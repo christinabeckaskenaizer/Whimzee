@@ -20,3 +20,13 @@ I wrote the api endpoint for creating a shop. It allows me to make a new shop. I
 Sina, Christina and I Went through the steps to create an Endpoint in Fastapi. We created the create users endpoint which will allows us to create a user. We still need to set up Auth but it is a good start.
 
 ## May 17, 2023
+
+Today I worked on:
+
+- Setting up tailwind configuration
+
+- Creating the get_all, update, delete, and put methods for the shop api
+
+Following the Tailwind documentation we were able to integrate it within our react app. Now we can use tailwind in all of our react components.
+
+I made a preliminary version of all of the shop methods. It is preliminary because I still need to integrate the authorization portion that my teammates are working on.
