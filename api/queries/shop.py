@@ -44,9 +44,11 @@ class ShopRepository(BaseModel):
                     )
                     id = result.fetchone()[0]
                     return ShopOut(id=id, **shop.dict())
+        #exception catch
+        #update later
         except Exception as e:
             print(e)
-            # return {"error": "unable to create shop"}
+            return None
 
 
     def get_all(self):
