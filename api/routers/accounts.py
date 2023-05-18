@@ -20,15 +20,6 @@ from authenticator import authenticator
 
 router = APIRouter()
 
-
-@router.get("/api/things")
-async def get_things(
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
-):
-    if account_data:
-        return personalized_list
-    return general_list
-
 class AccountForm(BaseModel):
     username: str
     password: str
@@ -52,13 +43,15 @@ async def create_account(
     hashed_password = authenticator.hash_password(info.password)
     try:
         account = repo.create(info, hashed_password)
+        print("This is the account: ", account)
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials",
         )
-    form = AccountForm(username=info.username, password=info.password)
+    form = AccountForm(username=info.email, password=info.password)
     token = await authenticator.login(response, request, form, repo)
+    print("This is the token: ", token)
     return AccountToken(account=account, **token.dict())
 
 @router.get("/token", response_model=AccountToken | None)

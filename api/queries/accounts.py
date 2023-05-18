@@ -20,7 +20,28 @@ class AccountOutWithPassword(AccountOut):
 
 class AccountQueries(BaseModel):
     def get(self, email:str) -> AccountOutWithPassword:
-        pass
+        print(email)
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, username, email, password
+                        FROM users
+                        WHERE email = %s
+                        """,
+                        [email]
+                    )
+                    records = result.fetchone()
+                    print("This is the records: ", records)
+                    return AccountOutWithPassword(id=records[0], email=records[2], username=records[1], hashed_password=records[3])
+
+
+
+        except Exception:
+            return {"message": "Could not get accounts!"}
+
+
     def create(self, info:AccountIn, hashed_password:str) -> AccountOutWithPassword:
         try:
             with pool.connection() as conn:
@@ -35,10 +56,13 @@ class AccountQueries(BaseModel):
                         """,
                         [info.username,
                          info.email,
-                         info.password
+                         hashed_password
                          ]
                     )
                     id = result.fetchone()[0]
-                    return AccountOutWithPassword(id=id, **info.dict())
+
+                    return AccountOutWithPassword(id=id, email=info.email, username=info.username, hashed_password=hashed_password)
+
+
         except Exception:
-            return {"message": "Could not create user!"}
+            return {"message": "Could not create account!"}
