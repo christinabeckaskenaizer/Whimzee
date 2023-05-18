@@ -16,7 +16,7 @@ steps = [
         """
         CREATE TABLE shops (
           id SERIAL PRIMARY KEY NOT NULL,
-          user_id INT REFERENCES users (id) NOT NULL,
+          user_id INT UNIQUE REFERENCES users (id) NOT NULL,
           name VARCHAR(100) NOT NULL,
           profile_picture TEXT,
           email VARCHAR(200) NOT NULL,
