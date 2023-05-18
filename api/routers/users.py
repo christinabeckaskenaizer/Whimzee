@@ -1,22 +1,19 @@
 from fastapi import APIRouter, Depends, Response
-from typing import List, Union, Optional
-from queries.users import (Error, UserIn, UserOut, UserRepository)
+from typing import List, Optional
+from queries.users import (Error, UserOut, UserRepository)
 
 router = APIRouter()
 
-@router.post("/users", response_model = UserOut)
-async def create(
-    user:UserIn,
-    repo:UserRepository=Depends()
-):
-    return repo.create(user)
-
-@router.get("/users", response_model = List[UserOut])
+@router.get("/users", response_model = List[UserOut] | Error)
 async def get_all(
     response: Response,
     repo: UserRepository = Depends()
 ):
-    return repo.get_all()
+    result = repo.get_all()
+    if result == None:
+        response.status_code = 404
+        result = Error(message="Unable to get users")
+    return result
 
 @router.delete("/users/{user_id}", response_model=bool)
 def delete_user(
@@ -24,6 +21,7 @@ def delete_user(
     repo: UserRepository = Depends(),
 ) -> bool:
     return repo.delete(user_id)
+
 
 @router.get("/users/{user_id}", response_model=Optional[UserOut])
 def get_one_user(
