@@ -6,6 +6,7 @@ from routers import users
 from routers import shop
 from routers import categories
 
+
 app = FastAPI()
 
 app.add_middleware(
