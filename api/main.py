@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 #Router imports
 from routers import users
-from routers import shop
+from routers import shop, cart
 
 app = FastAPI()
 
@@ -19,6 +19,8 @@ app.add_middleware(
 #routers from our routers folder
 app.include_router(users.router)
 app.include_router(shop.router)
+app.include_router(cart.router)
+
 
 
 @app.get("/api/launch-details")
