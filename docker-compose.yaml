@@ -23,6 +23,9 @@ services:
     volumes:
       - ./api:/app
     environment:
+      SIGNING_KEY: 0f57055363d97947b8b50498ed95bbdee0a5611d8f00fe5219dfa23134273c95
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
       DATABASE_URL: postgresql://whimzee:password@postgres/whimzee
       WAIT_HOSTS: postgres:5432
 
