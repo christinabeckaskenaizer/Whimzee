@@ -8,6 +8,7 @@ from routers import shop
 from routers import accounts
 from routers import categories
 from routers import listings
+from routers import orders
 
 app = FastAPI()
 app.include_router(authenticator.router)
@@ -27,6 +28,7 @@ app.include_router(users.router)
 app.include_router(shop.router)
 app.include_router(categories.router)
 app.include_router(listings.router)
+app.include_router(orders.router)
 
 
 @app.get("/api/launch-details")
