@@ -7,6 +7,7 @@ from routers import users
 from routers import shop
 from routers import accounts
 from routers import categories
+from routers import listings
 
 
 app = FastAPI()
@@ -26,6 +27,7 @@ app.add_middleware(
 app.include_router(users.router)
 app.include_router(shop.router)
 app.include_router(categories.router)
+app.include_router(listings.router)
 
 
 @app.get("/api/launch-details")
