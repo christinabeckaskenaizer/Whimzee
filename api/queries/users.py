@@ -17,7 +17,7 @@ class UserOut(BaseModel):
     password: str
 
 class UserRepository(BaseModel):
-    def create(self, user_in:UserIn):
+    def create(self, user_in:UserIn) -> UserIn | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -41,7 +41,7 @@ class UserRepository(BaseModel):
             print("User cannot be created")
             print(e)
 
-    def get_all(self) -> List[UserOut]:
+    def get_all(self) -> List[UserOut] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -67,7 +67,7 @@ class UserRepository(BaseModel):
             print(e)
             return {"message": "Could not get Users"}
 
-    def get_one(self, user_id:int) -> Optional[UserOut]:
+    def get_one(self, user_id:int) -> Optional[UserOut] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

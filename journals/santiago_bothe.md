@@ -1,3 +1,27 @@
+## May 18, 2023
+
+Today I worked on:
+
+- Setting up Authentication (pair programming)
+
+- Setting up Authentication for POST PUT DELETE shop endpoints
+
+Me and Sina worked on wrapping up the progress made on authentication from the previous day. Now we can Create accounts and authenticate users.
+
+I finished all of the shop endpoints to how we have planned SO FAR. Users can now only create, update or delete a shop if they are logged in.
+
+## May 17, 2023
+
+Today I worked on:
+
+- Setting up tailwind configuration
+
+- Creating the get_all, update, delete, and put methods for the shop api
+
+Following the Tailwind documentation we were able to integrate it within our react app. Now we can use tailwind in all of our react components.
+
+I made a preliminary version of all of the shop methods. It is preliminary because I still need to integrate the authorization portion that my teammates are working on.
+
 ## May 16, 2023
 
 Today I worked on:
@@ -18,15 +42,3 @@ Following the configuration files setup, we went through the steps of validating
 I wrote the api endpoint for creating a shop. It allows me to make a new shop. It has basic error handling which I will need to go back to and fix.
 
 Sina, Christina and I Went through the steps to create an Endpoint in Fastapi. We created the create users endpoint which will allows us to create a user. We still need to set up Auth but it is a good start.
-
-## May 17, 2023
-
-Today I worked on:
-
-- Setting up tailwind configuration
-
-- Creating the get_all, update, delete, and put methods for the shop api
-
-Following the Tailwind documentation we were able to integrate it within our react app. Now we can use tailwind in all of our react components.
-
-I made a preliminary version of all of the shop methods. It is preliminary because I still need to integrate the authorization portion that my teammates are working on.
