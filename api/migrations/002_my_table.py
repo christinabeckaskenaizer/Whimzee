@@ -45,7 +45,7 @@ steps = [
           shop_id INT REFERENCES shops (id) NOT NULL,
           name VARCHAR(100) NOT NULL,
           quantity INT NOT NULL,
-          quantity_sold INT NOT NULL,
+          quantity_sold INT DEFAULT 0,
           description TEXT,
           price NUMERIC(8, 2) NOT NULL,
           new BOOLEAN NOT NULL,
