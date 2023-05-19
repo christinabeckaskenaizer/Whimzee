@@ -9,7 +9,6 @@ from routers import accounts
 from routers import categories
 from routers import listings
 
-
 app = FastAPI()
 app.include_router(authenticator.router)
 app.include_router(accounts.router)

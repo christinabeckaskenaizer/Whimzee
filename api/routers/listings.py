@@ -16,3 +16,9 @@ def create_listing(
     repo: ListingRepository = Depends (),
 ):
         return repo.create(listing)
+
+@router.get("/listings", response_model=Union[List[ListingOut], Error])
+async def get_all(
+    repo: ListingRepository = Depends(),
+):
+    return repo.get_all()

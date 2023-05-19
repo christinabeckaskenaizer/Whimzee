@@ -29,6 +29,36 @@ class ListingOut(BaseModel):
     category: int
 
 class ListingRepository:
+    def get_all(self) -> Union[Error, List[ListingOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, shop_id, name, quantity, quantity_sold, description, price, new, picture, category
+                        FROM listings
+                        ORDER BY id
+                        """
+                    )
+                    result = []
+                    return [
+                        ListingOut(
+                            id=record[0],
+                            shop_id=record[1],
+                            name=record[2],
+                            quantity=record[3],
+                            quantity_sold=record[4],
+                            description=record[5],
+                            price=record[6],
+                            new=record[7],
+                            picture=record[8],
+                            category=record[9],
+                        )
+                        for record in db
+                    ]
+        except:
+            return {"message": "Could not return all listings"}
+
     def create(self, listing:ListingIn) -> ListingOut | Error:
         try:
             with pool.connection() as conn:
