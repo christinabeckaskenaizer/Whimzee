@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Union
+from typing import List, Optional, Union
 from queries.pool import pool
 
 class Error(BaseModel):
@@ -29,6 +29,35 @@ class ListingOut(BaseModel):
     category: int
 
 class ListingRepository:
+    def get_a_listing(self, listing_id) -> Optional[ListingOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id,
+                            shop_id,
+                            name,
+                            quantity,
+                            quantity_sold,
+                            description,
+                            price,
+                            new,
+                            picture,
+                            category
+                        FROM listings
+                        WHERE id = %s
+                        """,
+                        [listing_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_listing_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not return listing"}
+
     def get_all(self) -> Union[Error, List[ListingOut]]:
         try:
             with pool.connection() as conn:
@@ -100,3 +129,17 @@ class ListingRepository:
         except Exception as e:
             print("Listing cannot be created")
             print(e)
+
+    def record_to_listing_out(self,record):
+        return ListingOut(
+            id = record[0],
+            shop_id = record[1],
+            name = record[2],
+            quantity = record[3],
+            quantity_sold = record[4],
+            description = record[5],
+            price = record[6],
+            new = record[7],
+            picture = record[8],
+            category = record[9],
+        )
