@@ -8,7 +8,7 @@ Today I worked on:
 
 Me and Sina worked on wrapping up the progress made on authentication from the previous day. Now we can Create accounts and authenticate users.
 
-I finished all of the shop endpoints to how we have planned SO FAR. Users can now only create, update or delete a shop if they are logged in.
+I finished all of the shop endpoints to how we have planned SO FAR. Users can now only create, update or delete a shop if they are logged in. The Shop endpoints take the user_id and compare it to the user ID held by the specific instance of a shop.
 
 ## May 17, 2023
 
@@ -26,7 +26,7 @@ I made a preliminary version of all of the shop methods. It is preliminary becau
 
 Today I worked on:
 
-- Setting up the projects base configuration files
+- Setting up the project's base configuration files
 
 - Learning how to manage merge requests with my teammates
 
