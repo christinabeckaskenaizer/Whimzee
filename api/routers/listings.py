@@ -37,3 +37,16 @@ def get_a_listing(
             detail="Item not found",
         )
     return listing
+
+@router.delete("/listings/{listing_id}", response_model=bool)
+def delete_a_listing(
+    listing_id: int,
+    repo: ListingRepository = Depends()
+    ):
+    listing = repo.delete_a_listing(listing_id)
+    if listing is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Could not delete a listing that does not exist",
+        )
+    return True

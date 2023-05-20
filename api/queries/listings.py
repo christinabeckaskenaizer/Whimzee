@@ -29,6 +29,22 @@ class ListingOut(BaseModel):
     category: int
 
 class ListingRepository:
+    def delete_a_listing(self, listing_id) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        DELETE FROM listings
+                        WHERE id = %s
+                        """,
+                        [listing_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return {"message": "Could not delete a listing that does not exist"}
+
     def get_a_listing(self, listing_id) -> Optional[ListingOut]:
         try:
             with pool.connection() as conn:
