@@ -73,6 +73,7 @@ steps = [
         """
         CREATE TABLE orders (
           id SERIAL PRIMARY KEY NOT NULL,
+          user_id INT REFERENCES users (id),
           buyer_first_name VARCHAR(200) NOT NULL,
           buyer_last_name VARCHAR(200) NOT NULL,
           quantity INT NOT NULL,
