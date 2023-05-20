@@ -44,9 +44,17 @@ async def get_all(
     return result
 
 
-@router.get("orders/{order_id}")
-async def get_one():
-    pass
+@router.get("/orders/{order_id}")
+async def get_one(
+    order_id:int,
+    response: Response,
+    repo: OrderRepo = Depends()
+) -> OrderOut | Error:
+    result = repo.get_one(order_id)
+    if result == None:
+        response.status_code = 404
+        result = Error(message="Invalid order id")
+    return result
 
 @router.put("orders/{order_id}")
 async def update():

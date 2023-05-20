@@ -91,3 +91,38 @@ class OrderRepo(BaseModel):
         except Exception as e:
             print("Can't get orders because of: ", e)
             return None
+    def get_one(self, order_id:int) -> OrderOut | Error:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , user_id
+                            , buyer_first_name
+                            , buyer_last_name
+                            , quantity
+                            , listing
+                            , address
+                            , price
+                            , status
+                        FROM orders
+                        WHERE id = %s
+                        """,
+                        [order_id]
+                    )
+                    record = result.fetchone()
+                    return OrderOut(
+                        id = record[0],
+                        user_id=record[1],
+                        buyer_first_name=record[2],
+                        buyer_last_name=record[3],
+                        quantity=record[4],
+                        listing=record[5],
+                        address=record[6],
+                        price=record[7],
+                        status=record[8]
+                    )
+        except Exception as e:
+            print("Can't get order because of: ", e)
+            return None
