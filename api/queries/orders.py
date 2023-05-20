@@ -126,3 +126,34 @@ class OrderRepo(BaseModel):
         except Exception as e:
             print("Can't get order because of: ", e)
             return None
+    def update(self, order_id:int, status:bool, order:OrderIn) -> OrderOut | Error:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        UPDATE orders
+                        set status = %s
+                            , user_id = %s
+                            , buyer_first_name = %s
+                            , buyer_last_name = %s
+                            , quantity = %s
+                            , listing = %s
+                            , address = %s
+                            , price = %s
+                        WHERE id = %s
+                        """,
+                        [status,
+                         order.user_id,
+                         order.buyer_first_name,
+                         order.buyer_last_name,
+                         order.quantity,
+                         order.listing,
+                         order.address,
+                         order.price,
+                         order_id
+                        ]
+                    )
+                    return OrderOut(id=order_id, status=status, **order.dict())
+        except Exception as e:
+            print(e)

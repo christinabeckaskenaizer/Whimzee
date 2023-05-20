@@ -56,6 +56,16 @@ async def get_one(
         result = Error(message="Invalid order id")
     return result
 
-@router.put("orders/{order_id}")
-async def update():
-    pass
+@router.put("/orders/{order_id}", response_model = OrderOut | Error)
+async def update(
+    order: OrderIn,
+    order_id:int,
+    status:bool,
+    response: Response,
+    repo: OrderRepo = Depends(),
+) -> OrderOut | Error:
+    result = repo.update(order_id, status, order)
+    if result == None:
+        response.status_code = 404
+        result = Error(message="Unable to update order")
+    return result

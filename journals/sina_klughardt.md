@@ -1,16 +1,22 @@
-## May , 2023
+## May 20, 2023
 
--
+- Finished "get one order" and "update an order" Endpoints
 
-## May , 2023
+- I need to ask my teammates about some details(functionality) about these endpoints, at the moment only the user is able to see all their orders. I think a shop should also be able to do that.
 
--
+## May 19, 2023
+
+Today I worked on
+
+- Added all the orders endpoints and finished
+ - get all orders from a user
+ - create a new order
 
 ## May 18, 2023
 
 Today I worked on:
 
-- Added Endpoints
+- Added and finished following Endpoints: get all users, get a user, delete a user
 
 - Finished Auth with the help of my teammates
 
