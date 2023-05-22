@@ -3,6 +3,8 @@ import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
@@ -27,10 +29,28 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <ErrorNotification error={error} />
-      <Construct info={launchInfo} />
-    </div>
+    <BrowserRouter>
+      <div>
+        <ErrorNotification error={error} />
+        <Construct info={launchInfo} />
+      </div>
+      <Routes>
+        <Route path="/home">
+          <Route path="home/listing"></Route>
+        </Route>
+
+        <Route path="/account">
+          <Route path="account/shop" />
+          <Route path="account/listing" />
+        </Route>
+
+        <Route path="/shops"></Route>
+
+        <Route path="/liked"></Route>
+
+        <Route path="/checkout"></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
