@@ -15,13 +15,8 @@ async def create(
     order: OrderIn,
     response: Response,
     repo: OrderRepo = Depends(),
-    account: dict = Depends(authenticator.try_get_current_account_data)
 ) -> OrderOut:
-    if account == None:
-        response.status_code = 401
-        return Error(message="Sign in to create order")
-    user_id = account.get("id")
-    result = repo.create(order, False, int(user_id))
+    result = repo.create(order, False)
     if result == None:
         response.status_code = 404
         result = Error(message="Unable to create order")
