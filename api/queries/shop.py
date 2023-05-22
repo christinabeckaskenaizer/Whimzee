@@ -114,7 +114,7 @@ class ShopRepository(BaseModel):
                         result = db.execute(
                             """
                             UPDATE shops
-                            set name = %s
+                            SET name = %s
                                 , profile_picture = %s
                                 , email = %s
                                 , description = %s

@@ -86,5 +86,20 @@ steps = [
         """
         DROP TABLE orders
         """
+    ],
+    [
+        """
+        CREATE TABLE reviews (
+          id SERIAL PRIMARY KEY NOT NULL,
+          author VARCHAR(200) REFERENCES users (username) NOT NULL,
+          rating INT NOT NULL,
+          listing INT REFERENCES listings (id) NOT NULL,
+          created_on DATE NOT NULL,
+          description TEXT NOT NULL
+        );
+        """,
+        """
+        DROP TABLE reviews
+        """
     ]
 ]
