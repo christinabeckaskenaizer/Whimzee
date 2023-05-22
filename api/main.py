@@ -9,7 +9,8 @@ from routers import(
     accounts,
     categories,
     listings,
-    review
+    review,
+    orders
 )
 
 app = FastAPI()
@@ -30,6 +31,7 @@ app.include_router(users.router)
 app.include_router(shop.router)
 app.include_router(categories.router)
 app.include_router(listings.router)
+app.include_router(orders.router)
 app.include_router(review.router)
 
 
