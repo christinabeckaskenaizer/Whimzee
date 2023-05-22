@@ -3,11 +3,14 @@ from authenticator import authenticator
 from fastapi.middleware.cors import CORSMiddleware
 import os
 #Router imports
-from routers import users
-from routers import shop
-from routers import accounts
-from routers import categories
-from routers import listings
+from routers import(
+    users,
+    shop,
+    accounts,
+    categories,
+    listings,
+    review
+)
 
 app = FastAPI()
 app.include_router(authenticator.router)
@@ -27,6 +30,7 @@ app.include_router(users.router)
 app.include_router(shop.router)
 app.include_router(categories.router)
 app.include_router(listings.router)
+app.include_router(review.router)
 
 
 @app.get("/api/launch-details")
