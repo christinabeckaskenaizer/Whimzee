@@ -1,3 +1,13 @@
+## May 19, 2023
+
+Today I worked on:
+
+- Setting up the review endpoints(post, get, delete, and put)
+
+Logged in users can now create, edit, and delete reviews which have an author property matching the user's username.
+
+Non logged-in users may still get all reviews from a single listing.
+
 ## May 18, 2023
 
 Today I worked on:
