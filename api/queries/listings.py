@@ -29,6 +29,48 @@ class ListingOut(BaseModel):
     category: int
 
 class ListingRepository:
+    def update_listing(self, listing_id: int, listing: ListingIn) -> Union[ListingOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        UPDATE listings
+                        SET shop_id=%s,
+                            name=%s,
+                            quantity=%s,
+                            description=%s,
+                            price=%s,
+                            new=%s,
+                            picture=%s,
+                            category=%s
+                        WHERE id=%s
+                        RETURNING (id, shop_id, name, quantity, quantity_sold, description, price, new, picture, category)
+                        """,
+                        [
+                            listing.shop_id,
+                            listing.name,
+                            listing.quantity,
+                            listing.description,
+                            listing.price,
+                            listing.new,
+                            listing.picture,
+                            listing.category,
+                            listing_id,
+                        ],
+                    )
+
+                    old_data = listing.dict()
+                    # print(result.fetchone())
+                    updated_listing = result.fetchone()
+                    quantity_sold = updated_listing[0][4]
+                    print(updated_listing)
+
+                    return ListingOut(id=listing_id, quantity_sold=quantity_sold, **old_data)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update listing"}
+
     def delete_a_listing(self, listing_id) -> bool:
         try:
             with pool.connection() as conn:
@@ -66,7 +108,7 @@ class ListingRepository:
                         """,
                         [listing_id]
                     )
-                    record = result.fetchone()
+                    record = db.fetchone()
                     if record is None:
                         return None
                     return self.record_to_listing_out(record)

@@ -50,3 +50,11 @@ def delete_a_listing(
             detail="Could not delete a listing that does not exist",
         )
     return True
+
+@router.put("/listings/{listing_id}", response_model=Union[Error, ListingOut])
+def update_listing(
+    listing_id: int,
+    listing: ListingIn,
+    repo: ListingRepository = Depends(),
+) -> Union[Error, ListingOut]:
+    return repo.update_listing(listing_id, listing)
