@@ -1,12 +1,11 @@
 ## May 22, 2023
 
-Today I completed:
+Today I worked on:
 
 - Update a Listing endpoint
+- Discussed with Santi the next steps that I will take for the frontend
 
 That's pretty much all I completed! I spent about 5 hours working on this single endpoint and I was going a little crazy. Every time I fixed one error, another would get in my way! Maybe I should have asked for help, but I'm feeling heavily invested in the listings endpoints so I wanted to see if I could get a successful result without any help. Lo and behold, I got it and I learned a lot! Once again, db.fetchone() was my issue!
-
-Also fixed a little bug that happened when merged.
 
 ## May 19, 2023
 

@@ -5,6 +5,8 @@ import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar.js";
+import ListingCard from "./ListingCard.js";
+import AllListings from "./AllListings.js";
 
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
@@ -31,10 +33,10 @@ function App() {
 
   return (
     <BrowserRouter>
-    <NavBar />
+      <NavBar />
       <div>
         <ErrorNotification error={error} />
-        <Construct info={launchInfo} />
+        {/* <Construct info={launchInfo} /> */}
       </div>
       <Routes>
         <Route path="/home">
@@ -47,6 +49,8 @@ function App() {
         </Route>
 
         <Route path="/shops"></Route>
+
+        <Route path="/listings" element={< AllListings />} />
 
         <Route path="/liked"></Route>
 
