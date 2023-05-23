@@ -1,3 +1,11 @@
+## May 22, 2023
+
+- Merged orders enpoints
+
+- Started with Frontend Auth with Santiago
+
+- Implemented a nav bar on the front end and merged it into main
+
 ## May 20, 2023
 
 - Finished "get one order" and "update an order" Endpoints
