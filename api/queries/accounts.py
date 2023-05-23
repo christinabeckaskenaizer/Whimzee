@@ -20,7 +20,6 @@ class AccountOutWithPassword(AccountOut):
 
 class AccountQueries(BaseModel):
     def get(self, email:str) -> AccountOutWithPassword:
-        print(email)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -33,7 +32,6 @@ class AccountQueries(BaseModel):
                         [email]
                     )
                     records = result.fetchone()
-                    print("This is the records: ", records)
                     return AccountOutWithPassword(id=records[0], email=records[2], username=records[1], hashed_password=records[3])
 
 
