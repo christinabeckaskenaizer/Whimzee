@@ -1,3 +1,25 @@
+## May 22, 2023
+
+Today I completed:
+
+- Update a Listing endpoint
+
+That's pretty much all I completed! I spent about 5 hours working on this single endpoint and I was going a little crazy. Every time I fixed one error, another would get in my way! Maybe I should have asked for help, but I'm feeling heavily invested in the listings endpoints so I wanted to see if I could get a successful result without any help. Lo and behold, I got it and I learned a lot! Once again, db.fetchone() was my issue!
+
+Also fixed a little bug that happened when merged.
+
+## May 19, 2023
+
+Below is what I worked on on Friday plus the weekend!
+
+What I completed:
+
+- Delete a Listing endpoint
+- Get all Listings endpoint
+- Get one Listing endpoint
+
+These were all done with ease for the most part! I think this is where I really started to feel familiar with fastAPI. Instead of relying on Curtis' videos, I attempted to work on these solo to see how far I could get. I am especially loving working with the database. The documentation for postgres is intuitive and fun to work with.
+
 ## May 18, 2023
 
 Today I worked on:
