@@ -4,6 +4,7 @@ import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NavBar from "./NavBar.js";
 
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
@@ -30,6 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <NavBar />
       <div>
         <ErrorNotification error={error} />
         <Construct info={launchInfo} />

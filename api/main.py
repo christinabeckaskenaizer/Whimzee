@@ -10,7 +10,8 @@ from routers import(
     categories,
     listings,
     review,
-    orders
+    orders,
+    cart
 )
 
 app = FastAPI()
