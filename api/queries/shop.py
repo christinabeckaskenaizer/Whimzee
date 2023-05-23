@@ -5,7 +5,6 @@ class Error(BaseModel):
     message: str
 
 class ShopIn(BaseModel):
-    user_id: int
     name: str
     profile_picture: str
     email: str
@@ -21,7 +20,7 @@ class ShopOut(BaseModel):
 
 class ShopRepository(BaseModel):
 
-    def create(self, shop: ShopIn) -> ShopOut | Error:
+    def create(self, shop: ShopIn, user_id: int) -> ShopOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -35,7 +34,7 @@ class ShopRepository(BaseModel):
                         RETURNING id
                         """,
                         [
-                            shop.user_id,
+                            user_id,
                             shop.name,
                             shop.profile_picture,
                             shop.email,
@@ -43,9 +42,8 @@ class ShopRepository(BaseModel):
                         ]
                     )
                     id = result.fetchone()[0]
-                    return ShopOut(id=id, **shop.dict())
-        #exception catch
-        #update later
+                    return ShopOut(id=id, user_id=user_id, **shop.dict())
+
         except Exception as e:
             print(e)
             return None
@@ -71,54 +69,10 @@ class ShopRepository(BaseModel):
                         description = record[5]
                         ) for record in result
                     ]
-        #exception catch
-        except Exception as e:
-            print(e)
-            return None
-
-    def update(self, shop_id: int, shop: ShopIn) -> ShopOut | Error:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        UPDATE shops
-                        set name = %s
-                            , profile_picture = %s
-                            , email = %s
-                            , description = %s
-                        WHERE id = %s
-                        """,
-                        [
-                            shop.name,
-                            shop.profile_picture,
-                            shop.email,
-                            shop.description,
-                            shop_id
-                        ]
-                    )
-                    return ShopOut(id=shop_id, **shop.dict())
 
         except Exception as e:
             print(e)
             return None
-
-    def delete(self, shop_id: int) -> bool | Error:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        DELETE FROM shops
-                        WHERE id = %s
-                        """,
-                        [shop_id]
-                    ),
-                    return True
-
-        except Exception as e:
-            print(e)
-            return False
 
     def get_one(self, shop_id: int) -> ShopOut | Error:
         try:
@@ -150,3 +104,61 @@ class ShopRepository(BaseModel):
         except Exception as e:
             print(e)
             return None
+
+    def update(self, shop_id: int, shop: ShopIn, user_id: int) -> ShopOut | Error:
+        target_shop = self.get_one(shop_id)
+        if target_shop and target_shop.user_id == user_id:
+            try:
+                with pool.connection() as conn:
+                    with conn.cursor() as db:
+                        result = db.execute(
+                            """
+                            UPDATE shops
+                            SET name = %s
+                                , profile_picture = %s
+                                , email = %s
+                                , description = %s
+                            WHERE id = %s and
+                                user_id = %s
+                            """,
+                            [
+                                shop.name,
+                                shop.profile_picture,
+                                shop.email,
+                                shop.description,
+                                shop_id,
+                                user_id
+                            ]
+                        )
+                        return ShopOut(id=shop_id, user_id=user_id, **shop.dict())
+
+            except Exception as e:
+                print(e)
+                return None
+        else:
+            return None
+
+    def delete(self, shop_id: int, user_id: int) -> bool | Error:
+        target_shop = self.get_one(shop_id)
+        if target_shop and target_shop.user_id == user_id:
+                try:
+                    with pool.connection() as conn:
+                        with conn.cursor() as db:
+                            db.execute(
+                                """
+                                DELETE FROM shops
+                                WHERE id = %s and
+                                    user_id = %s
+                                """,
+                                [
+                                shop_id,
+                                user_id
+                                ]
+                            ),
+                            return True
+
+                except Exception as e:
+                    print(e)
+                    return False
+
+        return None

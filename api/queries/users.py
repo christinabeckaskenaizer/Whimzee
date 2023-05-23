@@ -17,7 +17,7 @@ class UserOut(BaseModel):
     password: str
 
 class UserRepository(BaseModel):
-    def create(self, user_in:UserIn):
+    def create(self, user_in:UserIn) -> UserIn | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -41,7 +41,7 @@ class UserRepository(BaseModel):
             print("User cannot be created")
             print(e)
 
-    def get_all(self) -> List[UserOut]:
+    def get_all(self) -> List[UserOut] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -67,5 +67,45 @@ class UserRepository(BaseModel):
             print(e)
             return {"message": "Could not get Users"}
 
-    def get_one(self):
-        pass
+    def get_one(self, user_id:int) -> Optional[UserOut] | Error:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, username, email, password
+                        FROM users
+                        where id = %s
+                        """,
+                        [user_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_user_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that user"}
+
+    def delete(self, user_id:int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        DELETE FROM users
+                        WHERE id = %s
+                        """,
+                        [user_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
+    def record_to_user_out(self, record):
+        return UserOut(
+            id=record[0],
+            username=record[1],
+            email=record[2],
+            password=record[3],
+        )

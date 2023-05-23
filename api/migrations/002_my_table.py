@@ -45,7 +45,7 @@ steps = [
           shop_id INT REFERENCES shops (id) NOT NULL,
           name VARCHAR(100) NOT NULL,
           quantity INT NOT NULL,
-          quantity_sold INT NOT NULL,
+          quantity_sold INT DEFAULT 0,
           description TEXT,
           price NUMERIC(8, 2) NOT NULL,
           new BOOLEAN NOT NULL,
@@ -73,8 +73,11 @@ steps = [
         """
         CREATE TABLE orders (
           id SERIAL PRIMARY KEY NOT NULL,
+          user_id INT REFERENCES users (id) NOT NULL,
+          shop_id INT REFERENCES shops (id) NOT NULL,
           buyer_first_name VARCHAR(200) NOT NULL,
           buyer_last_name VARCHAR(200) NOT NULL,
+          quantity INT NOT NULL,
           listing INT REFERENCES listings (id) NOT NULL,
           status BOOLEAN NOT NULL,
           address TEXT NOT NULL,
@@ -83,6 +86,21 @@ steps = [
         """,
         """
         DROP TABLE orders
+        """
+    ],
+    [
+        """
+        CREATE TABLE reviews (
+          id SERIAL PRIMARY KEY NOT NULL,
+          author VARCHAR(200) REFERENCES users (username) NOT NULL,
+          rating INT NOT NULL,
+          listing INT REFERENCES listings (id) NOT NULL,
+          created_on DATE NOT NULL,
+          description TEXT NOT NULL
+        );
+        """,
+        """
+        DROP TABLE reviews
         """
     ]
 ]
