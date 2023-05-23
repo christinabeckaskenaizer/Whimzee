@@ -43,3 +43,4 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_SAMPLE_SERVICE_API_HOST: ${REACT_APP_SAMPLE_SERVICE_API_HOST}
+      SIGNING_KEY: 48d93cf5c2f8fce4b30d6c0ec2ec27eeaa9a38becfe8f0281c487c04431964f2
