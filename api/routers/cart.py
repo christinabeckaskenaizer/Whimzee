@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, Response
 
 # from routers import users
-from queries.cart import Error, cartIn, cartOut, cartRepository
+from typing import List
+from queries.cart import Error, CartIn, CartOut, CartRepository
 from authenticator import authenticator
 router = APIRouter()
 # app = FastAPI()
@@ -17,12 +18,12 @@ router = APIRouter()
 router = APIRouter()
 
 
-@router.post("/cart", response_model=cartOut | Error)
+@router.post("/cart", response_model=CartOut | Error)
 async def create(
-    cart: cartIn,
+    cart: CartIn,
     response: Response,
-    repo: cartRepository = Depends(),
-) -> cartOut:
+    repo: CartRepository = Depends(),
+) -> CartOut:
     result = repo.create(cart)
     if result is None:
         response.status_code = 404
@@ -30,25 +31,26 @@ async def create(
     return result
 
 
-@router.get("/cart/{cart_id}", response_model=list[cartOut] | Error)
-async def get_all(
+@router.get("/cart/{cart_id}", response_model=CartOut | Error)
+async def get(
+    cart_id: int,
     response: Response,
-    repo: cartRepository = Depends()
+    repo: CartRepository = Depends()
 ):
-    result = repo.get_all()
+    result = repo.get_cart(cart_id)
     if result is None:
         response.status_code = 404
         result = Error(message="Unable to get cart")
     return result
 
 
-@router.put("/cart/{cart_id}", response_model=cartOut | Error)
+@router.put("/cart/{cart_id}", response_model=CartOut | Error)
 async def update(
     cart_id: int,
-    cart: cartIn,
+    cart: CartIn,
     response: Response,
-    repo: cartRepository = Depends()
-) -> cartOut | Error:
+    repo: CartRepository = Depends()
+) -> CartOut | Error:
     result = repo.update(cart_id, cart)
     if result is None:
         response.status_code = 404
@@ -60,7 +62,7 @@ async def update(
 async def delete(
     cart_id: int,
     response: Response,
-    repo: cartRepository = Depends()
+    repo: CartRepository = Depends()
 ) -> bool | Error:
     result = repo.delete(cart_id)
     if result is None:
@@ -69,14 +71,12 @@ async def delete(
     return result
 
 
-@router.get("/cart/{cart_id}", response_model=cartOut | Error)
-async def get_one(
-    cart_id: int,
-    cart: cartIn,
+@router.get("/cart/", response_model=List[CartOut] | Error)
+async def get_all(
     response: Response,
-    repo: cartRepository = Depends()
-) -> cartOut | Error:
-    result = repo.get_one(cart_id)
+    repo: CartRepository = Depends()
+) -> List[CartOut] | Error:
+    result = repo.get_all()
     if result is None:
         response.status_code = 404
         result = Error(message="Invalid cart id")

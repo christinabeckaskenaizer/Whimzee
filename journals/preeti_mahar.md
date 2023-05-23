@@ -1,10 +1,22 @@
-# May 16, 2023
+# May 22, 2023
 
 Today I worked on:
 
-- Setting up the projects base configuration files
+- Added Endpoint -> Cart Update, Cart Delete
 
-- Learning how to manage merge requests with my teammates
+- Re-Running docker containers and creating database
+
+- Git add and commit all endpoints and journals to 16-create-a-cart branch
+
+- Git merge main
+
+## May 18, 2023
+
+Today I worked on:
+
+- Added Endpoint -> Create Cart, Get Cart
+
+- Running docker containers
 
 ## May 17, 2023
 
@@ -14,10 +26,10 @@ Today I worked on:
 
 - Running docker containers
 
-## May 18, 2023
+## May 16, 2023
 
 Today I worked on:
 
-- Added Endpoint -> Cart
+- Setting up the projects base configuration files
 
-- Running docker containers
+- Learning how to manage merge requests with my teammates

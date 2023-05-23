@@ -1,6 +1,6 @@
 # from fastAPI import FastAPI()
 from pydantic import BaseModel
-# from typing import Optional
+from typing import Optional, List
 from queries.pool import pool
 
 
@@ -8,18 +8,18 @@ class Error(BaseModel):
     message: str
 
 
-class cartIn(BaseModel):
+class CartIn(BaseModel):
     user_id: int
 
 
-class cartOut(BaseModel):
+class CartOut(BaseModel):
     id: int
     user_id: int
 
 
-class cartRepository(BaseModel):
+class CartRepository(BaseModel):
 
-    def create(self, cart: cartIn) -> cartOut | Error:
+    def create(self, cart: CartIn) -> CartOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -37,47 +37,74 @@ class cartRepository(BaseModel):
                         ]
                     )
                     id = result.fetchone()[0]
-                    return cartOut(id=id, **cart.dict())
+                    return CartOut(id=id, **cart.dict())
         # exception catch
         # update later
         except Exception as e:
             print(e)
             return None
 
-    def get_all(self) -> list[cartOut] | Error:
+    def get_all(self) -> List[CartOut] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db_result = db.execute(
                         """
                         SELECT id, user_id
                         FROM cart
                         ORDER BY id
                         """
                     )
-                    id = result.fetchone()[0]
-                    return cartOut(id=id, **cart.dict())
+                    carts = []
+                    for rec in db_result:
+                        carts.append(CartOut(
+                            id=rec[0],
+                            user_id=rec[1]
+                        ))
+                    return carts
 
         except Exception as e:
             print(e)
             return None
 
-    def update(self, cart_id: int, cart: cartIn) -> cartOut | Error:
+    def get_cart(self, cart_id: int) -> CartOut | Error:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db_result = db.execute(
+                        """
+                        SELECT id, user_id
+                        FROM cart
+                        WHERE id = %s
+                        ORDER BY id
+                        """,
+                        [cart_id]
+                    )
+                    cart_data = db_result.fetchone()
+                    return CartOut(
+                        id=cart_data[0],
+                        user_id=cart_data[1]
+                    )
+        except Exception as e:
+            print(e)
+            return None
+
+    def update(self, cart_id: int, cart: CartIn) -> CartOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         UPDATE cart
-                        set name = %s
+                        set user_id = %s
                         WHERE id = %s
                         """,
                         [
-                            cart.name,
-                            cart.cart_id
+                            cart.user_id,
+                            cart_id
                         ]
                     )
-                    return cartOut(id=cart_id, **cart.dict())
+                    return CartOut(id=cart_id, **cart.dict())
 
         except Exception as e:
             print(e)
