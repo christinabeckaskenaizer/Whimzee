@@ -1,3 +1,11 @@
+## May 23, 2023
+
+Today I worked on:
+
+- Worked solely on the front end today. I was able to successfully pull data from our API and display all listings on the front end.
+- Using tailwind, I created listing cards. Most of the day was taken up by styling these cards. Upon resizing the screen, the cards would become misshapen and the pictures would not resize with the cards. I was also able to fix that issue, even though it tooko my until about 9:30 pm.
+- I made a resuable card component, for all future uses of the card.
+
 ## May 22, 2023
 
 Today I worked on:
