@@ -1,3 +1,32 @@
+## May 23, 2023
+
+Today I worked on:
+
+- Worked solely on the front end today. I was able to successfully pull data from our API and display all listings on the front end.
+- Using tailwind, I created listing cards. Most of the day was taken up by styling these cards. Upon resizing the screen, the cards would become misshapen and the pictures would not resize with the cards. I was also able to fix that issue, even though it tooko my until about 9:30 pm.
+- I made a resuable card component, for all future uses of the card.
+
+## May 22, 2023
+
+Today I worked on:
+
+- Update a Listing endpoint
+- Discussed with Santi the next steps that I will take for the frontend
+
+That's pretty much all I completed! I spent about 5 hours working on this single endpoint and I was going a little crazy. Every time I fixed one error, another would get in my way! Maybe I should have asked for help, but I'm feeling heavily invested in the listings endpoints so I wanted to see if I could get a successful result without any help. Lo and behold, I got it and I learned a lot! Once again, db.fetchone() was my issue!
+
+## May 19, 2023
+
+Below is what I worked on on Friday plus the weekend!
+
+What I completed:
+
+- Delete a Listing endpoint
+- Get all Listings endpoint
+- Get one Listing endpoint
+
+These were all done with ease for the most part! I think this is where I really started to feel familiar with fastAPI. Instead of relying on Curtis' videos, I attempted to work on these solo to see how far I could get. I am especially loving working with the database. The documentation for postgres is intuitive and fun to work with.
+
 ## May 18, 2023
 
 Today I worked on:

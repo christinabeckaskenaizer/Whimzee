@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
 import CreateShopForm from "./account-components/CreateShopForm.js";
+import ListingCard from "./ListingCard.js";
+import AllListings from "./AllListings.js";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             </Route>
 
             <Route path="/shops"></Route>
+
+            <Route path="/listings" element={<AllListings />} />
 
             <Route path="/liked"></Route>
 
