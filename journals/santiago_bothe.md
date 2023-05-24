@@ -1,3 +1,23 @@
+## May 22, 2023
+
+Today I worked on:
+
+- Endpoint replanning and project organization
+
+- pair programming on fastApi
+
+- Attempted Authentication on the front end
+
+- set up initial account page components in react.
+
+Today the team discussed restructuring a lot of the endpoints. They way we had the written did not cover all of the information we needed them too.
+
+Me and Preeti went over the files within a fastApi project and how to structure a create request.
+
+Me ans Sina started to tackle the front end authentication. Unfortunately we were unsuccessful and ran into various error along the way. Including the login function sending a post request to localhost:3000, and a CORS error afterwards.
+
+Finally I set up the base files for a user to check their account information. This will eventually allow a user to see their purchase history, create or manage their shop, alow users to navigate to the create a shop form and the create a listing form, and allow users to see other information about their profile.
+
 ## May 19, 2023
 
 Today I worked on:
