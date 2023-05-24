@@ -1,3 +1,19 @@
+## May 23, 2023
+
+Today I worked on:
+
+- Front-end authentication login
+
+- applying authentication by creating a form to create a shop
+
+- created a backend point to easily grab a users important identification values
+
+Today I resolved the problems that we were having with authentication in the front end. The problem was that while I was trying to understand the environment variables, I pruned my docker volume. Because of that I did not have a user to login with.
+
+I created a form that creates a shop for a user. This form only creates a shop if the user is currently logged in. I implemented authentication to secure the creation of a shop.
+
+I created an endpoint in accounts that uses an inner join of three tables to return the user id, the shopping cart id, and the shop id. It returns null on any value it does not have.
+
 ## May 22, 2023
 
 Today I worked on:
@@ -12,7 +28,7 @@ Today I worked on:
 
 Today the team discussed restructuring a lot of the endpoints. They way we had the written did not cover all of the information we needed them too.
 
-Me and Preeti went over the files within a fastApi project and how to structure a create request.
+I gave Preeti an overview of the files within a fastApi project and how to structure a create request.
 
 Me ans Sina started to tackle the front end authentication. Unfortunately we were unsuccessful and ran into various error along the way. Including the login function sending a post request to localhost:3000, and a CORS error afterwards.
 
