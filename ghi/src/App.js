@@ -11,15 +11,28 @@ import UserAccount from "./account-components/UserAccount.js";
 import CreateShopForm from "./account-components/CreateShopForm.js";
 import ListingCard from "./ListingCard.js";
 import AllListings from "./AllListings.js";
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUp";
+import useToken from "@galvanize-inc/jwtdown-for-react";
+
 
 function App() {
+  const { token } = useToken();
+  console.log(token)
+  useEffect(() => {
+    console.log(token)
+  }, [token])
+
+
   return (
     <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
       <BrowserRouter>
         <NavBar />
         <div className="container">
           <Routes>
-            <Route path="/home" element={<Landing />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/signup" element={<SignUpForm />} />
 
             <Route path="/account">
               <Route path="" element={<UserAccount />} />
