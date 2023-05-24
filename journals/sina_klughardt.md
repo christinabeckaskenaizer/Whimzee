@@ -1,3 +1,20 @@
+## May 23, 2023
+
+-
+
+
+## May 23, 2023
+
+- Made the navbar prettier, and look more like we want it to look
+- Started with the landing page
+- Created a new logo for our group
+
+## May 22, 2023
+
+- Merged my orders enpoints into main
+- Started working on frontend auth with Santiago
+- Started working on navbar with Tailwind
+
 ## May 20, 2023
 
 - Finished "get one order" and "update an order" Endpoints
