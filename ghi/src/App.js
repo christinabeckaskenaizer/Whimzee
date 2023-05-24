@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
+import Landing from "./LandingPage/Landing";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NavBar from "./NavBar.js";
+import NavBar from "./NavBar/NavBar.js";
+
+import UserAccount from "./account-components/UserAccount.js";
+import CreateShopForm from "./account-components/CreateShopForm.js";
 import ListingCard from "./ListingCard.js";
 import AllListings from "./AllListings.js";
 
@@ -12,51 +16,35 @@ function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function getData() {
-      let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-      console.log("fastapi url: ", url);
-      let response = await fetch(url);
-      console.log("------- hello? -------");
-      let data = await response.json();
-
-      if (response.ok) {
-        console.log("got launch data!");
-        setLaunchInfo(data.launch_details);
-      } else {
-        console.log("drat! something happened");
-        setError(data.message);
-      }
-    }
-    getData();
-  }, []);
 
   return (
-    <BrowserRouter>
-      <NavBar />
-      <div>
-        <ErrorNotification error={error} />
-        {/* <Construct info={launchInfo} /> */}
-      </div>
-      <Routes>
-        <Route path="/home">
-          <Route path="home/listing"></Route>
-        </Route>
+    <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
 
-        <Route path="/account">
-          <Route path="account/shop" />
-          <Route path="account/listing" />
-        </Route>
+      <BrowserRouter>
+        <NavBar />
+        <div className="container">
+          <Routes>
 
-        <Route path="/shops"></Route>
+            <Route path="/home" element={<Landing />} />
 
-        <Route path="/listings" element={<AllListings />} />
+            <Route path="/account">
+              <Route path="" element={<UserAccount />} />
+              <Route path="shop" element={<CreateShopForm />} />
+              <Route path="listing" />
+            </Route>
 
-        <Route path="/liked"></Route>
+            <Route path="/shops"></Route>
 
-        <Route path="/checkout"></Route>
-      </Routes>
-    </BrowserRouter>
+            <Route path="/listings" element={<AllListings />} />
+
+            <Route path="/liked"></Route>
+
+            <Route path="/checkout"></Route>
+          </Routes>
+        </div>
+
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
