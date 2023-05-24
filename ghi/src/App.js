@@ -14,32 +14,28 @@ function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
 
-
   return (
     <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
-
       <BrowserRouter>
-      <NavBar />
-      <div className="container">
-      <Routes>
+        <NavBar />
+        <div className="container">
+          <Routes>
+            <Route path="/home" element={<Landing />} />
 
-        <Route path="/home" element={<Landing />} />
+            <Route path="/account">
+              <Route path="" element={<UserAccount />} />
+              <Route path="shop" element={<CreateShopForm />} />
+              <Route path="listing" />
+            </Route>
 
-          <Route path="/account">
-            <Route path="" element={<UserAccount />} />
-            <Route path="shop" element={<CreateShopForm />} />
-            <Route path="listing" />
-          </Route>
+            <Route path="/shops"></Route>
 
-          <Route path="/shops"></Route>
+            <Route path="/liked"></Route>
 
-          <Route path="/liked"></Route>
-
-        <Route path="/checkout"></Route>
-      </Routes>
-      </div>
-
-    </BrowserRouter>
+            <Route path="/checkout"></Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
     </AuthProvider>
   );
 }
