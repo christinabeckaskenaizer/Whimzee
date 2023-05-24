@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import AccountOrderHistory from "./AccountOrderHistory";
 import ShopSalesList from "./ShopSalesList";
 
-export default function UserAccount() {
-  // Need a has shop confirmation bool
+import useToken from "@galvanize-inc/jwtdown-for-react";
+import useUser from "../custom-hooks/useUser";
+import useShop from "../custom-hooks/useShop";
+import useCart from "../custom-hooks/useCart";
+
+export default function UserAccount({}) {
+  const { token } = useToken();
+  const { user, ids } = useUser(token);
+  const { shop } = useShop(ids);
+  const { cart } = useCart(ids);
+  console.log(user);
   const [view, setView] = useState(false);
-  const [hasShop, setHasShop] = useState(false);
   // const [userPic, setUserPic] = useState(
   //   "https://s.yimg.com/ny/api/res/1.2/Gp3tIUKkvSV6HUF_d6yfsw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM1Mg--/https://media.zenfs.com/en-US/smartasset_475/47624d7cbd95041c5c0f9fb287e8d337"
   // );
@@ -17,7 +25,11 @@ export default function UserAccount() {
     setView(bool);
   };
 
-  console.log(process.env.REACT_APP_SAMPLE_SERVICE_API_HOST);
+  if (!ids) {
+    // add spinner here
+    return <h1>Loading</h1>;
+  }
+
   return (
     <>
       <div className="flex flex-col items-center p-10">
@@ -46,7 +58,7 @@ export default function UserAccount() {
 
           <h5 className="mb-1 text-2xl font-medium text-slate-500">User</h5>
           <div className="flex mt-4 space-x-3">
-            {hasShop ? (
+            {shop ? (
               <button
                 onClick={() => handleSelection(true)}
                 className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-emerald-500 rounded-lg hover:bg-emerald-400"

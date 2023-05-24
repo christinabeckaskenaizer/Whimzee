@@ -5,15 +5,12 @@ import "./App.css";
 
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NavBar from "./NavBar/NavBar.js";
 
+import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
 import CreateShopForm from "./account-components/CreateShopForm.js";
 
 function App() {
-  const [launchInfo, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
-
   return (
     <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
       <BrowserRouter>

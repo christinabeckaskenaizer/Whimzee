@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "../LoginForm";
+import useUser from "../custom-hooks/useUser";
 
-export default function CreateShopForm() {
+import { useNavigate } from "react-router";
+
+export default function CreateShopForm({}) {
+  const navigate = useNavigate();
   const { token } = useToken();
-  console.log(token);
+  const { user, ids } = useUser(token);
+
   const [shopName, setShopName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
@@ -24,8 +28,6 @@ export default function CreateShopForm() {
     data.email = email;
     data.description = description;
     data.profile_picture = picture;
-    console.log(data);
-    console.log(token);
 
     const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/shops`;
     const config = {
@@ -38,17 +40,18 @@ export default function CreateShopForm() {
       },
     };
     const response = await fetch(url, config);
-    console.log(response);
-    setShopName("");
-    setEmail("");
-    setDescription("");
-    setPicture("");
+    if (response.ok) {
+      setShopName("");
+      setEmail("");
+      setDescription("");
+      setPicture("");
+      navigate("/account");
+    }
   };
 
   return (
     <>
       name, profile_picture, email, description
-      <LoginForm />
       <div className="flex flex-col items-center">
         <div className="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <form onSubmit={handleSubmit} className="space-y-6" action="#">

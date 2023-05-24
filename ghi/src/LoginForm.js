@@ -1,18 +1,14 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState } from "react";
-import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 
-const LoginForm = () => {
+const LoginForm = ({}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useToken();
-  const { token } = useAuthContext();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`username: ${username} password: ${password}`);
-    login(username, password);
-    console.log(token);
+    await login(username, password);
     e.target.reset();
   };
 
