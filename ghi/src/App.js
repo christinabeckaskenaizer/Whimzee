@@ -15,10 +15,10 @@ function App() {
     <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
       <BrowserRouter>
         <NavBar />
-        <div>
+        {/* <div>
           <ErrorNotification error={error} />
           <Construct info={launchInfo} />
-        </div>
+        </div> */}
         <Routes>
           <Route path="/home">
             <Route path="home/listing"></Route>
