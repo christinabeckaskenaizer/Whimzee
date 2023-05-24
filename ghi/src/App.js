@@ -17,15 +17,13 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 
 
 function App() {
-  const { token } = useToken();
-  console.log(token)
+  const { token } = useToken()
   useEffect(() => {
     console.log(token)
   }, [token])
 
 
   return (
-    <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
       <BrowserRouter>
         <NavBar />
         <div className="container">
@@ -50,7 +48,6 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-    </AuthProvider>
   );
 }
 
