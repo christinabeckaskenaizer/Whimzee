@@ -50,7 +50,7 @@ function App() {
 
         <Route path="/shops"></Route>
 
-        <Route path="/listings" element={< AllListings />} />
+        <Route path="/listings" element={<AllListings />} />
 
         <Route path="/liked"></Route>
 
