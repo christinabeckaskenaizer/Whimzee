@@ -15,6 +15,11 @@ class AccountOut(BaseModel):
     username: str
     email: str
 
+class AccountIDS(BaseModel):
+    id: int
+    shop_id: int | None
+    cart_id: int | None
+
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
@@ -64,3 +69,36 @@ class AccountQueries(BaseModel):
 
         except Exception:
             return {"message": "Could not create account!"}
+
+
+    def get_ids_for_user(self, user: int) -> AccountIDS:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT u.id, s.id as shop_id, c.id as cart_id
+                        FROM users u
+                        LEFT OUTER JOIN shops s
+                        ON s.user_id = %s
+                        LEFT OUTER JOIN cart c
+                        ON c.user_id = %s
+                        WHERE u.id = %s
+                        """,
+                        [
+                            user,
+                            user,
+                            user,
+                        ]
+                    )
+                    data = result.fetchone()
+                    print(data, "This is the tupple")
+                    return AccountIDS(
+                        id = data[0],
+                        shop_id = data[1],
+                        cart_id = data[2]
+                    )
+
+        except Exception as e:
+            print(e)
+            return None

@@ -14,6 +14,7 @@ from queries.accounts import (
     AccountOut,
     AccountQueries,
     DuplicateAccountError,
+    AccountIDS
 )
 from typing import Optional
 from authenticator import authenticator
@@ -64,3 +65,16 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+
+
+@router.get("/user/{user_id}", response_model=AccountIDS | None)
+async def get_ids_for_user(
+    response: Response,
+    user_id: int,
+    repo: AccountQueries = Depends()
+) -> AccountIDS | None:
+    result = repo.get_ids_for_user(user_id)
+    if result == None:
+        response.status_code = 404
+        return {"Message": "Account Could not be found"}
+    return result

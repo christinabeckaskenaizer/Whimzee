@@ -16,15 +16,12 @@ function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
 
-
   return (
     <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
-
       <BrowserRouter>
         <NavBar />
         <div className="container">
           <Routes>
-
             <Route path="/home" element={<Landing />} />
 
             <Route path="/account">
@@ -42,7 +39,6 @@ function App() {
             <Route path="/checkout"></Route>
           </Routes>
         </div>
-
       </BrowserRouter>
     </AuthProvider>
   );
