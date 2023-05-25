@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-import useUser from "./custom-hooks/useUser";
-import useShop from "./custom-hooks/useShop";
-import useCart from "./custom-hooks/useCart";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import { NavLink } from 'react-router-dom';
 
 
 const LoginForm = ({}) => {
@@ -31,7 +28,7 @@ const LoginForm = ({}) => {
 <>
 <form className="flex flex-col items-center px-4 py-5 my-5" onSubmit={(e) => handleSubmit(e)}>
   <div className="text-center">
-    <h1>Welcome to Whimzee</h1>
+    <h1>Welcome back!</h1>
 </div>
   <div className="mb-6">
     <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 text-black">Username:</label>
@@ -55,7 +52,10 @@ const LoginForm = ({}) => {
     onChange={(e) => setPassword(e.target.value)}
     ></input>
   </div>
-  <button type="submit" className="text-white dark:bg-gray-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5">Submit</button>
+  <button type="submit" className="text-white dark:bg-gray-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-large rounded-lg text-sm w-full sm:w-auto px-5 py-2.5">Submit</button>
+            <NavLink to="/signup" className="block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-5 md:dark:text-black md:hover:text-green-800" aria-current="page">
+          New here? Click here to sign up
+          </NavLink>
 </form>
 </>
   );
