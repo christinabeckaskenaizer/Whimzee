@@ -17,11 +17,7 @@ function Logout(props) {
         const response = await fetch(url, fetchConfig);
         e.target.reset();
         if (response.ok) {
-            console.log(token)
-            if (location.pathname === "/") {
-                navigate(0)
-            };
-            navigate(0, "/")
+            navigate(0)
     };
     };
 
