@@ -3,19 +3,15 @@ from fastapi import APIRouter, Depends, Response
 # from routers import users
 from typing import List
 from queries.cart import Error, CartIn, CartOut, CartRepository
+from queries.cart import Cart_listingIn, Cart_listingOut
 from authenticator import authenticator
 router = APIRouter()
 # app = FastAPI()
 # app.include_router(users.router)
-
-
 # @router.post("/cart")
 # def create_cart(cart: cartIn):
 #     print('cart', cart.cart_id)
 #     return cart
-
-
-router = APIRouter()
 
 
 @router.post("/cart", response_model=CartOut | Error)
@@ -80,4 +76,17 @@ async def get_all(
     if result is None:
         response.status_code = 404
         result = Error(message="Invalid cart id")
+    return result
+
+
+@router.post("/cart/{listings_id}", response_model=Cart_listingOut | Error)
+async def create_listing(
+    cart: Cart_listingIn,
+    response: Response,
+    repo: CartRepository = Depends(),
+) -> Cart_listingOut:
+    result = repo.create(cart)
+    if result is None:
+        response.status_code = 404
+        result = Error(message="Unable to create new cart")
     return result

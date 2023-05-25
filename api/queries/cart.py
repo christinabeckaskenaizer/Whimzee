@@ -17,6 +17,17 @@ class CartOut(BaseModel):
     user_id: int
 
 
+class Cart_listingIn(BaseModel):
+    user_id: int
+    listing_id: int
+
+
+class Cart_listingOut(BaseModel):
+    id: int
+    user_id: int
+    listing_id: int
+
+
 class CartRepository(BaseModel):
 
     def create(self, cart: CartIn) -> CartOut | Error:
@@ -126,3 +137,26 @@ class CartRepository(BaseModel):
         except Exception as e:
             print(e)
             return False
+
+    def create_listing(self, cart: Cart_listingIn) -> Cart_listingOut | Error:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        INSERT INTO cart
+                        (listings_id)
+                        VALUES
+                        (%s)
+                        RETURNING id
+                        """,
+                        [
+                            cart.listings_id,
+                        ]
+                    )
+                    id = result.fetchone()[0]
+                    return Cart_listingOut(id=id, **cart.dict())
+
+        except Exception as e:
+            print(e)
+            return None
