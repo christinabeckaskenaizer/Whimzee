@@ -11,6 +11,7 @@ import UserAccount from "./account-components/UserAccount.js";
 import CreateShopForm from "./account-components/CreateShopForm.js";
 import ListingCard from "./ListingCard.js";
 import AllListings from "./AllListings.js";
+import Shop from "./shop-components/Shop";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
               <Route path="listing" />
             </Route>
 
-            <Route path="/shops"></Route>
+            <Route path="/shops" element={<Shop />}></Route>
 
             <Route path="/listings" element={<AllListings />} />
 
