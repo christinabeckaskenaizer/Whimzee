@@ -25,10 +25,11 @@ export default function ListingDetail() {
 
     const getShopData = async () => {
         try {
-            const shopUrl = `http://localhost:8000/shops/${id}`
+            const shopUrl = `http://localhost:8000/shops/${detail.shop_id}`
             const response = await fetch(shopUrl)
-            const data = await response.json();
-            setShop(data)
+            const shopData = await response.json();
+            setShop(shopData)
+            console.log("THIS", shopData)
         } catch (error) {
             console.log("error", error);
         }
@@ -36,6 +37,7 @@ export default function ListingDetail() {
 
     useEffect(() => {
         getDetailListingData();
+        getShopData();
     }, []);
 
     function formatToCurrency(amount) {
@@ -64,7 +66,7 @@ export default function ListingDetail() {
                             </div>
                             <div className="flex-wrap hidden -mx-2 md:flex">
                                 <div className="w-1/2 p-2 sm:w-1/4">
-                                    <a className="block border border-transparent hover:border-blue-400" href="#">
+                                    <a className="block border border-transparent hover:border-green-900" href="#">
                                         <img className="object-cover w-full lg:h-32" src="" alt="" />
                                     </a>
                                 </div>
@@ -92,7 +94,7 @@ export default function ListingDetail() {
                                     {detail.description}
                                 </p>
                                 <a href="#" className="text-green-600 hover:underline dark:text-gray-400">
-                                    {detail.shop_id}</a>
+                                    {shop.name}</a>
                                 <div>
                                     <span className="text-green-800 datext-green-200">{detail.new ? "New" : "Used"}</span>
                                 </div>
@@ -102,7 +104,7 @@ export default function ListingDetail() {
                             </div>
 
                             <div className="mt-6 ">
-                                <button className="w-full px-4 py-2 font-bold text-white bg-green-800 lg:w-96 hover:bg-blue-500">
+                                <button className="w-full px-4 py-2 font-bold text-white bg-green-800 lg:w-96 hover:bg-green-900">
                                     Add to Cart
                                 </button>
                             </div>
