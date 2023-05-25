@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ListingCard from "../ListingCard";
 
-export default function Shop(shop_id) {
+export default function Shop({ shop_id }) {
   const [shop, setShop] = useState(null);
   const [listings, setListings] = useState(null);
 
@@ -11,7 +11,7 @@ export default function Shop(shop_id) {
 
   const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}`;
   const getShopData = async () => {
-    const response = await fetch(`${url}/shops/${7}`);
+    const response = await fetch(`${url}/shops/${shop_id}`);
     if (response.ok) {
       const shopData = await response.json();
       setShop(shopData);
@@ -23,7 +23,7 @@ export default function Shop(shop_id) {
       const listingData = await response.json();
       console.log(listingData);
       const shopListings = listingData.filter(
-        (listing) => listing.shop_id === 7
+        (listing) => listing.shop_id === shop_id
       );
       setListings(shopListings);
     }
