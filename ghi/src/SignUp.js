@@ -14,8 +14,27 @@ const SignUpForm = ({}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(username, password);
-    e.target.reset();
+    const data = {};
+    data.email = email;
+    data.username = username;
+    data.password = password;
+
+    const url = 'http://localhost:8000/api/accounts';
+    const fetchConfig = {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+    const response = await fetch (url, fetchConfig);
+    if (response.ok) {
+        await login(username, password);
+        e.target.reset();
+        navigate("/")
+    }
+
+
 
   };
   useEffect(() => {
