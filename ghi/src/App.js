@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import Landing from "./LandingPage/Landing";
-import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 
-import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NavBar from "./NavBar/NavBar.js";
@@ -25,7 +23,7 @@ function App() {
 
   return (
       <BrowserRouter>
-        <NavBar />
+        <NavBar token={token}/>
         <div className="container">
           <Routes>
             <Route path="/" element={<Landing />} />
