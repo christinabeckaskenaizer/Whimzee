@@ -9,8 +9,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
 import CreateShopForm from "./account-components/CreateShopForm.js";
-import ListingCard from "./ListingCard.js";
 import AllListings from "./AllListings.js";
+import ListingDetail from "./ListingDetail";
+
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/shops"></Route>
 
             <Route path="/listings" element={<AllListings />} />
+            <Route path="/listings/:id" element={<ListingDetail />} />
 
             <Route path="/liked"></Route>
 
