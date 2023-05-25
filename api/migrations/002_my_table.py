@@ -62,7 +62,7 @@ steps = [
         CREATE TABLE cart (
           id SERIAL PRIMARY KEY NOT NULL,
           user_id INT REFERENCES users (id),
-          listings_id INT REFERENCES listings (id) NOT NULL
+          listings INT ARRAY
         );
         """,
         """
