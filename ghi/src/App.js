@@ -23,7 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar token={token} />
-      <div className="container">
+      <div className="flex justify-center">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<LoginForm />} />

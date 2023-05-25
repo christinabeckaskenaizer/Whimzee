@@ -1,3 +1,19 @@
+## May 24, 2023
+
+Today I worked on:
+
+- Adding custom hooks for grabbing users, a users shop, and the shopping cart.
+
+- Created the base for our initial imports in app.js
+
+- Worked on the shop page using tailwind
+
+Today I implemented a custom hook to return the user information and all important id's related to that user. If the user has a shop, there is a hook to grab that information, and when a user logs in, a hook will also grab the carts data.
+
+Me and Sina worked together to figure out how to get the token from our App.js file. The authprovider wrapper needed to go in index.js for our desired functionality to work.
+
+I also implemented the basic page that will show the shop details when that shop is linked on a listing.
+
 ## May 23, 2023
 
 Today I worked on:
