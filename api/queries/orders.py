@@ -58,6 +58,46 @@ class OrderRepo(BaseModel):
         except Exception as e:
             print("Order cannot be created because of: ", e)
             return {"message": "Order cannot be created"}
+
+    def get_all_shop_orders(self, shop_id:int) -> List[OrderOut] | Error:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , user_id
+                            , shop_id
+                            , buyer_first_name
+                            , buyer_last_name
+                            , quantity
+                            , listing
+                            , address
+                            , price
+                            , status
+                        FROM orders
+                        WHERE shop_id = %s
+                        """,
+                        [shop_id]
+                    )
+                    return [
+                        OrderOut(
+                        id = record[0],
+                        user_id=record[1],
+                        shop_id=record[2],
+                        buyer_first_name=record[3],
+                        buyer_last_name=record[4],
+                        quantity=record[5],
+                        listing=record[6],
+                        address=record[7],
+                        price=record[8],
+                        status=record[9]
+                        ) for record in result
+                    ]
+        except Exception as e:
+            print("Can't get orders because of: ", e)
+            return None
+
     def get_all(self, user_id:int) -> List[OrderOut] | Error:
         try:
             with pool.connection() as conn:
