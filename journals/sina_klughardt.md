@@ -1,6 +1,12 @@
 ## May 23, 2023
 
--
+Implemented some functionality today
+- Created a login and sign in page
+- Login is working now
+- Made the nav bar more functional -> User can now navigate to account and to log in if logged out
+- if logged in the user sees wishlist, account and cart
+- Put Auth on index.js file so we can get the token on the App.js file and we can pass it down to all the Route, so we don't have to make a fetch request everytime
+- if you submit and you are logged in you get redirected to Landing page
 
 
 ## May 23, 2023
@@ -18,7 +24,6 @@
 ## May 20, 2023
 
 - Finished "get one order" and "update an order" Endpoints
-
 - I need to ask my teammates about some details(functionality) about these endpoints, at the moment only the user is able to see all their orders. I think a shop should also be able to do that.
 
 ## May 19, 2023
