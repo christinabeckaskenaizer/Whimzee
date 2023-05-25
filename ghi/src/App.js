@@ -17,6 +17,7 @@ import ListingDetail from "./ListingDetail";
 
 function App() {
   const { token } = useToken();
+  const [shopToVisit, setShopToVisit] = useState(null);
   useEffect(() => {
     console.log(token);
   }, [token]);
@@ -36,10 +37,10 @@ function App() {
             <Route path="listing" />
           </Route>
 
-          <Route path="/shops" element={<Shop />}></Route>
+          <Route path="/shops/" element={<Shop shop_id={shopToVisit} />}></Route>
 
           <Route path="/listings" element={<AllListings />} />
-          <Route path="/listings/:id" element={<ListingDetail />} />
+          <Route path="/listings/:id" element={<ListingDetail setShopToVisit={setShopToVisit} />} />
 
           <Route path="/liked"></Route>
 

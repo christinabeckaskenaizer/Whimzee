@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ListingCard from "../ListingCard";
 
@@ -6,6 +6,9 @@ export default function Shop({ shop_id }) {
   const [shop, setShop] = useState(null);
   const [listings, setListings] = useState(null);
 
+  const id = useParams();
+  console.log("id", id)
+  console.log("shop_id", shop_id)
   const sampleImg =
     "https://i.ebayimg.com/images/g/dpUAAOSwwz1kP2K0/s-l1600.jpg";
 
@@ -15,6 +18,7 @@ export default function Shop({ shop_id }) {
     if (response.ok) {
       const shopData = await response.json();
       setShop(shopData);
+      console.log("shop data", shop)
     }
   };
   const getShopListings = async () => {

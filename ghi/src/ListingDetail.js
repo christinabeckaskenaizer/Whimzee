@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 
-export default function ListingDetail() {
+export default function ListingDetail({ setShopToVisit }) {
 
     const [detail, setDetail] = useState("");
     const [shop, setShop] = useState("");
 
     const { id } = useParams();
+    console.log("id", id)
+    const navigate = useNavigate();
 
+    const navigateToStorePage = (event, shopId) => {
+        event.preventDefault();
+        setShopToVisit(shopId);
+        navigate('/shops/');
+    }
 
     const getCombinedData = async () => {
         try {
@@ -94,7 +101,7 @@ export default function ListingDetail() {
                                     <p className="max-w-md mb-4 text-gray-500 dark:text-gray-500">
                                         {detail.description}
                                     </p>
-                                    <a href="#" className="text-green-600 hover:underline dark:text-gray-400">
+                                    <a onClick={((event) => navigateToStorePage(event, detail.shop_id))} href="#" className="text-green-600 hover:underline dark:text-gray-400">
                                         {shop && shop.name}</a>
                                     <div>
                                         <span className="text-green-800 datext-green-200">{detail.new ? "New" : "Used"}</span>
@@ -114,7 +121,7 @@ export default function ListingDetail() {
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     );
 }
