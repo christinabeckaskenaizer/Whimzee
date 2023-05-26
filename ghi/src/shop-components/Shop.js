@@ -72,6 +72,7 @@ export default function Shop({ listings }) {
               {shopListings.map((listing) => (
                 <div key={listing.id} className="col-span-1">
                   <ListingCard
+                    id={listing.id}
                     picture={listing.picture}
                     name={listing.name}
                     isNew={listing.new}
