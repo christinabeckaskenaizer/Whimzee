@@ -1,23 +1,40 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 
 import AccountOrderHistory from "./AccountOrderHistory";
 import ShopSalesList from "./ShopSalesList";
 import OpenShop from "./OpenShop";
 
-import useToken from "@galvanize-inc/jwtdown-for-react";
-
-export default function UserAccount({ user, ids, shop, cart }) {
-  const { token } = useToken();
+export default function UserAccount({ user, ids, shop, token }) {
   const [view, setView] = useState(true);
-  // const [userPic, setUserPic] = useState(
-  //   "https://s.yimg.com/ny/api/res/1.2/Gp3tIUKkvSV6HUF_d6yfsw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM1Mg--/https://media.zenfs.com/en-US/smartasset_475/47624d7cbd95041c5c0f9fb287e8d337"
-  // );
   const [userPic, setUserPic] = useState(null);
+  const [orders, setOrders] = useState(null);
 
   const handleSelection = (bool) => {
     setView(bool);
   };
+
+  const getShopOrders = async (id) => {
+    console.log("now I will get the orders");
+    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/${id}/orders`;
+    const config = {
+      credentials: "include",
+      method: "get",
+      headers: {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    };
+    const response = await fetch(url, config);
+    if (response.ok) {
+      const data = await response.json();
+      setOrders(data);
+    }
+  };
+
+  useEffect(() => {
+    if (ids?.shop_id) {
+      getShopOrders(ids.shop_id);
+    }
+  }, [ids]);
 
   if (!ids) {
     // add spinner here
@@ -26,7 +43,7 @@ export default function UserAccount({ user, ids, shop, cart }) {
 
   return (
     <>
-      <div className="flex flex-col items-center p-10">
+      <div className="flex w-full flex-col items-center p-10">
         <div className="flex flex-col items-center pb-10 mt-10">
           {userPic ? (
             <img
@@ -71,7 +88,7 @@ export default function UserAccount({ user, ids, shop, cart }) {
             </button>
           </div>
         </div>
-        {view ? <ShopSalesList ids={ids} /> : <AccountOrderHistory />}
+        {view ? <ShopSalesList orders={orders} /> : <AccountOrderHistory />}
       </div>
     </>
   );

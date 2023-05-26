@@ -1,3 +1,15 @@
+## May 25, 2023
+
+Today I worked on:
+
+- Centralizing how our frontend grabs data.
+
+- Made the create shop page a modal rather than a different page
+
+Today I worked on moving our fetch requests up the component tree and closer to the root. This way we can pass our big lists down to the components that need the data. This is better than having many components call the same data individually
+
+I implemented a way to show the create shop page on the account page. I am hoping to centralize all of this kind of user interactivity onto one page to make it easier to move and update data in the future.
+
 ## May 24, 2023
 
 Today I worked on:

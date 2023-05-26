@@ -66,10 +66,10 @@ function App() {
                   ids={ids}
                   shop={shop}
                   listings={listings}
+                  token={token}
                 />
               }
             />
-            <Route path="listing" />
           </Route>
 
           <Route
