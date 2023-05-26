@@ -1,9 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+
 import Logout from './Logout';
 
-function Login({token}) {
+function Login({token , user}) {
   const [open, setOpen] = useState(false)
+  console.log(user)
+
+
 
   const handleOpen = () => {
     setOpen(!open);
@@ -32,8 +36,8 @@ function Login({token}) {
           {open ? (
           <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
             <div className="py-1" role="none">
-              <div className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" id="menu-item-0">User name </div>
-              <div className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" id="menu-item-1">User email</div>
+              <div className="text-gray-700 block px-4 py-1 text-sm" role="menuitem" id="menu-item-0">User name </div>
+              <div className="text-gray-700 block px-4 py-1 text-sm" role="menuitem" id="menu-item-1">User email</div>
             </div>
             <div>
               <NavLink to="/account" className="text-gray-700 block px-4 py-2 text-sm md:dark:text-black md:hover:text-green-800" role="menuitem" tabIndex="-1" id="menu-item-2">Your Account</NavLink>
