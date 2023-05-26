@@ -3,6 +3,9 @@ import ListingCard from "./ListingCard";
 import { useEffect, useState } from "react";
 
 export default function AllListings({ listings }) {
+  if (!listings) {
+    return <h1>Loading</h1>;
+  }
   return (
     <div className="sm:grid flex flex-col items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
       {listings.map((listing) => (
