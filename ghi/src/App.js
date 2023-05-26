@@ -26,10 +26,27 @@ function App() {
   const { user, ids } = useUser(token);
   const { shop } = useShop(ids);
   const { cart } = useCart(ids);
-  const [shopToVisit, setShopToVisit] = useState(null);
+
+  const [listings, setListings] = useState([]);
+
+  const fetchListingData = async () => {
+    try {
+      const listingsUrl = "http://localhost:8000/listings";
+      const response = await fetch(listingsUrl);
+      const data = await response.json();
+      setListings(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   useEffect(() => {
-    console.log(token);
+    // console.log(token);
   }, [token]);
+
+  useEffect(() => {
+    fetchListingData();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -44,22 +61,27 @@ function App() {
             <Route
               path=""
               element={
-                <UserAccount user={user} ids={ids} shop={shop} cart={cart} />
+                <UserAccount
+                  user={user}
+                  ids={ids}
+                  shop={shop}
+                  listings={listings}
+                />
               }
             />
             <Route path="listing" />
           </Route>
 
           <Route
-            path="/shops/"
-            element={<Shop shop_id={shopToVisit} />}
+            path="/shops/:shopId"
+            element={<Shop listings={listings} />}
           ></Route>
 
-          <Route path="/listings" element={<AllListings />} />
           <Route
-            path="/listings/:id"
-            element={<ListingDetail setShopToVisit={setShopToVisit} />}
+            path="/listings"
+            element={<AllListings listings={listings} />}
           />
+          <Route path="/listings/:id" element={<ListingDetail />} />
 
           <Route path="/liked"></Route>
 
