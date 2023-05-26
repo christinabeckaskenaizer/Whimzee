@@ -3,19 +3,13 @@ import { NavLink } from "react-router-dom";
 
 import AccountOrderHistory from "./AccountOrderHistory";
 import ShopSalesList from "./ShopSalesList";
+import OpenShop from "./OpenShop";
 
 import useToken from "@galvanize-inc/jwtdown-for-react";
-import useUser from "../custom-hooks/useUser";
-import useShop from "../custom-hooks/useShop";
-import useCart from "../custom-hooks/useCart";
 
-export default function UserAccount({}) {
+export default function UserAccount({ user, ids, shop, cart }) {
   const { token } = useToken();
-  const { user, ids } = useUser(token);
-  const { shop } = useShop(ids);
-  const { cart } = useCart(ids);
-  console.log(user);
-  const [view, setView] = useState(false);
+  const [view, setView] = useState(true);
   // const [userPic, setUserPic] = useState(
   //   "https://s.yimg.com/ny/api/res/1.2/Gp3tIUKkvSV6HUF_d6yfsw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM1Mg--/https://media.zenfs.com/en-US/smartasset_475/47624d7cbd95041c5c0f9fb287e8d337"
   // );
@@ -66,15 +60,7 @@ export default function UserAccount({}) {
                 View Shop
               </button>
             ) : (
-              <NavLink
-                to={"shop"}
-                onClick={() => handleSelection(true)}
-                className="inline-flex items-center px-4 py-2 text-sm
-                font-medium text-center text-white bg-emerald-500 rounded-lg
-                hover:bg-emerald-400"
-              >
-                Open Shop
-              </NavLink>
+              <OpenShop />
             )}
             <button
               onClick={() => handleSelection(false)}
@@ -85,7 +71,7 @@ export default function UserAccount({}) {
             </button>
           </div>
         </div>
-        {view ? <ShopSalesList /> : <AccountOrderHistory />}
+        {view ? <ShopSalesList ids={ids} /> : <AccountOrderHistory />}
       </div>
     </>
   );

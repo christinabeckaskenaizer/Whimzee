@@ -1,3 +1,20 @@
+## May 25, 2023
+
+Today I worked on:
+
+- Added the name of the store to the detail page. (Before it was just an ID.)
+- Made the store name clickable, it will now redirect the user to the appropriate store page.
+
+## May 24, 2023
+
+Today I worked on:
+
+- I created the details page for an individual listing.
+- Used tailwind classes to stylize the page
+- Fetched both store data and listing data.
+
+I mostly worked on stylizing the listing detail page. My "Aha" moment of the day is a little silly and LONG overdue, but I finally got used to using console logs to find out where my problems lie. I solved SO many issues today, and it was as simple as console logging!!! This project is clearing up a lot of confusion that I had previously.
+
 ## May 23, 2023
 
 Today I worked on:

@@ -1,38 +1,38 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ListingCard from "../ListingCard";
 
-export default function Shop({ shop_id }) {
+export default function Shop({ listings }) {
   const [shop, setShop] = useState(null);
-  const [listings, setListings] = useState(null);
+  const [shopListings, setShopListings] = useState([]);
+
+  const { shopId } = useParams();
 
   const sampleImg =
     "https://i.ebayimg.com/images/g/dpUAAOSwwz1kP2K0/s-l1600.jpg";
 
   const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}`;
   const getShopData = async () => {
-    const response = await fetch(`${url}/shops/${shop_id}`);
+    const response = await fetch(`${url}/shops/${shopId}`);
     if (response.ok) {
       const shopData = await response.json();
       setShop(shopData);
     }
   };
   const getShopListings = async () => {
-    const response = await fetch(`${url}/listings`);
-    if (response.ok) {
-      const listingData = await response.json();
-      console.log(listingData);
-      const shopListings = listingData.filter(
-        (listing) => listing.shop_id === shop_id
-      );
-      setListings(shopListings);
-    }
+    const data = listings.filter(
+      (listing) => listing.shop_id === Number(shopId)
+    );
+    setShopListings(data);
   };
 
   useEffect(() => {
     getShopData();
-    getShopListings();
   }, []);
+
+  useEffect(() => {
+    getShopListings();
+  }, [listings]);
 
   if (!shop) {
     return <h1>Loading</h1>;
@@ -69,7 +69,7 @@ export default function Shop({ shop_id }) {
         <div className="m-auto p-4 flex justify-center flex-col px-4 w-5/6">
           {listings && (
             <div className="grid items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
-              {listings.map((listing) => (
+              {shopListings.map((listing) => (
                 <div key={listing.id} className="col-span-1">
                   <ListingCard
                     picture={listing.picture}
