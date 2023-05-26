@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function ListingDetail({}) {
+export default function ListingDetail({ }) {
   const [detail, setDetail] = useState("");
   const [shop, setShop] = useState("");
 
@@ -49,11 +49,11 @@ export default function ListingDetail({}) {
 
     <div>
       <section className="py-20 font-poppins dark:bg-slate-50">
-        <div className="max-w-6xl px-4 mx-auto">
+        <div className="mx-auto w-screen px-24">
           <div className="flex flex-wrap mb-24 -mx-4">
             <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
               <div className="sticky top-0 z-50 overflow-hidden ">
-                <div className="relative mb-6 lg:mb-10 ">
+                <div className="flex flex-col items-center relative mb-6 lg:mb-10 ">
                   <a
                     className="absolute left-0 transform lg:ml-2 top-1/2 translate-1/2"
                     href="#"
@@ -73,7 +73,7 @@ export default function ListingDetail({}) {
                     </svg>
                   </a>
                   <img
-                    className="object-cover w-full lg:h-1/2"
+                    className="object-cover w-96 h-96 rounded-xl"
                     src={detail.picture}
                     alt=""
                   />
