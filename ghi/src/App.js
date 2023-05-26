@@ -38,6 +38,7 @@ function App() {
           <Route path="/shops" element={<Shop />}></Route>
 
           <Route path="/listings" element={<AllListings />} />
+          <Route path="/listings/category/:category" element={<AllListings />}/>
 
           <Route path="/liked"></Route>
 

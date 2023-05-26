@@ -1,7 +1,10 @@
-from fastapi import FastAPI
+from fastapi import APIRouter, Depends, Response, FastAPI
 from authenticator import authenticator
 from fastapi.middleware.cors import CORSMiddleware
 import os
+from queries.categories import *
+router = APIRouter()
+
 # Router imports
 from routers import(
     users,
@@ -49,3 +52,15 @@ def launch_details():
             "min": "00"
         }
     }
+
+
+#CategoryRepository.create("Outdoors")
+
+# @router.post("/categories", response_model=Union[CategoryOut, Error])
+# async def create_category(
+#     category: CategoryIn,
+#     repo: CategoryRepository = Depends(),
+# ):
+#     return repo.create(category)
+
+# create_category("Outdoors")

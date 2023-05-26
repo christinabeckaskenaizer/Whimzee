@@ -1,7 +1,9 @@
+import CategoriesList from "../CategoriesList";
+
 function Landing(props) {
   return (
     <>
-      <header>here are categories</header>
+      <header><CategoriesList /></header>
       <div className="px-4 py-5 my-20 text-center">
         <div>
           <h1>Welcome friend!</h1>
