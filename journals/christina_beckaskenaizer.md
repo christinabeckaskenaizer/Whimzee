@@ -4,6 +4,8 @@ Today I worked on:
 
 - Added the name of the store to the detail page. (Before it was just an ID.)
 - Made the store name clickable, it will now redirect the user to the appropriate store page.
+- added all listings to the landing page. These will be seen only when the user scrolls.
+- intended to work on making the cards clickable but I will wait for tomroow when my partner merges a vital part that I need.
 
 ## May 24, 2023
 

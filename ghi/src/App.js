@@ -53,7 +53,7 @@ function App() {
       <NavBar token={token} />
       <div className="flex justify-center">
         <Routes>
-          <Route path="/" element={<Landing listings={<AllListings />} />} />
+          <Route path="/" element={<Landing listings={listings} />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
 
