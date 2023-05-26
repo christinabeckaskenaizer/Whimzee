@@ -77,16 +77,11 @@ function App() {
             element={<Shop listings={listings} />}
           ></Route>
 
-<<<<<<< HEAD
-          <Route path="/listings" element={<AllListings />} />
-          <Route path="/listings/category/:category" element={<AllListings />}/>
-=======
           <Route
             path="/listings"
             element={<AllListings listings={listings} />}
           />
           <Route path="/listings/:id" element={<ListingDetail />} />
->>>>>>> main
 
           <Route path="/liked"></Route>
 

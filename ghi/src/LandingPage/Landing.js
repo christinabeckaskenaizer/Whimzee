@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import CategoriesList from "../CategoriesList";
-=======
 import AllListings from "../AllListings";
->>>>>>> main
 
 function Landing(props) {
   return (
