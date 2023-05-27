@@ -22,11 +22,11 @@ function Logout(props) {
     };
 
     return (
-        <li>
+        <>
         <form onSubmit={(e) => handleOnSubmit(e)}>
-            <button type="submit" className="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:p-0 dark:text-white md:dark:text-black md:hover:text-green-800">Logout</button>
+            <button type="submit" className="text-gray-700 block px-4 py-2 text-sm md:dark:text-black md:hover:text-green-800">Logout</button>
         </form>
-        </li>
+        </>
     )
 }
 

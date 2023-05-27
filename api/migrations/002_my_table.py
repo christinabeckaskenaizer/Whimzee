@@ -38,6 +38,60 @@ steps = [
         DROP TABLE categories
         """
     ],
+    # [
+    #     """
+    #     INSERT INTO categories(name)
+    #     VALUES ("Outdoors")
+    #     """
+    # ],
+    # [
+    #     """
+    #     INSERT INTO categories(name)
+    #     VALUES ("Clothing")
+    #     """
+    # ],
+    # [
+    #     """
+    #     INSERT INTO categories(name)
+    #     VALUES ("Office")
+    #     """
+    # ],
+    # [
+    #     """
+    #     INSERT INTO categories(name)
+    #     VALUES ("Home Goods")
+    #     """
+    # ],
+    # [
+    #     """
+    #     INSERT INTO categories(name)
+    #     VALUES ("Pets")
+    #     """
+    # ],
+    # [
+    #     """
+    #     INSERT INTO categories(name)
+    #     VALUES ("Collectibles")
+    #     """
+    # ],
+    # [
+    #     """
+    #     INSERT INTO categories(name)
+    #     VALUES ("Beauty")
+    #     """
+    # ],
+    # [
+    #     """
+    #     INSERT INTO categories(name)
+    #     VALUES ("Accessories")
+    #     """
+    # ],
+    # [
+    #     """
+    #     INSERT INTO categories(name)
+    #     VALUES ("Other")
+    #     """
+    # ],
     [
         """
         CREATE TABLE listings (
