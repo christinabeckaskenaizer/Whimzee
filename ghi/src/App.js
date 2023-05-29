@@ -20,6 +20,7 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import useUser from "./custom-hooks/useUser";
 import useShop from "./custom-hooks/useShop";
 import useCart from "./custom-hooks/useCart";
+import CreateListing from "./CreateListing";
 
 function App() {
   const { token } = useToken();
@@ -52,8 +53,8 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar
-      token={token}
-      user={user}
+        token={token}
+        user={user}
       />
       <div className="flex flex-col justify-center">
         <Routes>
@@ -87,7 +88,7 @@ function App() {
           />
           <Route path="/listings/:id" element={<ListingDetail />} />
           <Route path="/listings/category/:id" />
-
+          <Route path="/button" element={<CreateListing />} />
           <Route path="/liked"></Route>
 
           <Route path="/checkout"></Route>
