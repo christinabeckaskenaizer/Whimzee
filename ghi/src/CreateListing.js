@@ -1,16 +1,19 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
+
 
 export default function MyModal() {
     const [isOpen, setIsOpen] = useState(true)
     const [data, setData] = useState({});
-    const [toggled, setToggled] = useState(false);
-
     const [title, setTitle] = useState('');
-    const [picte, setPicture] = useState('');
+    const [picture, setPicture] = useState('');
     const [quanity, setQuantity] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
+
+    const [toggled, setToggled] = useState(false);
+    const [categories, setCategories] = useState([]);
+
 
     console.log(data)
 
@@ -27,6 +30,13 @@ export default function MyModal() {
         console.log("toggled")
     }
 
+    async function getCategories() {
+        const categoryUrl = "http://localhost:8000/categories"
+        const response = await fetch(categoryUrl)
+        const categoryData = await response.json();
+        setCategories(categoryData)
+    }
+
     const createListing = async (event) => {
         event.preventDefault();
         const url = "http://localhost:8000/listings"
@@ -41,6 +51,9 @@ export default function MyModal() {
         console.log(result);
     }
 
+    useEffect(() => {
+        getCategories();
+    }, [])
     return (
         <>
             <div className="fixed inset-0 flex items-center justify-center">
@@ -104,6 +117,7 @@ export default function MyModal() {
                                         </div>
                                         <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Description</label>
                                         <textarea id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your item description here..."></textarea>
+
                                         <div className='mt-4'>
                                             <label className="relative inline-flex items-center mr-5 cursor-pointer">
                                                 <input onChange={toggleUsed} type="checkbox" value="" className="sr-only peer" />
@@ -112,7 +126,13 @@ export default function MyModal() {
                                             </label>
                                         </div>
                                     </form>
-
+                                    <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                                    <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option >Choose a category</option>
+                                        {categories.map((category) =>
+                                            <option key={category.id} value={category.id}>{category.name}</option>
+                                        )}
+                                    </select>
                                     <div className="mt-4">
                                         <button
                                             type="button"
