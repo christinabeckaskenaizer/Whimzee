@@ -2,16 +2,14 @@ import { useState, useEffect } from "react";
 
 function SearchBar(props) {
     const [categories, setCategories] = useState([])
-    // const [searchedCategory, setSearchedCategory] = useState(null)
-    // const [searchedItemName, setSearchedItemName] = useState(null)
-    const [open, setOpen] = useState(false)
+    const [filteredListings, setFilteredListings] = useState([]);
     const setListings = props.setlistings
-    const setSearchedCategory = props.category
-    const setSearchedItemName = props.name
+    const [searchedCategory, setSearchedCategory] = useState(null)
+    const [searchedItemName, setSearchedItemName] = useState(null)
+    const listings = props.listings
+    console.log(listings)
 
-    const handleOpen = () => {
-        setOpen(!open);
-    };
+
     const fetchCategoryData = async () => {
         try {
         const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
@@ -37,8 +35,15 @@ function SearchBar(props) {
     }
 
     const handleClick = async (e) => {
-
+        e.preventDefault();
+        if (searchedCategory) {
+            const filteredByCategory = listings.filter(
+            (listing) => listing.category === Number(searchedCategory)
+            )
+            setFilteredListings(filteredByCategory)
+        }
     }
+    console.log(filteredListings)
 
     return (
       <form>

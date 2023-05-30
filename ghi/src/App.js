@@ -29,10 +29,6 @@ function App() {
   const { cart } = useCart(ids);
 
   const [listings, setListings] = useState([]);
-  const [searchedCategory, setSearchedCategory] = useState(null)
-  const [searchedItemName, setSearchedItemName] = useState(null)
-  console.log(searchedItemName)
-  console.log(searchedCategory)
 
   const fetchListingData = async () => {
     try {
@@ -58,8 +54,7 @@ function App() {
       <NavBar
       token={token}
       user={user}
-      category={setSearchedCategory}
-      name={setSearchedItemName}
+      listings={listings}
       />
       <div className="flex flex-col justify-center">
         <Routes>
