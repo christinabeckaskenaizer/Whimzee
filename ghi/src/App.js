@@ -7,9 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
 
-import ListingCard from "./ListingCard.js";
-import AllListings from "./AllListings.js";
-import ListingDetail from "./ListingDetail";
+import ListingCard from "./listing-components/ListingCard.js";
+import AllListings from "./listing-components/AllListings.js";
+import ListingDetail from "./listing-components/ListingDetail";
 
 import Shop from "./shop-components/Shop";
 
@@ -20,7 +20,7 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import useUser from "./custom-hooks/useUser";
 import useShop from "./custom-hooks/useShop";
 import useCart from "./custom-hooks/useCart";
-import CreateListing from "./CreateListing";
+import CreateListing from "./listing-components/CreateListing";
 
 function App() {
   const { token } = useToken();

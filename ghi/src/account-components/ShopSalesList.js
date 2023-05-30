@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CreateListing from "../CreateListing"
+import CreateListing from "../listing-components/CreateListing"
 
 
 export default function ShopSalesList({ orders, ids }) {

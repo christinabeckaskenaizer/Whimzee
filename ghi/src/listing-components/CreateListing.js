@@ -36,6 +36,7 @@ export default function MyModal({ ids }) {
         setCategories(categoryData)
     }
 
+
     const createListing = async (event) => {
         try {
             event.preventDefault();
@@ -61,6 +62,10 @@ export default function MyModal({ ids }) {
                     'Content-Type': 'application/json'
                 }
             });
+            if (response.ok) {
+
+                closeModal();
+            }
             const result = await response.json();
             console.log("success:", result)
         } catch (error) {
@@ -88,7 +93,7 @@ export default function MyModal({ ids }) {
                 <button
                     type="button"
                     onClick={openModal}
-                    className="rounded-md bg-green-900 px-4 py-2 text-sm font-medium text-white hover:bg-green-950 focus:outline-none"
+                    className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none"
                 >
                     Add a Listing
                 </button>
