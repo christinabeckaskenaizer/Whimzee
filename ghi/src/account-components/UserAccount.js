@@ -109,9 +109,9 @@ export default function UserAccount({ user, ids, shop, token }) {
           </div>
         </div>
         {view ? (
-          <ShopSalesList ids={ids} orders={orders} />
+          <ShopSalesList shop={shop} orders={orders} token={token} ids={ids} />
         ) : (
-          <AccountOrderHistory history={history} />
+          <AccountOrderHistory history={history} token={token} />
         )}
       </div>
     </>
