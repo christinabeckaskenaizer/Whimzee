@@ -1,8 +1,9 @@
 import { useState } from "react";
-import CreateListing from "../listing-components/CreateListing"
+import CreateListing from "../listing-components/CreateListing";
+import EditShop from "./EditShop";
+import DeleteShop from "./DeleteShop";
 
-
-export default function ShopSalesList({ orders, ids }) {
+export default function ShopSalesList({ orders, shop, token, ids }) {
   let netTotal = 0;
   if (!orders) {
     return;
@@ -11,7 +12,9 @@ export default function ShopSalesList({ orders, ids }) {
   return (
     <>
       <div className="w-full relative overflow-x-auto shadow-md sm:rounded-lg">
-        <CreateListing ids={ids} />
+        <CreateListing ids={ids} token={token} />
+        <EditShop shop={shop} token={token} ids={ids} />
+        <DeleteShop shop={shop} token={token} />
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-center text-xs text-gray-700 uppercase bg-gray-200">
             <tr>
