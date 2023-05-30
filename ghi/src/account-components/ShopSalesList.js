@@ -1,6 +1,5 @@
 import { useState } from "react";
-import CreateListing from "../listing-components/CreateListing"
-
+import CreateListing from "../listing-components/CreateListing";
 
 export default function ShopSalesList({ orders, ids }) {
   let netTotal = 0;
@@ -10,8 +9,8 @@ export default function ShopSalesList({ orders, ids }) {
 
   return (
     <>
-      <CreateListing ids={ids} />
       <div className="w-full relative overflow-x-auto shadow-md sm:rounded-lg">
+        <CreateListing ids={ids} />
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-center text-xs text-gray-700 uppercase bg-gray-200">
             <tr>
