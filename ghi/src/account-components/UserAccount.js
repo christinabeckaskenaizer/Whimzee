@@ -8,13 +8,13 @@ export default function UserAccount({ user, ids, shop, token }) {
   const [view, setView] = useState(true);
   const [userPic, setUserPic] = useState(null);
   const [orders, setOrders] = useState(null);
+  const [history, setHistory] = useState(null);
 
   const handleSelection = (bool) => {
     setView(bool);
   };
 
   const getShopOrders = async (id) => {
-    console.log("now I will get the orders");
     const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/${id}/orders`;
     const config = {
       credentials: "include",
@@ -29,6 +29,26 @@ export default function UserAccount({ user, ids, shop, token }) {
       setOrders(data);
     }
   };
+
+  const getHistory = async () => {
+    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/orders`;
+    const config = {
+      credentials: "include",
+      method: "get",
+      headers: {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    };
+    const response = await fetch(url, config);
+    if (response.ok) {
+      const data = await response.json();
+      setHistory(data);
+    }
+  };
+
+  useEffect(() => {
+    getHistory();
+  }, [token]);
 
   useEffect(() => {
     if (ids?.shop_id) {
@@ -88,7 +108,11 @@ export default function UserAccount({ user, ids, shop, token }) {
             </button>
           </div>
         </div>
-        {view ? <ShopSalesList orders={orders} /> : <AccountOrderHistory />}
+        {view ? (
+          <ShopSalesList orders={orders} />
+        ) : (
+          <AccountOrderHistory history={history} />
+        )}
       </div>
     </>
   );

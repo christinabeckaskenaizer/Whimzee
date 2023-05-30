@@ -33,8 +33,6 @@ function App() {
   console.log(searchedItemName)
   console.log(searchedCategory)
 
-  console.log(user)
-
   const fetchListingData = async () => {
     try {
       const listingsUrl = "http://localhost:8000/listings";
@@ -72,13 +70,7 @@ function App() {
             <Route
               path=""
               element={
-                <UserAccount
-                  user={user}
-                  ids={ids}
-                  shop={shop}
-                  listings={listings}
-                  token={token}
-                />
+                <UserAccount user={user} ids={ids} shop={shop} token={token} />
               }
             />
           </Route>

@@ -4,7 +4,6 @@ import { useState } from "react";
 
 function Landing(props) {
   const [category, setCategory] = useState(null)
-  console.log(category)
   return (
       <>
       <CategoriesList
