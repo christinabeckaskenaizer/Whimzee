@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState, useEffect } from 'react'
 
 
-export default function MyModal() {
+export default function MyModal({ ids }) {
     const [isOpen, setIsOpen] = useState(false)
     const [title, setTitle] = useState('');
     const [picture, setPicture] = useState('');
@@ -41,7 +41,7 @@ export default function MyModal() {
             event.preventDefault();
 
             let data = {
-                "shop_id": 1,
+                "shop_id": ids.shop_id,
                 "name": title,
                 "quantity": quantity,
                 "description": description,
