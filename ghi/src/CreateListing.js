@@ -3,19 +3,18 @@ import { Fragment, useState, useEffect } from 'react'
 
 
 export default function MyModal() {
-    const [isOpen, setIsOpen] = useState(true)
-    const [data, setData] = useState({});
+    const [isOpen, setIsOpen] = useState(false)
     const [title, setTitle] = useState('');
     const [picture, setPicture] = useState('');
-    const [quanity, setQuantity] = useState('');
+    const [quantity, setQuantity] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
 
     const [toggled, setToggled] = useState(false);
     const [categories, setCategories] = useState([]);
+    const [category, setCategory] = useState();
 
-
-    console.log(data)
+    // console.log("data", data)
 
     function closeModal() {
         setIsOpen(false)
@@ -38,18 +37,47 @@ export default function MyModal() {
     }
 
     const createListing = async (event) => {
-        event.preventDefault();
-        const url = "http://localhost:8000/listings"
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
+        try {
+            event.preventDefault();
+
+            let data = {
+                "shop_id": 1,
+                "name": title,
+                "quantity": quantity,
+                "description": description,
+                "price": parseFloat(price),
+                "new": toggled,
+                "picture": picture,
+                "category": category
             }
-        });
-        const result = await response.json();
-        console.log(result);
+            // console.log(typeof data.price)
+            // return
+
+            const url = "http://localhost:8000/listings"
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const result = await response.json();
+            console.log("success:", result)
+        } catch (error) {
+            console.error("error:", error);
+        }
     }
+
+    // const data = {
+    //     "shop_id": 0,
+    //     "name": "string",
+    //     "quantity": 0,
+    //     "description": "string",
+    //     "price": 0,
+    //     "new": true,
+    //     "picture": "string",
+    //     "category": 0
+    // }
 
     useEffect(() => {
         getCategories();
@@ -101,22 +129,22 @@ export default function MyModal() {
                                     <form onSubmit={createListing} className="mt-2">
                                         <div>
                                             <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900">Title</label>
-                                            <input type="text" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                            <input onChange={(e) => setTitle(e.target.value)} type="text" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                         </div>
                                         <div>
                                             <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900">Picture URL</label>
-                                            <input type="text" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                            <input onChange={(e) => setPicture(e.target.value)} type="text" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                         </div>
                                         <div>
                                             <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900">Quantity</label>
-                                            <input type="text" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                            <input onChange={(e) => setQuantity(e.target.value)} type="number" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                         </div>
                                         <div>
                                             <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                                            <input type="text" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                            <input onChange={(e) => setPrice(e.target.value)} type="number" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                         </div>
                                         <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Description</label>
-                                        <textarea id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your item description here..."></textarea>
+                                        <textarea onChange={(e) => setDescription(e.target.value)} id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your item description here..."></textarea>
 
                                         <div className='mt-4'>
                                             <label className="relative inline-flex items-center mr-5 cursor-pointer">
@@ -127,7 +155,7 @@ export default function MyModal() {
                                         </div>
                                     </form>
                                     <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-                                    <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <select onChange={(e) => setCategory(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option >Choose a category</option>
                                         {categories.map((category) =>
                                             <option key={category.id} value={category.id}>{category.name}</option>
@@ -136,7 +164,7 @@ export default function MyModal() {
                                     <div className="mt-4">
                                         <button
                                             type="button"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                            className="inline-flex justify-center rounded-md border border-transparent bg-green-900 px-4 py-2 text-sm font-medium text-white hover:bg-green-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                             onClick={createListing}>
                                             Create
                                         </button>
