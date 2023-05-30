@@ -4,7 +4,8 @@ from queries.orders import (
     Error,
     OrderIn,
     OrderOut,
-    OrderRepo
+    OrderRepo,
+    OrderOutWithListing
 )
 from authenticator import authenticator
 
@@ -22,12 +23,28 @@ async def create(
         result = Error(message="Unable to create order")
     return result
 
-@router.get("/orders", response_model = List[OrderOut] | Error)
+# @router.get("/orders", response_model = List[OrderOut] | Error)
+# async def get_all(
+#     response: Response,
+#     repo: OrderRepo = Depends(),
+#     account: dict = Depends(authenticator.try_get_current_account_data)
+# ) -> List[OrderOut] | Error:
+#     if account == None:
+#         response.status_code = 401
+#         return Error(message="Sign in to see all orders")
+#     user_id = account.get("id")
+#     result = repo.get_all(user_id)
+#     if result == None:
+#         response.status_code = 404
+#         result = Error(message="Unable to get orders")
+#     return result
+
+@router.get("/orders", response_model = List[OrderOutWithListing] | Error)
 async def get_all(
     response: Response,
     repo: OrderRepo = Depends(),
     account: dict = Depends(authenticator.try_get_current_account_data)
-) -> List[OrderOut] | Error:
+) -> List[OrderOutWithListing] | Error:
     if account == None:
         response.status_code = 401
         return Error(message="Sign in to see all orders")
@@ -38,13 +55,29 @@ async def get_all(
         result = Error(message="Unable to get orders")
     return result
 
-@router.get("/{shop_id}/orders", response_model=List[OrderOut] | Error)
+# @router.get("/{shop_id}/orders", response_model=List[OrderOut] | Error)
+# async def get_all_shop_orders(
+#     shop_id:int,
+#     response: Response,
+#     repo: OrderRepo = Depends(),
+#     account: dict = Depends(authenticator.try_get_current_account_data)
+# ) -> List[OrderOut] | Error:
+#     if account == None:
+#         response.status_code = 404
+#         return Error(message="Sign in to see shop orders")
+#     result = repo.get_all_shop_orders(shop_id)
+#     if result == None:
+#         response.status_code = 404
+#         result = Error(message="Unable to get orders")
+#     return result
+
+@router.get("/{shop_id}/orders", response_model=List[OrderOutWithListing] | Error)
 async def get_all_shop_orders(
     shop_id:int,
     response: Response,
     repo: OrderRepo = Depends(),
     account: dict = Depends(authenticator.try_get_current_account_data)
-) -> List[OrderOut] | Error:
+) -> List[OrderOutWithListing] | Error:
     if account == None:
         response.status_code = 404
         return Error(message="Sign in to see shop orders")

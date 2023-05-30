@@ -29,7 +29,6 @@ function App() {
   const { cart } = useCart(ids);
 
   const [listings, setListings] = useState([]);
-  console.log(user)
 
   const fetchListingData = async () => {
     try {
@@ -66,13 +65,7 @@ function App() {
             <Route
               path=""
               element={
-                <UserAccount
-                  user={user}
-                  ids={ids}
-                  shop={shop}
-                  listings={listings}
-                  token={token}
-                />
+                <UserAccount user={user} ids={ids} shop={shop} token={token} />
               }
             />
           </Route>

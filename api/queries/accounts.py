@@ -92,7 +92,6 @@ class AccountQueries(BaseModel):
                         ]
                     )
                     data = result.fetchone()
-                    print(data, "This is the tupple")
                     return AccountIDS(
                         id = data[0],
                         shop_id = data[1],
