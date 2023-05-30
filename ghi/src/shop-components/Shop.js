@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ListingCard from "../ListingCard";
+import ListingCard from "../listing-components/ListingCard";
 
 export default function Shop({ listings }) {
   const [shop, setShop] = useState(null);
