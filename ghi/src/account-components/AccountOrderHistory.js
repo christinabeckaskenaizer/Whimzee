@@ -1,4 +1,4 @@
-import ListingCard from "../ListingCard";
+import ListingCard from "../listing-components/ListingCard";
 
 export default function AccountOrderHistory({ history }) {
   if (!history) {
