@@ -38,60 +38,96 @@ steps = [
         DROP TABLE categories
         """
     ],
-    # [
-    #     """
-    #     INSERT INTO categories(name)
-    #     VALUES ("Outdoors")
-    #     """
-    # ],
-    # [
-    #     """
-    #     INSERT INTO categories(name)
-    #     VALUES ("Clothing")
-    #     """
-    # ],
-    # [
-    #     """
-    #     INSERT INTO categories(name)
-    #     VALUES ("Office")
-    #     """
-    # ],
-    # [
-    #     """
-    #     INSERT INTO categories(name)
-    #     VALUES ("Home Goods")
-    #     """
-    # ],
-    # [
-    #     """
-    #     INSERT INTO categories(name)
-    #     VALUES ("Pets")
-    #     """
-    # ],
-    # [
-    #     """
-    #     INSERT INTO categories(name)
-    #     VALUES ("Collectibles")
-    #     """
-    # ],
-    # [
-    #     """
-    #     INSERT INTO categories(name)
-    #     VALUES ("Beauty")
-    #     """
-    # ],
-    # [
-    #     """
-    #     INSERT INTO categories(name)
-    #     VALUES ("Accessories")
-    #     """
-    # ],
-    # [
-    #     """
-    #     INSERT INTO categories(name)
-    #     VALUES ("Other")
-    #     """
-    # ],
+       [
+        """
+        INSERT INTO categories
+            (name)
+        VALUES
+            ('outdoors');
+        """,
+        """
+        """
+    ],
+    [
+        """
+        INSERT INTO categories
+            (name)
+        VALUES
+            ('clothing');
+        """,
+        """
+        """
+    ],
+    [
+        """
+        INSERT INTO categories
+            (name)
+        VALUES
+            ('office');
+        """,
+        """
+        """
+    ],
+    [
+        """
+        INSERT INTO categories
+            (name)
+        VALUES
+            ('home goods');
+        """,
+        """
+        """
+    ],
+    [
+        """
+        INSERT INTO categories
+            (name)
+        VALUES
+            ('pets');
+        """,
+        """
+        """
+    ],
+    [
+        """
+        INSERT INTO categories
+            (name)
+        VALUES
+            ('collectibles');
+        """,
+        """
+        """
+    ],
+       [
+        """
+        INSERT INTO categories
+            (name)
+        VALUES
+            ('beauty');
+        """,
+        """
+        """
+    ],
+    [
+        """
+        INSERT INTO categories
+            (name)
+        VALUES
+            ('accessories');
+        """,
+        """
+        """
+    ],
+    [
+        """
+        INSERT INTO categories
+            (name)
+        VALUES
+            ('other');
+        """,
+        """
+        """
+    ],
     [
         """
         CREATE TABLE listings (
