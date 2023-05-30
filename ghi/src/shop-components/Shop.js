@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ListingCard from "../ListingCard";
 
@@ -9,13 +9,16 @@ export default function Shop({ listings }) {
   const { shopId } = useParams();
 
   const sampleImg =
-    "https://i.ebayimg.com/images/g/dpUAAOSwwz1kP2K0/s-l1600.jpg";
+    "https://static.vecteezy.com/system/resources/thumbnails/022/086/896/small/banner-background-colorful-white-and-gray-gradations-halftone-vector.jpg";
 
   const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}`;
   const getShopData = async () => {
     const response = await fetch(`${url}/shops/${shopId}`);
     if (response.ok) {
       const shopData = await response.json();
+      if (shopData.profile_picture === "") {
+        shopData.profile_picture = sampleImg;
+      }
       setShop(shopData);
     }
   };
@@ -42,10 +45,10 @@ export default function Shop({ listings }) {
     <>
       <div className="w-full ">
         <section
-          style={{ backgroundImage: `url(${sampleImg})` }}
-          className="mb-4 flex justify-center w-full items-end h-[20rem] bg-center bg-no-repeat bg-gray-700 bg-blend-multiply"
+          style={{ backgroundImage: `url(${shop.profile_picture})` }}
+          className="mb-4 flex bg-cover justify-center w-full items-end h-[20rem] bg-center bg-no-repeat bg-gray-700 bg-blend-multiply"
         >
-          <div className=" flex justify-start flex-col px-4 w-5/6">
+          <div className="flex justify-start flex-col px-4 w-5/6">
             <h1 className="w-full mb-2 mt-10 p-4 text-4xl font-extrabold text-white md:text-5xl lg:text-6xl">
               {shop.name}
             </h1>

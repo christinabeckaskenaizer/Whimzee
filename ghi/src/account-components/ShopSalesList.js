@@ -13,6 +13,9 @@ export default function ShopSalesList({ orders }) {
           <thead className="text-center text-xs text-gray-700 uppercase bg-gray-200">
             <tr>
               <th scope="col" className="px-6 py-3">
+                Item
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Buyer
               </th>
               <th scope="col" className="px-6 py-3">
@@ -40,6 +43,7 @@ export default function ShopSalesList({ orders }) {
                   key={order.id}
                   className="text-gray-600 bg-white border-b hover:bg-gray-50"
                 >
+                  <td className="px-6 py-4">{order.listing.name}</td>
                   <td className="px-6 py-4">
                     {order.buyer_first_name} {order.buyer_last_name}
                   </td>
@@ -57,6 +61,7 @@ export default function ShopSalesList({ orders }) {
               );
             })}
             <tr className="text-gray-600 bg-white border-b hover:bg-gray-50">
+              <td className="px-6 py-4"></td>
               <td className="px-6 py-4"></td>
               <td className="px-6 py-4"></td>
               <td className="px-6 py-4"></td>

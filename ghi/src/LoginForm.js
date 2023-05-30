@@ -16,7 +16,6 @@ const LoginForm = ({}) => {
     e.target.reset();
   };
   useEffect(() => {
-    console.log(token);
     if (token) {
       navigate("/");
     }

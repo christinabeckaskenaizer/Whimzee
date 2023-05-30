@@ -1,6 +1,7 @@
 from queries.pool import pool
 from typing import Optional, List, Union
 from pydantic import BaseModel
+from .listings import ListingOut
 
 class Error(BaseModel):
     message: str
@@ -23,6 +24,18 @@ class OrderOut(BaseModel):
     buyer_last_name: str
     quantity: int
     listing: int
+    address: str
+    price: int
+    status: bool
+
+class OrderOutWithListing(BaseModel):
+    id: int
+    user_id: int
+    shop_id: int
+    buyer_first_name: str
+    buyer_last_name: str
+    quantity: int
+    listing: ListingOut
     address: str
     price: int
     status: bool
@@ -59,83 +72,172 @@ class OrderRepo(BaseModel):
             print("Order cannot be created because of: ", e)
             return {"message": "Order cannot be created"}
 
-    def get_all_shop_orders(self, shop_id:int) -> List[OrderOut] | Error:
+    # def get_all_shop_orders(self, shop_id:int) -> List[OrderOut] | Error:
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as db:
+    #                 result = db.execute(
+    #                     """
+    #                     SELECT id
+    #                         , user_id
+    #                         , shop_id
+    #                         , buyer_first_name
+    #                         , buyer_last_name
+    #                         , quantity
+    #                         , listing
+    #                         , address
+    #                         , price
+    #                         , status
+    #                     FROM orders
+    #                     WHERE shop_id = %s
+    #                     """,
+    #                     [shop_id]
+    #                 )
+    #                 return [
+    #                     OrderOut(
+    #                     id = record[0],
+    #                     user_id=record[1],
+    #                     shop_id=record[2],
+    #                     buyer_first_name=record[3],
+    #                     buyer_last_name=record[4],
+    #                     quantity=record[5],
+    #                     listing=record[6],
+    #                     address=record[7],
+    #                     price=record[8],
+    #                     status=record[9]
+    #                     ) for record in result
+    #                 ]
+    #     except Exception as e:
+    #         print("Can't get orders because of: ", e)
+    #         return None
+    def get_all_shop_orders(self, shop_id:int) -> List[OrderOutWithListing] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id
-                            , user_id
-                            , shop_id
-                            , buyer_first_name
-                            , buyer_last_name
-                            , quantity
-                            , listing
-                            , address
-                            , price
-                            , status
-                        FROM orders
-                        WHERE shop_id = %s
+                        SELECT o.* as listing_id, l.*
+                        FROM orders o
+                        LEFT OUTER JOIN listings l
+                        ON o.listing = l.id
+                        WHERE o.shop_id = %s
                         """,
                         [shop_id]
                     )
+                    data = result.fetchall()
                     return [
-                        OrderOut(
+                        OrderOutWithListing(
                         id = record[0],
                         user_id=record[1],
                         shop_id=record[2],
                         buyer_first_name=record[3],
                         buyer_last_name=record[4],
                         quantity=record[5],
-                        listing=record[6],
-                        address=record[7],
-                        price=record[8],
-                        status=record[9]
-                        ) for record in result
+                        listing=ListingOut(
+                            id=record[10],
+                            shop_id=record[11],
+                            name=record[12],
+                            quantity=record[13],
+                            quantity_sold=record[14],
+                            description=record[15],
+                            price=record[16],
+                            new=record[17],
+                            picture=record[18],
+                            category=record[19],
+                        ),
+                        address=record[8],
+                        price=record[9],
+                        status=record[7]
+                        ) for record in data
                     ]
         except Exception as e:
             print("Can't get orders because of: ", e)
             return None
 
-    def get_all(self, user_id:int) -> List[OrderOut] | Error:
+    # def get_all(self, user_id:int) -> List[OrderOut] | Error:
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as db:
+    #                 result = db.execute(
+    #                     """
+    #                     SELECT id
+    #                         , user_id
+    #                         , shop_id
+    #                         , buyer_first_name
+    #                         , buyer_last_name
+    #                         , quantity
+    #                         , listing
+    #                         , address
+    #                         , price
+    #                         , status
+    #                     FROM orders
+    #                     WHERE user_id = %s
+    #                     """,
+    #                     [user_id]
+    #                 )
+    #                 return [
+    #                     OrderOut(
+    #                     id = record[0],
+    #                     user_id=record[1],
+    #                     shop_id=record[2],
+    #                     buyer_first_name=record[3],
+    #                     buyer_last_name=record[4],
+    #                     quantity=record[5],
+    #                     listing=record[6],
+    #                     address=record[7],
+    #                     price=record[8],
+    #                     status=record[9]
+    #                     ) for record in result
+    #                 ]
+    #     except Exception as e:
+    #         print("Can't get orders because of: ", e)
+    #         return None
+
+    def get_all(self, user_id:int) -> List[OrderOutWithListing] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id
-                            , user_id
-                            , shop_id
-                            , buyer_first_name
-                            , buyer_last_name
-                            , quantity
-                            , listing
-                            , address
-                            , price
-                            , status
-                        FROM orders
-                        WHERE user_id = %s
+                        SELECT o.* as listing_id, l.*
+                        FROM orders o
+                        LEFT OUTER JOIN listings l
+                        ON o.listing = l.id
+                        WHERE o.user_id = %s
                         """,
                         [user_id]
                     )
+                    data = result.fetchall()
                     return [
-                        OrderOut(
+                        OrderOutWithListing(
                         id = record[0],
                         user_id=record[1],
                         shop_id=record[2],
                         buyer_first_name=record[3],
                         buyer_last_name=record[4],
                         quantity=record[5],
-                        listing=record[6],
-                        address=record[7],
-                        price=record[8],
-                        status=record[9]
-                        ) for record in result
+                        listing=ListingOut(
+                            id=record[10],
+                            shop_id=record[11],
+                            name=record[12],
+                            quantity=record[13],
+                            quantity_sold=record[14],
+                            description=record[15],
+                            price=record[16],
+                            new=record[17],
+                            picture=record[18],
+                            category=record[19],
+                        ),
+                        address=record[8],
+                        price=record[9],
+                        status=record[7],
+
+                        ) for record in data
                     ]
         except Exception as e:
             print("Can't get orders because of: ", e)
             return None
+
     def get_one(self, order_id:int) -> OrderOut | Error:
         try:
             with pool.connection() as conn:
