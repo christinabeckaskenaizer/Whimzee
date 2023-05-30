@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 
-function SearchBar() {
+function SearchBar(props) {
     const [categories, setCategories] = useState([])
-    const [searchedCategory, setSearchedCategory] = useState(null)
-    const [searchedItemName, setSearchedItemName] = useState(null)
+    // const [searchedCategory, setSearchedCategory] = useState(null)
+    // const [searchedItemName, setSearchedItemName] = useState(null)
     const [open, setOpen] = useState(false)
+    const setListings = props.setlistings
+    const setSearchedCategory = props.category
+    const setSearchedItemName = props.name
 
     const handleOpen = () => {
         setOpen(!open);
@@ -32,7 +35,10 @@ function SearchBar() {
         const name = e.target.value.toLowerCase();
         setSearchedItemName(name)
     }
-    console.log(searchedItemName)
+
+    const handleClick = async (e) => {
+
+    }
 
     return (
       <form>
@@ -48,8 +54,8 @@ function SearchBar() {
         })}
         </select>
           <div className="relative w-full">
-            <input onChange={handleSearchedItemName} type="search" id="search-dropdown" className="block p-2.5 w-96 z-30 text-sm text-black bg-white rounded-r-lg border-l-white border-l-2 border border-white dark:placeholder-gray-500" placeholder="Search tshirts, paintings, cups,..." value={searchedItemName} required/>
-            <button type="submit" className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-black hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-black dark:bg-black dark:hover:bg-grey-400 dark:focus:ring-black">
+            <input onChange={handleSearchedItemName} type="search" id="search-dropdown" className="block p-2.5 w-96 z-30 text-sm text-black bg-white rounded-r-lg border-l-white border-l-2 border border-white dark:placeholder-gray-500" placeholder="Search tshirts, paintings, cups,..." required/>
+            <button onClick={handleClick} type="submit" className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-black hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-black dark:bg-black dark:hover:bg-grey-400 dark:focus:ring-black">
                 <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <span className="sr-only">Search</span>
             </button>

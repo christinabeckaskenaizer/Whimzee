@@ -83,7 +83,7 @@ function NavBar(props) {
         </svg>
         <span className="self-center text-2xl font-semibold italic text-green-700">Whimzee</span>
         </NavLink>
-        <SearchBar />
+        <SearchBar category={props.category} name={props.name}/>
         <AccountNav token={token}/>
       </div>
     </nav>
