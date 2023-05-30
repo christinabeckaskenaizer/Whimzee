@@ -1,11 +1,34 @@
+import { useState, useEffect } from "react";
 
 function SearchBar() {
+    const [categories, setCategories] = useState([])
+    const [searchedCategory, setSearchedCategory] = useState(null)
+    const [searchedItemName, setSearchedItemName] = useState(null)
+    const [open, setOpen] = useState(false)
+
+    const handleOpen = () => {
+        setOpen(!open);
+    };
+    const fetchCategoryData = async () => {
+        try {
+        const categoryUrl = "http://localhost:8000/categories";
+        const response = await fetch(categoryUrl);
+        const data = await response.json();
+        setCategories(data);
+        } catch (error) {
+        console.log("error", error);
+        }
+    };
+    useEffect(() => {
+        fetchCategoryData()
+    }, []);
 
 
     return (
       <form>
       <div className="flex shadow">
         <button
+        onClick={handleOpen}
         id="dropdown-button"
         data-dropdown-toggle="dropdown"
         className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center rounded-l-lg bg-white"
@@ -20,6 +43,16 @@ function SearchBar() {
           </path>
           </svg>
           </button>
+      {open ? (
+      <ul
+      className="absolute z-[1000] float-right m-0 min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg [&[data-te-dropdown-show]]:block"
+      >
+        {categories.map((category) => (
+            <li>{category.name}</li>
+        ))}
+        </ul>
+      )
+      : null}
   {/* <div className="z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
     <div className="py-1" role="none">
 
