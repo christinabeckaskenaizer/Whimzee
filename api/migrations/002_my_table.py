@@ -38,93 +38,21 @@ steps = [
         DROP TABLE categories
         """
     ],
-       [
-        """
-        INSERT INTO categories
-            (name)
-        VALUES
-            ('outdoors');
-        """,
-        """
-        """
-    ],
     [
         """
-        INSERT INTO categories
-            (name)
+        INSERT INTO categories (name)
         VALUES
-            ('clothing');
+          ('outdoors'),
+          ('clothing'),
+          ('office'),
+          ('home goods'),
+          ('pets'),
+          ('collectibles'),
+          ('beauty'),
+          ('accessories'),
+          ('other');
         """,
-        """
-        """
-    ],
-    [
-        """
-        INSERT INTO categories
-            (name)
-        VALUES
-            ('office');
-        """,
-        """
-        """
-    ],
-    [
-        """
-        INSERT INTO categories
-            (name)
-        VALUES
-            ('home goods');
-        """,
-        """
-        """
-    ],
-    [
-        """
-        INSERT INTO categories
-            (name)
-        VALUES
-            ('pets');
-        """,
-        """
-        """
-    ],
-    [
-        """
-        INSERT INTO categories
-            (name)
-        VALUES
-            ('collectibles');
-        """,
-        """
-        """
-    ],
-       [
-        """
-        INSERT INTO categories
-            (name)
-        VALUES
-            ('beauty');
-        """,
-        """
-        """
-    ],
-    [
-        """
-        INSERT INTO categories
-            (name)
-        VALUES
-            ('accessories');
-        """,
-        """
-        """
-    ],
-    [
-        """
-        INSERT INTO categories
-            (name)
-        VALUES
-            ('other');
-        """,
+
         """
         """
     ],
