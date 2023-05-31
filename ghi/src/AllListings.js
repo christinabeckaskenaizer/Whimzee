@@ -2,9 +2,14 @@ import React from "react";
 import ListingCard from "./ListingCard";
 import { useState, useEffect } from "react";
 
-export default function AllListings({ listings, category }) {
+export default function AllListings({ listings, category, filteredlistings }) {
   const [filteredListings, setFilteredListings] = useState([]);
 
+  useEffect(() => {
+    console.log("ListingsBySearchBar: ");
+  }, [filteredlistings]);
+
+  console.log("filteredListings in all listings: ", filteredlistings);
   useEffect(() => {
     if (listings) {
       const filtered = listings.filter(
@@ -13,7 +18,7 @@ export default function AllListings({ listings, category }) {
       setFilteredListings(filtered);
     }
   }, [category]);
-  console.log(filteredListings);
+  console.log("hi", filteredlistings);
 
   if (category === null) {
     return (

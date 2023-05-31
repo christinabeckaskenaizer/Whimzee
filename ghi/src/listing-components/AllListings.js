@@ -3,7 +3,7 @@ import ListingCard from "./ListingCard";
 import { useState, useEffect } from "react";
 
 
-export default function AllListings({ listings, category }) {
+export default function AllListings({ listings, category, filteredlistings, searched }) {
     const [filteredListings, setFilteredListings] = useState([])
 
     useEffect(() => {
@@ -13,30 +13,52 @@ export default function AllListings({ listings, category }) {
         }
 
     }, [category]);
-    console.log(filteredListings)
 
+    if (filteredlistings.length === 0 && searched === false) {
+        if (category === null) {
+            return (
+                <div className="sm:grid flex flex-col items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
+                    {listings ? (listings.map((listing) => (
+                        <div key={listing.id} className="col-span-1">
+                            <ListingCard
+                                picture={listing.picture}
+                                name={listing.name}
+                                isNew={listing.new}
+                                price={listing.price}
+                                id={listing.id}
+                            />
+                        </div>
+                    ))) : <p>Loading...</p>}
+                </div>
+            )
+        } else {
 
-    if (category === null) {
+            return (
+                <div className="sm:grid flex flex-col items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
+                    {filteredListings ? (filteredListings.map((listing) => (
+                        <div key={listing.id} className="col-span-1">
+                            <ListingCard
+                                picture={listing.picture}
+                                name={listing.name}
+                                isNew={listing.new}
+                                price={listing.price}
+                                id={listing.id}
+                            />
+                        </div>
+                    ))) : <p>Loading...</p>}
+                </div>
+            );
+        }
+    } else if (filteredlistings.length === 0 && searched === true) {
         return (
-            <div className="sm:grid flex flex-col items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
-                {listings ? (listings.map((listing) => (
-                    <div key={listing.id} className="col-span-1">
-                        <ListingCard
-                            picture={listing.picture}
-                            name={listing.name}
-                            isNew={listing.new}
-                            price={listing.price}
-                            id={listing.id}
-                        />
-                    </div>
-                ))) : <p>Loading...</p>}
-            </div>
+            <>
+        <div>No result - try other terms</div>
+            </>
         )
     } else {
-
         return (
             <div className="sm:grid flex flex-col items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
-                {filteredListings ? (filteredListings.map((listing) => (
+                {filteredlistings ? (filteredlistings.map((listing) => (
                     <div key={listing.id} className="col-span-1">
                         <ListingCard
                             picture={listing.picture}
@@ -49,9 +71,9 @@ export default function AllListings({ listings, category }) {
                 ))) : <p>Loading...</p>}
             </div>
         );
+        }
     }
+
     // if (!listings) {
     //     return <h1>Loading</h1>;
     // }
-
-}

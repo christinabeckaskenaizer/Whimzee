@@ -4,10 +4,13 @@ import AccountOrderHistory from "./AccountOrderHistory";
 import ShopSalesList from "./ShopSalesList";
 import OpenShop from "./OpenShop";
 
-export default function UserAccount({ user, ids, shop, token }) {
-  const [view, setView] = useState(true);
+import Spinner from "../utilities/Spinner";
+
+export default function UserAccount({ user, ids, shop, token, listings }) {
+  const [view, setView] = useState(false);
   const [userPic, setUserPic] = useState(null);
   const [orders, setOrders] = useState(null);
+  const [shopListings, setShopListings] = useState(null);
   const [history, setHistory] = useState(null);
 
   const handleSelection = (bool) => {
@@ -28,6 +31,11 @@ export default function UserAccount({ user, ids, shop, token }) {
       const data = await response.json();
       setOrders(data);
     }
+  };
+
+  const getShopListings = (id) => {
+    const shopList = listings.filter((listing) => id === listing.shop_id);
+    setShopListings(shopList);
   };
 
   const getHistory = async () => {
@@ -52,13 +60,13 @@ export default function UserAccount({ user, ids, shop, token }) {
 
   useEffect(() => {
     if (ids?.shop_id) {
-      getShopOrders(ids.shop_id);
+      // getShopOrders(ids.shop_id);
+      getShopListings(ids.shop_id);
     }
-  }, [ids]);
+  }, [ids, listings]);
 
   if (!ids) {
-    // add spinner here
-    return <h1>Loading</h1>;
+    return <Spinner />;
   }
 
   return (
@@ -75,26 +83,34 @@ export default function UserAccount({ user, ids, shop, token }) {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth="1.5"
+              strokeWidth={1.5}
               stroke="currentColor"
-              className="w-32 h-32 text-slate-500"
+              className="w-20 h-20 text-gray-500"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
               />
             </svg>
           )}
 
-          <h5 className="mb-1 text-2xl font-medium text-slate-500">User</h5>
+          <p className="mb-1 text-2xl font-semibold text-gray-500">
+            {user.username}
+          </p>
+          <p className="mb-1 text-xl font-medium text-gray-500">{user.email}</p>
+
           <div className="flex mt-4 space-x-3">
             {shop ? (
               <button
                 onClick={() => handleSelection(true)}
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-emerald-500 rounded-lg hover:bg-emerald-400"
+                className={
+                  view
+                    ? "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 ring-2 ring-green-400"
+                    : "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800"
+                }
               >
-                View Shop
+                My Shop
               </button>
             ) : (
               <OpenShop />
@@ -102,14 +118,24 @@ export default function UserAccount({ user, ids, shop, token }) {
             <button
               onClick={() => handleSelection(false)}
               href="#"
-              className="inline-flex items-center px-4 py-2 text-sm font-medium text-center  text-white bg-slate-400 border border-slate-200 rounded-lg hover:bg-slate-300 "
+              className={
+                view
+                  ? "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-gray-500 border rounded-lg hover:bg-slate-600 "
+                  : "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-gray-500 border rounded-lg hover:bg-slate-600 ring-2 ring-gray-400"
+              }
             >
               Purchased
             </button>
           </div>
         </div>
         {view ? (
-          <ShopSalesList shop={shop} orders={orders} token={token} ids={ids} />
+          <ShopSalesList
+            shop={shop}
+            shopListings={shopListings}
+            orders={orders}
+            token={token}
+            ids={ids}
+          />
         ) : (
           <AccountOrderHistory history={history} token={token} />
         )}

@@ -1,4 +1,12 @@
-## May 23, 2023
+## May 30, 2023
+- Got the search bar to work
+- Worked on filtering listings by name and category (when you search by search bar) with Christina
+
+## May 26, 2023
+- Categories on frontend are now clickable
+- Updates category on landing page so all listings can be filtered and displayed by category (worked on the display with Christina)
+
+## May 24, 2023
 
 Implemented some functionality today
 - Created a login and sign in page

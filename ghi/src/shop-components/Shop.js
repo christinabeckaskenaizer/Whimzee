@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ListingCard from "../listing-components/ListingCard";
+import Spinner from "../utilities/Spinner";
 
 export default function Shop({ listings }) {
   const [shop, setShop] = useState(null);
@@ -38,7 +39,7 @@ export default function Shop({ listings }) {
   }, [listings]);
 
   if (!shop) {
-    return <h1>Loading</h1>;
+    return <Spinner />;
   }
 
   return (
@@ -57,15 +58,20 @@ export default function Shop({ listings }) {
                 {shop.description}
               </p>
               {/* This is the link to chat */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="cursor-pointer flex w-8 rounded-full text-gray-300 hover:text-green-700"
-              >
-                <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
-                <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
-              </svg>
+              <div className="flex flex-col justify-center items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="flex w-8 rounded-full text-gray-300"
+                >
+                  <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                  <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+                </svg>
+                <p className="text-center font-normal text-gray-300 lg:text-xl">
+                  {shop.email}
+                </p>
+              </div>
             </div>
           </div>
         </section>

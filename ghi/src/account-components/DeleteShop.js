@@ -31,11 +31,11 @@ export default function DeleteShop({ token, shop }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="inline-flex items-center px-4 py-2 text-sm
-                font-medium text-center text-white bg-emerald-500 rounded-lg
-                hover:bg-emerald-400"
+        className="bg-transparent hover:bg-red-700 text-red-700 font-sm
+         hover:text-white py-2 px-2 border border-red-700
+         hover:border-transparent rounded-lg"
       >
-        Delete My Shop
+        Delete shop
       </button>
 
       <Transition.Root show={open} as={Fragment}>
