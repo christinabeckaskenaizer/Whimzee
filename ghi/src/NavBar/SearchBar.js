@@ -5,6 +5,7 @@ function SearchBar({
   token,
   user,
   listings,
+  setsearched
 }) {
   const [categories, setCategories] = useState([]);
   const [searchedCategory, setSearchedCategory] = useState(null);
@@ -34,6 +35,7 @@ function SearchBar({
   };
   const handleClick = async (e) => {
     e.preventDefault();
+    setsearched(true);
     const filteredByItemName = listings.filter((listing) =>
       listing.name.toLowerCase().includes(searchedItemName)
     );
@@ -43,11 +45,6 @@ function SearchBar({
         (listing) => listing.category === Number(searchedCategory)
       );
       setfilteredlistings(filteredByCategory);
-    } else {
-      console.log(
-        "no category return all matches from search",
-        filteredByItemName
-      );
     }
   };
     return (

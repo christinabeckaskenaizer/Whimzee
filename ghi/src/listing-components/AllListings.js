@@ -3,7 +3,7 @@ import ListingCard from "./ListingCard";
 import { useState, useEffect } from "react";
 
 
-export default function AllListings({ listings, category, filteredlistings }) {
+export default function AllListings({ listings, category, filteredlistings, searched }) {
     const [filteredListings, setFilteredListings] = useState([])
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export default function AllListings({ listings, category, filteredlistings }) {
 
     }, [category]);
 
-    if (filteredlistings.length === 0) {
+    if (filteredlistings.length === 0 && searched === false) {
         if (category === null) {
             return (
                 <div className="sm:grid flex flex-col items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
@@ -49,6 +49,12 @@ export default function AllListings({ listings, category, filteredlistings }) {
                 </div>
             );
         }
+    } else if (filteredlistings.length === 0 && searched === true) {
+        return (
+            <>
+        <div>No result - try other terms</div>
+            </>
+        )
     } else {
         return (
             <div className="sm:grid flex flex-col items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
