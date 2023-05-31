@@ -17,6 +17,8 @@ export default function AllListings({ listings, category, filteredlistings, sear
     if (searched === false) {
         if (category === null) {
             return (
+                <>
+                <h1 className="text-left font-bold text-lg pl-9">Recently Posted</h1>
                 <div className="sm:grid flex flex-col items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
                     {listings ? (listings.map((listing) => (
                         <div key={listing.id} className="col-span-1">
@@ -30,6 +32,8 @@ export default function AllListings({ listings, category, filteredlistings, sear
                         </div>
                     ))) : <p>Loading...</p>}
                 </div>
+                </>
+
             )
         } else {
 
@@ -52,7 +56,13 @@ export default function AllListings({ listings, category, filteredlistings, sear
     } else if (filteredlistings.length === 0 && searched === true) {
         return (
             <>
-        <div>No result - try other terms</div>
+            <div>
+                <center>
+                <img src="https://media.istockphoto.com/id/1393523119/vector/cat-wearing-sunglasses-eyeglasses-rainbow-lenses-cute-cartoon-funny-character-kitten-kitty.jpg?s=612x612&w=0&k=20&c=nWY9LoFi3pHsyoEStNnZFNoGfaNk_Ks6vQegDKNFLoI="
+                width="400" height="500"
+            ></img></center>
+                </div>
+        <div><h1 className="text-2xl">No result - try other terms</h1></div>
             </>
         )
     } else {

@@ -14,8 +14,11 @@ const LoginForm = ({}) => {
     e.preventDefault();
     try {
       await login(email, password);
-    } catch (error) {
-      console.log("error: ", error)
+
+
+    } catch(err) {
+      console.log("error: ", err);
+      console.log("ERROR");
     }
     e.target.reset();
   };

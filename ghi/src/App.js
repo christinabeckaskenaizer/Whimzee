@@ -31,7 +31,7 @@ function App() {
   const [listings, setListings] = useState([]);
   const [listingsBySearchBar, setListingsBySearchBar] = useState([])
   const [searched, setSearched] = useState(false)
-  console.log(searched)
+  console.log("User id: ", ids)
 
   const fetchListingData = async () => {
     try {
@@ -66,7 +66,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing listings={listings} filteredlistings={listingsBySearchBar} searched={searched} setsearched={setSearched}/>} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/signup" element={<SignUpForm ids={ids}/>} />
 
           <Route path="/account">
             <Route
