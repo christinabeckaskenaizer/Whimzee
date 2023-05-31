@@ -14,7 +14,7 @@ export default function AllListings({ listings, category, filteredlistings, sear
 
     }, [category]);
 
-    if (filteredlistings.length === 0 && searched === false) {
+    if (searched === false) {
         if (category === null) {
             return (
                 <div className="sm:grid flex flex-col items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">

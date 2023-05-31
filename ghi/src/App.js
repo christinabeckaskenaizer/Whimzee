@@ -31,6 +31,7 @@ function App() {
   const [listings, setListings] = useState([]);
   const [listingsBySearchBar, setListingsBySearchBar] = useState([])
   const [searched, setSearched] = useState(false)
+  console.log(searched)
 
   const fetchListingData = async () => {
     try {
@@ -63,7 +64,7 @@ function App() {
       />
       <div className="flex flex-col justify-center">
         <Routes>
-          <Route path="/" element={<Landing listings={listings} filteredlistings={listingsBySearchBar} searched={searched}/>} />
+          <Route path="/" element={<Landing listings={listings} filteredlistings={listingsBySearchBar} searched={searched} setsearched={setSearched}/>} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
 

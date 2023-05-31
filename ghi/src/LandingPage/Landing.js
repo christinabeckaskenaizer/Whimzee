@@ -8,6 +8,7 @@ function Landing(props) {
     <>
       <CategoriesList
         setCategory={setCategory}
+        setsearched={props.setsearched}
       />
       <div className="px-4 py-5 my-20 text-center">
         <h1 className="text-left font-bold text-lg pl-9">Recently Posted</h1>
