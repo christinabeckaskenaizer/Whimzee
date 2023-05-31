@@ -11,7 +11,7 @@ function Landing(props) {
       />
       <div className="px-4 py-5 my-20 text-center">
         <h1 className="text-left font-bold text-lg pl-9">Recently Posted</h1>
-        <AllListings listings={props.listings} category={category} listingsbysearchbar={props.listingsbysearchbar}/>
+        <AllListings listings={props.listings} category={category} filteredlistings={props.filteredlistings}/>
       </div>
     </>
   );

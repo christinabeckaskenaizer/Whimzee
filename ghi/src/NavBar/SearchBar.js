@@ -1,66 +1,65 @@
 import { useState, useEffect } from "react";
-
-function SearchBar(props) {
-    const [categories, setCategories] = useState([])
-    const setFilteredListings = props.setfilteredlistings
-    const filteredListings = props.filteredlistings
-
-    const [searchedCategory, setSearchedCategory] = useState(null)
-    const [searchedItemName, setSearchedItemName] = useState(null)
-    const listings = props.listings
-
-
-    const fetchCategoryData = async () => {
-        try {
-        const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
-        const response = await fetch(categoryUrl);
+function SearchBar({
+  filteredlistings,
+  setfilteredlistings,
+  token,
+  user,
+  listings,
+}) {
+  console.log(filteredlistings);
+  const [categories, setCategories] = useState([]);
+  const [searchedCategory, setSearchedCategory] = useState(null);
+  const [searchedItemName, setSearchedItemName] = useState("");
+  const fetchCategoryData = async () => {
+    try {
+      const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
+      const response = await fetch(categoryUrl);
+      if (response.ok) {
         const data = await response.json();
         setCategories(data);
-        } catch (error) {
-        console.log("error", error);
-        }
-    };
-    useEffect(() => {
-        fetchCategoryData()
-    }, [searchedCategory]);
-
-    const handleSearchedCategory = async (e) => {
-        const category = e.target.value;
-        setSearchedCategory(category)
-    };
-
-    const handleSearchedItemName = async (e) => {
-        const name = e.target.value.toLowerCase();
-        setSearchedItemName(name)
+        console.log(data);
+      }
+    } catch (error) {
+      console.log("error", error);
     }
-
-    const handleClick = async (e) => {
-        e.preventDefault();
-        const filteredByItemName = listings.filter(
-            (listing) => listing.name.toLowerCase().includes(searchedItemName)
-        )
-        console.log("after everything: ", filteredListings)
-        setFilteredListings(filteredByItemName)
-        console.log("after name: ", filteredListings)
-        if (searchedCategory && searchedCategory !== "See all categories") {
-            const filteredByCategory = filteredListings.filter(
-            (listing) => listing.category === Number(searchedCategory)
-            )
-            setFilteredListings(filteredByCategory)
-            console.log("Filtered after category: ", filteredListings)
-        } else {
-            console.log("boooooooo")
-        }
-    };
-    useEffect(() => {
-        console.log("after everything: ", filteredListings)
-    }, [])
-    console.log("Category: ", searchedCategory)
+  };
+  useEffect(() => {
+    fetchCategoryData();
+  }, []);
+  const handleSearchedCategory = async (e) => {
+    const category = e.target.value;
+    setSearchedCategory(category);
+  };
+  const handleSearchedItemName = async (e) => {
+    const name = e.target.value.toLowerCase();
+    setSearchedItemName(name);
+  };
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const filteredByItemName = listings.filter((listing) =>
+      listing.name.toLowerCase().includes(searchedItemName)
+    );
+    console.log("this is just the filter from search bar ", filteredByItemName);
+    setfilteredlistings(filteredByItemName);
+    console.log("this is the searched category", searchedCategory);
+    if (searchedCategory > 0) {
+      const filteredByCategory = filteredByItemName.filter(
+        (listing) => listing.category === Number(searchedCategory)
+      );
+      setfilteredlistings(filteredByCategory);
+      console.log("Filtered after category: ", filteredByCategory);
+    } else {
+      console.log(
+        "no category return all matches from search",
+        filteredByItemName
+      );
+    }
+  };
     return (
       <form>
       <div className="flex shadow">
         <select onChange={handleSearchedCategory}>
-            <option>See all categories</option>
+            <option value={0}>See all categories</option>
         {categories.map((category) => {
             return (
                 <option key={category.id} value={category.id}>
