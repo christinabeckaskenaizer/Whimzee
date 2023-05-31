@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 function SearchBar({
   filteredlistings,
   setfilteredlistings,
@@ -10,6 +11,7 @@ function SearchBar({
   const [categories, setCategories] = useState([]);
   const [searchedCategory, setSearchedCategory] = useState(null);
   const [searchedItemName, setSearchedItemName] = useState("");
+  const navigate = useNavigate()
   const fetchCategoryData = async () => {
     try {
       const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
@@ -36,6 +38,7 @@ function SearchBar({
   const handleClick = async (e) => {
     e.preventDefault();
     setsearched(true);
+    navigate("/")
     const filteredByItemName = listings.filter((listing) =>
       listing.name.toLowerCase().includes(searchedItemName)
     );

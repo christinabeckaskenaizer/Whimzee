@@ -14,21 +14,24 @@ const SignUpForm = ({ids}) => {
 
   const createCart = async () => {
     const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart`;
-    console.log(ids)
     let cartData = {
       user_id:ids.id
     };
-    console.log("Cart data: ", cartData)
-    const cartResponse = await fetch(cartUrl, {
-      method: "POST",
-      body: JSON.stringify(cartData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (cartResponse.ok) {
-      console.log("cart got created")
+    try {
+      const cartResponse = await fetch(cartUrl, {
+        method: "POST",
+        body: JSON.stringify(cartData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (cartResponse.ok) {
+        console.log("cart got created")
+      }
+    } catch(err) {
+      console.log("Error: ", err)
     }
+
 }
 
   const handleSubmit = async (e) => {
@@ -53,7 +56,6 @@ const SignUpForm = ({ids}) => {
       await login(email, password);
       e.target.reset();
     }
-
 
 
   };
