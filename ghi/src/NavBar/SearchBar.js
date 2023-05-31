@@ -6,7 +6,6 @@ function SearchBar({
   user,
   listings,
 }) {
-  console.log(filteredlistings);
   const [categories, setCategories] = useState([]);
   const [searchedCategory, setSearchedCategory] = useState(null);
   const [searchedItemName, setSearchedItemName] = useState("");
@@ -17,7 +16,6 @@ function SearchBar({
       if (response.ok) {
         const data = await response.json();
         setCategories(data);
-        console.log(data);
       }
     } catch (error) {
       console.log("error", error);
@@ -39,15 +37,12 @@ function SearchBar({
     const filteredByItemName = listings.filter((listing) =>
       listing.name.toLowerCase().includes(searchedItemName)
     );
-    console.log("this is just the filter from search bar ", filteredByItemName);
     setfilteredlistings(filteredByItemName);
-    console.log("this is the searched category", searchedCategory);
     if (searchedCategory > 0) {
       const filteredByCategory = filteredByItemName.filter(
         (listing) => listing.category === Number(searchedCategory)
       );
       setfilteredlistings(filteredByCategory);
-      console.log("Filtered after category: ", filteredByCategory);
     } else {
       console.log(
         "no category return all matches from search",

@@ -13,7 +13,6 @@ export default function AllListings({ listings, category, filteredlistings }) {
         }
 
     }, [category]);
-    console.log("filtered Listing: ", filteredlistings.length)
 
     if (filteredlistings.length === 0) {
         if (category === null) {

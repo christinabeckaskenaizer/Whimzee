@@ -30,7 +30,6 @@ function App() {
 
   const [listings, setListings] = useState([]);
   const [listingsBySearchBar, setListingsBySearchBar] = useState([])
-  console.log(listingsBySearchBar)
 
   const fetchListingData = async () => {
     try {
