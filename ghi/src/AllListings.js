@@ -6,10 +6,10 @@ export default function AllListings({ listings, category, filteredlistings }) {
   const [filteredListings, setFilteredListings] = useState([]);
 
   useEffect(() => {
-    console.log("ListingsBySearchBar: ")
-  }, [filteredlistings])
+    console.log("ListingsBySearchBar: ");
+  }, [filteredlistings]);
 
-  console.log("filteredListings in all listings: ", filteredlistings)
+  console.log("filteredListings in all listings: ", filteredlistings);
   useEffect(() => {
     if (listings) {
       const filtered = listings.filter(
@@ -18,7 +18,7 @@ export default function AllListings({ listings, category, filteredlistings }) {
       setFilteredListings(filtered);
     }
   }, [category]);
-  console.log("hi",filteredlistings);
+  console.log("hi", filteredlistings);
 
   if (category === null) {
     return (
