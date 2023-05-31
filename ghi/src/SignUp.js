@@ -12,7 +12,7 @@ const SignUpForm = ({ids}) => {
   const { token } = useToken();
   const { login } = useToken();
 
-  const createCart = async (user_id) => {
+  const createCart = async () => {
     const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart`;
     console.log(ids)
     let cartData = {
@@ -50,10 +50,8 @@ const SignUpForm = ({ids}) => {
 
     if (response.ok) {
       console.log(response)
-      await login(username, password);
+      await login(email, password);
       e.target.reset();
-
-      navigate("/")
     }
 
 
@@ -61,10 +59,12 @@ const SignUpForm = ({ids}) => {
   };
   useEffect(() => {
     console.log(token)
+
     if (token) {
+      createCart();
       navigate("/")
     }
-  }, [token])
+  }, [ids])
 
   return (
 <>
