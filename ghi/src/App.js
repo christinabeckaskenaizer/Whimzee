@@ -69,7 +69,13 @@ function App() {
             <Route
               path=""
               element={
-                <UserAccount user={user} ids={ids} shop={shop} token={token} />
+                <UserAccount
+                  user={user}
+                  ids={ids}
+                  shop={shop}
+                  token={token}
+                  listings={listings}
+                />
               }
             />
           </Route>

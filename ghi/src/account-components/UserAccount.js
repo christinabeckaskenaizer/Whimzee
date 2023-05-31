@@ -4,11 +4,13 @@ import AccountOrderHistory from "./AccountOrderHistory";
 import ShopSalesList from "./ShopSalesList";
 import OpenShop from "./OpenShop";
 
-export default function UserAccount({ user, ids, shop, token }) {
+export default function UserAccount({ user, ids, shop, token, listings }) {
   const [view, setView] = useState(true);
   const [userPic, setUserPic] = useState(null);
   const [orders, setOrders] = useState(null);
+  const [shopListings, setShopListings] = useState(null);
   const [history, setHistory] = useState(null);
+  console.log(listings);
 
   const handleSelection = (bool) => {
     setView(bool);
@@ -28,6 +30,12 @@ export default function UserAccount({ user, ids, shop, token }) {
       const data = await response.json();
       setOrders(data);
     }
+  };
+
+  const getShopListings = (id) => {
+    const shopList = listings.filter((listing) => id === listing.shop_id);
+    setShopListings(shopList);
+    console.log(shopList, "here is what i've sold");
   };
 
   const getHistory = async () => {
@@ -52,9 +60,10 @@ export default function UserAccount({ user, ids, shop, token }) {
 
   useEffect(() => {
     if (ids?.shop_id) {
-      getShopOrders(ids.shop_id);
+      // getShopOrders(ids.shop_id);
+      getShopListings(ids.shop_id);
     }
-  }, [ids]);
+  }, [ids, listings]);
 
   if (!ids) {
     // add spinner here
@@ -92,7 +101,7 @@ export default function UserAccount({ user, ids, shop, token }) {
             {shop ? (
               <button
                 onClick={() => handleSelection(true)}
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-emerald-500 rounded-lg hover:bg-emerald-400"
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-400"
               >
                 View Shop
               </button>
@@ -109,9 +118,15 @@ export default function UserAccount({ user, ids, shop, token }) {
           </div>
         </div>
         {view ? (
-          <ShopSalesList ids={ids} orders={orders} />
+          <ShopSalesList
+            shop={shop}
+            shopListings={shopListings}
+            orders={orders}
+            token={token}
+            ids={ids}
+          />
         ) : (
-          <AccountOrderHistory history={history} />
+          <AccountOrderHistory history={history} token={token} />
         )}
       </div>
     </>

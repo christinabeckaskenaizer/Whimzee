@@ -1,8 +1,8 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 
-export default function OpenShop({ shop, token }) {
+export default function EditShop({ token, shop }) {
   const navigate = useNavigate();
 
   const [shopName, setShopName] = useState("");
@@ -27,7 +27,7 @@ export default function OpenShop({ shop, token }) {
     data.description = description;
     data.profile_picture = picture;
 
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/shops`;
+    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/shops/${shop.id}`;
     const config = {
       credentials: "include",
       method: "post",
@@ -47,6 +47,15 @@ export default function OpenShop({ shop, token }) {
     }
   };
 
+  useEffect(() => {
+    if (shop?.id) {
+      setShopName(shop.name);
+      setEmail(shop.email);
+      setDescription(shop.description);
+      setPicture(shop.profile_picture);
+    }
+  }, [shop]);
+
   return (
     <>
       <button
@@ -55,7 +64,7 @@ export default function OpenShop({ shop, token }) {
                 font-medium text-center text-white bg-emerald-500 rounded-lg
                 hover:bg-emerald-400"
       >
-        Open Shop
+        Edit Shop
       </button>
 
       <Transition.Root show={open} as={Fragment}>
@@ -91,7 +100,7 @@ export default function OpenShop({ shop, token }) {
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <Dialog.Title className="text-base text-center font-semibold leading-6 text-gray-900">
-                      Open a Shop
+                      Edit Your Shop
                     </Dialog.Title>
                     <form
                       className="flex flex-col items-center px-4 py-5 my-5 w-full"
