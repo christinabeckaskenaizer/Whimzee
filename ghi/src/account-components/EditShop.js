@@ -30,7 +30,7 @@ export default function EditShop({ token, shop }) {
     const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/shops/${shop.id}`;
     const config = {
       credentials: "include",
-      method: "put",
+      method: "post",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
@@ -48,11 +48,12 @@ export default function EditShop({ token, shop }) {
   };
 
   useEffect(() => {
-    console.log(shop, "this is the shop");
-    setShopName(shop.name);
-    setEmail(shop.email);
-    setDescription(shop.description);
-    setPicture(shop.profile_picture);
+    if (shop?.id) {
+      setShopName(shop.name);
+      setEmail(shop.email);
+      setDescription(shop.description);
+      setPicture(shop.profile_picture);
+    }
   }, [shop]);
 
   return (

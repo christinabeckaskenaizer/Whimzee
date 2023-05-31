@@ -51,10 +51,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar
-        token={token}
-        user={user}
-      />
+      <NavBar token={token} user={user} />
       <div className="flex flex-col justify-center">
         <Routes>
           <Route path="/" element={<Landing listings={listings} />} />
@@ -65,7 +62,13 @@ function App() {
             <Route
               path=""
               element={
-                <UserAccount user={user} ids={ids} shop={shop} token={token} />
+                <UserAccount
+                  user={user}
+                  ids={ids}
+                  shop={shop}
+                  token={token}
+                  listings={listings}
+                />
               }
             />
           </Route>
