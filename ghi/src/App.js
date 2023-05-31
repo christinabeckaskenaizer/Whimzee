@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
-
+import DeleteListing from "./listing-components/DeleteListing";
 import ListingCard from "./listing-components/ListingCard.js";
 import AllListings from "./listing-components/AllListings.js";
 import ListingDetail from "./listing-components/ListingDetail";
@@ -81,7 +81,7 @@ function App() {
           />
           <Route path="/listings/:id" element={<ListingDetail />} />
           <Route path="/listings/category/:id" />
-          <Route path="/button" element={<CreateListing />} />
+          <Route path="/button" element={<DeleteListing />} />
           <Route path="/liked"></Route>
 
           <Route path="/checkout"></Route>
