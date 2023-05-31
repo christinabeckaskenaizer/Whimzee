@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from queries.pool import pool
+# from cart import CartRepository
 
 
 class DuplicateAccountError(ValueError):
@@ -63,7 +64,7 @@ class AccountQueries(BaseModel):
                          ]
                     )
                     id = result.fetchone()[0]
-
+                    # CartRepository.create(id)
                     return AccountOutWithPassword(id=id, email=info.email, username=info.username, hashed_password=hashed_password)
 
 

@@ -5,14 +5,18 @@ import { NavLink } from "react-router-dom";
 
 const LoginForm = ({}) => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { token } = useToken();
   const { login } = useToken();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(username, password);
+    try {
+      await login(email, password);
+    } catch (error) {
+      console.log("error: ", error)
+    }
     e.target.reset();
   };
   useEffect(() => {
@@ -35,15 +39,15 @@ const LoginForm = ({}) => {
             htmlFor="username"
             className="block mb-2 text-sm font-medium text-gray-900 text-black"
           >
-            Username:
+            Email:
           </label>
           <input
             type="text"
-            id="username"
+            id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
-            placeholder="Your username"
+            placeholder="john@galvanize.com"
             required
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
         <div className="mb-6">
