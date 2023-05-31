@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ListingCard from "../listing-components/ListingCard";
+import Spinner from "../utilities/Spinner";
 
 export default function Shop({ listings }) {
   const [shop, setShop] = useState(null);
@@ -38,7 +39,7 @@ export default function Shop({ listings }) {
   }, [listings]);
 
   if (!shop) {
-    return <h1>Loading</h1>;
+    return <Spinner />;
   }
 
   return (

@@ -3,34 +3,31 @@ import CreateListing from "../listing-components/CreateListing";
 import EditShop from "./EditShop";
 import DeleteShop from "./DeleteShop";
 import { Link } from "react-router-dom";
+import Spinner from "../utilities/Spinner";
 
-export default function ShopSalesList({
-  shopListings,
-  listings,
-  shop,
-  token,
-  ids,
-}) {
-  if (!shopListings) {
-    return;
+export default function ShopSalesList({ shopListings, shop, token, ids }) {
+  if (!shopListings || !ids || !shop) {
+    return <Spinner />;
   }
   let netTotal = 0;
   console.log(shopListings, "shop list");
   return (
     <>
+      <p className="text-center text-2xl font-medium text-gray-500">
+        Active Listings
+      </p>
       <div className="mb-2 flex justify-between w-full">
         <div>
           <CreateListing ids={ids} token={token} />
         </div>
         <div className="">
           <Link
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-400"
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800"
             to={`/shops/${shop.id}`}
           >
             View shop
           </Link>
           <EditShop shop={shop} token={token} ids={ids} />
-          <DeleteShop shop={shop} token={token} />
         </div>
       </div>
       <div className="w-full relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -98,6 +95,9 @@ export default function ShopSalesList({
             </tr>
           </tbody>
         </table>
+      </div>
+      <div className="mt-2 flex justify-end w-full">
+        <DeleteShop shop={shop} token={token} />
       </div>
     </>
   );
