@@ -2,8 +2,13 @@ import React from "react";
 import ListingCard from "./ListingCard";
 import { useState, useEffect } from "react";
 
-export default function AllListings({ listings, category }) {
+export default function AllListings({ listings, category, listingsbysearchbar }) {
   const [filteredListings, setFilteredListings] = useState([]);
+
+  useEffect(() => {
+    console.log("ListingsBySearchBar: ")
+  }, [listingsbysearchbar])
+
 
   useEffect(() => {
     if (listings) {

@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 
 function SearchBar(props) {
     const [categories, setCategories] = useState([])
-    const [filteredListings, setFilteredListings] = useState([]);
-    const setListings = props.setlistings
+    const setFilteredListings = props.setfilteredlistings
+    const filteredListings = props.filteredlistings
+
     const [searchedCategory, setSearchedCategory] = useState(null)
     const [searchedItemName, setSearchedItemName] = useState(null)
     const listings = props.listings
-    console.log(listings)
 
 
     const fetchCategoryData = async () => {
@@ -22,7 +22,7 @@ function SearchBar(props) {
     };
     useEffect(() => {
         fetchCategoryData()
-    }, []);
+    }, [searchedCategory]);
 
     const handleSearchedCategory = async (e) => {
         const category = e.target.value;
@@ -36,15 +36,26 @@ function SearchBar(props) {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        if (searchedCategory) {
-            const filteredByCategory = listings.filter(
+        const filteredByItemName = listings.filter(
+            (listing) => listing.name.toLowerCase().includes(searchedItemName)
+        )
+        console.log("after everything: ", filteredListings)
+        setFilteredListings(filteredByItemName)
+        console.log("after name: ", filteredListings)
+        if (searchedCategory && searchedCategory !== "See all categories") {
+            const filteredByCategory = filteredListings.filter(
             (listing) => listing.category === Number(searchedCategory)
             )
             setFilteredListings(filteredByCategory)
+            console.log("Filtered after category: ", filteredListings)
+        } else {
+            console.log("boooooooo")
         }
-    }
-    console.log(filteredListings)
-
+    };
+    useEffect(() => {
+        console.log("after everything: ", filteredListings)
+    }, [])
+    console.log("Category: ", searchedCategory)
     return (
       <form>
       <div className="flex shadow">

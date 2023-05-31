@@ -29,6 +29,7 @@ function App() {
   const { cart } = useCart(ids);
 
   const [listings, setListings] = useState([]);
+  const [listingsBySearchBar, setListingsBySearchBar] = useState([])
 
   const fetchListingData = async () => {
     try {
@@ -55,10 +56,12 @@ function App() {
       token={token}
       user={user}
       listings={listings}
+      filteredlistings={listingsBySearchBar}
+      setfilteredlistings={setListingsBySearchBar}
       />
       <div className="flex flex-col justify-center">
         <Routes>
-          <Route path="/" element={<Landing listings={listings} />} />
+          <Route path="/" element={<Landing listings={listings} listingsbysearchbar={listingsBySearchBar}/>} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
 
