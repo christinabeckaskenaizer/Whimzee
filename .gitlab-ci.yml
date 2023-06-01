@@ -87,7 +87,7 @@ lint-test-job:
 services:
   - docker:dind
 
-build-api-service-image:
+build-fastapi-service-image:
   stage: build
   image: docker:git
   variables:
