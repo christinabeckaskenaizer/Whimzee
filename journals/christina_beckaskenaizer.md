@@ -1,3 +1,21 @@
+## June 1, 20232
+
+Today I worked on:
+
+- Updating state upon delete
+- Deploying our project
+
+Okay so bad news. I THOUGHT I fixed the state of the listings upon delete yesterday. But as I was excitedly demoing my progress to my teammates, we found a bug where the listings updated, but once I left the page and came back, the deleted listing appeared again. I spent all morning trying to figure out the issue and eventually got it. It was today that we realized we should have used redux!
+Spent the afternoon attempting to deploy our app.
+
+## May 31, 20232
+
+Today I worked on:
+
+- Spent the whole day working on deleting a listing on the frontend.
+
+Getting the functionality of deleting an item on the frontend took me about 45 minutes, BUT updating the state of the listings upon deleting a listing took me the whole day!! I was hitting the point of just using window.location.reload LOL! But I was able to push past my frustration and finally get the state to update!
+
 ## May 30, 2023
 
 Today I worked on:
@@ -10,7 +28,7 @@ Today I worked on:
 
 Today (and over the weekend) I worked on:
 
-- Search by category functinality with Sina! (Got it working woo)
+- Search by category functionality with Sina! (Got it working woo)
 - Create a listing form
 
 Creating a listing was great for me. It took me a while, but I got it to work!! I always had trouble with POST requests, but to be able to take my time and understand what was going on was an awesome moment for me. Also, I used Headless UI to create a pop up modal form. Understanding post requests as well as working with a new library was very rewarding.

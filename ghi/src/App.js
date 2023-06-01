@@ -81,6 +81,7 @@ function App() {
           />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm ids={ids} />} />
+
           <Route path="/account">
             <Route
               path=""
@@ -106,8 +107,8 @@ function App() {
           />
           <Route path="/listings/:id" element={<ListingDetail ids={ids} />} />
           <Route path="/listings/category/:id" />
-          <Route path="/button" element={<DeleteListing />} />{" "}
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
+          <Route path="/button" element={<DeleteListing />} />
           <Route path="/liked"></Route>
           <Route path="/checkout"></Route>
         </Routes>
