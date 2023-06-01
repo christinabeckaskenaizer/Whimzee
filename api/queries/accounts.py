@@ -40,7 +40,7 @@ class AccountQueries(BaseModel):
                     records = result.fetchone()
                     return AccountOutWithPassword(id=records[0], email=records[2], username=records[1], hashed_password=records[3])
         except Exception:
-            # return {"message": "Could not get accounts!"}
+            print("Could not get accounts!")
             return None
 
 

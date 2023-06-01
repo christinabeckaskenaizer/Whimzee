@@ -39,7 +39,6 @@ async def get_all_from_listing(
         return Error(message="Unable to fetch reviews")
     return result
 
-
 @router.delete("/reviews/{review_id}")
 async def delete(
     review_id: int,

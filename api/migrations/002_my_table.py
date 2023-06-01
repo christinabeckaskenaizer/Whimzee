@@ -80,11 +80,22 @@ steps = [
         CREATE TABLE cart (
           id SERIAL PRIMARY KEY NOT NULL,
           user_id INT REFERENCES users (id)
-
         );
         """,
         """
         DROP TABLE cart
+        """
+    ],
+    [
+        """
+        CREATE TABLE cart_listings (
+          id SERIAL PRIMARY KEY NOT NULL,
+          cart_id INT REFERENCES cart (id) NOT NULL,
+          listing_id INT REFERENCES listings (id) NOT NULL
+        );
+        """,
+        """
+        DROP TABLE cart_listings
         """
     ],
     [
