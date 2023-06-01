@@ -1,8 +1,16 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import useUser from '../custom-hooks/useUser';
 
-export default function DeleteListing() {
-    let [isOpen, setIsOpen] = useState(false)
+
+export default function DeleteListing({ listing, shopListings, handleClick, open }) {
+
+    let [isOpen, setIsOpen] = useState(open)
+    const [listings, setListings] = useState(shopListings);
+
+
+    const navigate = useNavigate();
 
     function closeModal() {
         setIsOpen(false)
@@ -12,6 +20,19 @@ export default function DeleteListing() {
         setIsOpen(true)
     }
 
+
+    // async function deleteListing() {
+    //     const listingUrl = `http://localhost:8000/listings/${listing.id}`
+
+    //     await fetch(listingUrl,
+    //         { method: 'DELETE' });
+    //     closeModal();
+    // }
+
+    // useEffect(() => {
+    //     setListings(shopListings)
+    // }, [shopListings]);
+
     return (
         <>
             <button
@@ -19,7 +40,7 @@ export default function DeleteListing() {
                 onClick={openModal}
                 className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             >
-                Open dialog
+                Delete
             </button>
 
 
@@ -57,17 +78,17 @@ export default function DeleteListing() {
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            Deleting your listing will also delete order history. Are you sure you wish to proceed?
+                                            Are you sure you wish to proceed?
                                         </p>
                                     </div>
 
                                     <div className="p-2 flex">
                                         <div className="w-1/2"></div>
                                         <div className="w-1/2">
-                                            <button type="submit" className="m-1 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                                            <button onClick={handleClick} className="m-1 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                                                 Delete
                                             </button>
-                                            <button type="submit" className="m-1 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                                            <button onClick={closeModal} className="m-1 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                                                 Cancel
                                             </button>
                                         </div>
