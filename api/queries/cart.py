@@ -232,7 +232,7 @@ class CartRepository(BaseModel):
 #                         JOIN listings ON cart_listings.listing_id = listings.id
 #                         WHERE cart_listings.id = 1
 #                         """,
-#                     )[listing_id]
+#                     [listing_id])
 #                     cartsnew = []
 #                     for rec in db_result:
 #                         cartsnew.append(Cart_listingsOutWithDetail(

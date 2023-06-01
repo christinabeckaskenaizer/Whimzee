@@ -1,16 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateListing from "../listing-components/CreateListing";
 import EditShop from "./EditShop";
 import DeleteShop from "./DeleteShop";
+import DeleteListing from "../listing-components/DeleteListing";
 import { Link } from "react-router-dom";
 import Spinner from "../utilities/Spinner";
 
-export default function ShopSalesList({ shopListings, shop, token, ids }) {
+
+export default function ShopSalesList({ shopListings, shop, token, ids, fetchData }) {
+
+  const [open, setOpen] = useState(false);
+  const [listings, setListings] = useState(shopListings);
+
+  useEffect(() => {
+    setListings(shopListings)
+  }, [shopListings])
+
   if (!shopListings || !ids || !shop) {
     return <Spinner />;
   }
+
+  async function deleteListing(listing) {
+    const listingUrl = `http://localhost:8000/listings/${listing.id}`
+
+    let response = await fetch(listingUrl,
+      { method: 'DELETE' });
+    if (response.ok) {
+      fetchData();
+      // updateListings();
+      // setListings(listings);
+      console.log("listings post delete", listings);
+      setOpen(false);
+    }
+  }
+
+  async function updateListings() {
+    let shopId = shop.id
+    const listingUrl = `http://localhost:8000/listings/`
+    let response = await fetch(listingUrl, { method: "GET" });
+    let data = await response.json();
+    const filteredData = data.filter(
+      (listing) => listing.shop_id === Number(shopId)
+    );
+    setListings(filteredData);
+    setOpen(false);
+
+  }
+
+
   let netTotal = 0;
   console.log(shopListings, "shop list");
+
   return (
     <>
       <p className="text-center text-2xl font-medium text-gray-500">
@@ -55,7 +95,7 @@ export default function ShopSalesList({ shopListings, shop, token, ids }) {
             </tr>
           </thead>
           <tbody className="text-center">
-            {shopListings.map((listing) => {
+            {listings.map((listing) => {
               netTotal += listing.quantity_sold * listing.price;
               console.log(netTotal, "nettotal");
               return (
@@ -75,7 +115,7 @@ export default function ShopSalesList({ shopListings, shop, token, ids }) {
                   </th>
                   <td className="px-6 py-4 flex justify-between">
                     <button className="ring-1 p-1">edit</button>
-                    <button className="ring-1 p-1">delete</button>
+                    <DeleteListing handleClick={() => deleteListing(listing)} shopListings={listings} listing={listing} open={open} />
                   </td>
                 </tr>
               );

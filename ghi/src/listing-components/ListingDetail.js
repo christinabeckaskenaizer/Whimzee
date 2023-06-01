@@ -35,9 +35,9 @@ export default function ListingDetail({}) {
       console.log("error", error);
     }
   };
-
+  console.log("id", id);
   const addToCart = async () => {
-    const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id.cart_id}`;
+    const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id}`;
     const payload = {
       // user_id: cart_id,
       listing: id,
@@ -47,9 +47,9 @@ export default function ListingDetail({}) {
     const data = payload;
     const result = await response.json();
   };
-  useEffect(() => {
-    addToCart();
-  }, []);
+  // useEffect(() => {
+  //   addToCart();
+  // }, []);
 
   useEffect(() => {
     getCombinedData();
@@ -163,7 +163,10 @@ export default function ListingDetail({}) {
                 <div className="mt-6 "></div>
 
                 <div className="mt-6 ">
-                  <button className="w-full px-4 py-2 font-bold text-white bg-green-800 lg:w-96 hover:bg-green-900">
+                  <button
+                    onClick={addToCart}
+                    className="w-full px-4 py-2 font-bold text-white bg-green-800 lg:w-96 hover:bg-green-900"
+                  >
                     Add to Cart
                   </button>
                 </div>

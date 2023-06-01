@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
-
+import DeleteListing from "./listing-components/DeleteListing";
 import ListingCard from "./listing-components/ListingCard.js";
 import AllListings from "./listing-components/AllListings.js";
 import ListingDetail from "./listing-components/ListingDetail";
@@ -40,6 +40,7 @@ function App() {
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data);
+      console.log("GETCHED");
     } catch (error) {
       console.log("error", error);
     }
@@ -52,6 +53,12 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar
+        token={token}
+        user={user}
+        listings={listings}
+        filteredlistings={listingsBySearchBar}
+        setfilteredlistings={setListingsBySearchBar}
+        setsearched={setSearched}
         token={token}
         user={user}
         listings={listings}
@@ -79,6 +86,7 @@ function App() {
               path=""
               element={
                 <UserAccount
+                  fetchData={fetchListingData}
                   user={user}
                   ids={ids}
                   shop={shop}
@@ -98,7 +106,7 @@ function App() {
           />
           <Route path="/listings/:id" element={<ListingDetail ids={ids} />} />
           <Route path="/listings/category/:id" />
-          <Route path="/button" element={<CreateListing />} />{" "}
+          <Route path="/button" element={<DeleteListing />} />{" "}
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
           <Route path="/liked"></Route>
           <Route path="/checkout"></Route>
