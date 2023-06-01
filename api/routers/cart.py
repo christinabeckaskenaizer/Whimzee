@@ -44,13 +44,13 @@ async def delete(
         result = Error(message="Invalid cart id")
     return result
 
-@router.put("/cart/{cart_id}", response_model=CartOut | Error)
+@router.put("/cart/{cart_id}", response_model=CartOut | bool | Error)
 async def put(
     cart_id: int,
     cart: CartIn,
     response: Response,
     repo: CartRepository = Depends()
-) -> bool | Error:
+) -> CartOut | Error | bool:
     result = repo.update(cart_id, cart)
     if result is None:
         response.status_code = 404
@@ -58,7 +58,7 @@ async def put(
     return result
 
 
-@router.get("/cart/{user_id}", response_model=List[CartOutWithDetail] | Error)
+@router.get("/cart/user/{user_id}", response_model=List[CartOutWithDetail] | Error)
 async def get_user_cart(
     user_id: int,
     response: Response,

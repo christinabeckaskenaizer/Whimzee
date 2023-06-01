@@ -21,7 +21,7 @@ import useUser from "./custom-hooks/useUser";
 import useShop from "./custom-hooks/useShop";
 import useCart from "./custom-hooks/useCart";
 import CreateListing from "./listing-components/CreateListing";
-import CreateCartForm from "./account-components/CartView";
+import CartView from "./account-components/CartView";
 
 function App() {
   const { token } = useToken();

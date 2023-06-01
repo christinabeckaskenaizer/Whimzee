@@ -93,10 +93,11 @@ class CartRepository(BaseModel):
                         cart.quantity, listings.name, listings.description,
                         listings.price, listings.picture
                         FROM cart
-                        JOIN listings ON cart.listing = listings.id
+                        JOIN listings ON cart.listing_id = listings.id
                         WHERE cart.user_id = %s
                         """,
-                    )[user_id]
+                        [user_id]
+                    )
                     carts = []
                     for rec in db_result:
                         carts.append(CartOutWithDetail(
@@ -156,12 +157,12 @@ class CartRepository(BaseModel):
             print(e)
             return False
 
-    def update(self, cart_id: int, cart: CartIn) -> bool | Error:
+    def update(self, cart_id: int, cart: CartIn) -> CartOut | bool | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     if cart.quantity > 0:
-                        db.execute(
+                        result = db.execute(
                             """
                             update cart
                             set
@@ -169,12 +170,15 @@ class CartRepository(BaseModel):
                             listing_id = %s,
                             quantity = %s
                             WHERE id = %s
+                            RETURNING (id, user_id, listing_id, quantity)
                             """,
                             [cart.user_id,
                                 cart.listing_id,
                                 cart.quantity,
                                 cart_id]
-                        ),
+                        )
+                        return CartOut(id=cart_id,
+                                       **cart.dict())
                     else:
                         db.execute(
                             """
@@ -182,8 +186,8 @@ class CartRepository(BaseModel):
                             WHERE id = %s
                             """,
                             [cart_id]
-                        ),
-                    return True
+                        )
+                        return True
 
         except Exception as e:
             print(e)
