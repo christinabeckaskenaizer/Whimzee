@@ -39,11 +39,9 @@ class AccountQueries(BaseModel):
                     )
                     records = result.fetchone()
                     return AccountOutWithPassword(id=records[0], email=records[2], username=records[1], hashed_password=records[3])
-
-
-
         except Exception:
-            return {"message": "Could not get accounts!"}
+            # return {"message": "Could not get accounts!"}
+            return None
 
 
     def create(self, info:AccountIn, hashed_password:str) -> AccountOutWithPassword:
@@ -64,7 +62,6 @@ class AccountQueries(BaseModel):
                          ]
                     )
                     id = result.fetchone()[0]
-                    # CartRepository.create(id)
                     return AccountOutWithPassword(id=id, email=info.email, username=info.username, hashed_password=hashed_password)
 
 

@@ -29,8 +29,8 @@ function App() {
   const { cart } = useCart(ids);
 
   const [listings, setListings] = useState([]);
-  const [listingsBySearchBar, setListingsBySearchBar] = useState([])
-  const [searched, setSearched] = useState(false)
+  const [listingsBySearchBar, setListingsBySearchBar] = useState([]);
+  const [searched, setSearched] = useState(false);
 
   const fetchListingData = async () => {
     try {
@@ -44,26 +44,31 @@ function App() {
   };
 
   useEffect(() => {
-    // console.log(token);
-  }, [token]);
-
-  useEffect(() => {
     fetchListingData();
   }, []);
 
   return (
     <BrowserRouter>
       <NavBar
-      token={token}
-      user={user}
-      listings={listings}
-      filteredlistings={listingsBySearchBar}
-      setfilteredlistings={setListingsBySearchBar}
-      setsearched = {setSearched}
+        token={token}
+        user={user}
+        listings={listings}
+        filteredlistings={listingsBySearchBar}
+        setfilteredlistings={setListingsBySearchBar}
+        setsearched={setSearched}
       />
       <div className="flex flex-col justify-center">
         <Routes>
-          <Route path="/" element={<Landing listings={listings} filteredlistings={listingsBySearchBar} searched={searched}/>} />
+          <Route
+            path="/"
+            element={
+              <Landing
+                listings={listings}
+                filteredlistings={listingsBySearchBar}
+                searched={searched}
+              />
+            }
+          />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
 
