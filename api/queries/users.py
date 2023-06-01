@@ -67,25 +67,24 @@ class UserRepository(BaseModel):
             print(e)
             return {"message": "Could not get Users"}
 
-    def get_one(self, user_id:int) -> Optional[UserOut] | Error:
+    def get_one(self, email:str) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, username, email, password
+                        SELECT username
                         FROM users
-                        where id = %s
+                        where email = %s
                         """,
-                        [user_id]
+                        [email]
                     )
-                    record = result.fetchone()
-                    if record is None:
-                        return None
-                    return self.record_to_user_out(record)
+                    record = result.fetchone()[0]
+                    print(record, "this is the record")
+                    return record != None
         except Exception as e:
             print(e)
-            return {"message": "Could not get that user"}
+            return False
 
     def delete(self, user_id:int) -> bool:
         try:
@@ -102,6 +101,7 @@ class UserRepository(BaseModel):
         except Exception as e:
             print(e)
             return False
+
     def record_to_user_out(self, record):
         return UserOut(
             id=record[0],

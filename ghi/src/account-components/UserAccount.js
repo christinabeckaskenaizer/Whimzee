@@ -79,20 +79,10 @@ export default function UserAccount({ user, ids, shop, token, listings, fetchDat
               src={userPic}
             />
           ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-20 h-20 text-gray-500"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-              />
-            </svg>
+            <img
+              className="p-3 object-cover rounded-full h-40 w-40"
+              src="https://media.istockphoto.com/id/1097490360/vector/vector-illustration-of-cute-black-cat.jpg?s=612x612&w=0&k=20&c=Ef0qYl79aZJ6NJXJVbJ0onjXVNnSyqrN_TKPjieAIGE="
+            />
           )}
 
           <p className="mb-1 text-2xl font-semibold text-gray-500">
@@ -106,8 +96,8 @@ export default function UserAccount({ user, ids, shop, token, listings, fetchDat
                 onClick={() => handleSelection(true)}
                 className={
                   view
-                    ? "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 ring-2 ring-green-400"
-                    : "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800"
+                    ? "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none  rounded-lg ring-2 ring-gray-400"
+                    : "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none"
                 }
               >
                 My Shop
@@ -120,7 +110,7 @@ export default function UserAccount({ user, ids, shop, token, listings, fetchDat
               href="#"
               className={
                 view
-                  ? "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-gray-500 border rounded-lg hover:bg-slate-600 "
+                  ? "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-gray-500 border rounded-lg hover:bg-slate-600 hover:ring-2 hover:ring-gray-400"
                   : "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-gray-500 border rounded-lg hover:bg-slate-600 ring-2 ring-gray-400"
               }
             >

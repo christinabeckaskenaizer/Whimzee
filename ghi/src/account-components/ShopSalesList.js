@@ -62,7 +62,7 @@ export default function ShopSalesList({ shopListings, shop, token, ids, fetchDat
         </div>
         <div className="">
           <Link
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800"
+            className="px-2.5 py-2.5 bg-gray-200 hover:bg-gray-300 text-black font-sm border border-gray-300 rounded-lg"
             to={`/shops/${shop.id}`}
           >
             View shop
