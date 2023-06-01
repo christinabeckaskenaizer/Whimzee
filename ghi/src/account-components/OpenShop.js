@@ -51,9 +51,9 @@ export default function OpenShop({ shop, token }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="inline-flex items-center px-4 py-2 text-sm
-                font-medium text-center text-white bg-emerald-500 rounded-lg
-                hover:bg-emerald-400"
+        className="bg-white hover:bg-gray-200 text-black font-sm
+         hover:text-black py-2 px-2 border border-gray-400
+        rounded-lg "
       >
         Open Shop
       </button>
