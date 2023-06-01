@@ -74,7 +74,7 @@ export default function DeleteListing({ listing, shopListings, handleClick, open
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Delete Listing?
+                                        Delete Listing
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
@@ -85,10 +85,10 @@ export default function DeleteListing({ listing, shopListings, handleClick, open
                                     <div className="p-2 flex">
                                         <div className="w-1/2"></div>
                                         <div className="w-1/2">
-                                            <button onClick={handleClick} className="m-1 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                                            <button onClick={handleClick} className="m-1 inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                                                 Delete
                                             </button>
-                                            <button onClick={closeModal} className="m-1 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                                            <button onClick={closeModal} className="m-1 inline-flex justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                                                 Cancel
                                             </button>
                                         </div>

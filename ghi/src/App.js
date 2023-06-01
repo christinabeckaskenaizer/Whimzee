@@ -38,6 +38,7 @@ function App() {
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data);
+      console.log("GETCHED")
     } catch (error) {
       console.log("error", error);
     }
@@ -72,6 +73,7 @@ function App() {
               path=""
               element={
                 <UserAccount
+                  fetchData={fetchListingData}
                   user={user}
                   ids={ids}
                   shop={shop}

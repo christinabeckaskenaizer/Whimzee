@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateListing from "../listing-components/CreateListing";
 import EditShop from "./EditShop";
 import DeleteShop from "./DeleteShop";
@@ -7,9 +7,15 @@ import { Link } from "react-router-dom";
 import Spinner from "../utilities/Spinner";
 
 
-export default function ShopSalesList({ shopListings, shop, token, ids }) {
+export default function ShopSalesList({ shopListings, shop, token, ids, fetchData }) {
+
   const [open, setOpen] = useState(false);
   const [listings, setListings] = useState(shopListings);
+
+  useEffect(() => {
+    setListings(shopListings)
+  }, [shopListings])
+
   if (!shopListings || !ids || !shop) {
     return <Spinner />;
   }
@@ -17,11 +23,15 @@ export default function ShopSalesList({ shopListings, shop, token, ids }) {
   async function deleteListing(listing) {
     const listingUrl = `http://localhost:8000/listings/${listing.id}`
 
-    await fetch(listingUrl,
+    let response = await fetch(listingUrl,
       { method: 'DELETE' });
-
-    updateListings();
-
+    if (response.ok) {
+      fetchData();
+      // updateListings();
+      // setListings(listings);
+      console.log("listings post delete", listings);
+      setOpen(false);
+    }
   }
 
   async function updateListings() {
@@ -32,14 +42,15 @@ export default function ShopSalesList({ shopListings, shop, token, ids }) {
     const filteredData = data.filter(
       (listing) => listing.shop_id === Number(shopId)
     );
-    console.log("HELLO", filteredData);
     setListings(filteredData);
     setOpen(false);
 
   }
 
+
   let netTotal = 0;
   console.log(shopListings, "shop list");
+
   return (
     <>
       <p className="text-center text-2xl font-medium text-gray-500">
