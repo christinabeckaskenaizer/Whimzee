@@ -1,3 +1,10 @@
+## May 31, 2023
+- Worked on the styling on the frontend
+- Went over Users account page
+- Made a pretty version for if no matches after searching for an item via search bar
+- Prettified "Add listings" modal so it look the same as the other Modals
+- Cleaned up some code
+
 ## May 30, 2023
 - Got the search bar to work
 - Worked on filtering listings by name and category (when you search by search bar) with Christina
