@@ -123,18 +123,18 @@ export default function MyModal({ ids }) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                  <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                  <div className="bg-white px-4 pb-4 pt-4 sm:p-6 sm:pb-4">
                   <Dialog.Title
                     as="h3"
                     className="text-base text-center font-semibold leading-6 text-gray-900"
                   >
                     Add a new listing
                   </Dialog.Title>
-                  <form onSubmit={createListing} className="mt-2">
-                    <div>
+                  <form onSubmit={createListing} className="flex flex-col items-center px-4 py-5 my-2 w-full">
+                    <div className="w-full mb-2">
                       <label
                         htmlFor="small-input"
-                        className="block mb-2 text-sm font-medium text-gray-900"
+                        className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
                       >
                         Title
                       </label>
@@ -145,7 +145,7 @@ export default function MyModal({ ids }) {
                         className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                       />
                     </div>
-                    <div>
+                    <div className="w-full mb-2">
                       <label
                         htmlFor="small-input"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -159,7 +159,7 @@ export default function MyModal({ ids }) {
                         className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                       />
                     </div>
-                    <div>
+                    <div className="w-full mb-2">
                       <label
                         htmlFor="small-input"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -173,7 +173,7 @@ export default function MyModal({ ids }) {
                         className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                       />
                     </div>
-                    <div>
+                    <div className="w-full mb-2">
                       <label
                         htmlFor="small-input"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -187,6 +187,7 @@ export default function MyModal({ ids }) {
                         className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                       />
                     </div>
+                    <div className="w-full mb-6">
                     <label
                       htmlFor="message"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
@@ -200,8 +201,8 @@ export default function MyModal({ ids }) {
                       className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                       placeholder="Your item description here..."
                     ></textarea>
-
-                    <div className="mt-4">
+                    </div>
+                    <div className="w-full mb-2">
                       <label className="relative inline-flex items-center mr-5 cursor-pointer">
                         <input
                           onChange={toggleUsed}
@@ -215,24 +216,21 @@ export default function MyModal({ ids }) {
                         </span>
                       </label>
                     </div>
-                  </form>
-                  <label
-                    htmlFor="countries"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Select an option
-                  </label>
-                  <select
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                  >
-                    <option>Choose a category</option>
-                    {categories.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="w-full mb-2">
+
+                    <select
+                      onChange={(e) => setCategory(e.target.value)}
+                      className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                    >
+                      <option>Choose a category</option>
+                      {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
                   <div className="mt-4">
                     <button
                       type="button"
@@ -242,8 +240,8 @@ export default function MyModal({ ids }) {
                       Create
                     </button>
                   </div>
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  </div>
+                    </form>
+
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
