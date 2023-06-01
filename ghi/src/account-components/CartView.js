@@ -62,8 +62,11 @@ async function CartView() {
       </div>
       <article>
         {CartView?.map((cart) => (
-          <div className="cart-box" key={cart.id}>
-            <div className="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pt-6 gap-8">
+          <div className="cart--box--id" key={cart.id}>
+            <div
+              className="box--large"
+              style={{ backgroundColor: "lightblue" }}
+            >
               <p>{cart.listing}</p>
             </div>
           </div>
