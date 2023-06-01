@@ -1,3 +1,20 @@
+## May 30, 2023
+
+Today I worked on:
+
+- Working on another search function with Sina. Had some trouble. D:
+- Finished stylizing my create a listing form as well as passing in the proper shop_id for the listing creation. Had some trouble with props, but Santi helped me sort it out.
+- Planned out components I need to make that should get me through the rest of the week.
+
+## May 26, 2023
+
+Today (and over the weekend) I worked on:
+
+- Search by category functinality with Sina! (Got it working woo)
+- Create a listing form
+
+Creating a listing was great for me. It took me a while, but I got it to work!! I always had trouble with POST requests, but to be able to take my time and understand what was going on was an awesome moment for me. Also, I used Headless UI to create a pop up modal form. Understanding post requests as well as working with a new library was very rewarding.
+
 ## May 25, 2023
 
 Today I worked on:
@@ -22,7 +39,7 @@ I mostly worked on stylizing the listing detail page. My "Aha" moment of the day
 Today I worked on:
 
 - Worked solely on the front end today. I was able to successfully pull data from our API and display all listings on the front end.
-- Using tailwind, I created listing cards. Most of the day was taken up by styling these cards. Upon resizing the screen, the cards would become misshapen and the pictures would not resize with the cards. I was also able to fix that issue, even though it tooko my until about 9:30 pm.
+- Using tailwind, I created listing cards. Most of the day was taken up by styling these cards. Upon resizing the screen, the cards would become misshapen and the pictures would not resize with the cards. I was also able to fix that issue, even though it took me until about 9:30 pm.
 - I made a resuable card component, for all future uses of the card.
 
 ## May 22, 2023

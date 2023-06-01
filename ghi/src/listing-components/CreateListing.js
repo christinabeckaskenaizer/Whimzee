@@ -96,9 +96,9 @@ export default function MyModal({ ids }) {
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
-        as="div"
-        className="relative z-10"
-        onClose={closeModal}>
+          as="div"
+          className="relative z-10"
+          onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -124,122 +124,122 @@ export default function MyModal({ ids }) {
               >
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div className="bg-white px-4 pb-4 pt-4 sm:p-6 sm:pb-4">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-base text-center font-semibold leading-6 text-gray-900"
-                  >
-                    Add a new listing
-                  </Dialog.Title>
-                  <form onSubmit={createListing} className="flex flex-col items-center px-4 py-5 my-2 w-full">
-                    <div className="w-full mb-2">
-                      <label
-                        htmlFor="small-input"
-                        className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
-                      >
-                        Title
-                      </label>
-                      <input
-                        onChange={(e) => setTitle(e.target.value)}
-                        type="text"
-                        id="small-input"
-                        className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                      />
-                    </div>
-                    <div className="w-full mb-2">
-                      <label
-                        htmlFor="small-input"
-                        className="block mb-2 text-sm font-medium text-gray-900"
-                      >
-                        Picture URL
-                      </label>
-                      <input
-                        onChange={(e) => setPicture(e.target.value)}
-                        type="text"
-                        id="small-input"
-                        className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                      />
-                    </div>
-                    <div className="w-full mb-2">
-                      <label
-                        htmlFor="small-input"
-                        className="block mb-2 text-sm font-medium text-gray-900"
-                      >
-                        Quantity
-                      </label>
-                      <input
-                        onChange={(e) => setQuantity(e.target.value)}
-                        type="number"
-                        id="small-input"
-                        className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                      />
-                    </div>
-                    <div className="w-full mb-2">
-                      <label
-                        htmlFor="small-input"
-                        className="block mb-2 text-sm font-medium text-gray-900"
-                      >
-                        Price
-                      </label>
-                      <input
-                        onChange={(e) => setPrice(e.target.value)}
-                        type="number"
-                        id="small-input"
-                        className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                      />
-                    </div>
-                    <div className="w-full mb-6">
-                    <label
-                      htmlFor="message"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                    <Dialog.Title
+                      as="h3"
+                      className="text-base text-center font-semibold leading-6 text-gray-900"
                     >
-                      Description
-                    </label>
-                    <textarea
-                      onChange={(e) => setDescription(e.target.value)}
-                      id="message"
-                      rows="4"
-                      className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                      placeholder="Your item description here..."
-                    ></textarea>
-                    </div>
-                    <div className="w-full mb-2">
-                      <label className="relative inline-flex items-center mr-5 cursor-pointer">
+                      Add a new listing
+                    </Dialog.Title>
+                    <form onSubmit={createListing} className="flex flex-col items-center px-4 py-5 my-2 w-full">
+                      <div className="w-full mb-2">
+                        <label
+                          htmlFor="small-input"
+                          className=" block mb-2 text-sm font-bold text-gray-900"
+                        >
+                          Title
+                        </label>
                         <input
-                          onChange={toggleUsed}
-                          type="checkbox"
-                          value=""
-                          className="sr-only peer"
+                          onChange={(e) => setTitle(e.target.value)}
+                          type="text"
+                          id="small-input"
+                          className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                         />
-                        <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
-                        <span className="ml-3 text-sm font-medium text-gray-900">
-                          Used?
-                        </span>
-                      </label>
-                    </div>
-                  <div className="w-full mb-2">
+                      </div>
+                      <div className="w-full mb-2">
+                        <label
+                          htmlFor="small-input"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                          Picture URL
+                        </label>
+                        <input
+                          onChange={(e) => setPicture(e.target.value)}
+                          type="text"
+                          id="small-input"
+                          className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                        />
+                      </div>
+                      <div className="w-full mb-2">
+                        <label
+                          htmlFor="small-input"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                          Quantity
+                        </label>
+                        <input
+                          onChange={(e) => setQuantity(e.target.value)}
+                          type="number"
+                          id="small-input"
+                          className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                        />
+                      </div>
+                      <div className="w-full mb-2">
+                        <label
+                          htmlFor="small-input"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                          Price
+                        </label>
+                        <input
+                          onChange={(e) => setPrice(e.target.value)}
+                          type="number"
+                          id="small-input"
+                          className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                        />
+                      </div>
+                      <div className="w-full mb-6">
+                        <label
+                          htmlFor="message"
+                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                        >
+                          Description
+                        </label>
+                        <textarea
+                          onChange={(e) => setDescription(e.target.value)}
+                          id="message"
+                          rows="4"
+                          className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                          placeholder="Your item description here..."
+                        ></textarea>
+                      </div>
+                      <div className="w-full mb-2">
+                        <label className="relative inline-flex items-center mr-5 cursor-pointer">
+                          <input
+                            onChange={toggleUsed}
+                            type="checkbox"
+                            value=""
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+                          <span className="ml-3 text-sm font-medium text-gray-900">
+                            Used?
+                          </span>
+                        </label>
+                      </div>
+                      <div className="w-full mb-2">
 
-                    <select
-                      onChange={(e) => setCategory(e.target.value)}
-                      className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                    >
-                      <option>Choose a category</option>
-                      {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
-                          {category.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                        <select
+                          onChange={(e) => setCategory(e.target.value)}
+                          className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                        >
+                          <option>Choose a category</option>
+                          {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                              {category.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
 
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="text-white dark:bg-gray-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-large rounded-lg text-sm w-full sm:w-auto px-5 py-2.5"
-                      onClick={createListing}
-                    >
-                      Create
-                    </button>
-                  </div>
+                      <div className="mt-4">
+                        <button
+                          type="button"
+                          className="text-white dark:bg-gray-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-large rounded-lg text-sm w-full sm:w-auto px-5 py-2.5"
+                          onClick={createListing}
+                        >
+                          Create
+                        </button>
+                      </div>
                     </form>
 
                   </div>
