@@ -31,9 +31,8 @@ export default function DeleteShop({ token, shop }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-transparent hover:bg-red-700 text-red-700 font-sm
-         hover:text-white py-2 px-2 border border-red-700
-         hover:border-transparent rounded-lg"
+
+        className="px-2 py-2 bg-gray-200 hover:bg-gray-300 text-black font-sm py-2 px-2 border border-gray-300 rounded-lg"
       >
         Delete shop
       </button>

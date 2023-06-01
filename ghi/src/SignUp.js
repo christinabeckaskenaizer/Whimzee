@@ -3,13 +3,35 @@ import { useNavigate } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { NavLink } from "react-router-dom";
 
-const SignUpForm = ({}) => {
-  const navigate = useNavigate();
+const SignUpForm = ({ids}) => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { token } = useToken();
   const { login } = useToken();
+
+  const createCart = async () => {
+    const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart`;
+    let cartData = {
+      user_id:ids.id
+    };
+    try {
+      const cartResponse = await fetch(cartUrl, {
+        method: "POST",
+        body: JSON.stringify(cartData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (cartResponse.ok) {
+        console.log("cart got created")
+      }
+    } catch(err) {
+      console.log("Error: ", err)
+    }
+
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,10 +64,13 @@ const SignUpForm = ({}) => {
   };
 
   useEffect(() => {
+    console.log(token)
+
     if (token) {
-      navigate("/");
+      createCart();
+      navigate("/")
     }
-  }, [token]);
+  }, [ids])
 
   return (
     <>
