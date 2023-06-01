@@ -45,22 +45,18 @@ function App() {
   };
 
   useEffect(() => {
-    // console.log(token);
-  }, [token]);
-
-  useEffect(() => {
     fetchListingData();
   }, []);
 
   return (
     <BrowserRouter>
       <NavBar
-      token={token}
-      user={user}
-      listings={listings}
-      filteredlistings={listingsBySearchBar}
-      setfilteredlistings={setListingsBySearchBar}
-      setsearched = {setSearched}
+        token={token}
+        user={user}
+        listings={listings}
+        filteredlistings={listingsBySearchBar}
+        setfilteredlistings={setListingsBySearchBar}
+        setsearched={setSearched}
       />
       <div className="flex flex-col justify-center">
         <Routes>
