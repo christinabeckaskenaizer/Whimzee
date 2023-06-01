@@ -1,14 +1,26 @@
+## June 1, 2023
+
+Today I worked on:
+
+- Creating an intermediary cart_listing table to keep track of all of our listings
+
+Today I created a create and delete method for cart_listings so that someone can add items to the cart and delete items from the cart.
+
 ## May 31, 2023
 
 Today I worked on:
+
+- handled cors errors when logging in with an unregistered user
 
 - created a spinner to show loading screens
 
 - updated the colors and styles on my components
 
+Today we noticed the login and register functions where throwing cors errors when logging in with unregistered accounts and when signing up with previously registered accounts
+
 Today I noticed that while our information is loading we had the word "loading" show up. I thought it would be nice to quickly make a spinner for us to use if we wanted to.
 
-I made my buttons have the same styles so everything would look better together.
+I made my buttons have the same styles so everything would look better together. Later this was further updated by Sina.
 
 ## May 30, 2023
 
@@ -22,7 +34,7 @@ Today I worked on:
 
 Today I created the component that will show all active listings including their name, lifetime units sold and total money made. This was made to replace the shop order history.
 
-Christina, Sina, and I worked on adding search functionality to our site. We pair programmed and individually added to Sina's branch.
+Christina, Sina, and I worked on adding search functionality to our site. We pair programmed on Sina's branch.
 
 I wrapped up the tables on the user account shop page.
 
@@ -32,11 +44,11 @@ Today I worked on:
 
 - General code clean up
 
-- SHowing a user's purchase history
+- Showing a user's purchase history
 
 - modified the orders endpoint to also return listingOut objects
 
-Today I went through my code and delete print statements, console logs, and unnecessary comments from some of the pages I have written. This was really helpful to clear up room for printing new errors.
+Today I went through my code and deleted print statements, console logs, and unnecessary comments from some of the pages I have written. This was really helpful to clear up room for printing new errors.
 
 I created a component that takes a user Id and gets all of their past orders. I then pass these orders down and create listings for each one.
 

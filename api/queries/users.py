@@ -101,6 +101,7 @@ class UserRepository(BaseModel):
         except Exception as e:
             print(e)
             return False
+
     def record_to_user_out(self, record):
         return UserOut(
             id=record[0],

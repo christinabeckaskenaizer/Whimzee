@@ -14,7 +14,8 @@ from routers import(
     listings,
     review,
     orders,
-    cart
+    cart,
+    cart_listings
 )
 
 app = FastAPI()
@@ -34,7 +35,7 @@ app.add_middleware(
 app.include_router(users.router)
 app.include_router(shop.router)
 app.include_router(cart.router)
-
+app.include_router(cart_listings.router)
 app.include_router(categories.router)
 app.include_router(listings.router)
 app.include_router(orders.router)
