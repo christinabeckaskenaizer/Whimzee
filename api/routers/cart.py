@@ -1,6 +1,7 @@
+# from queries.cart import Cart_listingsRepository, CartOutWithDetail, Cart_listingsIn, Cart_listingsOut, Cart_listingsOutWithDetail
 from fastapi import APIRouter, Depends, Response
 from typing import List
-from queries.cart import Error, CartIn, CartOut, CartRepository
+from queries.cart import Error, CartIn, CartOut, CartRepository, CartOutWithDetail
 from authenticator import authenticator
 router = APIRouter()
 
@@ -31,20 +32,6 @@ async def get(
     return result
 
 
-@router.put("/cart/{cart_id}", response_model=CartOut | Error)
-async def update(
-    cart_id: int,
-    cart: CartIn,
-    response: Response,
-    repo: CartRepository = Depends()
-) -> CartOut | Error:
-    result = repo.update(cart_id, cart)
-    if result is None:
-        response.status_code = 404
-        result = Error(message="Unable to get cart")
-    return result
-
-
 @router.delete("/cart/{cart_id}", response_model=bool | Error)
 async def delete(
     cart_id: int,
@@ -57,14 +44,41 @@ async def delete(
         result = Error(message="Invalid cart id")
     return result
 
-
-@router.get("/cart/", response_model=List[CartOut] | Error)
-async def get_all(
+@router.put("/cart/{cart_id}", response_model=CartOut | Error)
+async def put(
+    cart_id: int,
+    cart: CartIn,
     response: Response,
     repo: CartRepository = Depends()
-) -> List[CartOut] | Error:
-    result = repo.get_all()
+) -> bool | Error:
+    result = repo.update(cart_id, cart)
     if result is None:
         response.status_code = 404
         result = Error(message="Invalid cart id")
     return result
+
+
+@router.get("/cart/{user_id}", response_model=List[CartOutWithDetail] | Error)
+async def get_user_cart(
+    user_id: int,
+    response: Response,
+    repo: CartRepository = Depends()
+) -> List[CartOutWithDetail] | Error:
+    result = repo.get_all(user_id)
+    if result is None:
+        response.status_code = 404
+        result = Error(message="Invalid cart id")
+    return result
+
+
+# @router.post("/{cart_listings_id}", response_model=Cart_listingsOut | Error)
+# async def createcart(
+#     cart_listings: Cart_listingsIn,
+#     response: Response,
+#     repo: Cart_listingsRepository = Depends(),
+# ) -> Cart_listingsOut:
+#     result = repo.create(cart_listings_id)
+#     if result is None:
+#         response.status_code = 404
+#         result = Error(message="Unable to create new cart_listings")
+#     return result

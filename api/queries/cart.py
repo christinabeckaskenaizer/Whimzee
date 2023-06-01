@@ -10,15 +10,49 @@ class Error(BaseModel):
 
 class CartIn(BaseModel):
     user_id: int
-    # listing_id: int
-    listings: int
+    listing_id: int
+    quantity: int
 
 
 class CartOut(BaseModel):
     id: int
     user_id: int
-    # listing_id: int
-    listings: int
+    listing_id: int
+    quantity: int
+
+
+# class Cart_listingsIn(BaseModel):
+#     cart_id:
+#     listing_id: int
+#     cart_quantity: int
+
+
+# class Cart_listingsOut(BaseModel):
+#     id: int
+#     cart_id: int
+#     listing_id: int
+#     cart_quantity: int
+
+
+class CartOutWithDetail(BaseModel):
+    id: int
+    user_id: int
+    listing_id: int
+    quantity: int
+    name: str
+    description: str
+    price: int
+    picture: str
+
+
+# class Cart_listingsOutWithDetail(BaseModel):
+#     id: int
+#     user_id: int
+#     listing: int
+#     name: str
+#     description: str
+#     price: int
+#     picture: str
 
 
 class CartRepository(BaseModel):
@@ -31,15 +65,15 @@ class CartRepository(BaseModel):
                     result = db.execute(
                         """
                         INSERT INTO cart
-                        (user_id, listings)
+                        (user_id, listing_id, quantity)
                         VALUES
-                        (%s , %s)
+                        (%s, %s, %s)
                         RETURNING id
                         """,
                         [
                             cart.user_id,
-                            # cart.listing_id,
-                            cart.listings
+                            cart.listing_id,
+                            cart.quantity
                         ]
                     )
                     id = result.fetchone()[0]
@@ -49,22 +83,31 @@ class CartRepository(BaseModel):
             print(e)
             return None
 
-    def get_all(self) -> List[CartOut] | Error:
+    def get_all(self, user_id: int) -> List[CartOutWithDetail] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db_result = db.execute(
                         """
-                        SELECT id, user_id
+                        SELECT cart.id, cart.user_id, cart.listing_id,
+                        cart.quantity, listings.name, listings.description,
+                        listings.price, listings.picture
                         FROM cart
-                        ORDER BY id
-                        """
-                    )
+                        JOIN listings ON cart.listing = listings.id
+                        WHERE cart.user_id = %s
+                        """,
+                    )[user_id]
                     carts = []
                     for rec in db_result:
-                        carts.append(CartOut(
+                        carts.append(CartOutWithDetail(
                             id=rec[0],
-                            user_id=rec[1]
+                            user_id=rec[1],
+                            listing_id=rec[2],
+                            quantity=rec[3],
+                            name=rec[4],
+                            description=rec[5],
+                            price=rec[6],
+                            picture=rec[7]
                         ))
                     return carts
 
@@ -78,7 +121,7 @@ class CartRepository(BaseModel):
                 with conn.cursor() as db:
                     db_result = db.execute(
                         """
-                        SELECT id, user_id
+                        SELECT id, user_id, listing_id, quantity
                         FROM cart
                         WHERE id = %s
                         ORDER BY id
@@ -88,29 +131,10 @@ class CartRepository(BaseModel):
                     cart_data = db_result.fetchone()
                     return CartOut(
                         id=cart_data[0],
-                        user_id=cart_data[1]
+                        user_id=cart_data[1],
+                        listing_id=cart_data[2],
+                        quantity=cart_data[3],
                     )
-        except Exception as e:
-            print(e)
-            return None
-
-    def update(self, cart_id: int, cart: CartIn) -> CartOut | Error:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        UPDATE cart
-                        set user_id = %s
-                        WHERE id = %s
-                        """,
-                        [
-                            cart.user_id,
-                            cart_id
-                        ]
-                    )
-                    return CartOut(id=cart_id, **cart.dict())
-
         except Exception as e:
             print(e)
             return None
@@ -131,3 +155,93 @@ class CartRepository(BaseModel):
         except Exception as e:
             print(e)
             return False
+
+    def update(self, cart_id: int, cart: CartIn) -> bool | Error:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    if cart.quantity > 0:
+                        db.execute(
+                            """
+                            update cart
+                            set
+                            user_id = %s,
+                            listing_id = %s,
+                            quantity = %s
+                            WHERE id = %s
+                            """,
+                            [cart.user_id,
+                                cart.listing_id,
+                                cart.quantity,
+                                cart_id]
+                        ),
+                    else:
+                        db.execute(
+                            """
+                            DELETE FROM cart
+                            WHERE id = %s
+                            """,
+                            [cart_id]
+                        ),
+                    return True
+
+        except Exception as e:
+            print(e)
+            return False
+
+
+# class Cart_listingsRepository(BaseModel):
+
+#     def create(self, cart_listings: Cart_listingsIn) -> List[Cart_listingsOut] | Error:
+#         try:
+#             with pool.connection() as conn:
+#                 with conn.cursor() as db:
+
+#                     result = db.execute(
+#                         """
+#                         INSERT INTO cart_listings
+#                         (cart_id, listing_id, cart_quantity)
+#                         VALUES
+#                         (%s %s %s)
+#                         RETURNING id
+#                         """,
+#                         [
+#                             cart_listings.cart_id,
+#                         ]
+#                         )
+#                     id = result.fetchone()[0]
+#                     return Cart_listingsOut(id=id, **cart_listings.dict())
+
+#         except Exception as e:
+#             print(e)
+#             return None
+
+#     def get_all(self, listing_id: int) -> List[Cart_listingsOutWithDetail] | Error:
+#         try:
+#             with pool.connection() as conn:
+#                 with conn.cursor() as db:
+#                     db_result = db.execute(
+#                         """
+#                         SELECT cart_listings.cart_id, cart_listings.listing_id, cart_listings.cart_quantity
+#                         listings.name, listings.description, listings.price, listings.picture
+#                         FROM cart_listings
+#                         JOIN listings ON cart_listings.listing_id = listings.id
+#                         WHERE cart_listings.id = 1
+#                         """,
+#                     )[listing_id]
+#                     cartsnew = []
+#                     for rec in db_result:
+#                         cartsnew.append(Cart_listingsOutWithDetail(
+#                             cart_id=rec[0],
+#                             listing_id=rec[1],
+#                             cart_quantity=rec[2],
+#                             name=rec[3],
+#                             description=rec[4],
+#                             price=rec[5],
+#                             picture=rec[6]
+#                         ))
+#                     return cartsnew
+
+#         except Exception as e:
+            # print(e)
+            # return None

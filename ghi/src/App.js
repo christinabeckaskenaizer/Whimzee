@@ -21,6 +21,7 @@ import useUser from "./custom-hooks/useUser";
 import useShop from "./custom-hooks/useShop";
 import useCart from "./custom-hooks/useCart";
 import CreateListing from "./listing-components/CreateListing";
+import CreateCartForm from "./account-components/CartView";
 
 function App() {
   const { token } = useToken();
@@ -71,7 +72,6 @@ function App() {
           />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
-
           <Route path="/account">
             <Route
               path=""
@@ -86,21 +86,19 @@ function App() {
               }
             />
           </Route>
-
           <Route
             path="/shops/:shopId"
             element={<Shop listings={listings} />}
           ></Route>
-
           <Route
             path="/listings"
             element={<AllListings listings={listings} />}
           />
-          <Route path="/listings/:id" element={<ListingDetail />} />
+          <Route path="/listings/:id" element={<ListingDetail ids={ids} />} />
           <Route path="/listings/category/:id" />
-          <Route path="/button" element={<CreateListing />} />
+          <Route path="/button" element={<CreateListing />} />{" "}
+          <Route path="/cart/:userid" element={<CartView id={ids} />} />
           <Route path="/liked"></Route>
-
           <Route path="/checkout"></Route>
         </Routes>
       </div>

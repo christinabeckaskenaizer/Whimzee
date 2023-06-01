@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function ListingDetail({ }) {
+export default function ListingDetail({}) {
   const [detail, setDetail] = useState("");
   const [shop, setShop] = useState("");
 
@@ -35,6 +35,21 @@ export default function ListingDetail({ }) {
       console.log("error", error);
     }
   };
+
+  const addToCart = async () => {
+    const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id.cart_id}`;
+    const payload = {
+      // user_id: cart_id,
+      listing: id,
+      quantity: 1,
+    };
+    const response = await fetch(cartUrl);
+    const data = payload;
+    const result = await response.json();
+  };
+  useEffect(() => {
+    addToCart();
+  }, []);
 
   useEffect(() => {
     getCombinedData();
