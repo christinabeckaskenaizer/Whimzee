@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
-
+import DeleteListing from "./listing-components/DeleteListing";
 import ListingCard from "./listing-components/ListingCard.js";
 import AllListings from "./listing-components/AllListings.js";
 import ListingDetail from "./listing-components/ListingDetail";
@@ -39,6 +39,7 @@ function App() {
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data);
+      console.log("GETCHED")
     } catch (error) {
       console.log("error", error);
     }
@@ -57,18 +58,25 @@ function App() {
         filteredlistings={listingsBySearchBar}
         setfilteredlistings={setListingsBySearchBar}
         setsearched={setSearched}
+        token={token}
+        user={user}
+        listings={listings}
+        filteredlistings={listingsBySearchBar}
+        setfilteredlistings={setListingsBySearchBar}
+        setsearched={setSearched}
       />
       <div className="flex flex-col justify-center">
         <Routes>
-          <Route path="/" element={<Landing listings={listings} filteredlistings={listingsBySearchBar} searched={searched} setsearched={setSearched}/>} />
+          <Route path="/" element={<Landing listings={listings} filteredlistings={listingsBySearchBar} searched={searched} setsearched={setSearched} />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignUpForm ids={ids}/>} />
+          <Route path="/signup" element={<SignUpForm ids={ids} />} />
 
           <Route path="/account">
             <Route
               path=""
               element={
                 <UserAccount
+                  fetchData={fetchListingData}
                   user={user}
                   ids={ids}
                   shop={shop}
@@ -90,7 +98,7 @@ function App() {
           />
           <Route path="/listings/:id" element={<ListingDetail />} />
           <Route path="/listings/category/:id" />
-          <Route path="/button" element={<CreateListing />} />
+          <Route path="/button" element={<DeleteListing />} />
           <Route path="/liked"></Route>
 
           <Route path="/checkout"></Route>
