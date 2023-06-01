@@ -23,9 +23,9 @@ def delete_user(
     return repo.delete(user_id)
 
 
-@router.get("/users/{user_id}", response_model=Optional[UserOut])
+@router.get("/users/{email}", response_model=bool)
 def get_one_user(
-    user_id: int,
+    email: str,
     repo: UserRepository = Depends(),
-) -> UserOut:
-    return repo.get_one(user_id)
+) -> bool:
+    return repo.get_one(email)

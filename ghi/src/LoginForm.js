@@ -12,13 +12,18 @@ const LoginForm = ({}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/users/${email}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    if (data === true) {
       await login(email, password);
-    } catch (error) {
-      console.log("error: ", error)
+      e.target.reset();
+    } else {
+      console.log("Invalid username or password");
+      e.target.reset();
     }
-    e.target.reset();
   };
+
   useEffect(() => {
     if (token) {
       navigate("/");
@@ -42,7 +47,7 @@ const LoginForm = ({}) => {
             Email:
           </label>
           <input
-            type="text"
+            type="email"
             id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
             placeholder="john@galvanize.com"
