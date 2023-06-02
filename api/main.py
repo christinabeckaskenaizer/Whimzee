@@ -42,6 +42,10 @@ app.include_router(orders.router)
 app.include_router(review.router)
 
 
+@app.get("/")
+def root():
+    return {"message": "Hello World"}
+
 @app.get("/api/launch-details")
 def launch_details():
     return {

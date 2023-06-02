@@ -13,6 +13,7 @@ class CreateCategoryQueries:
             "id": 8,
             "name": "string"
         }
+        result.update(name)
         return result
 
 def test_get_all_categories():
@@ -26,4 +27,18 @@ def test_get_all_categories():
     assert response.json() == []
 
 def test_create_category():
+    #Arrange
     app.dependency_overrides[CategoryRepository] = CreateCategoryQueries
+    #Act
+    json = {
+        "name": "string"
+    }
+    expected = {
+        "id": 8,
+        "name": "string"
+    }
+    response = client.post("/categories", json=json)
+    app.dependency_overrides = {}
+    #Assert
+    assert response.status_code == 200
+    assert response.json() == expected

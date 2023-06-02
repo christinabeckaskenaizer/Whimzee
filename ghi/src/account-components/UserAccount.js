@@ -6,7 +6,7 @@ import OpenShop from "./OpenShop";
 
 import Spinner from "../utilities/Spinner";
 
-export default function UserAccount({ user, ids, shop, token, listings }) {
+export default function UserAccount({ user, ids, shop, token, listings, fetchData }) {
   const [view, setView] = useState(false);
   const [userPic, setUserPic] = useState(null);
   const [orders, setOrders] = useState(null);
@@ -120,6 +120,7 @@ export default function UserAccount({ user, ids, shop, token, listings }) {
         </div>
         {view ? (
           <ShopSalesList
+            fetchData={fetchData}
             shop={shop}
             shopListings={shopListings}
             orders={orders}

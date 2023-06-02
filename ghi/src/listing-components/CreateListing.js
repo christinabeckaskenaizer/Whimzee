@@ -205,10 +205,10 @@ export default function MyModal({ ids }) {
                     <div className="w-full mb-2">
                       <label className="relative inline-flex items-center mr-5 cursor-pointer">
                         <input
-                          onChange={toggleUsed}
-                          type="checkbox"
-                          value=""
-                          className="sr-only peer"
+                          onChange={(e) => setTitle(e.target.value)}
+                          type="text"
+                          id="small-input"
+                          className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                         />
                         <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
                         <span className="ml-3 text-sm font-medium text-gray-900">
