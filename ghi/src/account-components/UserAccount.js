@@ -96,7 +96,7 @@ export default function UserAccount({ user, ids, shop, token, listings, fetchDat
                 onClick={() => handleSelection(true)}
                 className={
                   view
-                    ? "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none  rounded-lg ring-2 ring-gray-400"
+                    ? "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none ring-2 ring-gray-400"
                     : "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none"
                 }
               >
