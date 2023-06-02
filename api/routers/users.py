@@ -4,13 +4,13 @@ from queries.users import (Error, UserOut, UserRepository)
 
 router = APIRouter()
 
-@router.get("/users", response_model = List[UserOut] | Error)
+@router.get("/users", response_model=List[UserOut] | Error)
 async def get_all(
     response: Response,
     repo: UserRepository = Depends()
 ):
     result = repo.get_all()
-    if result == None:
+    if result==None:
         response.status_code = 404
         result = Error(message="Unable to get users")
     return result

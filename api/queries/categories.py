@@ -6,13 +6,14 @@ from queries.pool import pool
 class Error(BaseModel):
     message: str
 
+
 class CategoryIn(BaseModel):
     name: str
+
 
 class CategoryOut(BaseModel):
     id: int
     name: str
-
 
 
 class CategoryRepository:
@@ -20,14 +21,13 @@ class CategoryRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         SELECT id, name
                         FROM categories
                         ORDER BY id
                         """
-                        )
-                    result = []
+                    )
                     return [
                         CategoryOut(
                             id=record[0],
@@ -38,7 +38,7 @@ class CategoryRepository:
         except Exception:
             return {"message": "Could not return all categories"}
 
-    def create(self, category:CategoryIn) -> CategoryOut | Error:
+    def create(self, category: CategoryIn) -> CategoryOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

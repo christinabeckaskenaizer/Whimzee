@@ -1,2 +1,3 @@
 [flake8]
+ignore=E251
 exclude = ghi,docs,journals,sample_service/migrations
