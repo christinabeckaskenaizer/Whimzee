@@ -4,7 +4,15 @@ Today I worked on:
 
 - Creating an intermediary cart_listing table to keep track of all of our listings
 
+- worked with my team to get deployment ready
+
+- cleaned up a million linting errors
+
 Today I created a create and delete method for cart_listings so that someone can add items to the cart and delete items from the cart.
+
+today we wanted to start on deployment! so we began getting all of the files ready. We were able to successfully login and get an access token
+
+during our attempt at deployment we found we had an absolute TON of linting errors. Me and Christina went through each file and cleaned them all up.
 
 ## May 31, 2023
 

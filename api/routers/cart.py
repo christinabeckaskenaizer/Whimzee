@@ -3,7 +3,6 @@ from fastapi import APIRouter, Depends, Response
 # from routers import users
 from typing import List
 from queries.cart import Error, CartIn, CartOut, CartRepository
-from authenticator import authenticator
 router = APIRouter()
 # app = FastAPI()
 # app.include_router(users.router)

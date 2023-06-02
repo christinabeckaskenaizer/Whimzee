@@ -1,14 +1,17 @@
 from queries.pool import pool
-from typing import Optional, List, Union
+from typing import List
 from pydantic import BaseModel
+
 
 class Error(BaseModel):
     message: str
+
 
 class UserIn(BaseModel):
     username: str
     email: str
     password: str
+
 
 class UserOut(BaseModel):
     id: int
@@ -16,8 +19,11 @@ class UserOut(BaseModel):
     email: str
     password: str
 
+
 class UserRepository(BaseModel):
-    def create(self, user_in:UserIn) -> UserIn | Error:
+
+    def create(self, user_in: UserIn) -> UserIn | Error:
+
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -42,6 +48,7 @@ class UserRepository(BaseModel):
             print(e)
 
     def get_all(self) -> List[UserOut] | Error:
+
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -67,7 +74,8 @@ class UserRepository(BaseModel):
             print(e)
             return {"message": "Could not get Users"}
 
-    def get_one(self, email:str) -> bool:
+    def get_one(self, email: str) -> bool:
+
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -81,16 +89,17 @@ class UserRepository(BaseModel):
                     )
                     record = result.fetchone()[0]
                     print(record, "this is the record")
-                    return record != None
+                    return record is not None
         except Exception as e:
             print(e)
             return False
 
-    def delete(self, user_id:int) -> bool:
+    def delete(self, user_id: int) -> bool:
+
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         DELETE FROM users
                         WHERE id = %s

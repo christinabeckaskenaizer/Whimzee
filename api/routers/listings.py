@@ -7,15 +7,17 @@ from queries.listings import (
     ListingRepository
 )
 
-router=APIRouter()
+router = APIRouter()
+
 
 @router.post("/listings", response_model=Union[ListingOut, Error])
 def create_listing(
-    listing:ListingIn,
+    listing: ListingIn,
     response: Response,
-    repo: ListingRepository = Depends (),
+    repo: ListingRepository = Depends(),
 ):
-        return repo.create(listing)
+    return repo.create(listing)
+
 
 @router.get("/listings", response_model=Union[List[ListingOut], Error])
 async def get_all(
@@ -38,11 +40,12 @@ def get_a_listing(
         )
     return listing
 
+
 @router.delete("/listings/{listing_id}", response_model=bool)
 def delete_a_listing(
     listing_id: int,
     repo: ListingRepository = Depends()
-    ):
+):
     listing = repo.delete_a_listing(listing_id)
     if listing is None:
         raise HTTPException(
@@ -50,6 +53,7 @@ def delete_a_listing(
             detail="Could not delete a listing that does not exist",
         )
     return True
+
 
 @router.put("/listings/{listing_id}", response_model=Union[Error, ListingOut])
 def update_listing(

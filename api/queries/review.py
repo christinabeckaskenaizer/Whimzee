@@ -2,12 +2,15 @@ from queries.pool import pool
 from pydantic import BaseModel
 from datetime import date
 
+
 class Error(BaseModel):
     message: str
+
 
 class ReviewIn(BaseModel):
     rating: int
     description: str
+
 
 class ReviewOut(BaseModel):
     id: int
@@ -17,9 +20,14 @@ class ReviewOut(BaseModel):
     created_on: date
     description: str
 
+
 class ReviewRepo(BaseModel):
 
-    def create(self, listing_id: int, review: ReviewIn, username: str) -> ReviewOut | None:
+    def create(self,
+               listing_id: int,
+               review: ReviewIn,
+               username: str) -> ReviewOut | None:
+
         try:
             today = date.today()
             with pool.connection() as conn:
@@ -42,12 +50,12 @@ class ReviewRepo(BaseModel):
                     )
                     data = result.fetchone()
                     return ReviewOut(
-                          id = data[0],
-                          author = data[1],
-                          rating = data[2],
-                          listing_id = data[3],
-                          created_on = data[4],
-                          description= data[5]
+                          id=data[0],
+                          author=data[1],
+                          rating=data[2],
+                          listing_id=data[3],
+                          created_on=data[4],
+                          description=data[5]
                         )
 
         except Exception as e:
@@ -55,6 +63,7 @@ class ReviewRepo(BaseModel):
             return None
 
     def get_all_from_listing(self, listing_id: int) -> ReviewOut | None:
+
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -67,12 +76,12 @@ class ReviewRepo(BaseModel):
                         [listing_id]
                     )
                     return [ReviewOut(
-                        id = record[0],
-                        author = record[1],
-                        rating = record[2],
-                        listing_id = record[3],
-                        created_on = record[4],
-                        description= record[5]
+                        id=record[0],
+                        author=record[1],
+                        rating=record[2],
+                        listing_id=record[3],
+                        created_on=record[4],
+                        description=record[5]
                       ) for record in result]
 
         except Exception as e:
@@ -100,7 +109,11 @@ class ReviewRepo(BaseModel):
             print(e)
             return None
 
-    def update(self, review: ReviewIn, review_id: int, username: str) -> ReviewOut | None:
+    def update(self,
+               review: ReviewIn,
+               review_id: int,
+               username: str) -> ReviewOut | None:
+
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -122,12 +135,12 @@ class ReviewRepo(BaseModel):
                     )
                     data = result.fetchone()
                     return ReviewOut(
-                          id = data[0],
-                          author = data[1],
-                          rating = data[2],
-                          listing_id = data[3],
-                          created_on = data[4],
-                          description= data[5]
+                          id=data[0],
+                          author=data[1],
+                          rating=data[2],
+                          listing_id=data[3],
+                          created_on=data[4],
+                          description=data[5]
                         )
 
         except Exception as e:
