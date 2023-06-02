@@ -9,7 +9,6 @@ class Error(BaseModel):
 
 
 class OrderIn(BaseModel):
-    user_id: int
     shop_id: int
     buyer_first_name: str
     buyer_last_name: str
@@ -49,7 +48,8 @@ class OrderRepo(BaseModel):
 
     def create(self,
                order_in: OrderIn,
-               status: bool) -> OrderIn | Error:
+               status: bool,
+               user_id: int) -> OrderIn | Error:
 
         try:
             with pool.connection() as conn:
@@ -71,7 +71,7 @@ class OrderRepo(BaseModel):
                         RETURNING id
                         """,
                         [
-                            order_in.user_id,
+                            user_id,
                             order_in.shop_id,
                             order_in.buyer_first_name,
                             order_in.buyer_last_name,
@@ -85,6 +85,7 @@ class OrderRepo(BaseModel):
                     id = result.fetchone()[0]
                     return OrderOut(id=id,
                                     status=status,
+                                    user_id=user_id,
                                     **order_in.dict())
 
         except Exception as e:
