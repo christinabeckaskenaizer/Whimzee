@@ -7,6 +7,13 @@ client = TestClient(app)
 class EmptyCategoryQueries:
     def get_all(self):
         return []
+class CreateCategoryQueries:
+    def create(self, name):
+        result = {
+            "id": 8,
+            "name": "string"
+        }
+        return result
 
 def test_get_all_categories():
     #Arrange
@@ -19,4 +26,4 @@ def test_get_all_categories():
     assert response.json() == []
 
 def test_create_category():
-    assert 1==1
+    app.dependency_overrides[CategoryRepository] = CreateCategoryQueries
