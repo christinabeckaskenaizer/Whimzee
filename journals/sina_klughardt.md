@@ -1,3 +1,8 @@
+## June 01, 2023
+- Wrote two pytests(get categories, post categories)
+- Started with deployment with the team, we still have to work ourselves through errors
+- Implemeneted UI error handling on LogIn and SignUp page
+
 ## May 31, 2023
 - Worked on the styling on the frontend
 - Went over Users account page

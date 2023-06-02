@@ -134,7 +134,7 @@ export default function MyModal({ ids }) {
                       <div className="w-full mb-2">
                         <label
                           htmlFor="small-input"
-                          className=" block mb-2 text-sm font-bold text-gray-900"
+                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
                         >
                           Title
                         </label>

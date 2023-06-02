@@ -38,7 +38,6 @@ steps = [
         DROP TABLE categories
         """
     ],
-        # categories hard coded
     [
         """
         INSERT INTO categories (name)

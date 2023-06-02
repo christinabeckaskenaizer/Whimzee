@@ -6,26 +6,31 @@ from queries.pool import pool
 class DuplicateAccountError(ValueError):
     pass
 
+
 class AccountIn(BaseModel):
     username: str
     email: str
     password: str
+
 
 class AccountOut(BaseModel):
     id: str
     username: str
     email: str
 
+
 class AccountIDS(BaseModel):
     id: int
     shop_id: int | None
     cart_id: int | None
 
+
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
+
 class AccountQueries(BaseModel):
-    def get(self, email:str) -> AccountOutWithPassword:
+    def get(self, email: str) -> AccountOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -38,13 +43,20 @@ class AccountQueries(BaseModel):
                         [email]
                     )
                     records = result.fetchone()
-                    return AccountOutWithPassword(id=records[0], email=records[2], username=records[1], hashed_password=records[3])
+                    return AccountOutWithPassword(
+                        id=records[0],
+                        email=records[2],
+                        username=records[1],
+                        hashed_password=records[3])
         except Exception:
             print("Could not get accounts!")
             return None
 
-
-    def create(self, info:AccountIn, hashed_password:str) -> AccountOutWithPassword:
+    def create(
+        self,
+        info: AccountIn,
+        hashed_password: str
+    ) -> AccountOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -56,18 +68,21 @@ class AccountQueries(BaseModel):
                         (%s, %s, %s)
                         RETURNING id
                         """,
-                        [info.username,
-                         info.email,
-                         hashed_password
-                         ]
+                        [
+                            info.username,
+                            info.email,
+                            hashed_password
+                        ]
                     )
                     id = result.fetchone()[0]
-                    return AccountOutWithPassword(id=id, email=info.email, username=info.username, hashed_password=hashed_password)
-
+                    return AccountOutWithPassword(
+                        id=id,
+                        email=info.email,
+                        username=info.username,
+                        hashed_password=hashed_password)
 
         except Exception:
             return {"message": "Could not create account!"}
-
 
     def get_ids_for_user(self, user: int) -> AccountIDS:
         try:

@@ -1,17 +1,21 @@
 from pydantic import BaseModel
 from queries.pool import pool
 
+
 class Error(BaseModel):
     message: str
+
 
 class cartListingIn(BaseModel):
     cart_id: int
     listing_id: int
 
+
 class cartListingOut(BaseModel):
     id: int
     cart_id: int
     listing_id: int
+
 
 class cartListingRepository(BaseModel):
 
@@ -43,7 +47,6 @@ class cartListingRepository(BaseModel):
         except Exception as e:
             print(e)
             return None
-
 
     def delete(self, cart_listing_id: int) -> bool:
         try:
