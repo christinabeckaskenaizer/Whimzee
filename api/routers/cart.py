@@ -1,7 +1,7 @@
-# from queries.cart import Cart_listingsRepository, CartOutWithDetail, Cart_listingsIn, Cart_listingsOut, Cart_listingsOutWithDetail
 from fastapi import APIRouter, Depends, Response
-from typing import List
 from queries.cart import Error, CartIn, CartOut, CartRepository
+
+
 router = APIRouter()
 
 
@@ -58,7 +58,8 @@ async def put(
     return result
 
 
-# @router.get("/cart/user/{user_id}", response_model=List[CartOutWithDetail] | Error)
+# @router.get("/cart/user/{user_id}",
+# response_model=List[CartOutWithDetail] | Error)
 # async def get_user_cart(
 #     user_id: int,
 #     response: Response,

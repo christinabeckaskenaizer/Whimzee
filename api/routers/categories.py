@@ -9,6 +9,7 @@ from queries.categories import (
 
 router = APIRouter()
 
+
 @router.post("/categories", response_model=Union[CategoryOut, Error])
 async def create_category(
     category: CategoryIn,
@@ -16,6 +17,7 @@ async def create_category(
     repo: CategoryRepository = Depends(),
 ):
     return repo.create(category)
+
 
 @router.get("/categories", response_model=Union[List[CategoryOut], Error])
 async def get_all(

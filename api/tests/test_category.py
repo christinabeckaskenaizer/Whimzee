@@ -4,10 +4,14 @@ from queries.categories import CategoryRepository
 
 client = TestClient(app)
 
+
 class EmptyCategoryQueries:
     def get_all(self):
         return []
+
+
 class CreateCategoryQueries:
+
     def create(self, name):
         result = {
             "id": 8,
@@ -16,20 +20,22 @@ class CreateCategoryQueries:
         result.update(name)
         return result
 
+
 def test_get_all_categories():
-    #Arrange
+    # Arrange
     app.dependency_overrides[CategoryRepository] = EmptyCategoryQueries
     response = client.get("/categories")
-    #Act
+    # Act
     app.dependency_overrides = {}
-    #Assert
+    # Assert
     assert response.status_code == 200
     assert response.json() == []
 
+
 def test_create_category():
-    #Arrange
+    # Arrange
     app.dependency_overrides[CategoryRepository] = CreateCategoryQueries
-    #Act
+    # Act
     json = {
         "name": "string"
     }
@@ -39,6 +45,6 @@ def test_create_category():
     }
     response = client.post("/categories", json=json)
     app.dependency_overrides = {}
-    #Assert
+    # Assert
     assert response.status_code == 200
     assert response.json() == expected

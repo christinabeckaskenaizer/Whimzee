@@ -1,12 +1,8 @@
-from fastapi import APIRouter, Depends, Response, FastAPI
+from fastapi import APIRouter, FastAPI
 from authenticator import authenticator
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from queries.categories import *
-router = APIRouter()
-
-# Router imports
-from routers import(
+from routers import (
     users,
     shop,
     accounts,
@@ -18,9 +14,9 @@ from routers import(
     cart_listings
 )
 
+router = APIRouter()
+
 app = FastAPI()
-app.include_router(authenticator.router)
-app.include_router(accounts.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,7 +27,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-#routers from our routers folder
+# routers from our routers folder
+app.include_router(authenticator.router)
+app.include_router(accounts.router)
 app.include_router(users.router)
 app.include_router(shop.router)
 app.include_router(cart.router)
@@ -45,27 +43,3 @@ app.include_router(review.router)
 @app.get("/")
 def root():
     return {"message": "Hello World"}
-
-@app.get("/api/launch-details")
-def launch_details():
-    return {
-        "launch_details": {
-            "module": 3,
-            "week": 17,
-            "day": 5,
-            "hour": 19,
-            "min": "00"
-        }
-    }
-
-
-#CategoryRepository.create("Outdoors")
-
-# @router.post("/categories", response_model=Union[CategoryOut, Error])
-# async def create_category(
-#     category: CategoryIn,
-#     repo: CategoryRepository = Depends(),
-# ):
-#     return repo.create(category)
-
-# create_category("Outdoors")

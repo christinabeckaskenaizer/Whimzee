@@ -16,20 +16,23 @@ from queries.accounts import (
     DuplicateAccountError,
     AccountIDS
 )
-from typing import Optional
 from authenticator import authenticator
 
 router = APIRouter()
+
 
 class AccountForm(BaseModel):
     username: str
     password: str
 
+
 class AccountToken(Token):
     account: AccountOut
 
+
 class HttpError(BaseModel):
     detail: str
+
 
 router = APIRouter()
 
@@ -53,6 +56,7 @@ async def create_account(
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
 
+
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
@@ -73,7 +77,7 @@ async def get_ids_for_user(
     repo: AccountQueries = Depends()
 ) -> AccountIDS | None:
     result = repo.get_ids_for_user(user_id)
-    if result == None:
+    if result is None:
         response.status_code = 404
         return {"Message": "Account Could not be found"}
     return result

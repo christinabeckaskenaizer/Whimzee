@@ -27,6 +27,4 @@ class MyAuthenticator(Authenticator):
         return account.hashed_password
 
 
-
-
 authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
