@@ -1,8 +1,7 @@
 # from queries.cart import Cart_listingsRepository, CartOutWithDetail, Cart_listingsIn, Cart_listingsOut, Cart_listingsOutWithDetail
 from fastapi import APIRouter, Depends, Response
 from typing import List
-from queries.cart import Error, CartIn, CartOut, CartRepository, CartOutWithDetail
-from authenticator import authenticator
+from queries.cart import Error, CartIn, CartOut, CartRepository
 router = APIRouter()
 
 
@@ -44,6 +43,7 @@ async def delete(
         result = Error(message="Invalid cart id")
     return result
 
+
 @router.put("/cart/{cart_id}", response_model=CartOut | bool | Error)
 async def put(
     cart_id: int,
@@ -58,17 +58,17 @@ async def put(
     return result
 
 
-@router.get("/cart/user/{user_id}", response_model=List[CartOutWithDetail] | Error)
-async def get_user_cart(
-    user_id: int,
-    response: Response,
-    repo: CartRepository = Depends()
-) -> List[CartOutWithDetail] | Error:
-    result = repo.get_all(user_id)
-    if result is None:
-        response.status_code = 404
-        result = Error(message="Invalid cart id")
-    return result
+# @router.get("/cart/user/{user_id}", response_model=List[CartOutWithDetail] | Error)
+# async def get_user_cart(
+#     user_id: int,
+#     response: Response,
+#     repo: CartRepository = Depends()
+# ) -> List[CartOutWithDetail] | Error:
+#     result = repo.get_all(user_id)
+#     if result is None:
+#         response.status_code = 404
+#         result = Error(message="Invalid cart id")
+#     return result
 
 
 # @router.post("/{cart_listings_id}", response_model=Cart_listingsOut | Error)

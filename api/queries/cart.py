@@ -10,15 +10,11 @@ class Error(BaseModel):
 
 class CartIn(BaseModel):
     user_id: int
-    listing_id: int
-    quantity: int
 
 
 class CartOut(BaseModel):
     id: int
     user_id: int
-    listing_id: int
-    quantity: int
 
 
 # class Cart_listingsIn(BaseModel):
@@ -34,15 +30,15 @@ class CartOut(BaseModel):
 #     cart_quantity: int
 
 
-class CartOutWithDetail(BaseModel):
-    id: int
-    user_id: int
-    listing_id: int
-    quantity: int
-    name: str
-    description: str
-    price: int
-    picture: str
+# class CartOutWithDetail(BaseModel):
+#     id: int
+#     user_id: int
+#     listing_id: int
+#     quantity: int
+#     name: str
+#     description: str
+#     price: int
+#     picture: str
 
 
 # class Cart_listingsOutWithDetail(BaseModel):
@@ -65,16 +61,12 @@ class CartRepository(BaseModel):
                     result = db.execute(
                         """
                         INSERT INTO cart
-                        (user_id, listing_id, quantity)
+                        (user_id)
                         VALUES
-                        (%s, %s, %s)
+                        (%s)
                         RETURNING id
                         """,
-                        [
-                            cart.user_id,
-                            cart.listing_id,
-                            cart.quantity
-                        ]
+                        [cart.user_id]
                     )
                     id = result.fetchone()[0]
                     return CartOut(id=id, **cart.dict())
@@ -83,38 +75,38 @@ class CartRepository(BaseModel):
             print(e)
             return None
 
-    def get_all(self, user_id: int) -> List[CartOutWithDetail] | Error:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db_result = db.execute(
-                        """
-                        SELECT cart.id, cart.user_id, cart.listing_id,
-                        cart.quantity, listings.name, listings.description,
-                        listings.price, listings.picture
-                        FROM cart
-                        JOIN listings ON cart.listing_id = listings.id
-                        WHERE cart.user_id = %s
-                        """,
-                        [user_id]
-                    )
-                    carts = []
-                    for rec in db_result:
-                        carts.append(CartOutWithDetail(
-                            id=rec[0],
-                            user_id=rec[1],
-                            listing_id=rec[2],
-                            quantity=rec[3],
-                            name=rec[4],
-                            description=rec[5],
-                            price=rec[6],
-                            picture=rec[7]
-                        ))
-                    return carts
+    # def get_all(self, user_id: int) -> List[CartOutWithDetail] | Error:
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as db:
+    #                 db_result = db.execute(
+    #                     """
+    #                     SELECT cart.id, cart.user_id, cart.listing_id,
+    #                     cart.quantity, listings.name, listings.description,
+    #                     listings.price, listings.picture
+    #                     FROM cart
+    #                     JOIN listings ON cart.listing_id = listings.id
+    #                     WHERE cart.user_id = %s
+    #                     """,
+    #                     [user_id]
+    #                 )
+    #                 carts = []
+    #                 for rec in db_result:
+    #                     carts.append(CartOutWithDetail(
+    #                         id=rec[0],
+    #                         user_id=rec[1],
+    #                         listing_id=rec[2],
+    #                         quantity=rec[3],
+    #                         name=rec[4],
+    #                         description=rec[5],
+    #                         price=rec[6],
+    #                         picture=rec[7]
+    #                     ))
+    #                 return carts
 
-        except Exception as e:
-            print(e)
-            return None
+    #     except Exception as e:
+    #         print(e)
+            # return None
 
     def get_cart(self, cart_id: int) -> CartOut | Error:
         try:
@@ -122,7 +114,7 @@ class CartRepository(BaseModel):
                 with conn.cursor() as db:
                     db_result = db.execute(
                         """
-                        SELECT id, user_id, listing_id, quantity
+                        SELECT id, user_id
                         FROM cart
                         WHERE id = %s
                         ORDER BY id
@@ -132,9 +124,7 @@ class CartRepository(BaseModel):
                     cart_data = db_result.fetchone()
                     return CartOut(
                         id=cart_data[0],
-                        user_id=cart_data[1],
-                        listing_id=cart_data[2],
-                        quantity=cart_data[3],
+                        user_id=cart_data[1]
                     )
         except Exception as e:
             print(e)
@@ -162,19 +152,15 @@ class CartRepository(BaseModel):
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     if cart.quantity > 0:
-                        result = db.execute(
+                        db.execute(
                             """
                             update cart
                             set
                             user_id = %s,
-                            listing_id = %s,
-                            quantity = %s
                             WHERE id = %s
-                            RETURNING (id, user_id, listing_id, quantity)
+                            RETURNING (id, user_id)
                             """,
                             [cart.user_id,
-                                cart.listing_id,
-                                cart.quantity,
                                 cart_id]
                         )
                         return CartOut(id=cart_id,
