@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Logout from './Logout';
 import useUser from '../custom-hooks/useUser';
 import SearchBar from './SearchBar';
@@ -70,6 +71,15 @@ function AccountNav({token}) {
 
 function NavBar(props) {
   const token = props.token
+  const navigate = useNavigate()
+  const [clickedWhimzee, setClickedWhimzee] = useState(false)
+
+  const handleClick = () => {
+    setClickedWhimzee(true)
+  }
+  if (clickedWhimzee) {
+    navigate(0)
+  }
 
   return (
     <>
@@ -78,6 +88,7 @@ function NavBar(props) {
       className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <NavLink
         to="/"
+        onClick={handleClick}
         className="flex items-center">
         <img
         className="w-10 h10"
