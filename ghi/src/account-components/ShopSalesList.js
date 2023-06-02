@@ -20,6 +20,7 @@ export default function ShopSalesList({ shopListings, shop, token, ids, fetchDat
     return <Spinner />;
   }
 
+
   async function deleteListing(listing) {
     const listingUrl = `http://localhost:8000/listings/${listing.id}`
 
@@ -58,7 +59,7 @@ export default function ShopSalesList({ shopListings, shop, token, ids, fetchDat
       </p>
       <div className="mb-2 flex justify-between w-full">
         <div>
-          <CreateListing ids={ids} token={token} />
+          <CreateListing fetchData={fetchData} shopListings={shopListings} ids={ids} token={token} />
         </div>
         <div className="">
           <Link
