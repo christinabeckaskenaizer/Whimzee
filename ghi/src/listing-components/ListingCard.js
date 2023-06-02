@@ -9,8 +9,8 @@ export default function ListingCard({ picture, name, isNew, price, id }) {
     });
 
     return (
-        <div className="container flex justify-center mx-4 max max-w-4xl shadow">
-            <div className="w-64 sm:w-80 overflow-hidden m-5 max-w-sm bg-white shadow border border-gray-300 rounded-lg shadow dark:bg-slate-50">
+        <div className="container flex justify-center mx-4 max max-w-4xl hover:scale-105">
+            <div className="w-64 sm:w-80 overflow-hidden m-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow dark:bg-slate-50">
                 <Link to={`/listings/${id}`}>
                     <div className="rounded-t-lg overflow-hidden h-48 object-fill flex items-center justify-center">
                         <img
