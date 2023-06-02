@@ -1,3 +1,8 @@
+## June 2, 2023
+
+-
+- Updated state of listings after one has been created
+
 ## June 1, 2023
 
 Today I worked on:
