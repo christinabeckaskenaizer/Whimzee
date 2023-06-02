@@ -41,22 +41,22 @@ class ReviewRepo(BaseModel):
                         RETURNING *
                         """,
                         [
-                          username,
-                          review.rating,
-                          listing_id,
-                          today,
-                          review.description
+                            username,
+                            review.rating,
+                            listing_id,
+                            today,
+                            review.description
                         ]
                     )
                     data = result.fetchone()
                     return ReviewOut(
-                          id=data[0],
-                          author=data[1],
-                          rating=data[2],
-                          listing_id=data[3],
-                          created_on=data[4],
-                          description=data[5]
-                        )
+                        id=data[0],
+                        author=data[1],
+                        rating=data[2],
+                        listing_id=data[3],
+                        created_on=data[4],
+                        description=data[5]
+                    )
 
         except Exception as e:
             print(e)
@@ -82,7 +82,7 @@ class ReviewRepo(BaseModel):
                         listing_id=record[3],
                         created_on=record[4],
                         description=record[5]
-                      ) for record in result]
+                    ) for record in result]
 
         except Exception as e:
             print(e)
@@ -99,8 +99,8 @@ class ReviewRepo(BaseModel):
                             author = %s
                         """,
                         [
-                          review_id,
-                          username
+                            review_id,
+                            username
                         ]
                     )
                     return True
@@ -135,13 +135,13 @@ class ReviewRepo(BaseModel):
                     )
                     data = result.fetchone()
                     return ReviewOut(
-                          id=data[0],
-                          author=data[1],
-                          rating=data[2],
-                          listing_id=data[3],
-                          created_on=data[4],
-                          description=data[5]
-                        )
+                        id=data[0],
+                        author=data[1],
+                        rating=data[2],
+                        listing_id=data[3],
+                        created_on=data[4],
+                        description=data[5]
+                    )
 
         except Exception as e:
             print(e)

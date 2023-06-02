@@ -39,7 +39,7 @@ class UserRepository(BaseModel):
                             user_in.username,
                             user_in.email,
                             user_in.password
-                            ]
+                        ]
                     )
                     id = result.fetchone()[0]
                     return UserOut(id=id, **user_in.dict())

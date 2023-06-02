@@ -106,7 +106,7 @@ class ListingRepository:
             print(e)
             return {
                 "message": "Could not delete a listing that does not exist"
-                }
+            }
 
     def get_a_listing(self, listing_id) -> Optional[ListingOut]:
 
