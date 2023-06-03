@@ -6,6 +6,7 @@ import ShopSalesList from "./ShopSalesList";
 import OpenShop from "./OpenShop";
 
 import Spinner from "../utilities/Spinner";
+import ReturnToHome from "../utilities/ReturnToHome";
 
 export default function UserAccount({
   user,
@@ -63,19 +64,10 @@ export default function UserAccount({
     }
   };
 
-  const timeoutLink = () => {
-    if (!token) {
-      navigate("/login");
-    }
-  };
-
   useEffect(() => {
     if (token) {
       getHistory();
     }
-    setTimeout(() => {
-      timeoutLink();
-    }, 5000);
   }, [token]);
 
   useEffect(() => {
@@ -86,7 +78,7 @@ export default function UserAccount({
   }, [ids, listings]);
 
   if (!ids) {
-    return <Spinner />;
+    return <ReturnToHome />;
   }
 
   return (
