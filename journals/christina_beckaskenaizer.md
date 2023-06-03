@@ -1,12 +1,19 @@
-## June 1, 20232
+## June 2, 2023
+
+-
+- Updated state of listings after one has been created
+
+## June 1, 2023
 
 Today I worked on:
 
 - Updating state upon delete
-- Deploying our project
+- Deploying our project (couldn't get it done btw)
+- Cleaned up over 100 lines of linting errors
 
-Okay so bad news. I THOUGHT I fixed the state of the listings upon delete yesterday. But as I was excitedly demoing my progress to my teammates, we found a bug where the listings updated, but once I left the page and came back, the deleted listing appeared again. I spent all morning trying to figure out the issue and eventually got it. It was today that we realized we should have used redux!
-Spent the afternoon attempting to deploy our app.
+Okay so bad news. I THOUGHT I fixed the state of the listings upon delete yesterday. But as I was excitedly demoing my progress to my teammates, we found a bug where the listings updated, but once I left the page and came back, the deleted listing appeared again. I spent all morning trying to figure out the issue and eventually got it. It was today that we realized we should have used Redux!
+Spent the afternoon attempting to deploy our app. Unfortunately, we didn't get very far but we intend to finish tomorrow!
+We had what I estimate to be 500 linting errors that we combed through and fixed!
 
 ## May 31, 20232
 

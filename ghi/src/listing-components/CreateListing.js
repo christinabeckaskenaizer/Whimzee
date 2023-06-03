@@ -1,7 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState, useEffect } from "react";
 
-export default function MyModal({ ids }) {
+export default function MyModal({ ids, shopListings, fetchData }) {
+  const [listings, setListings] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [picture, setPicture] = useState("");
@@ -27,6 +28,10 @@ export default function MyModal({ ids }) {
     setToggled(!toggled);
     console.log("toggled");
   }
+
+  // useEffect(() => {
+  //   setListings(shopListings)
+  // }, [shopListings])
 
   async function getCategories() {
     const categoryUrl = "http://localhost:8000/categories";
@@ -61,6 +66,7 @@ export default function MyModal({ ids }) {
         },
       });
       if (response.ok) {
+        fetchData();
         closeModal();
       }
       const result = await response.json();
@@ -134,7 +140,7 @@ export default function MyModal({ ids }) {
                       <div className="w-full mb-2">
                         <label
                           htmlFor="small-input"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
+                          className="block mb-2 text-sm font-medium text-gray-900"
                         >
                           Title
                         </label>

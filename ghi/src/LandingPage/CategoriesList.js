@@ -9,8 +9,8 @@ function CategoriesList({setCategory, setsearched}) {
 
     return (
     <>
-        <div className="h-full w-full mx-auto container px-6 py-2 xl:py-0">
-            <div className="items-center justify-between">
+        <div className="flex flex-col items-center h-full w-full mx-auto container px-6 py-2 xl:py-0">
+            <div className="justify-between">
                 <ul className="items-center w-full font-medium flex flex-col p-3 md:p-0 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
                         <li><button onClick={handleClick} value="1" className="text-lg md:dark:text-black md:hover:text-green-800">Outdoors</button></li>
                         <li><button onClick={handleClick} value="2" className="text-lg md:dark:text-black md:hover:text-green-800">Clothing</button></li>

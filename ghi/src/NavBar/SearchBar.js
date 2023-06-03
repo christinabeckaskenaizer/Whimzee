@@ -52,7 +52,7 @@ function SearchBar({
   };
     return (
       <form>
-      <div className="flex shadow">
+      <div className="flex shadow border rounded-lg border-gray-300">
         <select onChange={handleSearchedCategory}>
             <option value={0}>See all categories</option>
         {categories.map((category) => {

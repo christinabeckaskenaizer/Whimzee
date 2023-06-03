@@ -7,7 +7,7 @@ const Error = ({auth}) => {
   if (!auth) {
     return (
         <div className="text-center">
-          <h1>Welcome to Whimzee</h1>
+          <h1 >Welcome to Whimzee</h1>
         </div>
     )
   } else {

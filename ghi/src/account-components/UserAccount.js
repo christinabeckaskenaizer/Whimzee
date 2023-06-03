@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 import AccountOrderHistory from "./AccountOrderHistory";
 import ShopSalesList from "./ShopSalesList";
@@ -6,7 +7,15 @@ import OpenShop from "./OpenShop";
 
 import Spinner from "../utilities/Spinner";
 
-export default function UserAccount({ user, ids, shop, token, listings, fetchData }) {
+export default function UserAccount({
+  user,
+  ids,
+  shop,
+  token,
+  listings,
+  fetchData,
+}) {
+  const navigate = useNavigate();
   const [view, setView] = useState(false);
   const [userPic, setUserPic] = useState(null);
   const [orders, setOrders] = useState(null);
@@ -54,8 +63,19 @@ export default function UserAccount({ user, ids, shop, token, listings, fetchDat
     }
   };
 
+  const timeoutLink = () => {
+    if (!token) {
+      navigate("/login");
+    }
+  };
+
   useEffect(() => {
-    getHistory();
+    if (token) {
+      getHistory();
+    }
+    setTimeout(() => {
+      timeoutLink();
+    }, 5000);
   }, [token]);
 
   useEffect(() => {
@@ -96,7 +116,7 @@ export default function UserAccount({ user, ids, shop, token, listings, fetchDat
                 onClick={() => handleSelection(true)}
                 className={
                   view
-                    ? "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none  rounded-lg ring-2 ring-gray-400"
+                    ? "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none ring-2 ring-gray-400"
                     : "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none"
                 }
               >
