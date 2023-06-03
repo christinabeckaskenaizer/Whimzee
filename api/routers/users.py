@@ -1,19 +1,7 @@
-from fastapi import APIRouter, Depends, Response
-from queries.users import (Error, UserOut, UserRepository)
+from fastapi import APIRouter, Depends
+from queries.users import UserRepository
 
 router = APIRouter()
-
-
-@router.get("/users", response_model=list[UserOut] | Error)
-async def get_all(
-    response: Response,
-    repo: UserRepository = Depends()
-):
-    result = repo.get_all()
-    if result is None:
-        response.status_code = 404
-        result = Error(message="Unable to get users")
-    return result
 
 
 @router.delete("/users/{user_id}", response_model=bool)

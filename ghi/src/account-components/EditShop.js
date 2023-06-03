@@ -30,7 +30,7 @@ export default function EditShop({ token, shop }) {
     const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/shops/${shop.id}`;
     const config = {
       credentials: "include",
-      method: "post",
+      method: "put",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default function EditShop({ token, shop }) {
                       <div className="w-full mb-6">
                         <label
                           htmlFor="name"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
+                          className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
                           Shop Name
                         </label>
@@ -125,7 +125,7 @@ export default function EditShop({ token, shop }) {
                       <div className="w-full mb-6">
                         <label
                           htmlFor="email"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
+                          className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
                           Shop email
                         </label>
@@ -143,7 +143,7 @@ export default function EditShop({ token, shop }) {
                       <div className="w-full mb-6">
                         <label
                           htmlFor="description"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
+                          className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
                           Shop Description
                         </label>
@@ -163,7 +163,7 @@ export default function EditShop({ token, shop }) {
                       <div className="w-full mb-6">
                         <label
                           htmlFor="picture"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
+                          className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
                           Banner Picture
                         </label>

@@ -80,13 +80,13 @@ export default function OpenShop({ shop, token }) {
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
               <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
               >
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
@@ -100,7 +100,7 @@ export default function OpenShop({ shop, token }) {
                       <div className="w-full mb-6">
                         <label
                           htmlFor="name"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
+                          className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
                           Shop Name
                         </label>
@@ -118,7 +118,7 @@ export default function OpenShop({ shop, token }) {
                       <div className="w-full mb-6">
                         <label
                           htmlFor="email"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
+                          className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
                           Shop email
                         </label>
@@ -136,7 +136,7 @@ export default function OpenShop({ shop, token }) {
                       <div className="w-full mb-6">
                         <label
                           htmlFor="description"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
+                          className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
                           Shop Description
                         </label>
@@ -156,7 +156,7 @@ export default function OpenShop({ shop, token }) {
                       <div className="w-full mb-6">
                         <label
                           htmlFor="picture"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900 text-black"
+                          className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
                           Banner Picture
                         </label>

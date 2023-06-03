@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 import AccountOrderHistory from "./AccountOrderHistory";
 import ShopSalesList from "./ShopSalesList";
 import OpenShop from "./OpenShop";
 
 import Spinner from "../utilities/Spinner";
+import ReturnToHome from "../utilities/ReturnToHome";
 
-export default function UserAccount({ user, ids, shop, token, listings, fetchData }) {
+export default function UserAccount({
+  user,
+  ids,
+  shop,
+  token,
+  listings,
+  fetchData,
+}) {
+  const navigate = useNavigate();
   const [view, setView] = useState(false);
   const [userPic, setUserPic] = useState(null);
   const [orders, setOrders] = useState(null);
@@ -55,7 +65,9 @@ export default function UserAccount({ user, ids, shop, token, listings, fetchDat
   };
 
   useEffect(() => {
-    getHistory();
+    if (token) {
+      getHistory();
+    }
   }, [token]);
 
   useEffect(() => {
@@ -66,7 +78,7 @@ export default function UserAccount({ user, ids, shop, token, listings, fetchDat
   }, [ids, listings]);
 
   if (!ids) {
-    return <Spinner />;
+    return <ReturnToHome />;
   }
 
   return (

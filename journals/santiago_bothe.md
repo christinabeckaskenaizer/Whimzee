@@ -1,3 +1,19 @@
+## June 2, 2023
+
+Today I worked on:
+
+- deployment with my team
+
+- created various unit tests
+
+- cleaned up a few front-end errors
+
+Today we went through the steps to deploy but ran into many issues along the way. Most notably we were not able to process our requests due to a cloud server error.
+
+created unit tests for getting all shops, getting a single shop, creating a shop, getting a user, and getting a users credentials.
+
+I went through some of my front-end code and cleaned up some of the parts that were not behaving as I hoped. FOr example an endless spinner when a user is not logged in. now they will be redirected after 5 seconds.
+
 ## June 1, 2023
 
 Today I worked on:

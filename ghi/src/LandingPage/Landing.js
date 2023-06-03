@@ -1,4 +1,4 @@
-import CategoriesList from "../CategoriesList";
+import CategoriesList from "./CategoriesList";
 import AllListings from "../listing-components/AllListings";
 import { useState } from "react";
 

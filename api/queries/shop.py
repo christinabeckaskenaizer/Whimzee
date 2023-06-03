@@ -67,7 +67,6 @@ class ShopRepository(BaseModel):
                             email,
                             description
                         FROM shops
-                        ORDER BY name
                         """
                     )
                     shops = [
@@ -80,7 +79,7 @@ class ShopRepository(BaseModel):
                             description=record[5]
                         ) for record in result
                     ]
-                    return {"shops": shops}
+                    return shops
 
         except Exception as e:
             print(e)
@@ -136,8 +135,7 @@ class ShopRepository(BaseModel):
                                 , profile_picture = %s
                                 , email = %s
                                 , description = %s
-                            WHERE id = %s and
-                                user_id = %s
+                            WHERE id = %s
                             """,
                             [
                                 shop.name,
@@ -145,7 +143,6 @@ class ShopRepository(BaseModel):
                                 shop.email,
                                 shop.description,
                                 shop_id,
-                                user_id
                             ]
                         )
                         return ShopOut(id=shop_id,
@@ -169,11 +166,10 @@ class ShopRepository(BaseModel):
                         db.execute(
                             """
                             DELETE FROM shops
-                            WHERE id = %s and user_id = %s
+                            WHERE id = %s
                             """,
                             [
                                 shop_id,
-                                user_id
                             ]
                         ),
                         return True
