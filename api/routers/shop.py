@@ -20,7 +20,6 @@ async def create(
     if account is None:
         response.status_code = 401
         return Error(message="Sign in to access")
-    print(account)
     user_id = account.get("id")
     result = repo.create(shop, int(user_id))
     if result is None:

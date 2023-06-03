@@ -5,6 +5,7 @@ from authenticator import authenticator
 
 client = TestClient(app)
 
+
 class EmptyShopRepo:
 
     def get_all(self):
@@ -20,33 +21,16 @@ class EmptyShopRepo:
             "description": "string"
         }
 
-    def create(shop, user_id):
-        result = {
-            "id": 1
+    def create(self, shop, user_id):
+        base = {
+            "id": 1,
+            "user_id": user_id,
+            "name": shop.name,
+            "profile_picture": shop.profile_picture,
+            "email": shop.email,
+            "description": shop.description
         }
-        result.update(shop)
-        result.update(user_id)
-        return result
-
-# class EmptyAccount:
-
-#     def try_get_current_account_data():
-#         return {
-#             "access_token": "string",
-#             "token_type": "Bearer",
-#             "account": {
-#                 "id": 1,
-#                 "username": "string",
-#                 "email": "string"
-#             }
-#         }
-
-def EmptyAccount():
-    return {
-        'id': '12',
-        'username': 'string22',
-        'email': 'string222'
-    }
+        return base
 
 
 def test_get_all_shops():
@@ -81,16 +65,18 @@ def test_get_one_shop():
 
 def test_create_shop():
     # ARRANGE
+    app.dependency_overrides[ShopRepository] = EmptyShopRepo
     app.dependency_overrides[
-        ShopRepository, authenticator.try_get_current_account_data
-    ] = EmptyShopRepo, EmptyAccount
+        authenticator.try_get_current_account_data
+    ] = lambda: {
+        'id': '1',
+    }
     json = {
         "name": "string",
         "profile_picture": "string",
         "email": "string",
         "description": "string"
     }
-    response = client.post("/shops", json=json)
     expected = {
         "id": 1,
         "user_id": 1,
@@ -99,6 +85,7 @@ def test_create_shop():
         "email": "string",
         "description": "string"
     }
+    response = client.post("/shops", json=json)
     # ACT
     app.dependency_overrides = {}
     # ASSERT
