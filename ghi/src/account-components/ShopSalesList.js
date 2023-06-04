@@ -5,6 +5,7 @@ import DeleteShop from "./DeleteShop";
 import DeleteListing from "../listing-components/DeleteListing";
 import { Link } from "react-router-dom";
 import Spinner from "../utilities/Spinner";
+import EditListing from "../listing-components/EditListing";
 
 
 export default function ShopSalesList({ shopListings, shop, token, ids, fetchData }) {
@@ -35,18 +36,18 @@ export default function ShopSalesList({ shopListings, shop, token, ids, fetchDat
     }
   }
 
-  async function updateListings() {
-    let shopId = shop.id
-    const listingUrl = `http://localhost:8000/listings/`
-    let response = await fetch(listingUrl, { method: "GET" });
-    let data = await response.json();
-    const filteredData = data.filter(
-      (listing) => listing.shop_id === Number(shopId)
-    );
-    setListings(filteredData);
-    setOpen(false);
+  // async function updateListings() {
+  //   let shopId = shop.id
+  //   const listingUrl = `http://localhost:8000/listings/`
+  //   let response = await fetch(listingUrl, { method: "GET" });
+  //   let data = await response.json();
+  //   const filteredData = data.filter(
+  //     (listing) => listing.shop_id === Number(shopId)
+  //   );
+  //   setListings(filteredData);
+  //   setOpen(false);
 
-  }
+  // }
 
 
   let netTotal = 0;
@@ -114,8 +115,8 @@ export default function ShopSalesList({ shopListings, shop, token, ids, fetchDat
                   >
                     ${listing.quantity_sold * listing.price}
                   </th>
-                  <td className="px-6 py-4 flex justify-between">
-                    <button className="ring-1 p-1">edit</button>
+                  <td className="px-6 py-4 flex justify-center md:space-x-6">
+                    <EditListing fetchData={fetchData} shopListings={shopListings} ids={ids} token={token} listing={listing} />
                     <DeleteListing handleClick={() => deleteListing(listing)} shopListings={listings} listing={listing} open={open} />
                   </td>
                 </tr>
