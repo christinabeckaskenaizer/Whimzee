@@ -115,7 +115,7 @@ export default function ShopSalesList({ shopListings, shop, token, ids, fetchDat
                   >
                     ${listing.quantity_sold * listing.price}
                   </th>
-                  <td className="px-6 py-4 flex justify-between">
+                  <td className="px-6 py-4 flex justify-center md:space-x-6">
                     <EditListing fetchData={fetchData} shopListings={shopListings} ids={ids} token={token} listing={listing} />
                     <DeleteListing handleClick={() => deleteListing(listing)} shopListings={listings} listing={listing} open={open} />
                   </td>

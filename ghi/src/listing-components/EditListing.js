@@ -4,17 +4,19 @@ import { Fragment, useState, useEffect } from "react";
 export default function EditListing({ fetchData, shopListings, ids, token, listing }) {
     const [listings, setListings] = useState();
     const [isOpen, setIsOpen] = useState(false);
-    const [title, setTitle] = useState("");
-    const [picture, setPicture] = useState("");
-    const [quantity, setQuantity] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState(listing.name);
+    const [picture, setPicture] = useState(listing.picture);
+    const [quantity, setQuantity] = useState(listing.quantity);
+    const [price, setPrice] = useState(listing.price);
+    const [description, setDescription] = useState(listing.description);
 
     const [toggled, setToggled] = useState(true);
     const [categories, setCategories] = useState([]);
-    const [category, setCategory] = useState();
+    const [category, setCategory] = useState(listing.category);
+    // const [currentCategory, setCurrentCategory] = useState(category);
 
     console.log("shopListings", shopListings)
+    console.log("GOT LISTING:", listing)
 
     function closeModal() {
         setIsOpen(false);
@@ -81,10 +83,10 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
             <button
                 type="button"
                 onClick={openModal}
-                className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none"
+                className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-800"
             >
                 Edit
-            </button>
+            </button >
 
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog
@@ -135,7 +137,7 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                                                     type="text"
                                                     id="small-input"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                                                    value={listing.name}
+                                                    defaultValue={listing.name}
                                                 />
                                             </div>
                                             <div className="w-full mb-2">
@@ -150,7 +152,7 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                                                     type="text"
                                                     id="small-input"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                                                    value={listing.picture}
+                                                    defaultValue={listing.picture}
                                                 />
                                             </div>
                                             <div className="w-full mb-2">
@@ -165,7 +167,7 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                                                     type="number"
                                                     id="small-input"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                                                    value={listing.quantity}
+                                                    defaultValue={listing.quantity}
                                                 />
                                             </div>
                                             <div className="w-full mb-2">
@@ -180,7 +182,7 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                                                     type="number"
                                                     id="small-input"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                                                    value={listing.price}
+                                                    defaultValue={listing.price}
                                                 />
                                             </div>
                                             <div className="w-full mb-6">
@@ -195,7 +197,7 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                                                     id="message"
                                                     rows="4"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                                                    value={listing.description}
+                                                    defaultValue={listing.description}
                                                 ></textarea>
                                             </div>
                                             <div className="w-full mb-2">
@@ -217,8 +219,10 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                                                 <select
                                                     onChange={(e) => setCategory(e.target.value)}
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                                                    value={listing.category.id}
+                                                    defaultValue={listing.category}
                                                 >
-                                                    <option>Choose a category</option>
+                                                    {/* <option>Choose a category</option> */}
                                                     {categories.map((category) => (
                                                         <option key={category.id} value={category.id}>
                                                             {category.name}

@@ -109,7 +109,7 @@ export default function UserAccount({
                 className={
                   view
                     ? "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none ring-2 ring-gray-400"
-                    : "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none"
+                    : "rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none"
                 }
               >
                 My Shop
@@ -123,7 +123,7 @@ export default function UserAccount({
               className={
                 view
                   ? "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-gray-500 border rounded-lg hover:bg-slate-600 hover:ring-2 hover:ring-gray-400"
-                  : "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-gray-500 border rounded-lg hover:bg-slate-600 ring-2 ring-gray-400"
+                  : "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-green-700 border rounded-lg hover:bg-slate-600 ring-2 ring-gray-400"
               }
             >
               Purchased
