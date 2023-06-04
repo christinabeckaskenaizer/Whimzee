@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState, useEffect } from "react";
 
-export default function EditListing({ fetchData, shopListings, ids, token }) {
+export default function EditListing({ fetchData, shopListings, ids, token, listing }) {
     const [listings, setListings] = useState();
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState("");
@@ -15,8 +15,6 @@ export default function EditListing({ fetchData, shopListings, ids, token }) {
     const [category, setCategory] = useState();
 
     console.log("shopListings", shopListings)
-
-    const listing_id = shopListings.id
 
     function closeModal() {
         setIsOpen(false);
@@ -39,13 +37,14 @@ export default function EditListing({ fetchData, shopListings, ids, token }) {
         const categoryUrl = "http://localhost:8000/categories";
         const response = await fetch(categoryUrl);
         const categoryData = await response.json();
+        console.log("category data", categoryData)
         setCategories(categoryData);
     }
 
 
 
     async function editListing() {
-        const listingUrl = `http://localhost:8000/listings/${listing_id}`
+        const listingUrl = `http://localhost:8000/listings/${listing.id}`
         console.log("listing url", listingUrl)
 
         let data = {
@@ -136,6 +135,7 @@ export default function EditListing({ fetchData, shopListings, ids, token }) {
                                                     type="text"
                                                     id="small-input"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                                                    value={listing.name}
                                                 />
                                             </div>
                                             <div className="w-full mb-2">
@@ -150,6 +150,7 @@ export default function EditListing({ fetchData, shopListings, ids, token }) {
                                                     type="text"
                                                     id="small-input"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                                                    value={listing.picture}
                                                 />
                                             </div>
                                             <div className="w-full mb-2">
@@ -164,6 +165,7 @@ export default function EditListing({ fetchData, shopListings, ids, token }) {
                                                     type="number"
                                                     id="small-input"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                                                    value={listing.quantity}
                                                 />
                                             </div>
                                             <div className="w-full mb-2">
@@ -178,6 +180,7 @@ export default function EditListing({ fetchData, shopListings, ids, token }) {
                                                     type="number"
                                                     id="small-input"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                                                    value={listing.price}
                                                 />
                                             </div>
                                             <div className="w-full mb-6">
@@ -192,7 +195,7 @@ export default function EditListing({ fetchData, shopListings, ids, token }) {
                                                     id="message"
                                                     rows="4"
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                                                    placeholder="Your item description here..."
+                                                    value={listing.description}
                                                 ></textarea>
                                             </div>
                                             <div className="w-full mb-2">
@@ -200,8 +203,8 @@ export default function EditListing({ fetchData, shopListings, ids, token }) {
                                                     <input
                                                         onChange={toggleUsed}
                                                         type="checkbox"
-                                                        value=""
                                                         className="sr-only peer"
+                                                        value={listing.new}
                                                     />
                                                     <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
                                                     <span className="ml-3 text-sm font-medium text-gray-900">
