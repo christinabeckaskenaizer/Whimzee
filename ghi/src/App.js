@@ -22,6 +22,8 @@ import useCart from "./custom-hooks/useCart";
 import CreateListing from "./listing-components/CreateListing";
 import CartView from "./account-components/CartView";
 
+import Payment from "./payment-components/Payment";
+
 function App() {
   const { token } = useToken();
   const { user, ids } = useUser(token);
@@ -98,7 +100,7 @@ function App() {
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
           <Route path="/button" element={<DeleteListing />} />
           <Route path="/liked"></Route>
-          <Route path="/checkout"></Route>
+          <Route path="/checkout" element={<Payment />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

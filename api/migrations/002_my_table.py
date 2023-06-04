@@ -90,7 +90,7 @@ steps = [
         CREATE TABLE cart_listings (
           id SERIAL PRIMARY KEY NOT NULL,
           cart_id INT REFERENCES cart (id) ON DELETE CASCADE,
-          listing_id INT REFERENCES listings (id) NOT NULL
+          listing_id INT REFERENCES listings (id) ON DELETE CASCADE
         );
         """,
         """
