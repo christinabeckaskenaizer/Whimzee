@@ -184,6 +184,7 @@ function NavBar(props) {
           <AccountNav token={token} />
         </div>
       </nav>
+      <hr />
     </>
   );
 }
