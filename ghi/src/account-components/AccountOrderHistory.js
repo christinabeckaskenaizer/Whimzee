@@ -21,7 +21,9 @@ export default function AccountOrderHistory({ history }) {
   };
 
   useEffect(() => {
-    historyToListings(history);
+    if (history) {
+      historyToListings(history);
+    }
   }, [history]);
 
   if (!history) {
