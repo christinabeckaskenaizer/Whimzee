@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 from main import app
-from queries.listings import ListingRepository
+
+# from queries.listings import ListingRepository
 
 
 client = TestClient(app)

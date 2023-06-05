@@ -1,6 +1,7 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
-from queries.pool import pool
+
+# from typing import List, Optional, Union
+# from queries.pool import pool
 
 
 class Error(BaseModel):
@@ -64,7 +65,9 @@ class WishlistOut(BaseModel):
 #                     updated_listing = result.fetchone()
 #                     quantity_sold = updated_listing[0][4]
 #                     return ListingOut(
-#                         id=listing_id, quantity_sold=quantity_sold, **old_data
+#                         id=listing_id,
+#                         quantity_sold=quantity_sold,
+#                         **old_data
 #                     )
 
 #         except Exception as e:
