@@ -1,10 +1,34 @@
+## June 2, 2023
+
+Today I worked on:
+
+- deployment with my team
+
+- created various unit tests
+
+- cleaned up a few front-end errors
+
+Today we went through the steps to deploy but ran into many issues along the way. Most notably we were not able to process our requests due to a cloud server error.
+
+created unit tests for getting all shops, getting a single shop, creating a shop, getting a user, and getting a users credentials.
+
+I went through some of my front-end code and cleaned up some of the parts that were not behaving as I hoped. FOr example an endless spinner when a user is not logged in. now they will be redirected after 5 seconds.
+
 ## June 1, 2023
 
 Today I worked on:
 
 - Creating an intermediary cart_listing table to keep track of all of our listings
 
+- worked with my team to get deployment ready
+
+- cleaned up a million linting errors
+
 Today I created a create and delete method for cart_listings so that someone can add items to the cart and delete items from the cart.
+
+today we wanted to start on deployment! so we began getting all of the files ready. We were able to successfully login and get an access token
+
+during our attempt at deployment we found we had an absolute TON of linting errors. Me and Christina went through each file and cleaned them all up.
 
 ## May 31, 2023
 

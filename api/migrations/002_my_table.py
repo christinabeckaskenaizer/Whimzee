@@ -16,7 +16,7 @@ steps = [
         """
         CREATE TABLE shops (
           id SERIAL PRIMARY KEY NOT NULL,
-          user_id INT UNIQUE REFERENCES users (id) NOT NULL,
+          user_id INT UNIQUE REFERENCES users (id) ON DELETE CASCADE,
           name VARCHAR(100) NOT NULL,
           profile_picture TEXT,
           email VARCHAR(200) NOT NULL,
@@ -38,7 +38,6 @@ steps = [
         DROP TABLE categories
         """
     ],
-        # categories hard coded
     [
         """
         INSERT INTO categories (name)
@@ -60,7 +59,7 @@ steps = [
         """
         CREATE TABLE listings (
           id SERIAL PRIMARY KEY NOT NULL,
-          shop_id INT REFERENCES shops (id) NOT NULL,
+          shop_id INT REFERENCES shops (id) ON DELETE CASCADE,
           name VARCHAR(100) NOT NULL,
           quantity INT NOT NULL,
           quantity_sold INT DEFAULT 0,
@@ -90,8 +89,8 @@ steps = [
         """
         CREATE TABLE cart_listings (
           id SERIAL PRIMARY KEY NOT NULL,
-          cart_id INT REFERENCES cart (id) NOT NULL,
-          listing_id INT REFERENCES listings (id) NOT NULL
+          cart_id INT REFERENCES cart (id) ON DELETE CASCADE,
+          listing_id INT REFERENCES listings (id) ON DELETE CASCADE
         );
         """,
         """
@@ -123,7 +122,7 @@ steps = [
           id SERIAL PRIMARY KEY NOT NULL,
           author VARCHAR(200) REFERENCES users (username) NOT NULL,
           rating INT NOT NULL,
-          listing INT REFERENCES listings (id) NOT NULL,
+          listing INT REFERENCES listings (id) ON DELETE CASCADE,
           created_on DATE NOT NULL,
           description TEXT NOT NULL
         );

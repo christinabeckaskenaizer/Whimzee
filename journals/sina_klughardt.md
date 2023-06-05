@@ -1,3 +1,15 @@
+## June 02, 2023
+- Did more styling with Tailwind on the frontend
+  * Made the landing page prettier
+  * Made the Search bar more visible
+  * Listing cards look more modern and get bigger when hover over them
+- Worked together with team on deployment, ran into a lot of errors
+
+## June 01, 2023
+- Wrote two pytests(get categories, post categories)
+- Started with deployment with the team, we still have to work ourselves through errors
+- Implemeneted UI error handling on LogIn and SignUp page
+
 ## May 31, 2023
 - Worked on the styling on the frontend
 - Went over Users account page

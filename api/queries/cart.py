@@ -1,6 +1,6 @@
 # from fastAPI import FastAPI()
 from pydantic import BaseModel
-from typing import Optional, List
+# from typing import Optional, List
 from queries.pool import pool
 
 
@@ -182,7 +182,8 @@ class CartRepository(BaseModel):
 
 # class Cart_listingsRepository(BaseModel):
 
-#     def create(self, cart_listings: Cart_listingsIn) -> List[Cart_listingsOut] | Error:
+#     def create(self,
+# cart_listings: Cart_listingsIn) -> List[Cart_listingsOut] | Error:
 #         try:
 #             with pool.connection() as conn:
 #                 with conn.cursor() as db:
@@ -206,16 +207,24 @@ class CartRepository(BaseModel):
 #             print(e)
 #             return None
 
-#     def get_all(self, listing_id: int) -> List[Cart_listingsOutWithDetail] | Error:
+#     def get_all(self,
+# listing_id: int) -> List[Cart_listingsOutWithDetail] | Error:
 #         try:
 #             with pool.connection() as conn:
 #                 with conn.cursor() as db:
 #                     db_result = db.execute(
 #                         """
-#                         SELECT cart_listings.cart_id, cart_listings.listing_id, cart_listings.cart_quantity
-#                         listings.name, listings.description, listings.price, listings.picture
+#                         SELECT
+# cart_listings.cart_id,
+# cart_listings.listing_id,
+# cart_listings.cart_quantity
+# listings.name,
+# listings.description,
+# listings.price,
+# listings.picture
 #                         FROM cart_listings
-#                         JOIN listings ON cart_listings.listing_id = listings.id
+#                         JOIN listings ON
+# cart_listings.listing_id = listings.id
 #                         WHERE cart_listings.id = 1
 #                         """,
 #                     [listing_id])

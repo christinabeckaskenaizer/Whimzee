@@ -3,12 +3,30 @@ import { useNavigate } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { NavLink } from "react-router-dom";
 
+const Error = ({auth}) => {
+  if (!auth) {
+    return (
+          <div className="text-center">
+            <h1 >Welcome back!</h1>
+        </div>
+    )
+  } else {
+    return (
+      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+  <span className="block sm:inline">Email or Username incorrect. Please try again or sign up</span>
+  <span className="block sm:inline"></span>
+</div>
+    )
+  }
+};
+
 const LoginForm = ({}) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { token } = useToken();
   const { login } = useToken();
+  const [auth, setAuth] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +38,7 @@ const LoginForm = ({}) => {
       e.target.reset();
     } else {
       console.log("Invalid username or password");
+      setAuth(true);
       e.target.reset();
     }
   };
@@ -36,9 +55,7 @@ const LoginForm = ({}) => {
         className="flex flex-col items-center px-4 py-5 my-5"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <div className="text-center">
-          <h1>Welcome back!</h1>
-        </div>
+        <Error auth={auth}/>
         <div className="mb-6">
           <label
             htmlFor="username"

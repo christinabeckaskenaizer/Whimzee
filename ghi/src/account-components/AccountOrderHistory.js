@@ -8,9 +8,9 @@ export default function AccountOrderHistory({ history }) {
 
   return (
     <>
-      <div className="m-auto p-4 flex justify-center flex-col px-4 w-5/6">
+      <div className="m-auto p-4 flex flex-col px-4">
         {history.length > 0 ? (
-          <div className="grid items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
+          <div className="grid m-auto items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
             {history.map((hist) => (
               <div key={hist.id} className="col-span-1">
                 <ListingCard

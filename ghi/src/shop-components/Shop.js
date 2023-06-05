@@ -49,7 +49,7 @@ export default function Shop({ listings }) {
           style={{ backgroundImage: `url(${shop.profile_picture})` }}
           className="mb-4 flex bg-cover justify-center w-full items-end h-[20rem] bg-center bg-no-repeat bg-gray-700 bg-blend-multiply"
         >
-          <div className="flex justify-start flex-col px-4 w-5/6">
+          <div className="flex justify-start flex-col px-4 w-5/6 lg:w-[70rem]">
             <h1 className="w-full mb-2 mt-10 p-4 text-4xl font-extrabold text-white md:text-5xl lg:text-6xl">
               {shop.name}
             </h1>
@@ -75,9 +75,9 @@ export default function Shop({ listings }) {
             </div>
           </div>
         </section>
-        <div className="m-auto p-4 flex justify-center flex-col px-4 w-5/6">
+        <div className="m-auto p-4 flex flex-col px-4">
           {listings && (
-            <div className="grid items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
+            <div className="grid m-auto items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
               {shopListings.map((listing) => (
                 <div key={listing.id} className="col-span-1">
                   <ListingCard

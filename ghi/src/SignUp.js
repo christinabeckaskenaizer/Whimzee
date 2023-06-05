@@ -3,6 +3,23 @@ import { useNavigate } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { NavLink } from "react-router-dom";
 
+const Error = ({auth}) => {
+  if (!auth) {
+    return (
+        <div className="text-center">
+          <h1 >Welcome to Whimzee</h1>
+        </div>
+    )
+  } else {
+    return (
+      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+  <span className="block sm:inline">Username or Email already taken. Please try again</span>
+  <span className="block sm:inline"></span>
+</div>
+    )
+  }
+};
+
 const SignUpForm = ({ids}) => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("");
@@ -10,6 +27,7 @@ const SignUpForm = ({ids}) => {
   const [password, setPassword] = useState("");
   const { token } = useToken();
   const { login } = useToken();
+  const [auth, setAuth] = useState(false)
 
   const createCart = async () => {
     const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart`;
@@ -58,6 +76,7 @@ const SignUpForm = ({ids}) => {
         console.log("unable to create user");
       }
     } else {
+      setAuth(true)
       console.log("a user with these credentials already exists");
       e.target.reset();
     }
@@ -78,9 +97,7 @@ const SignUpForm = ({ids}) => {
         className="flex flex-col items-center px-4 py-5 my-5"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <div className="text-center">
-          <h1>Welcome to Whimzee</h1>
-        </div>
+        <Error auth={auth}/>
         <div className="mb-6">
           <label
             htmlFor="email"

@@ -4,18 +4,21 @@ from queries.listings import (
     Error,
     ListingIn,
     ListingOut,
-    ListingRepository
+    ListingsInventoryUpdate,
+    ListingRepository,
 )
 
-router=APIRouter()
+router = APIRouter()
+
 
 @router.post("/listings", response_model=Union[ListingOut, Error])
 def create_listing(
-    listing:ListingIn,
+    listing: ListingIn,
     response: Response,
-    repo: ListingRepository = Depends (),
+    repo: ListingRepository = Depends(),
 ):
-        return repo.create(listing)
+    return repo.create(listing)
+
 
 @router.get("/listings", response_model=Union[List[ListingOut], Error])
 async def get_all(
@@ -38,11 +41,9 @@ def get_a_listing(
         )
     return listing
 
+
 @router.delete("/listings/{listing_id}", response_model=bool)
-def delete_a_listing(
-    listing_id: int,
-    repo: ListingRepository = Depends()
-    ):
+def delete_a_listing(listing_id: int, repo: ListingRepository = Depends()):
     listing = repo.delete_a_listing(listing_id)
     if listing is None:
         raise HTTPException(
@@ -51,6 +52,7 @@ def delete_a_listing(
         )
     return True
 
+
 @router.put("/listings/{listing_id}", response_model=Union[Error, ListingOut])
 def update_listing(
     listing_id: int,
@@ -58,3 +60,17 @@ def update_listing(
     repo: ListingRepository = Depends(),
 ) -> Union[Error, ListingOut]:
     return repo.update_listing(listing_id, listing)
+
+
+@router.put("/listings/{listing_id}/inventory", response_model=bool)
+def update_inventory(
+    response: Response,
+    listing_id: int,
+    listing: ListingsInventoryUpdate,
+    repo: ListingRepository = Depends(),
+) -> bool:
+    result = repo.update_inventory(listing, listing_id)
+    if result is None:
+        response.status_code = 400
+        return Error(message="Unable to update listing")
+    return result

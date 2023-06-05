@@ -1,25 +1,21 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import useUser from '../custom-hooks/useUser';
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useState } from "react";
 
 
-export default function DeleteListing({ listing, shopListings, handleClick, open }) {
-
-    let [isOpen, setIsOpen] = useState(open)
-    const [listings, setListings] = useState(shopListings);
-
-
-    const navigate = useNavigate();
+export default function DeleteListing({
+    shopListings,
+    handleClick,
+    open,
+}) {
+    let [isOpen, setIsOpen] = useState(open);
 
     function closeModal() {
-        setIsOpen(false)
+        setIsOpen(false);
     }
 
     function openModal() {
-        setIsOpen(true)
+        setIsOpen(true);
     }
-
 
     // async function deleteListing() {
     //     const listingUrl = `http://localhost:8000/listings/${listing.id}`
@@ -38,11 +34,10 @@ export default function DeleteListing({ listing, shopListings, handleClick, open
             <button
                 type="button"
                 onClick={openModal}
-                className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-800"
             >
                 Delete
             </button>
-
 
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -85,10 +80,16 @@ export default function DeleteListing({ listing, shopListings, handleClick, open
                                     <div className="p-2 flex">
                                         <div className="w-1/2"></div>
                                         <div className="w-1/2">
-                                            <button onClick={handleClick} className="m-1 inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                                            <button
+                                                onClick={handleClick}
+                                                className="m-1 inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                            >
                                                 Delete
                                             </button>
-                                            <button onClick={closeModal} className="m-1 inline-flex justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                                            <button
+                                                onClick={closeModal}
+                                                className="m-1 inline-flex justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                            >
                                                 Cancel
                                             </button>
                                         </div>
@@ -98,7 +99,7 @@ export default function DeleteListing({ listing, shopListings, handleClick, open
                         </div>
                     </div>
                 </Dialog>
-            </Transition >
+            </Transition>
         </>
-    )
+    );
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Landing from "./LandingPage/Landing";
 import "./App.css";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NavBar from "./NavBar/NavBar.js";
@@ -23,16 +22,16 @@ import useCart from "./custom-hooks/useCart";
 import CreateListing from "./listing-components/CreateListing";
 import CartView from "./account-components/CartView";
 
+import Payment from "./payment-components/Payment";
+
 function App() {
   const { token } = useToken();
   const { user, ids } = useUser(token);
   const { shop } = useShop(ids);
   const { cart } = useCart(ids);
-
   const [listings, setListings] = useState([]);
   const [listingsBySearchBar, setListingsBySearchBar] = useState([]);
   const [searched, setSearched] = useState(false);
-  console.log("User id: ", ids);
 
   const fetchListingData = async () => {
     try {
@@ -40,10 +39,7 @@ function App() {
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data);
-      console.log("GETCHED");
-    } catch (error) {
-      console.log("error", error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -53,12 +49,6 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar
-        token={token}
-        user={user}
-        listings={listings}
-        filteredlistings={listingsBySearchBar}
-        setfilteredlistings={setListingsBySearchBar}
-        setsearched={setSearched}
         token={token}
         user={user}
         listings={listings}
@@ -110,7 +100,10 @@ function App() {
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
           <Route path="/button" element={<DeleteListing />} />
           <Route path="/liked"></Route>
-          <Route path="/checkout"></Route>
+          <Route
+            path="/checkout"
+            element={<Payment token={token} user={user} />}
+          ></Route>
         </Routes>
       </div>
     </BrowserRouter>
