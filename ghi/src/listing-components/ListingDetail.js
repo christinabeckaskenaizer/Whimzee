@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function ListingDetail({}) {
+export default function ListingDetail({ }) {
   const [detail, setDetail] = useState("");
   const [shop, setShop] = useState("");
 
