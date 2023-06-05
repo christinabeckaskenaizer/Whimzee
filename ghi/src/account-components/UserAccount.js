@@ -83,8 +83,8 @@ export default function UserAccount({
 
   return (
     <>
-      <div className="flex w-full flex-col items-center p-10">
-        <div className="flex flex-col items-center pb-10 mt-10">
+      <div className="flex w-full flex-col items-center p-5">
+        <div className="flex flex-col items-center pb-10 mt-5">
           {userPic ? (
             <img
               className="p-3 object-cover rounded-full h-32 w-32"

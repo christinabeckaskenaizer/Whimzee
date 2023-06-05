@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-import Spinner from "../utilities/Spinner";
+import ReturnToHome from "../utilities/ReturnToHome";
 import PaymentSuccess from "./PaySuccess";
 
 export default function Payment({ token, user }) {
@@ -135,7 +135,7 @@ export default function Payment({ token, user }) {
   }, []);
 
   if (!user) {
-    return <Spinner />;
+    return <ReturnToHome />;
   }
 
   return (
