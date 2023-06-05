@@ -90,7 +90,7 @@ class OrderRepo(BaseModel):
 
         except Exception as e:
             print("Order cannot be created because of: ", e)
-            return {"message": "Order cannot be created"}
+            return None
 
     def get_all_shop_orders(self,
                             shop_id: int) -> List[OrderOutWithListing] | Error:
@@ -263,3 +263,4 @@ class OrderRepo(BaseModel):
                                     **order.dict())
         except Exception as e:
             print(e)
+            return None

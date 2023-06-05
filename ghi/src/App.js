@@ -100,7 +100,10 @@ function App() {
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
           <Route path="/button" element={<DeleteListing />} />
           <Route path="/liked"></Route>
-          <Route path="/checkout" element={<Payment />}></Route>
+          <Route
+            path="/checkout"
+            element={<Payment token={token} user={user} />}
+          ></Route>
         </Routes>
       </div>
     </BrowserRouter>
