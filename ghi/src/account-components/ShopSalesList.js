@@ -16,6 +16,7 @@ export default function ShopSalesList({
 }) {
   const [open, setOpen] = useState(false);
   const [listings, setListings] = useState(shopListings);
+  let netTotal = 0;
 
   useEffect(() => {
     setListings(shopListings);
@@ -26,33 +27,14 @@ export default function ShopSalesList({
   }
 
   async function deleteListing(listing) {
-    const listingUrl = `http://localhost:8000/listings/${listing.id}`;
+    const listingUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings/${listing.id}`;
 
     let response = await fetch(listingUrl, { method: "DELETE" });
     if (response.ok) {
       fetchData();
-      // updateListings();
-      // setListings(listings);
-      console.log("listings post delete", listings);
       setOpen(false);
     }
   }
-
-  // async function updateListings() {
-  //   let shopId = shop.id
-  //   const listingUrl = `http://localhost:8000/listings/`
-  //   let response = await fetch(listingUrl, { method: "GET" });
-  //   let data = await response.json();
-  //   const filteredData = data.filter(
-  //     (listing) => listing.shop_id === Number(shopId)
-  //   );
-  //   setListings(filteredData);
-  //   setOpen(false);
-
-  // }
-
-  let netTotal = 0;
-  console.log(shopListings, "shop list");
 
   return (
     <>
@@ -106,7 +88,6 @@ export default function ShopSalesList({
             <tbody className="text-center">
               {listings.map((listing) => {
                 netTotal += listing.quantity_sold * listing.price;
-                console.log(netTotal, "nettotal");
                 return (
                   <tr
                     key={listing.id}

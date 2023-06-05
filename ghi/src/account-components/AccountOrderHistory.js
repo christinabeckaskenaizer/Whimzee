@@ -1,7 +1,31 @@
+import { useEffect, useState } from "react";
+
 import ListingCard from "../listing-components/ListingCard";
 import Spinner from "../utilities/Spinner";
 
 export default function AccountOrderHistory({ history }) {
+  const [purchased, setPurchased] = useState([]);
+
+  const historyToListings = (history) => {
+    const listings = [];
+    const listingIDs = [];
+    for (let i = 0; i < history.length; i++) {
+      const listing = history[i].listing;
+      const inList = listingIDs.includes(listing.id);
+      if (inList === false) {
+        listingIDs.push(listing.id);
+        listings.push(listing);
+      }
+    }
+    setPurchased(listings);
+  };
+
+  useEffect(() => {
+    if (history) {
+      historyToListings(history);
+    }
+  }, [history]);
+
   if (!history) {
     return <Spinner />;
   }
@@ -9,16 +33,16 @@ export default function AccountOrderHistory({ history }) {
   return (
     <>
       <div className="m-auto p-4 flex flex-col px-4">
-        {history.length > 0 ? (
+        {purchased.length > 0 ? (
           <div className="grid m-auto items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-            {history.map((hist) => (
-              <div key={hist.id} className="col-span-1">
+            {purchased.map((item) => (
+              <div key={item.id} className="col-span-1">
                 <ListingCard
-                  id={hist.listing.id}
-                  picture={hist.listing.picture}
-                  name={hist.listing.name}
-                  isNew={hist.new}
-                  price={hist.listing.price}
+                  id={item.id}
+                  picture={item.picture}
+                  name={item.name}
+                  isNew={item.new}
+                  price={item.price}
                 />
               </div>
             ))}
