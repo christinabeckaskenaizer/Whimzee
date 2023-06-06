@@ -1,3 +1,7 @@
+## June 05, 2023
+- Worked with Team on Deployment: Got backend deployment to work with help of Rosheen
+- Started working on Stretch Goals: Show reviews on the listings detail page
+
 ## June 02, 2023
 - Did more styling with Tailwind on the frontend
   * Made the landing page prettier
