@@ -20,6 +20,7 @@ const Reviews = ({listing_id}) => {
     }
     useEffect(() => {
         getReviews();
+        // eslint-disable-next-line
     }, [listing_id]);
 
     return (
@@ -27,7 +28,7 @@ const Reviews = ({listing_id}) => {
         <h1 className="text-2xl font-bold w-full px-6 py-6">{reviewLength} Reviews</h1>
         {reviews.map((review) => {
             return (
-        <div className="sm:grid flex flex-col items-center sm:grid-cols-2lg:grid-cols-4 gap-1">
+        <div key={review.id} className="sm:grid flex flex-col items-center sm:grid-cols-2lg:grid-cols-4 gap-1">
             <div className="max-w-sm rounded overflow-hidden shadow-lg col-span-1">
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{review.rating}</div>
