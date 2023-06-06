@@ -146,15 +146,6 @@ function AccountNav({ token }) {
 
 function NavBar(props) {
   const token = props.token;
-  const navigate = useNavigate();
-  const [clickedWhimzee, setClickedWhimzee] = useState(false);
-
-  // const handleClick = () => {
-  //   setClickedWhimzee(true);
-  // };
-  // if (clickedWhimzee) {
-  //   navigate(0);
-  // }
 
   return (
     <>

@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 
 import AccountOrderHistory from "./AccountOrderHistory";
 import ShopSalesList from "./ShopSalesList";
 import OpenShop from "./OpenShop";
 
-import Spinner from "../utilities/Spinner";
 import ReturnToHome from "../utilities/ReturnToHome";
 
 export default function UserAccount({
@@ -16,10 +14,9 @@ export default function UserAccount({
   listings,
   fetchData,
 }) {
-  const navigate = useNavigate();
   const [view, setView] = useState(false);
-  const [userPic, setUserPic] = useState(null);
-  const [orders, setOrders] = useState(null);
+  const [userPic] = useState(null);
+  const [orders] = useState(null);
   const [shopListings, setShopListings] = useState(null);
   const [history, setHistory] = useState(null);
 
@@ -27,21 +24,21 @@ export default function UserAccount({
     setView(bool);
   };
 
-  const getShopOrders = async (id) => {
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/${id}/orders`;
-    const config = {
-      credentials: "include",
-      method: "get",
-      headers: {
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    };
-    const response = await fetch(url, config);
-    if (response.ok) {
-      const data = await response.json();
-      setOrders(data);
-    }
-  };
+  // const getShopOrders = async (id) => {
+  //   const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/${id}/orders`;
+  //   const config = {
+  //     credentials: "include",
+  //     method: "get",
+  //     headers: {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     },
+  //   };
+  //   const response = await fetch(url, config);
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setOrders(data);
+  //   }
+  // };
 
   const getShopListings = (id) => {
     const shopList = listings.filter((listing) => id === listing.shop_id);
