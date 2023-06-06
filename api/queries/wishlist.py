@@ -41,7 +41,9 @@
 #                     updated_wishlist = result.fetchone()
 #                     quantity_sold = updated_wishlist[0][4]
 #                     return WishlistOut(
-#                         id=wishlist_id, quantity_sold=quantity_sold, **old_data
+#                         id=wishlist_id,
+#                         quantity_sold=quantity_sold,
+#                         **old_data
 #                     )
 
 #         except Exception as e:
