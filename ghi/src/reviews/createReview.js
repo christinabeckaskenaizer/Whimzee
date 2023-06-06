@@ -97,15 +97,26 @@ export default function CreateReview({ listing_id, token }) {
                         >
                           Rating
                         </label>
-                        <input
+                                <select
+                                onChange={(event) => handleChange(event, setRating)}
+                                className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                                <option value={0}>Rating</option>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                    <option value={5}>5</option>
+                                </select>
+                        {/* <input
                           value={rating}
                           onChange={(event) => handleChange(event, setRating)}
                           type="number"
                           name="rating"
                           id="rating"
+                          placeholder="1-5"
                           className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                           required
-                        />
+                        /> */}
                       </div>
                       <div className="w-full mb-6">
                         <label
