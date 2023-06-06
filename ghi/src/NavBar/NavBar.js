@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AccountNav from "./AccountNav";
 import SearchBar from "./SearchBar";
 
