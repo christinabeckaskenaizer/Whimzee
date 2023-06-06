@@ -37,7 +37,7 @@ export default function ListingDetail() {
   };
   console.log("id", id);
   const addToCart = async () => {
-    const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id}`;
+    // const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id}`;
     // const payload = {
     //   // user_id: cart_id,
     //   listing: id,

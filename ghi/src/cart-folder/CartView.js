@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // import useToken from "@galvanize-inc/jwtdown-for-react";
 // import useCart from "../custom-hooks/useUser";
 import "../cart.css";
