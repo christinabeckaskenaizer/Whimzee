@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Reviews from "../reviews/reviews";
 
 export default function ListingDetail() {
   const [detail, setDetail] = useState("");
@@ -16,7 +17,7 @@ export default function ListingDetail() {
 
   const getCombinedData = async () => {
     try {
-      const detailUrl = `http://localhost:8000/listings/${id}`;
+      const detailUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings/${id}`;
       const detailResponse = await fetch(detailUrl);
       const data = await detailResponse.json();
       setDetail(data);
@@ -25,7 +26,7 @@ export default function ListingDetail() {
       if (detailResponse.ok) {
         const shop_id = data.shop_id;
 
-        const shopUrl = `http://localhost:8000/shops/${shop_id}`;
+        const shopUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/shops/${shop_id}`;
         const shopResponse = await fetch(shopUrl);
         const shopData = await shopResponse.json();
         setShop(shopData);
@@ -36,6 +37,7 @@ export default function ListingDetail() {
     }
   };
   console.log("id", id);
+  console.log(detail.id)
   const addToCart = async () => {
     // const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id}`;
     // const payload = {
@@ -127,8 +129,8 @@ export default function ListingDetail() {
                   </div>
                 </div>
                 <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
-                  <div className="flex items-center justify-center mt-6">
-                    <span className="mr-3">REVIEWS?!</span>
+                  <div className="items-center justify-center mt-6">
+                    <Reviews listing_id={detail.id}/>
                   </div>
                 </div>
               </div>

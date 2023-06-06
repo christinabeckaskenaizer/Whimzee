@@ -1,98 +1,56 @@
-from pydantic import BaseModel
+# from pydantic import BaseModel
 
 # from typing import List, Optional, Union
 # from queries.pool import pool
 
 
-class Error(BaseModel):
-    message: str
+# class Error(BaseModel):
+#     message: str
 
 
-class WishlistIn(BaseModel):
-    user_id: int
+# class WishlistIn(BaseModel):
+#     user_id: int
 
 
-class WishlistOut(BaseModel):
-    id: int
-    user_id: int
-    listings: list[int]
+# class WishlistOut(BaseModel):
+#     id: int
+#     user_id: int
+#     listings: list[int]
 
 
 # class WishlistRepository:
 #     def update_wishlist(
-#         self, listing_id: int, listing: ListingIn
-#     ) -> Union[ListingOut, Error]:
+#         self, wishlist_id: int, wishlist: WishlistIn
+#     ) -> Union[WishlistOut, Error]:
 #         try:
 #             with pool.connection() as conn:
 #                 with conn.cursor() as db:
 #                     result = db.execute(
 #                         """
-#                         UPDATE listings
-#                         SET shop_id=%s,
-#                             name=%s,
-#                             quantity=%s,
-#                             description=%s,
-#                             price=%s,
-#                             new=%s,
-#                             picture=%s,
-#                             category=%s
+#                         UPDATE wishlist
+#                         SET listings=%s
 #                         WHERE id=%s
 #                         RETURNING
 #                             (id,
-#                             shop_id,
-#                             name,
-#                             quantity,
-#                             quantity_sold,
-#                             description,
-#                             price,
-#                             new,
-#                             picture,
-#                             category)
+#                             user_id,
+#                             listings)
 #                         """,
-#                         [
-#                             listing.shop_id,
-#                             listing.name,
-#                             listing.quantity,
-#                             listing.description,
-#                             listing.price,
-#                             listing.new,
-#                             listing.picture,
-#                             listing.category,
-#                             listing_id,
-#                         ],
+#                         [wishlist.id, wishlist.user_id, wishlist.listings],
 #                     )
-#                     old_data = listing.dict()
-#                     updated_listing = result.fetchone()
-#                     quantity_sold = updated_listing[0][4]
-#                     return ListingOut(
-#                         id=listing_id,
+#                     old_data = wishlist.dict()
+#                     updated_wishlist = result.fetchone()
+#                     quantity_sold = updated_wishlist[0][4]
+#                     return WishlistOut(
+#                         id=wishlist_id,
 #                         quantity_sold=quantity_sold,
 #                         **old_data
 #                     )
 
 #         except Exception as e:
 #             print(e)
-#             return {"message": "Could not update listing"}
+#             return {"message": "Could not update wishlist"}
 
-#     def delete_a_listing(self, listing_id) -> bool:
-#         try:
-#             with pool.connection() as conn:
-#                 with conn.cursor() as db:
-#                     db.execute(
-#                         """
-#                         DELETE FROM listings
-#                         WHERE id = %s
-#                         """,
-#                         [listing_id],
-#                     )
-#                     return True
-#         except Exception as e:
-#             print(e)
-#             return {
-#                 "message": "Could not delete a listing that does not exist"
-#             }
-
-#     def get_a_listing(self, listing_id) -> Optional[ListingOut]:
+#     def get_a_listing(self, listing_id) -> Optional[WishlistOut]:
 #         try:
 #             with pool.connection() as conn:
 #                 with conn.cursor() as db:
@@ -121,46 +79,7 @@ class WishlistOut(BaseModel):
 #             print(e)
 #             return {"message": "Could not return listing"}
 
-#     def get_all(self) -> Union[Error, List[ListingOut]]:
-#         try:
-#             with pool.connection() as conn:
-#                 with conn.cursor() as db:
-#                     db.execute(
-#                         """
-#                         SELECT
-#                             id,
-#                             shop_id,
-#                             name,
-#                             quantity,
-#                             quantity_sold,
-#                             description,
-#                             price,
-#                             new,
-#                             picture,
-#                             category
-#                         FROM listings
-#                         ORDER BY id
-#                         """
-#                     )
-#                     return [
-#                         ListingOut(
-#                             id=record[0],
-#                             shop_id=record[1],
-#                             name=record[2],
-#                             quantity=record[3],
-#                             quantity_sold=record[4],
-#                             description=record[5],
-#                             price=record[6],
-#                             new=record[7],
-#                             picture=record[8],
-#                             category=record[9],
-#                         )
-#                         for record in db
-#                     ]
-#         except Exception:
-#             return {"message": "Could not return all listings"}
-
-#     def create(self, listing: ListingIn) -> ListingOut | Error:
+#     def create(self, listing: WishlistIn) -> WishlistOut | Error:
 #         try:
 #             with pool.connection() as conn:
 #                 with conn.cursor() as db:
@@ -198,7 +117,7 @@ class WishlistOut(BaseModel):
 
 #                     old_data = listing.dict()
 
-#                     return ListingOut(
+#                     return WishlistOut(
 #                         id=id, quantity_sold=quantity_sold, **old_data
 #                     )
 #         except Exception as e:
@@ -206,7 +125,7 @@ class WishlistOut(BaseModel):
 #             print(e)
 
 #     def record_to_listing_out(self, record):
-#         return ListingOut(
+#         return WishlistOut(
 #             id=record[0],
 #             shop_id=record[1],
 #             name=record[2],
@@ -218,23 +137,3 @@ class WishlistOut(BaseModel):
 #             picture=record[8],
 #             category=record[9],
 #         )
-
-#     def update_inventory(
-#         self, listing: ListingsInventoryUpdate, id: int
-#     ) -> bool:
-#         try:
-#             with pool.connection() as conn:
-#                 with conn.cursor() as db:
-#                     db.execute(
-#                         """
-#                         UPDATE listings
-#                         SET quantity=%s,
-#                             quantity_sold=%s
-#                         WHERE id=%s
-#                         """,
-#                         [listing.quantity, listing.quantity_sold, id],
-#                     )
-#                     return True
-#         except Exception as e:
-#             print(e)
-#             return None

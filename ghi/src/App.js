@@ -38,11 +38,11 @@ function App() {
 
   const fetchListingData = async () => {
     try {
-      const listingsUrl = "http://localhost:8000/listings";
+      const listingsUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {

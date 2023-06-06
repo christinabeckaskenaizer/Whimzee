@@ -33,7 +33,7 @@ export default function MyModal({ ids, fetchData }) {
   // }, [shopListings])
 
   async function getCategories() {
-    const categoryUrl = "http://localhost:8000/categories";
+    const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
     const response = await fetch(categoryUrl);
     const categoryData = await response.json();
     setCategories(categoryData);
@@ -56,7 +56,7 @@ export default function MyModal({ ids, fetchData }) {
       // console.log(typeof data.price)
       // return
 
-      const url = "http://localhost:8000/listings";
+      const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(data),

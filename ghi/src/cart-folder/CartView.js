@@ -11,14 +11,15 @@ async function CartView() {
     // eslint-disable-next-line
   }, []);
   // async function loadCartView() {
-  const response = await fetch("http://localhost:8000/cart:userid/");
-  if (response.ok) {
-    const data = await response.json();
-    console.log(data);
-    CartView(data);
-  } else {
-    console.error("error");
-  }
+  // const response = await fetch(`${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${user_id}`);
+
+  // if (response.ok) {
+  //   const data = await response.json();
+  //   console.log(data);
+  //   CartView(data);
+  // } else {
+  //   console.error("error");
+  // }
 
   // const [carts, setCarts] = useState([]);
   //   const handlePrice = () => {
