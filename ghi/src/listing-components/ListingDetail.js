@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Reviews from "../reviews/reviews";
 
-export default function ListingDetail() {
+export default function ListingDetail({token}) {
   const [detail, setDetail] = useState("");
   const [shop, setShop] = useState("");
 
@@ -130,7 +130,7 @@ export default function ListingDetail() {
                 </div>
                 <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
                   <div className="items-center justify-center mt-6">
-                    <Reviews listing_id={detail.id}/>
+                    <Reviews listing_id={detail.id} token={token}/>
                   </div>
                 </div>
               </div>

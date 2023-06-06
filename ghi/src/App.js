@@ -98,7 +98,7 @@ function App() {
             path="/listings"
             element={<AllListings listings={listings} />}
           />
-          <Route path="/listings/:id" element={<ListingDetail ids={ids} />} />
+          <Route path="/listings/:id" element={<ListingDetail ids={ids} token={token}/>} />
           <Route path="/listings/category/:id" />
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
           <Route path="/button" element={<DeleteListing />} />
