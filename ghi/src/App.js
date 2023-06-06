@@ -31,6 +31,11 @@ function App() {
   const [listingsBySearchBar, setListingsBySearchBar] = useState([]);
   const [searched, setSearched] = useState(false);
 
+  const domain = /https:\/\/[^/]+/;
+  console.log(domain);
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
+  console.log(basename);
+
   const fetchListingData = async () => {
     try {
       const listingsUrl = "http://localhost:8000/listings";
@@ -45,7 +50,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <NavBar
         token={token}
         user={user}
