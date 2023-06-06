@@ -33,7 +33,7 @@ export default function MyModal({ ids, fetchData }) {
   // }, [shopListings])
 
   async function getCategories() {
-    const categoryUrl = "http://localhost:8000/categories";
+    const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
     const response = await fetch(categoryUrl);
     const categoryData = await response.json();
     setCategories(categoryData);
