@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Reviews from "../reviews/reviews";
 
-export default function ListingDetail() {
+export default function ListingDetail({token}) {
   const [detail, setDetail] = useState("");
   const [shop, setShop] = useState("");
 
@@ -70,7 +70,7 @@ export default function ListingDetail() {
         <div className="mx-auto w-screen px-24">
           <div className="flex flex-wrap mb-24 -mx-4">
             <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
-              <div className="sticky top-0 z-50 overflow-hidden ">
+              <div className="sticky top-0overflow-hidden ">
                 <div className="flex flex-col items-center relative mb-6 lg:mb-10 ">
                   <button
                     className="absolute left-0 transform lg:ml-2 top-1/2 translate-1/2"
@@ -130,7 +130,7 @@ export default function ListingDetail() {
                 </div>
                 <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
                   <div className="items-center justify-center mt-6">
-                    <Reviews listing_id={detail.id}/>
+                    <Reviews listing_id={detail.id} token={token}/>
                   </div>
                 </div>
               </div>

@@ -1,4 +1,9 @@
 ## June 05, 2023
+- Worked with Team on Frontend Deployment! Its all deployed now yay!
+- Reviews are showing up on listings detail page now
+- you can create a review now
+
+## June 05, 2023
 - Worked with Team on Deployment: Got backend deployment to work with help of Rosheen
 - Started working on Stretch Goals: Show reviews on the listings detail page
 
