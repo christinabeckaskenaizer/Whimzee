@@ -1,6 +1,20 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
+function CreateReviewButton({ token, setOpen }) {
+    if (token) {
+        return (
+        <button
+        onClick={() => setOpen(true)}
+        className="bg-white hover:bg-gray-200 text-black font-sm
+         hover:text-black py-2 px-2 border border-gray-400
+        rounded-lg "
+      >
+        Write a review
+      </button>
+        )
+    }
+}
 export default function CreateReview({ listing_id, token }) {
   const [rating, setRating] = useState("");
   const [description, setDescription] = useState("");
@@ -40,15 +54,7 @@ export default function CreateReview({ listing_id, token }) {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="bg-white hover:bg-gray-200 text-black font-sm
-         hover:text-black py-2 px-2 border border-gray-400
-        rounded-lg "
-      >
-        Write a review
-      </button>
-
+    <CreateReviewButton token={token} setOpen={setOpen}/>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
