@@ -35,7 +35,7 @@ export default function EditListing({ fetchData, shopListings, ids, listing }) {
     // }, [shopListings])
 
     async function getCategories() {
-        const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}categories`;
+        const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
         const response = await fetch(categoryUrl);
         const categoryData = await response.json();
         console.log("category data", categoryData)
