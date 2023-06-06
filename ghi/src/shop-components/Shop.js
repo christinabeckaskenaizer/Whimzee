@@ -32,10 +32,12 @@ export default function Shop({ listings }) {
 
   useEffect(() => {
     getShopData();
+    // getShopOrders(ids.shop_id);
   }, []);
 
   useEffect(() => {
     getShopListings();
+    // getShopOrders(ids.shop_id);
   }, [listings]);
 
   if (!shop) {

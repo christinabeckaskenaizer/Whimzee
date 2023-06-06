@@ -65,6 +65,7 @@ export default function UserAccount({
     if (token) {
       getHistory();
     }
+    // eslint-disable-next-line
   }, [token]);
 
   useEffect(() => {
@@ -72,6 +73,7 @@ export default function UserAccount({
       // getShopOrders(ids.shop_id);
       getShopListings(ids.shop_id);
     }
+    // eslint-disable-next-line
   }, [ids, listings]);
 
   if (!ids) {
@@ -84,11 +86,13 @@ export default function UserAccount({
         <div className="flex flex-col items-center pb-10 mt-5">
           {userPic ? (
             <img
+              alt=""
               className="p-3 object-cover rounded-full h-32 w-32"
               src={userPic}
             />
           ) : (
             <img
+              alt=""
               className="p-3 object-cover rounded-full h-40 w-40"
               src="https://media.istockphoto.com/id/1097490360/vector/vector-illustration-of-cute-black-cat.jpg?s=612x612&w=0&k=20&c=Ef0qYl79aZJ6NJXJVbJ0onjXVNnSyqrN_TKPjieAIGE="
             />

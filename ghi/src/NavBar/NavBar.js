@@ -1,6 +1,5 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Logout from "./Logout";
 import useUser from "../custom-hooks/useUser";
 import SearchBar from "./SearchBar";

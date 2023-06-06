@@ -92,6 +92,7 @@ const SignUpForm = ({ ids }) => {
       createCart();
       navigate("/");
     }
+    // eslint-disable-next-line
   }, [ids]);
 
   return (
