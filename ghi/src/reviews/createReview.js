@@ -101,8 +101,8 @@ export default function CreateReview({ listing_id, token }) {
                           value={rating}
                           onChange={(event) => handleChange(event, setRating)}
                           type="number"
-                          name="name"
-                          id="name"
+                          name="rating"
+                          id="rating"
                           className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                           required
                         />
