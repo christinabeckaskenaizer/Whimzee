@@ -2,7 +2,8 @@ import { useState, useEffect } from "react"
 
 const Reviews = ({listing_id}) => {
     const [reviews, setReviews] = useState([])
-    console.log("Review l.Id", listing_id)
+    const reviewLength = reviews.length
+
     const getReviews = async () => {
         if (listing_id) {
             try {
@@ -24,7 +25,7 @@ const Reviews = ({listing_id}) => {
 
     return (
         <>
-        <h1 className="text-2xl font-bold w-full px-6 py-6">Reviews</h1>
+        <h1 className="text-2xl font-bold w-full px-6 py-6">{reviewLength} Reviews</h1>
         {reviews.map((review) => {
             return (
         <div className="sm:grid flex flex-col items-center sm:grid-cols-2lg:grid-cols-4 gap-1">
