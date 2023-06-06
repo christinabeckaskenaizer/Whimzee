@@ -1,8 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState, useEffect } from "react";
 
-export default function EditListing({ fetchData, shopListings, ids, token, listing }) {
-    const [listings, setListings] = useState();
+export default function EditListing({ fetchData, shopListings, ids, listing }) {
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState(listing.name);
     const [picture, setPicture] = useState(listing.picture);
@@ -15,8 +14,8 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
     const [category, setCategory] = useState(listing.category);
     // const [currentCategory, setCurrentCategory] = useState(category);
 
-    console.log("shopListings", shopListings)
-    console.log("GOT LISTING:", listing)
+    console.log("shopListings", shopListings);
+    console.log("GOT LISTING:", listing);
 
     function closeModal() {
         setIsOpen(false);
@@ -36,7 +35,7 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
     // }, [shopListings])
 
     async function getCategories() {
-        const categoryUrl = "http://localhost:8000/categories";
+        const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}categories`;
         const response = await fetch(categoryUrl);
         const categoryData = await response.json();
         console.log("category data", categoryData)
@@ -46,7 +45,7 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
 
 
     async function editListing() {
-        const listingUrl = `http://localhost:8000/listings/${listing.id}`
+        const listingUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}${listing.id}`
         console.log("listing url", listingUrl)
 
         let data = {
@@ -59,16 +58,15 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
             picture: picture,
             category: category,
         };
-        console.log(data)
+        console.log(data);
 
-        let response = await fetch(listingUrl,
-            {
-                method: "PUT",
-                body: JSON.stringify(data),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+        let response = await fetch(listingUrl, {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
         if (response.ok) {
             fetchData();
             closeModal();
@@ -86,13 +84,10 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                 className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-800"
             >
                 Edit
-            </button >
+            </button>
 
             <Transition appear show={isOpen} as={Fragment}>
-                <Dialog
-                    as="div"
-                    className="relative z-10"
-                    onClose={closeModal}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -124,7 +119,10 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                                         >
                                             Edit Listing
                                         </Dialog.Title>
-                                        <form onSubmit={editListing} className="flex flex-col items-center px-4 py-5 my-2 w-full">
+                                        <form
+                                            onSubmit={editListing}
+                                            className="flex flex-col items-center px-4 py-5 my-2 w-full"
+                                        >
                                             <div className="w-full mb-2">
                                                 <label
                                                     htmlFor="small-input"
@@ -215,7 +213,6 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                                                 </label>
                                             </div>
                                             <div className="w-full mb-2">
-
                                                 <select
                                                     onChange={(e) => setCategory(e.target.value)}
                                                     className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
@@ -241,7 +238,6 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
                                                 </button>
                                             </div>
                                         </form>
-
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>

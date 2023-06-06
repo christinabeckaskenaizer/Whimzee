@@ -1,6 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-
 function CategoriesList({ setCategory, setsearched }) {
   const handleClick = (e) => {
     setsearched(false);

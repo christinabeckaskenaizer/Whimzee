@@ -2,7 +2,7 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 
-export default function OpenShop({ shop, token }) {
+export default function OpenShop({ token }) {
   const navigate = useNavigate();
 
   const [shopName, setShopName] = useState("");

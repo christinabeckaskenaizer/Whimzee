@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import useToken from "@galvanize-inc/jwtdown-for-react";
-import useCart from "../custom-hooks/useUser";
+import React, { useEffect } from "react";
+// import useToken from "@galvanize-inc/jwtdown-for-react";
+// import useCart from "../custom-hooks/useUser";
 import "../cart.css";
 import { Link } from "react-router-dom";
 async function CartView() {
   //   const [price, setPrice] = useState(0);
-  const [CartView, setCartView] = useState([]);
+  // const [CartView, setCartView] = useState([]);
   useEffect(() => {
     CartView();
+    // eslint-disable-next-line
   }, []);
   // async function loadCartView() {
   // const response = await fetch(`${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${user_id}`);
@@ -20,7 +21,7 @@ async function CartView() {
   //   console.error("error");
   // }
 
-  const [carts, setCarts] = useState([]);
+  // const [carts, setCarts] = useState([]);
   //   const handlePrice = () => {
   //     let ans = 0;
   //     useCart.map((cart) => (ans += quantity * cart.price));
@@ -89,11 +90,9 @@ export default CartView;
 //         <span>${price}</span>
 //         </div> */
 // }
-{
-  /* <div>
+/* <div>
   <button onClick={() => handleAdd(cart.quantity, "+")}>Add</button>
   <button>+</button>
   <button>{cart.quantity}</button>
   <button onClick={() => handleDelete(cart.quantity, "-")}>-</button>
 </div>; */
-}
