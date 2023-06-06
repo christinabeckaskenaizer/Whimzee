@@ -65,7 +65,7 @@ const Reviews = ({listing_id, token }) => {
                 const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/${listing_id}/reviews`;
                 const response = await fetch(url);
                 const data = await response.json();
-                setReviews(data);
+                setReviews(data.reverse());
             }
             catch(error) {
                 console.log("Error: ", error)
