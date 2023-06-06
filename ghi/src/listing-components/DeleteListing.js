@@ -17,18 +17,6 @@ export default function DeleteListing({
         setIsOpen(true);
     }
 
-    // async function deleteListing() {
-    //     const listingUrl = `http://localhost:8000/listings/${listing.id}`
-
-    //     await fetch(listingUrl,
-    //         { method: 'DELETE' });
-    //     closeModal();
-    // }
-
-    // useEffect(() => {
-    //     setListings(shopListings)
-    // }, [shopListings]);
-
     return (
         <>
             <button

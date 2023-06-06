@@ -36,7 +36,7 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
     // }, [shopListings])
 
     async function getCategories() {
-        const categoryUrl = "http://localhost:8000/categories";
+        const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}categories`;
         const response = await fetch(categoryUrl);
         const categoryData = await response.json();
         console.log("category data", categoryData)
@@ -46,7 +46,7 @@ export default function EditListing({ fetchData, shopListings, ids, token, listi
 
 
     async function editListing() {
-        const listingUrl = `http://localhost:8000/listings/${listing.id}`
+        const listingUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}${listing.id}`
         console.log("listing url", listingUrl)
 
         let data = {

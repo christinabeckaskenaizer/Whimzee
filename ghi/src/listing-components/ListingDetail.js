@@ -16,7 +16,7 @@ export default function ListingDetail({ }) {
 
   const getCombinedData = async () => {
     try {
-      const detailUrl = `http://localhost:8000/listings/${id}`;
+      const detailUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings/${id}`;
       const detailResponse = await fetch(detailUrl);
       const data = await detailResponse.json();
       setDetail(data);
@@ -25,7 +25,7 @@ export default function ListingDetail({ }) {
       if (detailResponse.ok) {
         const shop_id = data.shop_id;
 
-        const shopUrl = `http://localhost:8000/shops/${shop_id}`;
+        const shopUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/shops/${shop_id}`;
         const shopResponse = await fetch(shopUrl);
         const shopData = await shopResponse.json();
         setShop(shopData);

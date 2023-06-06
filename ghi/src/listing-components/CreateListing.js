@@ -57,7 +57,7 @@ export default function MyModal({ ids, shopListings, fetchData }) {
       // console.log(typeof data.price)
       // return
 
-      const url = "http://localhost:8000/listings";
+      const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(data),
