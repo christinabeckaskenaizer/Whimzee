@@ -36,7 +36,7 @@ export default function CreateReview({ listing_id, token }) {
     if (response.ok) {
       setRating("");
       setDescription("");
-      navigate(0);
+      setOpen(false);
     }
   };
 

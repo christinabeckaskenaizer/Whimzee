@@ -76,7 +76,7 @@ const Reviews = ({listing_id, token }) => {
     useEffect(() => {
         getReviews();
         // eslint-disable-next-line
-    }, [listing_id]);
+    }, [listing_id, reviews]);
 
     return (
         <>
