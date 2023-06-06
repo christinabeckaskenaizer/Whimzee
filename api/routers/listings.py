@@ -4,7 +4,8 @@ from queries.listings import (
     Error,
     ListingIn,
     ListingOut,
-    ListingRepository
+    ListingsInventoryUpdate,
+    ListingRepository,
 )
 
 router = APIRouter()
@@ -42,10 +43,7 @@ def get_a_listing(
 
 
 @router.delete("/listings/{listing_id}", response_model=bool)
-def delete_a_listing(
-    listing_id: int,
-    repo: ListingRepository = Depends()
-):
+def delete_a_listing(listing_id: int, repo: ListingRepository = Depends()):
     listing = repo.delete_a_listing(listing_id)
     if listing is None:
         raise HTTPException(
@@ -62,3 +60,17 @@ def update_listing(
     repo: ListingRepository = Depends(),
 ) -> Union[Error, ListingOut]:
     return repo.update_listing(listing_id, listing)
+
+
+@router.put("/listings/{listing_id}/inventory", response_model=bool)
+def update_inventory(
+    response: Response,
+    listing_id: int,
+    listing: ListingsInventoryUpdate,
+    repo: ListingRepository = Depends(),
+) -> bool:
+    result = repo.update_inventory(listing, listing_id)
+    if result is None:
+        response.status_code = 400
+        return Error(message="Unable to update listing")
+    return result

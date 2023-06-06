@@ -60,7 +60,7 @@ export default function EditShop({ token, shop }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="px-2 py-2 bg-gray-200 hover:bg-gray-300 text-black font-sm py-2 px-2 border border-gray-300 rounded-lg"
+        className="bg-gray-200 hover:bg-gray-300 text-black font-sm py-2 px-2 border border-gray-300 rounded-lg"
       >
         Edit Shop
       </button>

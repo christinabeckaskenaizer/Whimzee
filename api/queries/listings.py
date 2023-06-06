@@ -7,6 +7,11 @@ class Error(BaseModel):
     message: str
 
 
+class ListingsInventoryUpdate(BaseModel):
+    quantity: int
+    quantity_sold: int
+
+
 class ListingIn(BaseModel):
     shop_id: int
     name: str
@@ -32,11 +37,9 @@ class ListingOut(BaseModel):
 
 
 class ListingRepository:
-
-    def update_listing(self,
-                       listing_id: int,
-                       listing: ListingIn) -> Union[ListingOut, Error]:
-
+    def update_listing(
+        self, listing_id: int, listing: ListingIn
+    ) -> Union[ListingOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -80,9 +83,7 @@ class ListingRepository:
                     updated_listing = result.fetchone()
                     quantity_sold = updated_listing[0][4]
                     return ListingOut(
-                        id=listing_id,
-                        quantity_sold=quantity_sold,
-                        **old_data
+                        id=listing_id, quantity_sold=quantity_sold, **old_data
                     )
 
         except Exception as e:
@@ -90,7 +91,6 @@ class ListingRepository:
             return {"message": "Could not update listing"}
 
     def delete_a_listing(self, listing_id) -> bool:
-
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -99,7 +99,7 @@ class ListingRepository:
                         DELETE FROM listings
                         WHERE id = %s
                         """,
-                        [listing_id]
+                        [listing_id],
                     )
                     return True
         except Exception as e:
@@ -109,7 +109,6 @@ class ListingRepository:
             }
 
     def get_a_listing(self, listing_id) -> Optional[ListingOut]:
-
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -128,7 +127,7 @@ class ListingRepository:
                         FROM listings
                         WHERE id = %s
                         """,
-                        [listing_id]
+                        [listing_id],
                     )
                     record = db.fetchone()
                     if record is None:
@@ -139,7 +138,6 @@ class ListingRepository:
             return {"message": "Could not return listing"}
 
     def get_all(self) -> Union[Error, List[ListingOut]]:
-
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -206,8 +204,8 @@ class ListingRepository:
                             listing.price,
                             listing.new,
                             listing.picture,
-                            listing.category
-                        ]
+                            listing.category,
+                        ],
                     )
 
                     tup = db.fetchone()
@@ -216,9 +214,9 @@ class ListingRepository:
 
                     old_data = listing.dict()
 
-                    return ListingOut(id=id,
-                                      quantity_sold=quantity_sold,
-                                      **old_data)
+                    return ListingOut(
+                        id=id, quantity_sold=quantity_sold, **old_data
+                    )
         except Exception as e:
             print("Listing cannot be created")
             print(e)
@@ -236,3 +234,23 @@ class ListingRepository:
             picture=record[8],
             category=record[9],
         )
+
+    def update_inventory(
+        self, listing: ListingsInventoryUpdate, id: int
+    ) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE listings
+                        SET quantity=%s,
+                            quantity_sold=%s
+                        WHERE id=%s
+                        """,
+                        [listing.quantity, listing.quantity_sold, id],
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return None

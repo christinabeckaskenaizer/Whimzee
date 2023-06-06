@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 
 import AccountOrderHistory from "./AccountOrderHistory";
 import ShopSalesList from "./ShopSalesList";
 import OpenShop from "./OpenShop";
 
-import Spinner from "../utilities/Spinner";
 import ReturnToHome from "../utilities/ReturnToHome";
 
 export default function UserAccount({
@@ -16,10 +14,9 @@ export default function UserAccount({
   listings,
   fetchData,
 }) {
-  const navigate = useNavigate();
   const [view, setView] = useState(false);
-  const [userPic, setUserPic] = useState(null);
-  const [orders, setOrders] = useState(null);
+  const [userPic] = useState(null);
+  const [orders] = useState(null);
   const [shopListings, setShopListings] = useState(null);
   const [history, setHistory] = useState(null);
 
@@ -27,21 +24,21 @@ export default function UserAccount({
     setView(bool);
   };
 
-  const getShopOrders = async (id) => {
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/${id}/orders`;
-    const config = {
-      credentials: "include",
-      method: "get",
-      headers: {
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    };
-    const response = await fetch(url, config);
-    if (response.ok) {
-      const data = await response.json();
-      setOrders(data);
-    }
-  };
+  // const getShopOrders = async (id) => {
+  //   const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/${id}/orders`;
+  //   const config = {
+  //     credentials: "include",
+  //     method: "get",
+  //     headers: {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     },
+  //   };
+  //   const response = await fetch(url, config);
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setOrders(data);
+  //   }
+  // };
 
   const getShopListings = (id) => {
     const shopList = listings.filter((listing) => id === listing.shop_id);
@@ -68,6 +65,7 @@ export default function UserAccount({
     if (token) {
       getHistory();
     }
+    // eslint-disable-next-line
   }, [token]);
 
   useEffect(() => {
@@ -75,6 +73,7 @@ export default function UserAccount({
       // getShopOrders(ids.shop_id);
       getShopListings(ids.shop_id);
     }
+    // eslint-disable-next-line
   }, [ids, listings]);
 
   if (!ids) {
@@ -83,15 +82,17 @@ export default function UserAccount({
 
   return (
     <>
-      <div className="flex w-full flex-col items-center p-10">
-        <div className="flex flex-col items-center pb-10 mt-10">
+      <div className="flex w-full flex-col items-center p-5">
+        <div className="flex flex-col items-center pb-10 mt-5">
           {userPic ? (
             <img
+              alt=""
               className="p-3 object-cover rounded-full h-32 w-32"
               src={userPic}
             />
           ) : (
             <img
+              alt=""
               className="p-3 object-cover rounded-full h-40 w-40"
               src="https://media.istockphoto.com/id/1097490360/vector/vector-illustration-of-cute-black-cat.jpg?s=612x612&w=0&k=20&c=Ef0qYl79aZJ6NJXJVbJ0onjXVNnSyqrN_TKPjieAIGE="
             />
@@ -109,7 +110,7 @@ export default function UserAccount({
                 className={
                   view
                     ? "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none ring-2 ring-gray-400"
-                    : "rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none"
+                    : "rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none"
                 }
               >
                 My Shop
@@ -123,7 +124,7 @@ export default function UserAccount({
               className={
                 view
                   ? "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-gray-500 border rounded-lg hover:bg-slate-600 hover:ring-2 hover:ring-gray-400"
-                  : "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-gray-500 border rounded-lg hover:bg-slate-600 ring-2 ring-gray-400"
+                  : "w-24 px-2 py-2 text-sm font-medium text-center text-white bg-green-700 border rounded-lg hover:bg-slate-600 ring-2 ring-gray-400"
               }
             >
               Purchased

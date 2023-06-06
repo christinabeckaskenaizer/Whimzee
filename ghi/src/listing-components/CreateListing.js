@@ -1,8 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState, useEffect } from "react";
 
-export default function MyModal({ ids, shopListings, fetchData }) {
-  const [listings, setListings] = useState();
+export default function MyModal({ ids, fetchData }) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [picture, setPicture] = useState("");
@@ -34,7 +33,7 @@ export default function MyModal({ ids, shopListings, fetchData }) {
   // }, [shopListings])
 
   async function getCategories() {
-    const categoryUrl = "http://localhost:8000/categories";
+    const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
     const response = await fetch(categoryUrl);
     const categoryData = await response.json();
     setCategories(categoryData);
@@ -57,7 +56,7 @@ export default function MyModal({ ids, shopListings, fetchData }) {
       // console.log(typeof data.price)
       // return
 
-      const url = "http://localhost:8000/listings";
+      const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(data),
@@ -101,10 +100,7 @@ export default function MyModal({ ids, shopListings, fetchData }) {
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-10"
-          onClose={closeModal}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -136,7 +132,10 @@ export default function MyModal({ ids, shopListings, fetchData }) {
                     >
                       Add a new listing
                     </Dialog.Title>
-                    <form onSubmit={createListing} className="flex flex-col items-center px-4 py-5 my-2 w-full">
+                    <form
+                      onSubmit={createListing}
+                      className="flex flex-col items-center px-4 py-5 my-2 w-full"
+                    >
                       <div className="w-full mb-2">
                         <label
                           htmlFor="small-input"
@@ -223,7 +222,6 @@ export default function MyModal({ ids, shopListings, fetchData }) {
                         </label>
                       </div>
                       <div className="w-full mb-2">
-
                         <select
                           onChange={(e) => setCategory(e.target.value)}
                           className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
@@ -247,7 +245,6 @@ export default function MyModal({ ids, shopListings, fetchData }) {
                         </button>
                       </div>
                     </form>
-
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

@@ -9,7 +9,7 @@ export default function ReturnToHome() {
   useEffect(() => {
     setTimeout(() => {
       setShow(true);
-    }, 3000);
+    }, 2500);
   });
 
   return (

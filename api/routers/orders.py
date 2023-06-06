@@ -18,7 +18,7 @@ async def create(
     response: Response,
     repo: OrderRepo = Depends(),
     account: dict = Depends(authenticator.try_get_current_account_data)
-) -> OrderOut:
+) -> OrderOut | Error:
     if account is None:
         response.status_code = 401
         return Error(message="Sign in to create an order")

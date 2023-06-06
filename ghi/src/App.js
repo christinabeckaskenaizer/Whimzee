@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
 import DeleteListing from "./listing-components/DeleteListing";
-import ListingCard from "./listing-components/ListingCard.js";
 import AllListings from "./listing-components/AllListings.js";
 import ListingDetail from "./listing-components/ListingDetail";
 
@@ -18,26 +17,27 @@ import SignUpForm from "./SignUp";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import useUser from "./custom-hooks/useUser";
 import useShop from "./custom-hooks/useShop";
-import useCart from "./custom-hooks/useCart";
-import CreateListing from "./listing-components/CreateListing";
-import CartView from "./account-components/CartView";
+// import useCart from "./custom-hooks/useCart";
+import CartView from "./cart-folder/CartView";
+
+import Payment from "./payment-components/Payment";
 
 function App() {
   const { token } = useToken();
   const { user, ids } = useUser(token);
   const { shop } = useShop(ids);
-  const { cart } = useCart(ids);
+  // const { cart } = useCart(ids);
   const [listings, setListings] = useState([]);
   const [listingsBySearchBar, setListingsBySearchBar] = useState([]);
   const [searched, setSearched] = useState(false);
 
   const fetchListingData = async () => {
     try {
-      const listingsUrl = "http://localhost:8000/listings";
+      const listingsUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -98,7 +98,10 @@ function App() {
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
           <Route path="/button" element={<DeleteListing />} />
           <Route path="/liked"></Route>
-          <Route path="/checkout"></Route>
+          <Route
+            path="/checkout"
+            element={<Payment token={token} user={user} />}
+          ></Route>
         </Routes>
       </div>
     </BrowserRouter>
