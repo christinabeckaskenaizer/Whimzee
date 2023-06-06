@@ -1,12 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
-
-export default function DeleteListing({
-    shopListings,
-    handleClick,
-    open,
-}) {
+export default function DeleteListing({ shopListings, handleClick, open }) {
     let [isOpen, setIsOpen] = useState(open);
 
     function closeModal() {

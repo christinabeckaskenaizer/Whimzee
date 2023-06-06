@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function ListingDetail({ }) {
+export default function ListingDetail() {
   const [detail, setDetail] = useState("");
   const [shop, setShop] = useState("");
 
@@ -37,15 +37,15 @@ export default function ListingDetail({ }) {
   };
   console.log("id", id);
   const addToCart = async () => {
-    const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id}`;
-    const payload = {
-      // user_id: cart_id,
-      listing: id,
-      quantity: 1,
-    };
-    const response = await fetch(cartUrl);
-    const data = payload;
-    const result = await response.json();
+    // const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id}`;
+    // const payload = {
+    //   // user_id: cart_id,
+    //   listing: id,
+    //   quantity: 1,
+    // };
+    // const response = await fetch(cartUrl);
+    // const data = payload;
+    // const result = await response.json();
   };
   // useEffect(() => {
   //   addToCart();
@@ -53,6 +53,7 @@ export default function ListingDetail({ }) {
 
   useEffect(() => {
     getCombinedData();
+    // eslint-disable-next-line
   }, []);
 
   function formatToCurrency(amount) {
@@ -69,7 +70,7 @@ export default function ListingDetail({ }) {
             <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
               <div className="sticky top-0 z-50 overflow-hidden ">
                 <div className="flex flex-col items-center relative mb-6 lg:mb-10 ">
-                  <a
+                  <button
                     className="absolute left-0 transform lg:ml-2 top-1/2 translate-1/2"
                     href="#"
                   >
@@ -86,13 +87,13 @@ export default function ListingDetail({ }) {
                         d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
                       ></path>
                     </svg>
-                  </a>
+                  </button>
                   <img
                     className="object-cover w-96 h-96 rounded-xl"
                     src={detail.picture}
                     alt=""
                   />
-                  <a
+                  <button
                     className="absolute right-0 transform lg:mr-2 top-1/2 translate-1/2"
                     href="#"
                   >
@@ -109,11 +110,11 @@ export default function ListingDetail({ }) {
                         d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
                       ></path>
                     </svg>
-                  </a>
+                  </button>
                 </div>
                 <div className="flex-wrap hidden -mx-2 md:flex">
                   <div className="w-1/2 p-2 sm:w-1/4">
-                    <a
+                    <button
                       className="block border border-transparent hover:border-green-900"
                       href="#"
                     >
@@ -122,7 +123,7 @@ export default function ListingDetail({ }) {
                         src=""
                         alt=""
                       />
-                    </a>
+                    </button>
                   </div>
                 </div>
                 <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
@@ -145,7 +146,7 @@ export default function ListingDetail({ }) {
                   <p className="max-w-md mb-4 text-gray-500 dark:text-gray-500">
                     {detail.description}
                   </p>
-                  <a
+                  <button
                     onClick={(event) =>
                       navigateToStorePage(event, detail.shop_id)
                     }
@@ -153,7 +154,7 @@ export default function ListingDetail({ }) {
                     className="text-green-600 hover:underline dark:text-gray-400"
                   >
                     {shop && shop.name}
-                  </a>
+                  </button>
                   <div>
                     <span className="text-green-800 datext-green-200">
                       {detail.new ? "New" : "Used"}
