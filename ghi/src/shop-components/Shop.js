@@ -32,12 +32,12 @@ export default function Shop({ listings }) {
 
   useEffect(() => {
     getShopData();
-    // getShopOrders(ids.shop_id);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     getShopListings();
-    // getShopOrders(ids.shop_id);
+    // eslint-disable-next-line
   }, [listings]);
 
   if (!shop) {

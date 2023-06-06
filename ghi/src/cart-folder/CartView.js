@@ -20,7 +20,7 @@ async function CartView() {
     console.error("error");
   }
 
-  const [carts, setCarts] = useState([]);
+  // const [carts, setCarts] = useState([]);
   //   const handlePrice = () => {
   //     let ans = 0;
   //     useCart.map((cart) => (ans += quantity * cart.price));
