@@ -11,7 +11,6 @@ const Reviews = ({listing_id}) => {
                 const response = await fetch(url);
                 const data = await response.json();
                 setReviews(data);
-                console.log("Reviews",reviews)
             }
             catch(error) {
                 console.log("Error: ", error)
