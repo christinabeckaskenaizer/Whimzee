@@ -17,7 +17,6 @@ class CreateCategoryQueries:
             "id": 8,
             "name": "string"
         }
-        result.update(name)
         return result
 
 
