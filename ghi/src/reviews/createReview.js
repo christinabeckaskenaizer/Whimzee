@@ -1,9 +1,7 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useNavigate } from "react-router-dom";
 
 export default function CreateReview({ listing_id, token }) {
-  const navigate = useNavigate();
   const [rating, setRating] = useState("");
   const [description, setDescription] = useState("");
 
