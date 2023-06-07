@@ -205,3 +205,33 @@ What is necessary: request body with field: "status"
 ### Reviews
 
 ### Categories
+**Endpoint: Get all categories** \
+Method: GET \
+Request URL: http://localhost:8000/categories \
+Description: Get all existing categories \
+What is necessary: No request body, just Request Url
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/get_categories_response.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Create category** \
+Method: POST \
+Request URL: http://localhost:8000/categories \
+Description: Create a new category \
+What is necessary: Request Body with a "name" field and Request Url
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/create_category_request.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/create_category_response.png)
+</details>
+</p>
