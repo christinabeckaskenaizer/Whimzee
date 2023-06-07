@@ -14,6 +14,7 @@ The key features of the website include:
 <br>
 Overall, our shop website provides a user-friendly interface for buying and selling items. The combination of user management, shop creation, listing creation, reviews, and efficient search functionalities ensures a seamless experience for users as they explore and interact with the platform.
 <br>
+<br>
 
 **Team**
 
@@ -54,7 +55,7 @@ Run the following commands in the project directory:
 
 Diagram of the backend and how every table interacts with each other
 
-![Alt text](excalidraw.png)
+![Alt text](screenshots/excalidraw.png)
 
 ## API Documentation
 
