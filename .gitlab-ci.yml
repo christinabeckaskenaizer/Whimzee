@@ -20,7 +20,7 @@ api-unit-tests-job:
   script:
     - cd api
     - pip install pytest
-    - pip install fastapi
+    - pip install fastapi[all]
     - pip install jwtdown-fastapi
     - python -m pytest
 
