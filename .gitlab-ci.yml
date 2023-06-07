@@ -17,6 +17,8 @@ api-unit-tests-job:
   stage: test
   variables:
     DATABASE_URL: postgresql://whimzee:password@postgres/whimzee
+    SIGNING_KEY: 0f57055363d97947b8b50498ed95bbdee0a5611d8f00fe5219dfa23134273c95
+    WAIT_HOSTS: postgres:5432
   needs:
     - lint-test-job
   script:
