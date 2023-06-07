@@ -17,7 +17,7 @@ const useCart = (ids) => {
       getCart();
     }
   }, [ids]);
-  console.log(cart);
+  console.log({ cart });
   return { cart: cart };
 };
 
