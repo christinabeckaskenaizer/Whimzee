@@ -170,7 +170,7 @@ What is necessary: No Request body necessary, just the Url with shop_id
 </p>
 <br>
 
-**Endpoint: Get one orders** \
+**Endpoint: Get one order** \
 Method: GET \
 Request URL: http://localhost:8000/orders/{order_id} \
 Description: Get one orders by order_id \
@@ -183,6 +183,24 @@ What is necessary: No Request body necessary, just the Url with order_id
 </p>
 <br>
 
+**Endpoint: Update Order** \
+Method: PUT \
+Request URL: http://localhost:8000/orders/{order_id} \
+Description: Update status of order to true when order got processed \
+What is necessary: request body with field: "status"
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/update_order_request.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/update_order_response.png)
+</details>
+</p>
+<br>
 
 ### Reviews
 
