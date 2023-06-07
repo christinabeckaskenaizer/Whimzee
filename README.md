@@ -6,8 +6,6 @@ Our project is a user-friendly shop website that facilitates the buying and sell
 \
 \
 The key features of the website include:
-\
-\
 * User Registration and Authentication: Users can sign up with their personal details and create an account. They can subsequently log in to access the full range of functionalities offered by the website. Logging out allows users to securely end their session.
 \
 * Shop Creation: Each registered user has the option to open their own shop. This feature enables users to showcase their products and manage their inventory in a personalized space.
@@ -29,22 +27,22 @@ Overall, our shop website provides a user-friendly interface for buying and sell
 Backend: Categories, Listings \
 Frontend: Listings, Wishlist \
 Unit test: \
-Backend Auth \
-\
+Backend Auth
+
 * Sina Klughardt \
 Backend: Users, Orders \
 Frontend: Navbar(Searchbar, Navigation, Logos), Reviews, Landing Page \
 Unit Test: test_category \
-Backend Auth \
+Backend Auth
 * Santiago Bothe \
 Backend: Shops, Reviews, Cart listings \
 Frontend: Shops, Account Page \
 Unit Test: \
-Frontend Auth \
+Frontend Auth
 * Preeti Mahar \
 Backend: Cart \
 Frontend: \
-Unit Test: \
+Unit Test:
 
 ## How to run this project
 Here are step by step instructions to run this project:
