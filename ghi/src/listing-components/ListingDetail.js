@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Reviews from "../reviews/reviews";
+import AddToCart from "../cart-folder/AddToCart";
 
-export default function ListingDetail({token}) {
+export default function ListingDetail({ token }) {
   const [detail, setDetail] = useState("");
   const [shop, setShop] = useState("");
 
@@ -37,7 +38,7 @@ export default function ListingDetail({token}) {
     }
   };
   console.log("id", id);
-  console.log(detail.id)
+  console.log(detail.id);
   const addToCart = async () => {
     // const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id}`;
     // const payload = {
@@ -130,7 +131,7 @@ export default function ListingDetail({token}) {
                 </div>
                 <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
                   <div className="items-center justify-center mt-6">
-                    <Reviews listing_id={detail.id} token={token}/>
+                    <Reviews listing_id={detail.id} token={token} />
                   </div>
                 </div>
               </div>
@@ -166,12 +167,7 @@ export default function ListingDetail({token}) {
                 <div className="mt-6 "></div>
 
                 <div className="mt-6 ">
-                  <button
-                    onClick={addToCart}
-                    className="w-full px-4 py-2 font-bold text-white bg-green-800 lg:w-96 hover:bg-green-900"
-                  >
-                    Add to Cart
-                  </button>
+                  <AddToCart listing_id={id} />
                 </div>
               </div>
             </div>

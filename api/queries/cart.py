@@ -1,5 +1,6 @@
 # from fastAPI import FastAPI()
 from pydantic import BaseModel
+
 # from typing import Optional, List
 from queries.pool import pool
 
@@ -52,12 +53,10 @@ class CartOut(BaseModel):
 
 
 class CartRepository(BaseModel):
-
     def create(self, cart: CartIn) -> CartOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-
                     result = db.execute(
                         """
                         INSERT INTO cart
@@ -66,7 +65,7 @@ class CartRepository(BaseModel):
                         (%s)
                         RETURNING id
                         """,
-                        [cart.user_id]
+                        [cart.user_id],
                     )
                     id = result.fetchone()[0]
                     return CartOut(id=id, **cart.dict())
@@ -106,7 +105,7 @@ class CartRepository(BaseModel):
 
     #     except Exception as e:
     #         print(e)
-            # return None
+    # return None
 
     def get_cart(self, cart_id: int) -> CartOut | Error:
         try:
@@ -119,13 +118,10 @@ class CartRepository(BaseModel):
                         WHERE id = %s
                         ORDER BY id
                         """,
-                        [cart_id]
+                        [cart_id],
                     )
                     cart_data = db_result.fetchone()
-                    return CartOut(
-                        id=cart_data[0],
-                        user_id=cart_data[1]
-                    )
+                    return CartOut(id=cart_data[0], user_id=cart_data[1])
         except Exception as e:
             print(e)
             return None
@@ -139,7 +135,7 @@ class CartRepository(BaseModel):
                         DELETE FROM cart
                         WHERE id = %s
                         """,
-                        [cart_id]
+                        [cart_id],
                     ),
                     return True
 
@@ -160,18 +156,16 @@ class CartRepository(BaseModel):
                             WHERE id = %s
                             RETURNING (id, user_id)
                             """,
-                            [cart.user_id,
-                                cart_id]
+                            [cart.user_id, cart_id],
                         )
-                        return CartOut(id=cart_id,
-                                       **cart.dict())
+                        return CartOut(id=cart_id, **cart.dict())
                     else:
                         db.execute(
                             """
                             DELETE FROM cart
                             WHERE id = %s
                             """,
-                            [cart_id]
+                            [cart_id],
                         )
                         return True
 
@@ -242,5 +236,5 @@ class CartRepository(BaseModel):
 #                     return cartsnew
 
 #         except Exception as e:
-            # print(e)
-            # return None
+# print(e)
+# return None

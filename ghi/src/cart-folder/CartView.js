@@ -1,98 +1,56 @@
-import React, { useEffect } from "react";
-// import useToken from "@galvanize-inc/jwtdown-for-react";
-// import useCart from "../custom-hooks/useUser";
-import "../cart.css";
-import { Link } from "react-router-dom";
-async function CartView() {
-  //   const [price, setPrice] = useState(0);
-  // const [CartView, setCartView] = useState([]);
+import { useState, useEffect } from "react";
+import ListingCard from "../listing-components/ListingCard";
+
+export default function CartView({ ids, cartListings, setCartListings }) {
   useEffect(() => {
-    CartView();
-    // eslint-disable-next-line
-  }, []);
-  // async function loadCartView() {
-  // const response = await fetch(`${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${user_id}`);
+    console.log(cartListings, "this is inside the current cart");
+  }, [cartListings]);
 
-  // if (response.ok) {
-  //   const data = await response.json();
-  //   console.log(data);
-  //   CartView(data);
-  // } else {
-  //   console.error("error");
-  // }
-
-  // const [carts, setCarts] = useState([]);
-  //   const handlePrice = () => {
-  //     let ans = 0;
-  //     useCart.map((cart) => (ans += quantity * cart.price));
-  //     setPrice(ans);
-  //   };
-  //   useEffect(() => {
-  //     handlePrice();
-  //   });
-  //   const handleNoChange = (event) => {
-  //     const value = event.target.value;
-  //     // setNo(value);
-  //   };
-  //   const handleRemove = (event) => {
-  //     const value = event.target.value;
-  //     // set(value);
-  //   };
-  //   async function handleAdd(id) {
-  //     return (cart.quantity += 1);
-  //   }
-  //   async function handleDelete(id) {
-  //     return (cart.quantity -= 1);
-  //   }
-  // async function handleRemove(id) {
-  // delete cart.id;
-  // }
-  //     <><><template>
-  //         <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pt-6 gap-8">
-  //             <div class="rounded border-gray-300 dark:border-gray-700 border-dashed border-2 h-24"></div>
-  //             <div class="rounded border-gray-300 dark:border-gray-700 border-dashed border-2 h-24"></div>
-  //             <div class="rounded border-gray-300 dark:border-gray-700 border-dashed border-2 h-24"></div>
-  //         </div>
-  //     </template><script></script></></>
-  //   </>;
+  if (!ids || !cartListings) {
+    return (
+      <>
+        <h1>Loading</h1>
+      </>
+    );
+  }
   return (
     <>
+      <h1>This is the cart Page</h1>
+      <p>Here we need to list of of the current cart_listings</p>
       <div>
-        <Link to="/cart/:userid" className="btn btn-primary">
-          Shopping Cart
-        </Link>
+        <button className="bg-gray-400 p-1 rounded">Checkout</button>
       </div>
-      <article>
-        {CartView?.map((cart) => (
-          <div className="cart--box--id" key={cart.id}>
-            <div
-              className="box--large"
-              style={{ backgroundColor: "lightblue" }}
-            >
-              <p>{cart.listing}</p>
+      <div>
+        {cartListings.map((listing) => {
+          return (
+            <div className="flex">
+              <div key={listing.id} className="">
+                <ListingCard
+                  picture={listing.listing.picture}
+                  name={listing.listing.name}
+                  isNew={listing.listing.new}
+                  price={listing.listing.price}
+                  id={listing.listing.id}
+                />
+              </div>
+              <div>
+                <div className="flex">
+                  <button className="bg-gray-400 p-1 rounded">
+                    decrease by 1
+                  </button>
+                  <p>number in cart: {listing.num_in_cart}</p>
+                  <button className="bg-gray-400 p-1 rounded">
+                    increate by 1
+                  </button>
+                </div>
+                <button className="bg-gray-400 p-1 rounded mt-3">
+                  Delete from cart
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </article>
+          );
+        })}
+      </div>
     </>
   );
 }
-
-export default CartView;
-
-// <div>
-//   <span>{cart.price}</span>
-//   <button onClick={() => handleRemove(cart.id)}>Remove</button>
-// </div>;
-// {
-//   /* <div className="Total">
-//         <span>Total price of your cart</span>
-//         <span>${price}</span>
-//         </div> */
-// }
-/* <div>
-  <button onClick={() => handleAdd(cart.quantity, "+")}>Add</button>
-  <button>+</button>
-  <button>{cart.quantity}</button>
-  <button onClick={() => handleDelete(cart.quantity, "-")}>-</button>
-</div>; */

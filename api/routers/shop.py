@@ -1,10 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from queries.shop import (
-    Error,
-    ShopIn,
-    ShopOut,
-    ShopRepository
-)
+from queries.shop import Error, ShopIn, ShopOut, ShopRepository
 from authenticator import authenticator
 
 router = APIRouter()
@@ -15,7 +10,7 @@ async def create(
     shop: ShopIn,
     response: Response,
     repo: ShopRepository = Depends(),
-    account: dict = Depends(authenticator.try_get_current_account_data)
+    account: dict = Depends(authenticator.try_get_current_account_data),
 ) -> ShopOut:
     if account is None:
         response.status_code = 401
@@ -34,7 +29,7 @@ async def update(
     shop: ShopIn,
     response: Response,
     repo: ShopRepository = Depends(),
-    account: dict = Depends(authenticator.try_get_current_account_data)
+    account: dict = Depends(authenticator.try_get_current_account_data),
 ) -> ShopOut | Error:
     if account is None:
         response.status_code = 401
@@ -52,7 +47,7 @@ async def delete(
     shop_id: int,
     response: Response,
     repo: ShopRepository = Depends(),
-    account: dict = Depends(authenticator.try_get_current_account_data)
+    account: dict = Depends(authenticator.try_get_current_account_data),
 ) -> bool | Error:
     if account is None:
         response.status_code = 401
@@ -67,9 +62,7 @@ async def delete(
 
 @router.get("/shops/{shop_id}", response_model=ShopOut | Error)
 async def get_one(
-    shop_id: int,
-    response: Response,
-    repo: ShopRepository = Depends()
+    shop_id: int, response: Response, repo: ShopRepository = Depends()
 ) -> ShopOut | Error:
     result = repo.get_one(shop_id)
     if result is None:
@@ -79,10 +72,7 @@ async def get_one(
 
 
 @router.get("/shops", response_model=list[ShopOut] | Error)
-async def get_all(
-    response: Response,
-    repo: ShopRepository = Depends()
-):
+async def get_all(response: Response, repo: ShopRepository = Depends()):
     result = repo.get_all()
     if result is None:
         response.status_code = 404
