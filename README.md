@@ -62,7 +62,7 @@ Diagram of the backend and how every table interacts with each other
 ### User/Account
 **Endpoint: Create Account** \
 Method: POST \
-Url: \
+Request URL: http://localhost:8000/api/accounts \
 Description: Create a new account/user \
 What is necessary: request body with fields: "username", "email" and "password"
 <p>
@@ -77,6 +77,20 @@ What is necessary: request body with fields: "username", "email" and "password"
 ![Alt text](screenshots/create_user_response.png)
 </details>
 </p>
+<br>
+
+**Endpoint: Get Ids For User** \
+Method: GET \
+Request URL: http://localhost:8000/user/{user_id} \
+Description: Get user_id, shop_id and cart_id for a user \
+What is necessary: user_id in Request Url, no request body
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/get_user_ids_response.png)
+</details>
+</p>
+<br>
 
 ### Shop
 
