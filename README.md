@@ -60,10 +60,10 @@ Diagram of the backend and how every table interacts with each other
 ## API Documentation
 
 ### User/Account
-Endpoint: Create Account
-Method: POST
-Url:
-Description: Create a new account/user
+**Endpoint: Create Account** \
+Method: POST \
+Url: \
+Description: Create a new account/user \
 What is necessary: request body with fields: "username", "email" and "password"
 <p>
 <details>
@@ -71,14 +71,12 @@ What is necessary: request body with fields: "username", "email" and "password"
 ![Alt text](screenshots/create_user_request.png)
 </details>
 </p>
-<br>
 <p>
 <details>
 <summary>Response</summary>
 ![Alt text](screenshots/create_user_response.png)
 </details>
 </p>
-<br>
 
 ### Shop
 
