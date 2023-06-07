@@ -64,7 +64,10 @@ class cartListingRepository(BaseModel):
             print(e)
             return False
 
-    def get_all_cart_items(self, cart_id: int) -> CartListingsFull | None:
+    def get_all_cart_items(
+        self, cart_id: int
+    ) -> list[CartListingsFull] | None:
+        print("getting here")
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

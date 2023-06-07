@@ -6,10 +6,9 @@ const useCart = (ids) => {
   useEffect(() => {
     const getCart = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${ids.cart_id}`
+        `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart_listings/${ids.cart_id}`
       );
       const result = await response.json();
-
       setCart(result);
     };
 
@@ -17,7 +16,7 @@ const useCart = (ids) => {
       getCart();
     }
   }, [ids]);
-  console.log(cart);
+
   return { cart: cart };
 };
 
