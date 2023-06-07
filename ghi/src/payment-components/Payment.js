@@ -20,7 +20,7 @@ export default function Payment({ token, user }) {
       address: "some address",
       price: currentListing.item.price,
     };
-    console.log(data, "this is the data");
+
     const config = {
       credentials: "include",
       method: "post",
@@ -35,7 +35,6 @@ export default function Payment({ token, user }) {
       const responseData = await response.json();
       return responseData;
     } else {
-      console.log("response not ok");
       return null;
     }
   };

@@ -1,3 +1,7 @@
+## June 07, 2023
+- Cleaned up code
+- Started with Read Me
+
 ## June 06, 2023
 - Worked with Team on Frontend Deployment! Its all deployed now yay!
 - Reviews are showing up on listings detail page now

@@ -14,8 +14,6 @@ export default function EditListing({ fetchData, shopListings, ids, listing }) {
     const [category, setCategory] = useState(listing.category);
     // const [currentCategory, setCurrentCategory] = useState(category);
 
-    console.log("shopListings", shopListings);
-    console.log("GOT LISTING:", listing);
 
     function closeModal() {
         setIsOpen(false);
@@ -27,7 +25,6 @@ export default function EditListing({ fetchData, shopListings, ids, listing }) {
 
     function toggleUsed() {
         setToggled(!toggled);
-        console.log("toggled");
     }
 
     // useEffect(() => {
@@ -38,7 +35,6 @@ export default function EditListing({ fetchData, shopListings, ids, listing }) {
         const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
         const response = await fetch(categoryUrl);
         const categoryData = await response.json();
-        console.log("category data", categoryData)
         setCategories(categoryData);
     }
 
@@ -46,7 +42,6 @@ export default function EditListing({ fetchData, shopListings, ids, listing }) {
 
     async function editListing() {
         const listingUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings/${listing.id}`
-        console.log("listing url", listingUrl)
 
         let data = {
             shop_id: ids.shop_id,
@@ -58,7 +53,6 @@ export default function EditListing({ fetchData, shopListings, ids, listing }) {
             picture: picture,
             category: category,
         };
-        console.log(data);
 
         let response = await fetch(listingUrl, {
             method: "PUT",

@@ -79,7 +79,6 @@ class cartListingRepository(BaseModel):
                         [cart_id],
                     )
                     data = result.fetchall()
-                    print(data, "This is the record")
                     return [
                         CartListingsFull(
                             id=record[0],
