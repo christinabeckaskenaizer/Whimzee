@@ -12,6 +12,7 @@ from routers import (
     orders,
     cart,
     cart_listings,
+    wishlist,
 )
 
 router = APIRouter()
@@ -36,6 +37,7 @@ app.include_router(categories.router)
 app.include_router(listings.router)
 app.include_router(orders.router)
 app.include_router(review.router)
+app.include_router(wishlist.router)
 
 
 @app.get("/")
