@@ -3,7 +3,8 @@ from queries.cart_listings import (
     Error,
     cartListingIn,
     cartListingOut,
-    cartListingRepository
+    CartListingsFull,
+    cartListingRepository,
 )
 
 router = APIRouter()
@@ -13,7 +14,7 @@ router = APIRouter()
 def create(
     cart_listing: cartListingIn,
     response: Response,
-    repo: cartListingRepository = Depends()
+    repo: cartListingRepository = Depends(),
 ):
     result = repo.create(cart_listing)
     if result is None:
@@ -26,10 +27,23 @@ def create(
 def delete(
     cart_listing_id: int,
     response: Response,
-    repo: cartListingRepository = Depends()
+    repo: cartListingRepository = Depends(),
 ):
     result = repo.delete(cart_listing_id)
     if result is False:
         response.status_code = 400
         result = Error(message="unable to process delete request")
+    return result
+
+
+@router.get(
+    "/cart_listings/${cart_id}", response_model=list[CartListingsFull] | None
+)
+def get_all_cart_items(
+    cart_id: int, response: Response, repo: cartListingRepository = Depends()
+):
+    result = repo.get_all_cart_items(cart_id)
+    if result is None:
+        response.status_code = 400
+        result = Error(message="Unable to retrieve cart_listing")
     return result
