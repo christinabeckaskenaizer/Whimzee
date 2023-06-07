@@ -3,7 +3,7 @@ import useUser from "../custom-hooks/useUser";
 
 export default function AddToCart({ listing_id }) {
   const { token } = useToken();
-  const { user, ids } = useUser(token);
+  const { ids } = useUser(token);
 
   const handleClick = async (cart_id, listing_id) => {
     const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart_listings`;
