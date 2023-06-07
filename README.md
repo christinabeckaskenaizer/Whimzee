@@ -13,8 +13,8 @@ The key features of the website include:
 * Navigation Bar: The navigation bar offers convenient search functionalities. Users can search for specific items by selecting a category or using the search by name function. This feature streamlines the process of finding desired products within the website's extensive inventory.
 <br>
 Overall, our shop website provides a user-friendly interface for buying and selling items. The combination of user management, shop creation, listing creation, reviews, and efficient search functionalities ensures a seamless experience for users as they explore and interact with the platform.
-\
-\
+<br>
+
 **Team**
 
 * Christina Beckaskenaizer \
@@ -137,7 +137,7 @@ What is necessary: No Request body, just the Url
 </p>
 <br>
 
-**Endpoint: Create Account** \
+**Endpoint: Create an order** \
 Method: POST \
 Request URL: http://localhost:8000/orders \
 Description: Create a new order \
