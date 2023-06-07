@@ -55,6 +55,28 @@ const SignUpForm = ({ ids }) => {
     }
   };
 
+
+  const createWishlist = async () => {
+    const wishlistUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/wishlist`;
+    let wishlistData = {
+      user_id: ids.id,
+    };
+    try {
+      const wishlistResponse = await fetch(wishlistUrl, {
+        method: "POST",
+        body: JSON.stringify(wishlistData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (wishlistResponse.ok) {
+        console.log("wishlist created!");
+      }
+    } catch (err) {
+      console.log("Error: ", err);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const url = process.env.REACT_APP_SAMPLE_SERVICE_API_HOST;
@@ -90,6 +112,7 @@ const SignUpForm = ({ ids }) => {
 
     if (token) {
       createCart();
+      createWishlist();
       navigate("/");
     }
     // eslint-disable-next-line

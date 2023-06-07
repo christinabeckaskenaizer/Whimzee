@@ -11,11 +11,7 @@ def create_wishlist(
     wishlist: WishlistIn,
     response: Response,
     repo: WishlistRepository = Depends(),
-    account: dict = Depends(authenticator.try_get_current_account_data),
 ):
-    if account is None:
-        response.status_code = 401
-        return Error(message="Sign in to access")
     return repo.create(wishlist)
 
 

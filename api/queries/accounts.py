@@ -24,6 +24,7 @@ class AccountIDS(BaseModel):
     id: int
     shop_id: int | None
     cart_id: int | None
+    wishlist_id: int | None
 
 
 class AccountOutWithPassword(AccountOut):
