@@ -8,7 +8,6 @@ export default function ListingDetail({ token }) {
   const [shop, setShop] = useState("");
 
   const { id } = useParams();
-  console.log("id", id);
   const navigate = useNavigate();
 
   const navigateToStorePage = (event, shopId) => {
@@ -22,7 +21,6 @@ export default function ListingDetail({ token }) {
       const detailResponse = await fetch(detailUrl);
       const data = await detailResponse.json();
       setDetail(data);
-      console.log("detail", data);
 
       if (detailResponse.ok) {
         const shop_id = data.shop_id;
@@ -31,14 +29,12 @@ export default function ListingDetail({ token }) {
         const shopResponse = await fetch(shopUrl);
         const shopData = await shopResponse.json();
         setShop(shopData);
-        console.log("Shopdata", shop);
       }
     } catch (error) {
       console.log("error", error);
     }
   };
-  console.log("id", id);
-  console.log(detail.id);
+
   const addToCart = async () => {
     // const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id}`;
     // const payload = {

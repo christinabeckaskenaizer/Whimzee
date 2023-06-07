@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { NavLink } from "react-router-dom";
+import Error from "./reviews/Error";
 
-const Error = ({ auth }) => {
+const SignupError = ({ auth }) => {
   if (!auth) {
     return (
       <div className="text-center">
@@ -33,6 +34,7 @@ const SignUpForm = ({ ids }) => {
   const { token } = useToken();
   const { login } = useToken();
   const [auth, setAuth] = useState(false);
+  const [error, setError] = useState(false)
 
   const createCart = async () => {
     const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart`;
@@ -40,18 +42,14 @@ const SignUpForm = ({ ids }) => {
       user_id: ids.id,
     };
     try {
-      const cartResponse = await fetch(cartUrl, {
+      await fetch(cartUrl, {
         method: "POST",
         body: JSON.stringify(cartData),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      if (cartResponse.ok) {
-        console.log("cart got created");
-      }
     } catch (err) {
-      console.log("Error: ", err);
     }
   };
 
@@ -76,18 +74,15 @@ const SignUpForm = ({ ids }) => {
       if (createUser.ok) {
         login(email, password);
       } else {
-        console.log("unable to create user");
+        setError(true)
       }
     } else {
       setAuth(true);
-      console.log("a user with these credentials already exists");
       e.target.reset();
     }
   };
 
   useEffect(() => {
-    console.log(token);
-
     if (token) {
       createCart();
       navigate("/");
@@ -101,7 +96,8 @@ const SignUpForm = ({ ids }) => {
         className="flex flex-col items-center px-4 py-5 my-5"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <Error auth={auth} />
+        <SignupError auth={auth} />
+        <Error error={error} />
         <div className="mb-6">
           <label
             htmlFor="email"
