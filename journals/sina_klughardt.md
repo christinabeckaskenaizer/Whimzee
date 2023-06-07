@@ -1,6 +1,7 @@
 ## June 07, 2023
 - Cleaned up code
-- Started with Read Me
+- Started with Read Me, Made an excalidraw, structured the Read me, wrote my end points in Api Documentations
+- Changed update orders endpoint because I noticed that my logic was not making sense
 
 ## June 06, 2023
 - Worked with Team on Frontend Deployment! Its all deployed now yay!
