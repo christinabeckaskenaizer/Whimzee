@@ -1,3 +1,19 @@
+## June 7, 2023
+
+Today I worked on:
+
+- wrote a sql query to get all of the cart_listings for a specific cart
+
+- Implemented my previous hook to get the cart_listings on load
+
+- pair programmed with Preeti to make an "add to cart button"
+
+Today I realized we were missing the last sql query for the cart functionality. It was a join between the listings and cart. Now we can query for a list of all the cart_listings that belong to a specific cart.
+
+I finally got to put the cart hook to work! It has been on our App.js file this whole time but now it uses the sql query to grab all of the cart_listings so a user has them as soon as they login, reload, or hit back.
+
+I showed Preeti one way to implement a create button. We created a component called "AddToCart" and used it on christina's listing detail component. We are aiming to finish the cart functionality by today.
+
 ## June 6, 2023
 
 Today I worked on:

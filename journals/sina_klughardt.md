@@ -1,7 +1,14 @@
-## June 05, 2023
+## June 07, 2023
+- Cleaned up code
+- Started with Read Me
+
+## June 06, 2023
 - Worked with Team on Frontend Deployment! Its all deployed now yay!
 - Reviews are showing up on listings detail page now
 - you can create a review now
+- Got the unit tests to work on GitLab
+- Worked on dropdown: when you click somewhere on the website it closes
+- You can only write a review when you are logged in
 
 ## June 05, 2023
 - Worked with Team on Deployment: Got backend deployment to work with help of Rosheen
