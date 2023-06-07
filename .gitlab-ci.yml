@@ -15,6 +15,8 @@ lint-test-job:
 api-unit-tests-job:
   image: python:3-bullseye
   stage: test
+  variables:
+    DATABASE_URL: postgresql://whimzee:password@postgres/whimzee
   needs:
     - lint-test-job
   script:
