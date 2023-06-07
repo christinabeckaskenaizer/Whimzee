@@ -35,21 +35,6 @@ export default function ListingDetail({ token }) {
     }
   };
 
-  const addToCart = async () => {
-    // const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${id}`;
-    // const payload = {
-    //   // user_id: cart_id,
-    //   listing: id,
-    //   quantity: 1,
-    // };
-    // const response = await fetch(cartUrl);
-    // const data = payload;
-    // const result = await response.json();
-  };
-  // useEffect(() => {
-  //   addToCart();
-  // }, []);
-
   useEffect(() => {
     getCombinedData();
     // eslint-disable-next-line

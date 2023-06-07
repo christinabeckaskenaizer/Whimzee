@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ListingCard from "../listing-components/ListingCard";
 
 export default function CartView({ ids, cartListings, setCartListings }) {
@@ -23,8 +23,8 @@ export default function CartView({ ids, cartListings, setCartListings }) {
       <div>
         {cartListings.map((listing) => {
           return (
-            <div className="flex">
-              <div key={listing.id} className="">
+            <div key={listing.id} className="flex">
+              <div className="">
                 <ListingCard
                   picture={listing.listing.picture}
                   name={listing.listing.name}
