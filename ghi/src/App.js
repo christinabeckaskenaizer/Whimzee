@@ -32,9 +32,7 @@ function App() {
   const [searched, setSearched] = useState(false);
 
   const domain = /https:\/\/[^/]+/;
-  console.log(domain);
   const basename = process.env.PUBLIC_URL.replace(domain, "");
-  console.log(basename);
 
   const fetchListingData = async () => {
     try {
@@ -42,7 +40,7 @@ function App() {
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -98,7 +96,10 @@ function App() {
             path="/listings"
             element={<AllListings listings={listings} />}
           />
-          <Route path="/listings/:id" element={<ListingDetail ids={ids} token={token}/>} />
+          <Route
+            path="/listings/:id"
+            element={<ListingDetail ids={ids} token={token} />}
+          />
           <Route path="/listings/category/:id" />
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
           <Route path="/button" element={<DeleteListing />} />
