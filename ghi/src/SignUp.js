@@ -40,18 +40,14 @@ const SignUpForm = ({ ids }) => {
       user_id: ids.id,
     };
     try {
-      const cartResponse = await fetch(cartUrl, {
+      await fetch(cartUrl, {
         method: "POST",
         body: JSON.stringify(cartData),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      if (cartResponse.ok) {
-        console.log("cart got created");
-      }
     } catch (err) {
-      console.log("Error: ", err);
     }
   };
 
@@ -80,14 +76,11 @@ const SignUpForm = ({ ids }) => {
       }
     } else {
       setAuth(true);
-      console.log("a user with these credentials already exists");
       e.target.reset();
     }
   };
 
   useEffect(() => {
-    console.log(token);
-
     if (token) {
       createCart();
       navigate("/");

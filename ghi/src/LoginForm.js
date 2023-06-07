@@ -42,7 +42,6 @@ const LoginForm = () => {
       await login(email, password);
       e.target.reset();
     } else {
-      console.log("Invalid username or password");
       setAuth(true);
       e.target.reset();
     }

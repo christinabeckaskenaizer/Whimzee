@@ -7,15 +7,11 @@ function SearchBar({ setfilteredlistings, listings, setsearched }) {
   const [searchedItemName, setSearchedItemName] = useState("");
   const navigate = useNavigate();
   const fetchCategoryData = async () => {
-    try {
-      const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
-      const response = await fetch(categoryUrl);
-      if (response.ok) {
-        const data = await response.json();
-        setCategories(data);
-      }
-    } catch (error) {
-      console.log("error", error);
+    const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
+    const response = await fetch(categoryUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setCategories(data);
     }
   };
   useEffect(() => {
