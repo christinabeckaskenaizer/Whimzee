@@ -31,6 +31,11 @@ function App() {
   const [listingsBySearchBar, setListingsBySearchBar] = useState([]);
   const [searched, setSearched] = useState(false);
 
+  const domain = /https:\/\/[^/]+/;
+  console.log(domain);
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
+  console.log(basename);
+
   const fetchListingData = async () => {
     try {
       const listingsUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
@@ -45,7 +50,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <NavBar
         token={token}
         user={user}
@@ -93,7 +98,7 @@ function App() {
             path="/listings"
             element={<AllListings listings={listings} />}
           />
-          <Route path="/listings/:id" element={<ListingDetail ids={ids} />} />
+          <Route path="/listings/:id" element={<ListingDetail ids={ids} token={token}/>} />
           <Route path="/listings/category/:id" />
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
           <Route path="/button" element={<DeleteListing />} />
