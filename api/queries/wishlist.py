@@ -38,7 +38,7 @@ class WishlistRepository:
                         """,
                         [wishlist.listings, user_id],
                     )
-                    old_data = wishlist.dict()
+                    # old_data = wishlist.dict()
                     updated_listing = result.fetchone()
                     print("LOOKY HERE!!!!!", updated_listing)
                     if updated_listing:
@@ -66,7 +66,7 @@ class WishlistRepository:
             print(e)
             return {"message": "Could not update wishlist"}
 
-    def get_a_wishlist(self, wishlist_id) -> Optional[WishlistOut]:
+    def get_a_wishlist(self, user_id) -> Optional[WishlistOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -74,11 +74,11 @@ class WishlistRepository:
                         """
                         SELECT id,
                             user_id,
-                            listings,
+                            listings
                         FROM wishlist
-                        WHERE id = %s
+                        WHERE user_id = %s
                         """,
-                        [wishlist_id],
+                        [user_id],
                     )
                     record = db.fetchone()
                     if record is None:
@@ -86,7 +86,7 @@ class WishlistRepository:
                     return self.record_to_wishlist_out(record)
         except Exception as e:
             print(e)
-            return {"message": "Could not return cart"}
+            return {"message": "Could not return wishlist"}
 
     def create(self, wishlist: WishlistIn) -> WishlistOut | Error:
         try:

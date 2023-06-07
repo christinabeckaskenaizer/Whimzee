@@ -16,11 +16,11 @@ def create_wishlist(
 
 @router.get("/wishlist/{user_id}", response_model=Union[WishlistOut, Error])
 def get_a_wishlist(
-    wishlist_id: int,
+    user_id: int,
     response: Response,
     repo: WishlistRepository = Depends(),
 ) -> WishlistOut:
-    wishlist = repo.get_a_wishlist(wishlist_id)
+    wishlist = repo.get_a_wishlist(user_id)
     if wishlist is None:
         raise HTTPException(
             status_code=404,
