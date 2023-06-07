@@ -7,9 +7,24 @@ Summary of project here
 **Team**
 
 * Christina Beckaskenaizer
-* Sina Klughardt -
+Backend: Categories, Listings
+Frontend: Listings, Wishlist
+Unit test:
+Backend Auth
+* Sina Klughardt
+Backend: Users, Orders
+Frontend: Navbar(Searchbar, Navigation, Logos), Reviews, Landing Page
+Unit Test: test_category
+Backend Auth
 * Santiago Bothe
+Backend: Shops, Reviews, Cart listings
+Frontend: Shops, Account Page
+Unit Test:
+Frontend Auth
 * Preeti Mahar
+Backend: Cart
+Frontend:
+Unit Test:
 
 ## How to run this project
 Here are step by step instructions to run this project:
