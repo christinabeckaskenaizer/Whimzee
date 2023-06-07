@@ -11,18 +11,22 @@ from routers import (
     review,
     orders,
     cart,
-    cart_listings
+    cart_listings,
+    wishlist,
 )
 
 router = APIRouter()
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:3000",
+    os.environ.get("CORS_HOST", None),
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        os.environ.get("CORS_HOST", "http://localhost:3000")
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,6 +42,7 @@ app.include_router(categories.router)
 app.include_router(listings.router)
 app.include_router(orders.router)
 app.include_router(review.router)
+app.include_router(wishlist.router)
 
 
 @app.get("/")

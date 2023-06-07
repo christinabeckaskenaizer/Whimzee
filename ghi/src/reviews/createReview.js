@@ -1,14 +1,23 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useNavigate } from "react-router-dom";
 
-export default function OpenShop({ token }) {
-  const navigate = useNavigate();
-
-  const [shopName, setShopName] = useState("");
-  const [email, setEmail] = useState("");
+function CreateReviewButton({ token, setOpen }) {
+    if (token) {
+        return (
+        <button
+        onClick={() => setOpen(true)}
+        className="bg-white hover:bg-gray-200 text-black font-sm
+         hover:text-black py-2 px-2 border border-gray-400
+        rounded-lg "
+      >
+        Write a review
+      </button>
+        )
+    }
+}
+export default function CreateReview({ listing_id, token }) {
+  const [rating, setRating] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState("");
 
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
@@ -22,12 +31,10 @@ export default function OpenShop({ token }) {
     event.preventDefault();
 
     const data = {};
-    data.name = shopName;
-    data.email = email;
-    data.description = description;
-    data.profile_picture = picture;
+    data.rating = rating
+    data.description = description
 
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/shops`;
+    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/${listing_id}/reviews`;
     const config = {
       credentials: "include",
       method: "post",
@@ -39,25 +46,15 @@ export default function OpenShop({ token }) {
     };
     const response = await fetch(url, config);
     if (response.ok) {
-      setShopName("");
-      setEmail("");
+      setRating("");
       setDescription("");
-      setPicture("");
-      navigate(0);
+      setOpen(false);
     }
   };
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="bg-white hover:bg-gray-200 text-black font-sm
-         hover:text-black py-2 px-2 border border-gray-400
-        rounded-lg "
-      >
-        Open Shop
-      </button>
-
+    <CreateReviewButton token={token} setOpen={setOpen}/>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
@@ -91,7 +88,7 @@ export default function OpenShop({ token }) {
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <Dialog.Title className="text-base text-center font-semibold leading-6 text-gray-900">
-                      Open a Shop
+                      Tell us how you like our product
                     </Dialog.Title>
                     <form
                       className="flex flex-col items-center px-4 py-5 my-5 w-full"
@@ -99,46 +96,38 @@ export default function OpenShop({ token }) {
                     >
                       <div className="w-full mb-6">
                         <label
-                          htmlFor="name"
+                          htmlFor="rating"
                           className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
-                          Shop Name
+                          Rating
                         </label>
-                        <input
-                          value={shopName}
-                          onChange={(event) => handleChange(event, setShopName)}
-                          type="text"
-                          name="name"
-                          id="name"
+                                <select
+                                onChange={(event) => handleChange(event, setRating)}
+                                className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                                <option value={0}>Rating</option>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                    <option value={5}>5</option>
+                                </select>
+                        {/* <input
+                          value={rating}
+                          onChange={(event) => handleChange(event, setRating)}
+                          type="number"
+                          name="rating"
+                          id="rating"
+                          placeholder="1-5"
                           className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                          placeholder="Name of Shop"
                           required
-                        />
-                      </div>
-                      <div className="w-full mb-6">
-                        <label
-                          htmlFor="email"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900"
-                        >
-                          Shop email
-                        </label>
-                        <input
-                          value={email}
-                          onChange={(event) => handleChange(event, setEmail)}
-                          type="email"
-                          name="email"
-                          id="email"
-                          className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                          placeholder="name@company.com"
-                          required
-                        />
+                        /> */}
                       </div>
                       <div className="w-full mb-6">
                         <label
                           htmlFor="description"
                           className="block mb-2 m-auto text-sm font-large text-gray-900"
                         >
-                          Shop Description
+                          Description
                         </label>
                         <textarea
                           value={description}
@@ -148,26 +137,9 @@ export default function OpenShop({ token }) {
                           type="text"
                           name="description"
                           id="description"
-                          placeholder="Shop Description"
+                          placeholder="Description"
                           className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                           required
-                        />
-                      </div>
-                      <div className="w-full mb-6">
-                        <label
-                          htmlFor="picture"
-                          className="block mb-2 m-auto text-sm font-large text-gray-900"
-                        >
-                          Banner Picture
-                        </label>
-                        <input
-                          value={picture}
-                          onChange={(event) => handleChange(event, setPicture)}
-                          type="text"
-                          name="picture"
-                          id="picture"
-                          className="w-full bg-gray-50 m-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-                          placeholder="picture URL (optional)"
                         />
                       </div>
                       <button

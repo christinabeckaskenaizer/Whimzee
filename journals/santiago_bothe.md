@@ -1,3 +1,53 @@
+## June 7, 2023
+
+Today I worked on:
+
+- wrote a sql query to get all of the cart_listings for a specific cart
+
+- Implemented my previous hook to get the cart_listings on load
+
+- pair programmed with Preeti to make an "add to cart button"
+
+Today I realized we were missing the last sql query for the cart functionality. It was a join between the listings and cart. Now we can query for a list of all the cart_listings that belong to a specific cart.
+
+I finally got to put the cart hook to work! It has been on our App.js file this whole time but now it uses the sql query to grab all of the cart_listings so a user has them as soon as they login, reload, or hit back.
+
+I showed Preeti one way to implement a create button. We created a component called "AddToCart" and used it on christina's listing detail component. We are aiming to finish the cart functionality by today.
+
+## June 6, 2023
+
+Today I worked on:
+
+- fixing connectivity errors between our front and back ends
+
+- attempted to integrate Web-sockets
+
+- debugged various errors with my teammates
+
+- Pair programmed with Sina to make our Test-job pass the pipeline.
+
+Today I patched up some cors errors we were getting by adding a base url to our browser router component (which we were missing) and fixing a typo on an -e tag in the Galvanize cloud command we originally passed.
+
+I was unable to make the progress I hoped on web-sockets and have decided to leave them out as there is no longer enough time to do that and everything else I want to finish.
+
+Me and Sina worked on making the pipeline tests pass. We added a variable to the .yml file which contains the secret key, and base url. This was able to satisfy the compiler. Finally our tests ran and passed.
+
+## June 5, 2023
+
+Today I worked on:
+
+- deployment to the backend
+
+- deployment to the front end
+
+- eliminating front end linting errors
+
+today we got our database running on Galvanize cloud. We worked on it together by following the notion. I shared my screen and my teammates pair programmed with me.
+
+We followed the same procedure with the front end but unfortunately we ran out of time. We were able to get everything to show up correctly but for some reason our fast api was not able to connect to our database until the very end of the day. It was a typo.
+
+I cleared all of the front end linting errors that were making the pipeline failed. I was able to make them all pass!
+
 ## June 2, 2023
 
 Today I worked on:

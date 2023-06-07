@@ -32,10 +32,12 @@ export default function Shop({ listings }) {
 
   useEffect(() => {
     getShopData();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     getShopListings();
+    // eslint-disable-next-line
   }, [listings]);
 
   if (!shop) {

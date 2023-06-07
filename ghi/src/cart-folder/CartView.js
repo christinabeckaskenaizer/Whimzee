@@ -1,127 +1,56 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import useToken from "@galvanize-inc/jwtdown-for-react";
-import useCart from "../custom-hooks/useUser";
-//import "../cart.css";
-import ReactDOM from "react-dom/client";
-import { Link } from "react-router-dom";
-import { createContext } from "react";
-const UserContext = createContext();
+import { useEffect } from "react";
+import ListingCard from "../listing-components/ListingCard";
 
-function CartView() {
-  //   const [price, setPrice] = useState(0);
-  const [CartView, setCartView] = useState([]);
-  const { user_id } = useParams();
-  //console.log("id", ids);
+export default function CartView({ ids, cartListings, setCartListings }) {
+  useEffect(() => {
+    console.log(cartListings, "this is inside the current cart");
+  }, [cartListings]);
 
-  // useEffect ( => {
-  // loadCartView();
-  // }, []);
-  async function loadCartView() {
-    // const response = await fetch(
-    //   `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${ids.cart_id}`
-    // );
-    const response = await fetch(`http://localhost:3000/cart/${user_id}`);
-    if (response.ok) {
-      const data = await response.json();
-      //console.log(data);
-      //return data;
-      setCartView(data.CartView);
-    } else {
-      console.error("error");
-    }
+  if (!ids || !cartListings) {
+    return (
+      <>
+        <h1>Loading</h1>
+      </>
+    );
   }
-  //}, [ids]);
-  //return { CartView: CartView };
-
-  //console.log({ CartView });
-
   return (
     <>
-      <UserContext.Provider value={user_id}>
-        <br />
-        <div>
-          <Link to="cart/:userid">CartView</Link>
-        </div>
-        <br />
-      </UserContext.Provider>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Cart View</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <h1>This is the cart Page</h1>
+      <p>Here we need to list of of the current cart_listings</p>
+      <div>
+        <button className="bg-gray-400 p-1 rounded">Checkout</button>
+      </div>
+      <div>
+        {cartListings.map((listing) => {
+          return (
+            <div key={listing.id} className="flex">
+              <div className="">
+                <ListingCard
+                  picture={listing.listing.picture}
+                  name={listing.listing.name}
+                  isNew={listing.listing.new}
+                  price={listing.listing.price}
+                  id={listing.listing.id}
+                />
+              </div>
+              <div>
+                <div className="flex">
+                  <button className="bg-gray-400 p-1 rounded">
+                    decrease by 1
+                  </button>
+                  <p>number in cart: {listing.num_in_cart}</p>
+                  <button className="bg-gray-400 p-1 rounded">
+                    increate by 1
+                  </button>
+                </div>
+                <button className="bg-gray-400 p-1 rounded mt-3">
+                  Delete from cart
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }
-<CartView />;
-
-// {
-//   /* {CartView?.map((CartView) => ( */
-// }
-// {
-//   /* <tr key={CartView.id}> */
-// }
-// {
-//   cart: cart;
-// }
-// {
-//   /* </tr> */
-// }
-// {
-//   /* ))} */
-// }
-//const root = document.getElementById("root");
-//root.render(<CartView />);
-// else {
-//   console.error("error");
-// }
-
-//const [carts, setCarts] = useState([]);
-//return { CartView: CartView };
-
-// return (
-//   <>
-//     <div>
-//       <Link to="/cart/:userid" className="btn btn-primary">
-//         Shopping Cart
-//       </Link>
-//     </div>
-//     <article>
-//       {CartView?.map((cart) => (
-//         <div className="cart--box--id" key={cart.id}>
-//           <div
-//             className="box--large"
-//             style={{ backgroundColor: "lightblue" }}
-//           >
-//             <p>{ids}</p>
-//             <p>{cart}</p>
-//           </div>
-//         </div>
-//       ))}
-//     </article>
-//   </>
-// );
-
-export default CartView;
-
-// <div>
-//   <span>{cart.price}</span>
-//   <button onClick={() => handleRemove(cart.id)}>Remove</button>
-// </div>;
-// {
-//   /* <div className="Total">
-//         <span>Total price of your cart</span>
-//         <span>${price}</span>
-//         </div> */
-// }
-//{
-/* <div>
-  <button onClick={() => handleAdd(cart.quantity, "+")}>Add</button>
-  <button>+</button>
-  <button>{cart.quantity}</button>
-  <button onClick={() => handleDelete(cart.quantity, "-")}>-</button>
-</div>; */
-//}

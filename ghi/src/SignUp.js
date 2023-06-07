@@ -2,54 +2,56 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { NavLink } from "react-router-dom";
+import Error from "./reviews/Error";
 
-const Error = ({auth}) => {
+const SignupError = ({ auth }) => {
   if (!auth) {
     return (
-        <div className="text-center">
-          <h1 >Welcome to Whimzee</h1>
-        </div>
-    )
+      <div className="text-center">
+        <h1>Welcome to Whimzee</h1>
+      </div>
+    );
   } else {
     return (
-      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-  <span className="block sm:inline">Username or Email already taken. Please try again</span>
-  <span className="block sm:inline"></span>
-</div>
-    )
+      <div
+        className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+        role="alert"
+      >
+        <span className="block sm:inline">
+          Username or Email already taken. Please try again
+        </span>
+        <span className="block sm:inline"></span>
+      </div>
+    );
   }
 };
 
-const SignUpForm = ({ids}) => {
-  const navigate = useNavigate()
+const SignUpForm = ({ ids }) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { token } = useToken();
   const { login } = useToken();
-  const [auth, setAuth] = useState(false)
+  const [auth, setAuth] = useState(false);
+  const [error, setError] = useState(false)
 
   const createCart = async () => {
     const cartUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart`;
     let cartData = {
-      user_id:ids.id
+      user_id: ids.id,
     };
     try {
-      const cartResponse = await fetch(cartUrl, {
+      await fetch(cartUrl, {
         method: "POST",
         body: JSON.stringify(cartData),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      if (cartResponse.ok) {
-        console.log("cart got created")
-      }
-    } catch(err) {
-      console.log("Error: ", err)
+    } catch (err) {
     }
-
-}
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,26 +72,23 @@ const SignUpForm = ({ids}) => {
       };
       const createUser = await fetch(`${url}/api/accounts`, config);
       if (createUser.ok) {
-        const newUserData = await createUser.json();
         login(email, password);
       } else {
-        console.log("unable to create user");
+        setError(true)
       }
     } else {
-      setAuth(true)
-      console.log("a user with these credentials already exists");
+      setAuth(true);
       e.target.reset();
     }
   };
 
   useEffect(() => {
-    console.log(token)
-
     if (token) {
       createCart();
-      navigate("/")
+      navigate("/");
     }
-  }, [ids])
+    // eslint-disable-next-line
+  }, [ids]);
 
   return (
     <>
@@ -97,7 +96,8 @@ const SignUpForm = ({ids}) => {
         className="flex flex-col items-center px-4 py-5 my-5"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <Error auth={auth}/>
+        <SignupError auth={auth} />
+        <Error error={error} />
         <div className="mb-6">
           <label
             htmlFor="email"

@@ -1,60 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 
 import ReturnToHome from "../utilities/ReturnToHome";
 import PaymentSuccess from "./PaySuccess";
 
 export default function Payment({ token, user }) {
   const [purchased, setPurchased] = useState(false);
-  // temporary list
-  const tempList = [
-    {
-      item: {
-        id: 2,
-        shop_id: 2,
-        name: "item1",
-        quantity: 10,
-        quantity_sold: 0,
-        description: "aaa",
-        price: 10,
-        new: true,
-        picture: "",
-        category: 1,
-      },
-      quantity: 4,
-    },
-    {
-      item: {
-        id: 3,
-        shop_id: 2,
-        name: "item2",
-        quantity: 25,
-        quantity_sold: 0,
-        description: "dddddd",
-        price: 12,
-        new: false,
-        picture: "",
-        category: 5,
-      },
-      quantity: 13,
-    },
-    {
-      item: {
-        id: 4,
-        shop_id: 2,
-        name: "item3",
-        quantity: 45,
-        quantity_sold: 0,
-        description: "e",
-        price: 100,
-        new: true,
-        picture: "",
-        category: 1,
-      },
-      quantity: 7,
-    },
-  ];
-  const navigate = useNavigate();
+
   const [checkoutList, setCheckoutList] = useState([]);
   const orderUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/orders`;
   const listingUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
@@ -69,6 +20,7 @@ export default function Payment({ token, user }) {
       address: "some address",
       price: currentListing.item.price,
     };
+
     const config = {
       credentials: "include",
       method: "post",
@@ -83,16 +35,15 @@ export default function Payment({ token, user }) {
       const responseData = await response.json();
       return responseData;
     } else {
-      console.log("response not ok");
       return null;
     }
   };
 
   const editListings = async (currentListing) => {
     let data = {
-      quantity: currentListing.item.quantity - currentListing.quantity,
-      quantity_sold:
-        currentListing.item.quantity_sold + currentListing.quantity,
+      quantity: (currentListing.item.quantity -= currentListing.quantity),
+      quantity_sold: (currentListing.item.quantity_sold +=
+        currentListing.quantity),
     };
     const config = {
       method: "put",
@@ -114,9 +65,11 @@ export default function Payment({ token, user }) {
   const handlePay = async () => {
     for (let i = 0; i < checkoutList.length; i++) {
       const currentListing = checkoutList[i];
+      console.log("this is the current Listing in the loop", currentListing);
       if (currentListing.item.quantity >= currentListing.quantity) {
-        const shop = currentListing.item.shop_id;
+        // const shop = currentListing.item.shop_id;
         const orderStatus = await createNewOrder(currentListing);
+        console.log("this is the status of the order creation", orderStatus);
         if (orderStatus) {
           editListings(currentListing);
         } else {
@@ -131,7 +84,53 @@ export default function Payment({ token, user }) {
   };
 
   useEffect(() => {
-    setCheckoutList(tempList);
+    setCheckoutList([
+      {
+        item: {
+          id: 1,
+          shop_id: 1,
+          name: "item1",
+          quantity: 10,
+          quantity_sold: 0,
+          description: "aaa",
+          price: 10,
+          new: true,
+          picture: "",
+          category: 1,
+        },
+        quantity: 4,
+      },
+      {
+        item: {
+          id: 1,
+          shop_id: 1,
+          name: "item2",
+          quantity: 25,
+          quantity_sold: 0,
+          description: "dddddd",
+          price: 12,
+          new: false,
+          picture: "",
+          category: 5,
+        },
+        quantity: 13,
+      },
+      {
+        item: {
+          id: 1,
+          shop_id: 1,
+          name: "item3",
+          quantity: 45,
+          quantity_sold: 0,
+          description: "e",
+          price: 100,
+          new: true,
+          picture: "",
+          category: 1,
+        },
+        quantity: 7,
+      },
+    ]);
   }, []);
 
   if (!user) {

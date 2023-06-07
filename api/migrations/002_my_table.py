@@ -10,7 +10,7 @@ steps = [
         """,
         """
         DROP TABLE users
-        """
+        """,
     ],
     [
         """
@@ -25,7 +25,7 @@ steps = [
         """,
         """
         DROP TABLE shops
-        """
+        """,
     ],
     [
         """
@@ -36,7 +36,7 @@ steps = [
         """,
         """
         DROP TABLE categories
-        """
+        """,
     ],
     [
         """
@@ -53,7 +53,7 @@ steps = [
           ('other');
         """,
         """
-        """
+        """,
     ],
     [
         """
@@ -72,7 +72,7 @@ steps = [
         """,
         """
         DROP TABLE listings
-        """
+        """,
     ],
     [
         """
@@ -83,7 +83,7 @@ steps = [
         """,
         """
         DROP TABLE cart
-        """
+        """,
     ],
     [
         """
@@ -95,7 +95,7 @@ steps = [
         """,
         """
         DROP TABLE cart_listings
-        """
+        """,
     ],
     [
         """
@@ -114,7 +114,7 @@ steps = [
         """,
         """
         DROP TABLE orders
-        """
+        """,
     ],
     [
         """
@@ -129,6 +129,18 @@ steps = [
         """,
         """
         DROP TABLE reviews
+        """,
+    ],
+    [
         """
+        CREATE TABLE wishlist (
+          id SERIAL PRIMARY KEY NOT NULL,
+          user_id INT REFERENCES users (id) NOT NULL,
+          listings INT[]
+        );
+        """,
+        """
+        DROP TABLE wishlist
+        """,
     ],
 ]
