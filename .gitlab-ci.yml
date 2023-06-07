@@ -22,6 +22,8 @@ api-unit-tests-job:
     - pip install pytest
     - pip install fastapi[all]
     - pip install jwtdown-fastapi
+    - pip install psycopg[binary,pool]
+    - pip install uvicorn[standard]
     - python -m pytest
 
 # # Build the React/JavaScript front-end
