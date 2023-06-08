@@ -1,12 +1,9 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReturnToHome from "../utilities/ReturnToHome";
 
-export default function CartView({ ids, cartListings, setCartListings }) {
-  useEffect(() => {
-    console.log(cartListings, "this is inside the current cart");
-  }, [cartListings]);
-
+export default function CartView({ ids, cartListings }) {
+  // props setCartListings is available
   if (!ids || !cartListings) {
     return (
       <>
