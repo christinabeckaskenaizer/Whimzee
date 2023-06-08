@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import ReturnToHome from "../utilities/ReturnToHome";
 import DeleteCart from "./DeleteCart";
+import Payment from "../payment-components/Payment";
 
 export default function CartView({ ids, cartListings }) {
   // props setCartListings is available
@@ -74,6 +75,7 @@ export default function CartView({ ids, cartListings }) {
             );
           })}
           <div className="mt-2 flex justify-end w-full">
+            {/* <Payment/> */}
             <Link to="/checkout" className="bg-gray-400 flex p-1 rounded">
               Checkout
             </Link>

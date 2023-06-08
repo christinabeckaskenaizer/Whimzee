@@ -21,7 +21,6 @@ import useCart from "./custom-hooks/useCart";
 import CartView from "./cart-folder/CartView";
 
 import Payment from "./payment-components/Payment";
-import PaySuccess from "./payment-components/success";
 
 function App() {
   const { token } = useToken();
@@ -137,7 +136,6 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/success" element={<PaySuccess />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
