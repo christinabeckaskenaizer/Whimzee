@@ -8,29 +8,32 @@ export default function AllListings({
   filteredlistings,
   searched,
   ids,
-  token
+  token,
+  wishlist,
+  fetchWL,
+  changeWishlist
 }) {
   const [filteredListings, setFilteredListings] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+  // const [wishlist, setWishlist] = useState([]);
 
-  const getWishlist = async () => {
-    const wishlistUrl = `http://localhost:8000/wishlist/${ids.id}`;
-    const config = {
-      credentials: "include",
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    };
-    const response = await fetch(wishlistUrl, config, ids);
-    const data = await response.json();
-    if (response.ok) {
-      setWishlist(data.listings)
-    } else {
-      console.log("uh ohhhhh")
-    }
-  }
+  // const getWishlist = async () => {
+  //   const wishlistUrl = `http://localhost:8000/wishlist/${ids.id}`;
+  //   const config = {
+  //     credentials: "include",
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     },
+  //   };
+  //   const response = await fetch(wishlistUrl, config, ids);
+  //   const data = await response.json();
+  //   if (response.ok) {
+  //     setWishlist(data.listings)
+  //   } else {
+  //     console.log("uh ohhhhh")
+  //
+  // }
 
 
   useEffect(() => {
@@ -43,11 +46,10 @@ export default function AllListings({
     // eslint-disable-next-line
   }, [category]);
 
-  useEffect(() => {
-    if (token && ids) {
-      getWishlist();
-    }
-  }, [token, ids])
+  // useEffect(() => {
+  //   if (token && ids) {
+  //   }
+  // }, [token, ids])
 
   if (searched === false) {
     if (category === null) {
@@ -59,6 +61,11 @@ export default function AllListings({
               listings.map((listing) => (
                 <div key={listing.id} className="col-span-1">
                   <ListingCard
+                    changeWishlist={changeWishlist}
+                    ids={ids}
+                    token={token}
+                    fetchWL={fetchWL}
+                    wishlist={wishlist}
                     picture={listing.picture}
                     name={listing.name}
                     isNew={listing.new}

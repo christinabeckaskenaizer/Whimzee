@@ -1,49 +1,47 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function ListingCard({ picture, name, isNew, price, id }) {
+export default function ListingCard({ picture, name, isNew, price, id, wishlist, fetchWL, token, ids, changeWishlist }) {
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
 
-  // const updateWishlist = async (newWishlist) => {
-  //   const url = `http://localhost:8000/wishlist/${ids.id}`
+  const updateWishlist = async (newWishlist) => {
+    const url = `http://localhost:8000/wishlist/${ids.id}`
 
-  //   const data = {
-  //     "user_id": ids.id,
-  //     "listings": newWishlist
-  //   }
+    const data = {
+      "user_id": ids.id,
+      "listings": newWishlist.listings
+    }
+    const config = {
+      credentials: "include",
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+        headers: { Authorization: `Bearer ${token}` },
+      },
+      body: JSON.stringify(data)
+    };
 
-  //   const config = {
-  //     credentials: "include",
-  //     method: 'PUT',
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     },
-  //     body: JSON.stringify(data)
-  //   };
+    const response = await fetch(url, config);
 
-  //   const response = await fetch(url, config);
-  //   const updated = await response.json()
+    const updated = await response.json()
+    console.log(updated)
 
-  //   if (response.ok) {
-  //     setWishlist(updated.listings);
-  //   } else {
-  //     console.log("ERROR!!")
-  //   }
-  // }
+    if (response.ok) {
+      changeWishlist(updated);
+    } else {
+      console.log("ERROR!!")
+    }
+  }
 
-  // const removeItem = async (listing) => {
-  //   const iToBeRemoved = wishlist.indexOf(listing.id);
-  //   wishlist.splice(iToBeRemoved, 1);
-
-
-  //   setWishlist(wishlist);
-  //   updateWishlist(wishlist);
-  // }
+  const addItem = async () => {
+    console.log(wishlist)
+    wishlist.listings.push(id);
+    updateWishlist(wishlist);
+  }
 
   return (
     <div className="container flex justify-center mx-4 max max-w-4xl hover:scale-105">
@@ -71,7 +69,7 @@ export default function ListingCard({ picture, name, isNew, price, id }) {
             {formatter.format(price)}
           </span>
           <button
-            onClick={() => console.log('hi')}
+            onClick={() => addItem()}
             href="#"
             className="text-green-700 font-medium rounded-lg text-sm px-2 py-2 text-center"
           >

@@ -32,6 +32,7 @@ function App() {
   const [listingsBySearchBar, setListingsBySearchBar] = useState([]);
   const [searched, setSearched] = useState(false);
   const [cartListings, setCartListings] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -45,9 +46,30 @@ function App() {
     } catch (error) { }
   };
 
+  const fetchWishlistData = async () => {
+    try {
+      const wishlistUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/wishlist/${ids.id}`;
+      const config = {
+        credentials: "include",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      };
+      const response = await fetch(wishlistUrl, config);
+      const data = await response.json();
+      setWishlist(data);
+    } catch (error) { }
+  };
+
   useEffect(() => {
     fetchListingData();
   }, []);
+
+  useEffect(() => {
+    fetchWishlistData();
+  }, [ids])
 
   useEffect(() => {
     setCartListings(cart);
@@ -69,6 +91,10 @@ function App() {
             path="/"
             element={
               <Landing
+                changeWishlist={(listings) => setWishlist(listings)}
+                ids={ids}
+                fetchWL={fetchWishlistData}
+                wishlist={wishlist}
                 listings={listings}
                 filteredlistings={listingsBySearchBar}
                 searched={searched}
