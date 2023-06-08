@@ -69,7 +69,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchWishlistData();
+    if (ids) {
+      fetchWishlistData();
+    }
     // eslint-disable-next-line
   }, [ids])
 
