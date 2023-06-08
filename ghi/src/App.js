@@ -8,6 +8,7 @@ import UserAccount from "./account-components/UserAccount.js";
 import DeleteListing from "./listing-components/DeleteListing";
 import AllListings from "./listing-components/AllListings.js";
 import ListingDetail from "./listing-components/ListingDetail";
+import WishList from "./WishList";
 
 import Shop from "./shop-components/Shop";
 
@@ -40,7 +41,7 @@ function App() {
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -102,7 +103,7 @@ function App() {
           />
           <Route path="/listings/category/:id" />
           <Route path="/cart/:userid" element={<CartView id={ids} />} />
-          <Route path="/button" element={<DeleteListing />} />
+          <Route path="/wishlist" element={<WishList token={token} ids={ids} listings={listings} />} />
           <Route path="/liked"></Route>
           <Route
             path="/checkout"
