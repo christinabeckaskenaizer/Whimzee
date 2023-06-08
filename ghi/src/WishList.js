@@ -10,7 +10,7 @@ export default function WishList({ token, ids }) {
 
     const getListings = async () => {
         try {
-            const listingsUrl = `http://localhost:8000/listings`;
+            const listingsUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
             const response = await fetch(listingsUrl);
             const listingsData = await response.json();
             if (response.ok) {
@@ -22,7 +22,7 @@ export default function WishList({ token, ids }) {
     }
 
     const getWishlist = async () => {
-        const wishlistUrl = `http://localhost:8000/wishlist/${ids.id}`;
+        const wishlistUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/wishlist/${ids.id}`;
         const config = {
             credentials: "include",
             method: "GET",
@@ -41,7 +41,7 @@ export default function WishList({ token, ids }) {
     }
 
     const updateWishlist = async (newWishlist) => {
-        const url = `http://localhost:8000/wishlist/${ids.id}`
+        const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/wishlist/${ids.id}`
 
         const data = {
             "user_id": ids.id,
