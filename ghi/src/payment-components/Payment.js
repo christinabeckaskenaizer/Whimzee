@@ -14,7 +14,7 @@ export default function Payment({
   const [checkoutList, setCheckoutList] = useState([]);
   const orderUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/orders`;
   const listingUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   // const cancelButtonRef = useRef(null);
 
   const createNewOrder = async (currentListing) => {
