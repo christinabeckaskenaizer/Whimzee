@@ -1,14 +1,12 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import useUser from "../custom-hooks/useUser";
-//import { useEffect, useState } from "react";
-//import CartView from "./CartView";
+
 export default function DeleteCart({ listing_id }) {
   const { token } = useToken();
   const { ids } = useUser(token);
 
   const handleClick = async (listing_id) => {
     const data = {
-      cart_id: cart_id,
       listing_id: listing_id,
     };
 
@@ -24,8 +22,9 @@ export default function DeleteCart({ listing_id }) {
       `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart_listings/${listing_id}`,
       config
     );
-    const cart_id = ids.cart_id;
+
     if (response.ok) {
+      const data = await response.json();
       console.log(data);
       console.log("item deleted");
     } else {
@@ -41,8 +40,6 @@ export default function DeleteCart({ listing_id }) {
       </>
     );
   }
-  //const cart_id = ids.cart_id;
-  //const cart_listings_id = ids.listing_id;
 
   return (
     <>
@@ -55,14 +52,3 @@ export default function DeleteCart({ listing_id }) {
     </>
   );
 }
-// useEffect(() => {
-//     const DeleteCart = async () => {
-//       const response = await fetch(
-//         `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${ids.listing_id}`, config
-//       );
-//       const result = await response.json();
-//     if (response.ok) {
-//         DeleteCart();
-//     }
-//     }
-//     })

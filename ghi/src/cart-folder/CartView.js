@@ -65,7 +65,7 @@ export default function CartView({ ids, cartListings }) {
                         >
                           Delete
                         </button>
-                        <DeleteCart listing_id={listing.listing.id} />
+                        <DeleteCart listing_id={listing.id} />
                       </div>
                     </div>
                   </div>
