@@ -68,7 +68,6 @@ const SignUpForm = ({ ids }) => {
         },
       });
       if (wishlistResponse.ok) {
-        console.log("wishlist created!");
       }
     } catch (err) {
       console.log("Error: ", err);
