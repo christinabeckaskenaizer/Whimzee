@@ -103,6 +103,10 @@ function App() {
             element={<AllListings listings={listings} />}
           />
           <Route
+            path="/wishlist"
+            element={<WishList listings={listings} token={token} ids={ids} />}
+          />
+          <Route
             path="/listings/:id"
             element={
               <ListingDetail

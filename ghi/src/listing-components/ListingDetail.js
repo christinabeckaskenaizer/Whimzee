@@ -52,7 +52,7 @@ export default function ListingDetail({
     // left side of page from top to bottom
 
     <div>
-      <section className="py-20 font-poppins dark:bg-slate-50">
+      <section className="py-20 font-poppins">
         <div className="mx-auto w-screen px-24">
           <div className="flex flex-wrap mb-24 -mx-4">
             <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
@@ -101,7 +101,7 @@ export default function ListingDetail({
                   </button>
                 </div>
                 <div className="flex-wrap hidden -mx-2 md:flex">
-                  <div className="w-1/2 p-2 sm:w-1/4">
+                  {/* <div className="w-1/2 p-2 sm:w-1/4">
                     <button
                       className="block border border-transparent hover:border-green-900"
                       href="#"
@@ -112,7 +112,7 @@ export default function ListingDetail({
                         alt=""
                       />
                     </button>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
                   <div className="items-center justify-center mt-6">
