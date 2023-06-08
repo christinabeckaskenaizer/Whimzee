@@ -18,7 +18,7 @@ import SignUpForm from "./SignUp";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import useUser from "./custom-hooks/useUser";
 import useShop from "./custom-hooks/useShop";
-// import useCart from "./custom-hooks/useCart";
+import useCart from "./custom-hooks/useCart";
 import CartView from "./cart-folder/CartView";
 
 import Payment from "./payment-components/Payment";
@@ -27,10 +27,11 @@ function App() {
   const { token } = useToken();
   const { user, ids } = useUser(token);
   const { shop } = useShop(ids);
-  // const { cart } = useCart(ids);
+  const { cart } = useCart(ids);
   const [listings, setListings] = useState([]);
   const [listingsBySearchBar, setListingsBySearchBar] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [cartListings, setCartListings] = useState([]);
 
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -47,6 +48,10 @@ function App() {
   useEffect(() => {
     fetchListingData();
   }, []);
+
+  useEffect(() => {
+    setCartListings(cart);
+  }, [cart]);
 
   return (
     <BrowserRouter basename={basename}>
@@ -99,15 +104,38 @@ function App() {
           />
           <Route
             path="/listings/:id"
-            element={<ListingDetail ids={ids} token={token} />}
+            element={
+              <ListingDetail
+                ids={ids}
+                token={token}
+                cartListings={cartListings}
+                setCartListings={setCartListings}
+              />
+            }
           />
           <Route path="/listings/category/:id" />
-          <Route path="/cart/:userid" element={<CartView id={ids} />} />
-          <Route path="/wishlist" element={<WishList token={token} ids={ids} listings={listings} />} />
+          <Route
+            path="/cart"
+            element={
+              <CartView
+                ids={ids}
+                cartListings={cartListings}
+                setCartListings={setCartListings}
+              />
+            }
+          />
+          <Route path="/button" element={<DeleteListing />} />
           <Route path="/liked"></Route>
           <Route
             path="/checkout"
-            element={<Payment token={token} user={user} />}
+            element={
+              <Payment
+                token={token}
+                user={user}
+                cartListings={cartListings}
+                setCartListings={setCartListings}
+              />
+            }
           ></Route>
         </Routes>
       </div>

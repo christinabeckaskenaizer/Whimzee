@@ -20,9 +20,7 @@ async def create(
 
 @router.get("/cart/{cart_id}", response_model=CartOut | Error)
 async def get(
-    cart_id: int,
-    response: Response,
-    repo: CartRepository = Depends()
+    cart_id: int, response: Response, repo: CartRepository = Depends()
 ):
     result = repo.get_cart(cart_id)
     if result is None:
@@ -33,9 +31,7 @@ async def get(
 
 @router.delete("/cart/{cart_id}", response_model=bool | Error)
 async def delete(
-    cart_id: int,
-    response: Response,
-    repo: CartRepository = Depends()
+    cart_id: int, response: Response, repo: CartRepository = Depends()
 ) -> bool | Error:
     result = repo.delete(cart_id)
     if result is None:
@@ -49,7 +45,7 @@ async def put(
     cart_id: int,
     cart: CartIn,
     response: Response,
-    repo: CartRepository = Depends()
+    repo: CartRepository = Depends(),
 ) -> CartOut | Error | bool:
     result = repo.update(cart_id, cart)
     if result is None:

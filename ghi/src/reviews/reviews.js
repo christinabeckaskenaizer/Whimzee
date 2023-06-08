@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import CreateReview from "./createReview"
+import Error from "./Error"
 
 const ReviewRating = ({rating}) => {
     if (rating < 2) {
@@ -55,9 +56,11 @@ const ReviewRating = ({rating}) => {
     }
 }
 
+
 const Reviews = ({listing_id, token }) => {
     const [reviews, setReviews] = useState([])
     const reviewLength = reviews.length
+    const [error, setError] = useState(false)
 
     const getReviews = async () => {
         if (listing_id) {
@@ -68,7 +71,7 @@ const Reviews = ({listing_id, token }) => {
                 setReviews(data.reverse());
             }
             catch(error) {
-                console.log("Error: ", error)
+                setError(true)
             }
         }
 
@@ -82,6 +85,7 @@ const Reviews = ({listing_id, token }) => {
         <>
         <h1 className="text-2xl font-bold w-full px-6 py-6">{reviewLength} Reviews</h1>
         < CreateReview listing_id={listing_id} token={token}/>
+        <Error error={error}/>
         {reviews.map((review) => {
             return (
         <div key={review.id} className="sm:grid flex flex-col items-center sm:grid-cols-2lg:grid-cols-4 gap-1">

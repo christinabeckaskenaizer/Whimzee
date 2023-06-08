@@ -6,6 +6,7 @@ import { Menu, Transition } from "@headlessui/react";
 
 export default function AccountNav({ token }) {
   const { user } = useUser(token);
+
   if (token) {
     return (
       <>
@@ -66,7 +67,7 @@ export default function AccountNav({ token }) {
                   <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
                       <Menu.Item>
-                        {({ active }) => (
+                        {() => (
                           <div className="py-1" role="none">
                             <div
                               className="text-gray-700 block px-4 py-1 text-sm"
@@ -86,7 +87,7 @@ export default function AccountNav({ token }) {
                         )}
                       </Menu.Item>
                       <Menu.Item>
-                        {({ active }) => (
+                        {() => (
                           <NavLink
                             to="/account"
                             className="text-gray-700 block px-4 py-2 text-sm md:dark:text-black md:hover:text-green-800"
@@ -106,7 +107,7 @@ export default function AccountNav({ token }) {
             </li>
             <li>
               <NavLink
-                to="#"
+                to="/cart"
                 className="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:p-0 dark:text-white md:dark:text-black md:hover:text-green-800"
                 aria-current="page"
               >

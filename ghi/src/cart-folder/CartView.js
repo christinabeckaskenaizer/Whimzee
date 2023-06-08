@@ -1,98 +1,83 @@
-import React, { useEffect } from "react";
-// import useToken from "@galvanize-inc/jwtdown-for-react";
-// import useCart from "../custom-hooks/useUser";
-import "../cart.css";
+// import { useEffect } from "react";
 import { Link } from "react-router-dom";
-async function CartView() {
-  //   const [price, setPrice] = useState(0);
-  // const [CartView, setCartView] = useState([]);
-  useEffect(() => {
-    CartView();
-    // eslint-disable-next-line
-  }, []);
-  // async function loadCartView() {
-  // const response = await fetch(`${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/cart/${user_id}`);
+import ReturnToHome from "../utilities/ReturnToHome";
 
-  // if (response.ok) {
-  //   const data = await response.json();
-  //   console.log(data);
-  //   CartView(data);
-  // } else {
-  //   console.error("error");
-  // }
-
-  // const [carts, setCarts] = useState([]);
-  //   const handlePrice = () => {
-  //     let ans = 0;
-  //     useCart.map((cart) => (ans += quantity * cart.price));
-  //     setPrice(ans);
-  //   };
-  //   useEffect(() => {
-  //     handlePrice();
-  //   });
-  //   const handleNoChange = (event) => {
-  //     const value = event.target.value;
-  //     // setNo(value);
-  //   };
-  //   const handleRemove = (event) => {
-  //     const value = event.target.value;
-  //     // set(value);
-  //   };
-  //   async function handleAdd(id) {
-  //     return (cart.quantity += 1);
-  //   }
-  //   async function handleDelete(id) {
-  //     return (cart.quantity -= 1);
-  //   }
-  // async function handleRemove(id) {
-  // delete cart.id;
-  // }
-  //     <><><template>
-  //         <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pt-6 gap-8">
-  //             <div class="rounded border-gray-300 dark:border-gray-700 border-dashed border-2 h-24"></div>
-  //             <div class="rounded border-gray-300 dark:border-gray-700 border-dashed border-2 h-24"></div>
-  //             <div class="rounded border-gray-300 dark:border-gray-700 border-dashed border-2 h-24"></div>
-  //         </div>
-  //     </template><script></script></></>
-  //   </>;
+export default function CartView({ ids, cartListings }) {
+  // props setCartListings is available
+  if (!ids || !cartListings) {
+    return (
+      <>
+        <ReturnToHome />
+      </>
+    );
+  }
   return (
     <>
-      <div>
-        <Link to="/cart/:userid" className="btn btn-primary">
-          Shopping Cart
-        </Link>
-      </div>
-      <article>
-        {CartView?.map((cart) => (
-          <div className="cart--box--id" key={cart.id}>
-            <div
-              className="box--large"
-              style={{ backgroundColor: "lightblue" }}
-            >
-              <p>{cart.listing}</p>
-            </div>
+      <div className="flex justify-center ">
+        <ul className="mt-4 flex items-center flex-col w-5/6 md:w-[40rem] lg:w-[50rem]">
+          <div className="flex justify-end w-full">
+            <Link to="/checkout" className="bg-gray-400 flex p-1 rounded">
+              Checkout
+            </Link>
           </div>
-        ))}
-      </article>
+          {cartListings.map((listing) => {
+            return (
+              <div key={listing.id} className="flex w-full">
+                <li className="flex m-auto justify-between items-center w-full border-b-2">
+                  <div className="h-28 w-28 overflow-hidden rounded-md border border-gray-200">
+                    <img
+                      src={listing.listing.picture}
+                      alt=""
+                      className="h-full w-full object-cover object-center"
+                    />
+                  </div>
+
+                  <div className="ml-4 flex flex-col py-6 w-5/6">
+                    <div>
+                      <div className="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <Link to={`/listings/${listing.listing.id}`}>
+                            {listing.listing.name}
+                          </Link>
+                        </h3>
+                        <p className="ml-4">${listing.listing.price}</p>
+                      </div>
+                      <p className="mt-1 text-sm text-gray-500">
+                        {listing.listing.description.slice(0, 25)}...
+                      </p>
+                    </div>
+                    <div className="flex flex-1 items-end justify-between text-sm">
+                      <div className="text-gray-500 flex items-center ">
+                        <button className="w-6 h-6 text-sm bg-gray-100 hover:bg-gray-200 rounded-full">
+                          -
+                        </button>
+                        <p className="mx-2">Amount: {listing.num_in_cart}</p>
+                        <button className="w-6 h-6 text-sm bg-gray-100 hover:bg-gray-200 rounded-full">
+                          +
+                        </button>
+                      </div>
+
+                      <div className="flex">
+                        <button
+                          type="button"
+                          className="font-medium text-red-600 hover:text-red-400"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </div>
+            );
+          })}
+          <div className="mt-2 flex justify-end w-full">
+            <Link to="/checkout" className="bg-gray-400 flex p-1 rounded">
+              Checkout
+            </Link>
+          </div>
+        </ul>
+      </div>
     </>
   );
 }
-
-export default CartView;
-
-// <div>
-//   <span>{cart.price}</span>
-//   <button onClick={() => handleRemove(cart.id)}>Remove</button>
-// </div>;
-// {
-//   /* <div className="Total">
-//         <span>Total price of your cart</span>
-//         <span>${price}</span>
-//         </div> */
-// }
-/* <div>
-  <button onClick={() => handleAdd(cart.quantity, "+")}>Add</button>
-  <button>+</button>
-  <button>{cart.quantity}</button>
-  <button onClick={() => handleDelete(cart.quantity, "-")}>-</button>
-</div>; */

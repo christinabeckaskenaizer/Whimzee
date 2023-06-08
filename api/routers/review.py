@@ -35,7 +35,7 @@ async def get_all_from_listing(
     return result
 
 
-@router.delete("/reviews/{review_id}")
+@router.delete("/reviews/{review_id}", response_model=bool | Error)
 async def delete(
     review_id: int,
     response: Response,
@@ -53,7 +53,7 @@ async def delete(
     return result
 
 
-@router.put("/reviews{review_id}")
+@router.put("/reviews{review_id}", response_model=ReviewOut | Error)
 async def update(
     review: ReviewIn,
     review_id: int,
