@@ -183,6 +183,73 @@ What is necessary: Url with correct "shop id".
 
 ### Reviews
 
+**Endpoint: Create Review** \
+Method: POST \
+Request URL: http://localhost:8000/{listing_id}/reviews \
+Authorization: Requires user Login and Token \
+Description: Create a new review for a listing \
+What is necessary: request body with fields: "rating" and "description".
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/reviews-screenshots/create_review_bod.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/reviews-screenshots/create_review_res.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Get Reviews** \
+Method: GET \
+Request URL: http://localhost:8000/{listing_id}/reviews \
+Description: Get all reviews for a listing \
+What is necessary: Url with correct "listing id"
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/reviews-screenshots/get_review_res.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Delete Review** \
+Method: DELETE \
+Request URL: http://localhost:8000/reviews/{review_id} \
+Authorization: Requires user Login and Token \
+Description: Delete a review \
+What is necessary: Url with correct "review id"
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/reviews-screenshots/delete_review_res.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Update Reviews** \
+Method: PUT \
+Request URL: http://localhost:8000/reviews/{review_id} \
+Authorization: Requires user Login and Token \
+Description: Update review for a listing \
+What is necessary: request body with fields: "rating" and "description".
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/reviews-screenshots/update_review_bod.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/reviews-screenshots/update_review_res.png)
+</details>
+</p>
+<br>
+
 ### Categories
 
 ### Cart Listings

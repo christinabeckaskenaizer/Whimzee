@@ -1,10 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from queries.review import (
-    Error,
-    ReviewIn,
-    ReviewOut,
-    ReviewRepo
-)
+from queries.review import Error, ReviewIn, ReviewOut, ReviewRepo
 from authenticator import authenticator
 
 router = APIRouter()
@@ -16,7 +11,7 @@ async def create(
     listing: ReviewIn,
     response: Response,
     repo: ReviewRepo = Depends(),
-    account: dict = Depends(authenticator.try_get_current_account_data)
+    account: dict = Depends(authenticator.try_get_current_account_data),
 ):
     if account is None:
         response.status_code = 401
@@ -31,9 +26,7 @@ async def create(
 
 @router.get("/{listing_id}/reviews", response_model=list[ReviewOut] | Error)
 async def get_all_from_listing(
-    listing_id: int,
-    response: Response,
-    repo: ReviewRepo = Depends()
+    listing_id: int, response: Response, repo: ReviewRepo = Depends()
 ):
     result = repo.get_all_from_listing(listing_id)
     if result is None:
@@ -42,12 +35,12 @@ async def get_all_from_listing(
     return result
 
 
-@router.delete("/reviews/{review_id}")
+@router.delete("/reviews/{review_id}", response_model=bool | Error)
 async def delete(
     review_id: int,
     response: Response,
     repo: ReviewRepo = Depends(),
-    account: dict = Depends(authenticator.try_get_current_account_data)
+    account: dict = Depends(authenticator.try_get_current_account_data),
 ):
     if account is None:
         response.status_code = 401
@@ -60,13 +53,13 @@ async def delete(
     return result
 
 
-@router.put("/reviews{review_id}")
+@router.put("/reviews{review_id}", response_model=ReviewOut | Error)
 async def update(
     review: ReviewIn,
     review_id: int,
     response: Response,
     repo: ReviewRepo = Depends(),
-    account: dict = Depends(authenticator.try_get_current_account_data)
+    account: dict = Depends(authenticator.try_get_current_account_data),
 ):
     if account is None:
         response.status_code = 401
