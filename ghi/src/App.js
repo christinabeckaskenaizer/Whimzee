@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Landing from "./LandingPage/Landing";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
@@ -43,7 +43,7 @@ function App() {
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data.reverse());
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const fetchWishlistData = async () => {
@@ -60,7 +60,7 @@ function App() {
       const response = await fetch(wishlistUrl, config);
       const data = await response.json();
       setWishlist(data);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function App() {
   useEffect(() => {
     fetchWishlistData();
     // eslint-disable-next-line
-  }, [ids])
+  }, [ids]);
 
   useEffect(() => {
     setCartListings(cart);
@@ -79,7 +79,7 @@ function App() {
   }, [cart]);
 
   return (
-    <BrowserRouter basename={basename}>
+    <HashRouter basename={basename}>
       <NavBar
         token={token}
         user={user}
@@ -172,7 +172,7 @@ function App() {
           ></Route>
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
