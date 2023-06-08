@@ -556,6 +556,9 @@ What is necessary: Request Body with a "name" field and Request Url
 ![Alt text](screenshots/create_category_request.png)
 </details>
 </p>
+<p>
+<details>
+<summary>Response</summary>
 ![Alt text](screenshots/create_category_response.png)
 </details>
 </p>
@@ -572,6 +575,7 @@ What is necessary: request body with fields: "cart_id" and "listing_id".
 <details>
 <summary>Request body</summary>
 ![Alt text](screenshots/cart-listing-screenshots/create_cart_listings_bod.png)
+</p>
 <p>
 <details>
 <summary>Response</summary>
