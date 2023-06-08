@@ -51,6 +51,7 @@ export default function AddToCart({
     if (cartListings) {
       checkCartHasListing();
     }
+    // eslint-disable-next-line
   }, [cartListings]);
 
   if (!ids || !listing_id) {
