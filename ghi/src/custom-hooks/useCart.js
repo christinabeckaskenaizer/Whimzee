@@ -16,7 +16,6 @@ const useCart = (ids) => {
       getCart();
     }
   }, [ids]);
-
   return { cart: cart };
 };
 
