@@ -14,12 +14,10 @@ export default function AddToCart({
   const [alreadyInCart, setAlreadyInCart] = useState(false);
 
   const checkCartHasListing = () => {
-    console.log("this is the cartListing after add", cartListings);
     const filtered = cartListings.filter(
-      (listing) => listing_id === listing.listing.id
+      (listing) => Number(listing_id) === listing.listing.id
     );
-    console.log("this is the filtered example");
-    setAlreadyInCart(filtered);
+    setAlreadyInCart(filtered.length > 0);
   };
 
   const handleClick = async (cart_id, listing_id) => {
@@ -38,7 +36,6 @@ export default function AddToCart({
     const response = await fetch(url, config);
     if (response.ok) {
       const responseData = await response.json();
-      console.log(responseData, "this is the response after create");
       const newCartListing = {
         id: responseData.id,
         listing: detail,
@@ -53,7 +50,6 @@ export default function AddToCart({
   useEffect(() => {
     if (cartListings) {
       checkCartHasListing();
-      console.log("updated cartListings", cartListings);
     }
   }, [cartListings]);
 

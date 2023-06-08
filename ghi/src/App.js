@@ -127,7 +127,14 @@ function App() {
           <Route path="/liked"></Route>
           <Route
             path="/checkout"
-            element={<Payment token={token} user={user} />}
+            element={
+              <Payment
+                token={token}
+                user={user}
+                cartListings={cartListings}
+                setCartListings={setCartListings}
+              />
+            }
           ></Route>
         </Routes>
       </div>

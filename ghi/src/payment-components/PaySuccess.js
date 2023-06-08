@@ -18,7 +18,7 @@ export default function PaymentSuccess({ checkoutList }) {
       </Link>
       {/* Show reciept here */}
       {ordered.map((listing) => {
-        return <div key={listing.item.id}>item</div>;
+        return <div key={listing.id}>item</div>;
       })}
     </>
   );
