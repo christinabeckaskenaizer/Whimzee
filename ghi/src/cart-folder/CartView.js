@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import ListingCard from "../listing-components/ListingCard";
+//import DeleteCart from "./DeleteCart";
 
 export default function CartView({ ids, cartListings, setCartListings }) {
   useEffect(() => {
