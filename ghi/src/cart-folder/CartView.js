@@ -1,6 +1,7 @@
 // import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReturnToHome from "../utilities/ReturnToHome";
+import DeleteCart from "./DeleteCart";
 
 export default function CartView({ ids, cartListings }) {
   // props setCartListings is available
@@ -64,6 +65,7 @@ export default function CartView({ ids, cartListings }) {
                         >
                           Delete
                         </button>
+                        <DeleteCart listing_id={listing.listing.id} />
                       </div>
                     </div>
                   </div>

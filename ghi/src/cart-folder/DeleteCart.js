@@ -2,10 +2,9 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import useUser from "../custom-hooks/useUser";
 //import { useEffect, useState } from "react";
 //import CartView from "./CartView";
-export default function DeleteCart(props) {
+export default function DeleteCart({ listing_id }) {
   const { token } = useToken();
   const { ids } = useUser(token);
-  const listing_id = props.listing;
 
   const handleClick = async (listing_id) => {
     const data = {
@@ -28,7 +27,6 @@ export default function DeleteCart(props) {
     const cart_id = ids.cart_id;
     if (response.ok) {
       console.log(data);
-      //DeleteCart();
       console.log("item deleted");
     } else {
       console.log("unable to delete");

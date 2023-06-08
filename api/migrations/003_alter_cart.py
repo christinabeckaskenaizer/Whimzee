@@ -6,6 +6,6 @@ steps = [
           ADD COLUMN quantity INT NOT NULL;
         """,
         """
-        """
-    ],
-  ]
+        """,
+    ]
+]
