@@ -71,10 +71,10 @@ export default function AddToCart({
     <>
       {alreadyInCart ? (
         <Link
-          to="/checkout"
+          to="/cart"
           className="w-full block text-center px-4 py-2 font-bold text-white lg:w-96 bg-green-800 hover:bg-green-900"
         >
-          Proceed to checkout
+          Proceed to cart
         </Link>
       ) : (
         <button
