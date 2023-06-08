@@ -17,7 +17,7 @@ export default function CartListingCard({ cartListings }) {
           >
             <img
               class="w-48 h-48 object-cover rounded-lg"
-              src="https://www.rei.com/dam/camping-checklist-lg1.jpg?t=ea16by9xs"
+              src={listing.listing.picture}
               alt=""
             />
             <div className="h-full w-full flex flex-col items-end justify-between text-sm">
