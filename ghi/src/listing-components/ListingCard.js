@@ -28,8 +28,6 @@ export default function ListingCard({ picture, name, isNew, price, id, wishlist,
     const response = await fetch(url, config);
 
     const updated = await response.json()
-    console.log(updated)
-
     if (response.ok) {
       changeWishlist(updated);
     } else {
@@ -38,9 +36,7 @@ export default function ListingCard({ picture, name, isNew, price, id, wishlist,
   }
 
   const addItem = async () => {
-    console.log(wishlist)
     wishlist.listings.push(id);
-    console.log(wishlist.listings)
     updateWishlist(wishlist);
   }
 

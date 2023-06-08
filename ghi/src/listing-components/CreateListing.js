@@ -13,8 +13,6 @@ export default function MyModal({ ids, fetchData }) {
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState();
 
-  // console.log("data", data)
-
   function closeModal() {
     setIsOpen(false);
   }
@@ -25,12 +23,7 @@ export default function MyModal({ ids, fetchData }) {
 
   function toggleUsed() {
     setToggled(!toggled);
-    console.log("toggled");
   }
-
-  // useEffect(() => {
-  //   setListings(shopListings)
-  // }, [shopListings])
 
   async function getCategories() {
     const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;

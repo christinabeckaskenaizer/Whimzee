@@ -17,7 +17,7 @@ export default function WishList({ token, ids }) {
                 setListings(listingsData)
             }
         } catch {
-            console.log("nohr listings")
+            console.log("Error")
         }
     }
 
@@ -36,7 +36,7 @@ export default function WishList({ token, ids }) {
         if (response.ok) {
             setWishlist(data.listings)
         } else {
-            console.log("uh ohhhhh")
+            console.log("Error fetching data")
         }
     }
 
@@ -64,7 +64,7 @@ export default function WishList({ token, ids }) {
         if (response.ok) {
             setWishlist(updated.listings);
         } else {
-            console.log("ERROR!!")
+            console.log("Error")
         }
     }
 

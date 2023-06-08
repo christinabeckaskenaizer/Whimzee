@@ -42,7 +42,11 @@ class WishlistRepository:
                     updated_listing = result.fetchone()
 
                     if updated_listing and len(updated_listing[0][2]) == 0:
-                        return WishlistOut(id=id, user_id=user_id, listings=[])
+                        return WishlistOut(
+                            id=updated_listing[0][0],
+                            user_id=user_id,
+                            listings=[],
+                        )
 
                     if updated_listing:
                         id = updated_listing[0][0]
