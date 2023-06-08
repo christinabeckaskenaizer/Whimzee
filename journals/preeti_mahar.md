@@ -1,6 +1,17 @@
-# May 31, 2023
+## June 1, 2023
+
+- Working on the deployment together with my team - Christina, Santi and Sina. One person shared the screen and we followed the steps as explained by Miss. Rosheen for CI/CD.
+
+- We encountered blockers during deployment, the app stopped running which were resolved by our staff.(by changing the ports to 8000:8000 instead of 8000:80 in the docker-compose.yaml file for the ports under the fast-api).
+
+- Working on getting the back-end ready for cart by resolving the code to get end-points working. Dropping the extra column for listing_id and quantity as it was not required after clarifying from our instructor James . Now the cart displays the cart_id which is created according to the user_id. Removing the 003_alter_cart.py file after making the changes in the cart table and putting the cart_listings table separately in the 002_my_table.py.
+
+- Pushing the changes into the branch 'origin/10-add-a-listing-to-the-cart' and resolving the merge confllicts.
+
+## May 31, 2023
 
 - Working on the front-end for CreateCart as CartView.js.
+
 - Writing the getCart() function and calling consecutive useEffect and useState methods to describe the working model.
 
 ## May 30, 2023
@@ -17,7 +28,7 @@
 
 ## May 24, 2023
 
-- Closing create a cart issue and its respective branch with the help of Sina.
+- Closing create a cart issue and its respective branch with the help of Sina . Deleting the '16-create-a-cart-branch' after merging it into the main.
 
 - Added listings variable to my Cart with the help of Santi.
 

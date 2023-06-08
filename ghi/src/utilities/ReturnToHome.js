@@ -16,6 +16,11 @@ export default function ReturnToHome() {
     <>
       {show ? (
         <div className="flex w-full flex-col items-center p-10">
+            <img
+              alt=""
+              className="p-3 object-cover rounded-full h-60 w-60"
+              src="https://img.freepik.com/premium-vector/cute-cat-character-with-paper-bag-mask-its-head-illustration_90661-395.jpg"
+            />
           <p className="mb-1 text-2xl font-semibold text-gray-500">
             Can't find what you're looking for?
           </p>
