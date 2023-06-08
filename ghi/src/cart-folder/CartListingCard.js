@@ -8,15 +8,15 @@ export default function CartListingCard({ cartListings }) {
   }
 
   return (
-    <div class="mt-4 col-span-3 flex-col flex items-center">
+    <div className="mt-4 col-span-3 flex-col flex items-center">
       {cartListings.map((listing) => {
         return (
           <div
             key={listing.id}
-            class="p-2 w-[30rem] my-2 full h-52 flex-col-2 flex items-center bg-white border border-gray-200 rounded-lg shadow"
+            className="p-2 w-[30rem] my-2 full h-52 flex-col-2 flex items-center bg-white border border-gray-200 rounded-lg shadow"
           >
             <img
-              class="w-48 h-48 object-cover rounded-lg"
+              className="w-48 h-48 object-cover rounded-lg"
               src={listing.listing.picture}
               alt=""
             />
