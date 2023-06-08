@@ -34,7 +34,7 @@ export default function DeleteCart({ listing_id }) {
   if (!ids || !listing_id) {
     return (
       <>
-        <button className="w-full px-4 py-2 font-bold text-white bg-green-800 lg:w-96 hover:bg-green-900">
+        <button className="font-medium text-red-600 hover:text-red-400">
           Delete from cart
         </button>
       </>
@@ -44,7 +44,7 @@ export default function DeleteCart({ listing_id }) {
   return (
     <>
       <button
-        className="w-full px-4 py-2 font-bold text-white bg-green-800 lg:w-96 hover:bg-green-900"
+        className="font-medium text-red-600 hover:text-red-400"
         onClick={() => handleClick(listing_id)}
       >
         Delete
