@@ -18,6 +18,10 @@ class OrderIn(BaseModel):
     price: int
 
 
+class OrderInWithStatus(BaseModel):
+    status: bool
+
+
 class OrderOut(BaseModel):
     id: int
     user_id: int
@@ -225,42 +229,37 @@ class OrderRepo(BaseModel):
 
     def update(self,
                order_id: int,
-               status: bool,
-               order: OrderIn) -> OrderOut | Error:
+               order: OrderInWithStatus) -> OrderOut | Error:
 
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    db.execute(
+                    result = db.execute(
                         """
                         UPDATE orders
                         set status = %s
-                            , user_id = %s
-                            , shop_id = %s
-                            , buyer_first_name = %s
-                            , buyer_last_name = %s
-                            , quantity = %s
-                            , listing = %s
-                            , address = %s
-                            , price = %s
                         WHERE id = %s
+                        RETURNING *
                         """,
                         [
-                            status,
-                            order.user_id,
-                            order.shop_id,
-                            order.buyer_first_name,
-                            order.buyer_last_name,
-                            order.quantity,
-                            order.listing,
-                            order.address,
-                            order.price,
+                            order.status,
                             order_id
                         ]
                     )
-                    return OrderOut(id=order_id,
-                                    status=status,
-                                    **order.dict())
+                    record = result.fetchall()[0]
+                    print(record)
+                    return OrderOut(
+                        id=record[0],
+                        user_id=record[1],
+                        shop_id=record[2],
+                        buyer_first_name=record[3],
+                        buyer_last_name=record[4],
+                        quantity=record[5],
+                        listing=record[6],
+                        status=record[7],
+                        address=record[8],
+                        price=record[9]
+                    )
         except Exception as e:
-            print(e)
+            print("Yoooohoo", e)
             return None

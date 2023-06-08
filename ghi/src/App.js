@@ -103,7 +103,14 @@ function App() {
           />
           <Route
             path="/listings/:id"
-            element={<ListingDetail ids={ids} token={token} />}
+            element={
+              <ListingDetail
+                ids={ids}
+                token={token}
+                cartListings={cartListings}
+                setCartListings={setCartListings}
+              />
+            }
           />
           <Route path="/listings/category/:id" />
           <Route

@@ -5,7 +5,8 @@ from queries.orders import (
     OrderIn,
     OrderOut,
     OrderRepo,
-    OrderOutWithListing
+    OrderOutWithListing,
+    OrderInWithStatus
 )
 from authenticator import authenticator
 
@@ -80,13 +81,12 @@ async def get_one(
 
 @router.put("/orders/{order_id}", response_model=OrderOut | Error)
 async def update(
-    order: OrderIn,
+    order: OrderInWithStatus,
     order_id: int,
-    status: bool,
     response: Response,
     repo: OrderRepo = Depends(),
 ) -> OrderOut | Error:
-    result = repo.update(order_id, status, order)
+    result = repo.update(order_id, order)
     if result is None:
         response.status_code = 404
         result = Error(message="Unable to update order")
