@@ -103,7 +103,14 @@ function App() {
           />
           <Route
             path="/listings/:id"
-            element={<ListingDetail ids={ids} token={token} />}
+            element={
+              <ListingDetail
+                ids={ids}
+                token={token}
+                cartListings={cartListings}
+                setCartListings={setCartListings}
+              />
+            }
           />
           <Route path="/listings/category/:id" />
           <Route
@@ -120,7 +127,14 @@ function App() {
           <Route path="/liked"></Route>
           <Route
             path="/checkout"
-            element={<Payment token={token} user={user} />}
+            element={
+              <Payment
+                token={token}
+                user={user}
+                cartListings={cartListings}
+                setCartListings={setCartListings}
+              />
+            }
           ></Route>
         </Routes>
       </div>

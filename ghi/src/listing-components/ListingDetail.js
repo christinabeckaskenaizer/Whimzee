@@ -3,7 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import Reviews from "../reviews/reviews";
 import AddToCart from "../cart-folder/AddToCart";
 
-export default function ListingDetail({ token }) {
+export default function ListingDetail({
+  token,
+  setCartListings,
+  cartListings,
+}) {
   const [detail, setDetail] = useState("");
   const [shop, setShop] = useState("");
 
@@ -148,7 +152,12 @@ export default function ListingDetail({ token }) {
                 <div className="mt-6 "></div>
 
                 <div className="mt-6 ">
-                  <AddToCart listing_id={id} />
+                  <AddToCart
+                    detail={detail}
+                    listing_id={id}
+                    cartListings={cartListings}
+                    setCartListings={setCartListings}
+                  />
                 </div>
               </div>
             </div>

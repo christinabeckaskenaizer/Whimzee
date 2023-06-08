@@ -8,11 +8,15 @@ Today I worked on:
 
 - pair programmed with Preeti to make an "add to cart button"
 
+- Wrote the readme portions for the shop, reviews, and cart_listing endpoints
+
 Today I realized we were missing the last sql query for the cart functionality. It was a join between the listings and cart. Now we can query for a list of all the cart_listings that belong to a specific cart.
 
 I finally got to put the cart hook to work! It has been on our App.js file this whole time but now it uses the sql query to grab all of the cart_listings so a user has them as soon as they login, reload, or hit back.
 
 I showed Preeti one way to implement a create button. We created a component called "AddToCart" and used it on christina's listing detail component. We are aiming to finish the cart functionality by today.
+
+I added the readme documentation for the shop, reviews, and cart_listings backend points. They include a request body picture where necessary and they also have a response picture.
 
 ## June 6, 2023
 
