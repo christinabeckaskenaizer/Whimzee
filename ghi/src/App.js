@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Landing from "./LandingPage/Landing";
 import "./App.css";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NavBar from "./NavBar/NavBar.js";
 import UserAccount from "./account-components/UserAccount.js";
@@ -69,9 +69,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (ids) {
-      fetchWishlistData();
-    }
+    fetchWishlistData();
     // eslint-disable-next-line
   }, [ids]);
 
@@ -81,7 +79,7 @@ function App() {
   }, [cart]);
 
   return (
-    <HashRouter basename={basename}>
+    <BrowserRouter basename={basename}>
       <NavBar
         token={token}
         user={user}
@@ -174,7 +172,7 @@ function App() {
           ></Route>
         </Routes>
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
