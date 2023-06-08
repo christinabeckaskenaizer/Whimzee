@@ -13,16 +13,16 @@ The key features of the website include:
 - Reviews and Ratings: Users have the ability to leave reviews for items they have purchased or interacted with. This feature enables an open and transparent feedback system, allowing users to make informed decisions when browsing listings.
 - Landing Page: The landing page serves as a central hub for all the listings available on the website. Users can explore a wide range of items across different categories, allowing for easy browsing and discovery.
 - Navigation Bar: The navigation bar offers convenient search functionalities. Users can search for specific items by selecting a category or using the search by name function. This feature streamlines the process of finding desired products within the website's extensive inventory.
-<br>
-Overall, our shop website provides a user-friendly interface for buying and selling items. The combination of user management, shop creation, listing creation, reviews, and efficient search functionalities ensures a seamless experience for users as they explore and interact with the platform.
-<br>
-<br>
+  <br>
+  Overall, our shop website provides a user-friendly interface for buying and selling items. The combination of user management, shop creation, listing creation, reviews, and efficient search functionalities ensures a seamless experience for users as they explore and interact with the platform.
+  <br>
+  <br>
 
 **Team**
 
-- Christina Beckaskenaizer \
-  Backend: Categories, Listings \
-  Frontend: Listings, Wishlist \
+- Christina Beck-Askenaizer \
+  Backend: Categories, Listings, Wishlist \
+  Frontend: Listings(create, get one, get all, update, delete), Wishlist \
   Unit test: test_listings(get and create)\
   Backend Auth
 

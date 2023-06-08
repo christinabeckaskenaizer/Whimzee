@@ -65,14 +65,17 @@ function App() {
 
   useEffect(() => {
     fetchListingData();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     fetchWishlistData();
+    // eslint-disable-next-line
   }, [ids])
 
   useEffect(() => {
     setCartListings(cart);
+    // eslint-disable-next-line
   }, [cart]);
 
   return (

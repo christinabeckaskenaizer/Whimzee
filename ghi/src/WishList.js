@@ -79,12 +79,14 @@ export default function WishList({ token, ids }) {
 
     useEffect(() => {
         getListings();
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         if (ids) {
             getWishlist();
         }
+        // eslint-disable-next-line
     }, [ids]);
 
     return (
