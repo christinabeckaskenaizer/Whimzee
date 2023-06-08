@@ -29,11 +29,13 @@ Backend: Users, Orders \
 Frontend: Navbar(Searchbar, Navigation, Logos), Reviews, Landing Page \
 Unit Test: test_category \
 Backend Auth
+
 * Santiago Bothe \
-Backend: Shops, Reviews, Cart listings \
-Frontend: Shops, Account Page \
-Unit Test: \
-Frontend Auth
+Backend: Accounts, Shops, Reviews, Cart listings \
+Frontend: Shops, Account Page, Payment, Specialized Operations \
+Unit Test: Test_shops, Test_users\
+Frontend Auth, Backend Deployment
+
 * Preeti Mahar \
 Backend: Cart \
 Frontend: \
@@ -94,6 +96,85 @@ What is necessary: user_id in Request Url, no request body
 
 ### Shop
 
+**Endpoint: Create Shop** \
+Method: POST \
+Request URL: http://localhost:8000/shops \
+Authorization: Requires user Login and Token \
+Description: Create a new shop \
+What is necessary: request body with fields: "name", "profile_picture", "description" and "email"
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/shop-screenshots/create_shop_bod.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/shop-screenshots/create_shop_res.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Get Shops** \
+Method: GET \
+Request URL: http://localhost:8000/shops \
+Description: Get all shops \
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/shop-screenshots/get_all_shops_res.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Get Shop** \
+Method: POST \
+Request URL: http://localhost:8000/shops/{shop_id} \
+Description: Get a shop \
+What is necessary: Url with correct "shop id".
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/shop-screenshots/get_shop_res.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Update Shop** \
+Method: PUT \
+Request URL: http://localhost:8000/shops/{shop_id} \
+Authorization: Requires user Login and Token \
+Description: Update a shop \
+What is necessary: Url with correct "shop id".
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/shop-screenshots/create_shop_bod.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/shop-screenshots/create_shop_res.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Delete Shop** \
+Method: DELETE \
+Request URL: http://localhost:8000/shops/{shop_id} \
+Authorization: Requires user Login and Token \
+Description: Delete a shop \
+What is necessary: Url with correct "shop id".
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/shop-screenshots/get_shop_res.png)
+</details>
+</p>
+<br>
+
 ### Listing
 
 ### Cart
@@ -103,3 +184,51 @@ What is necessary: user_id in Request Url, no request body
 ### Reviews
 
 ### Categories
+
+### Cart Listings
+
+**Endpoint: Create Cart Listing** \
+Method: POST \
+Request URL: http://localhost:8000/cart_listings \
+Description: Create a new cart listing \
+What is necessary: request body with fields: "cart_id" and "listing_id".
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/cart-listing-screenshots/create_cart_listings_bod.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/cart-listing-screenshots/create_cart_listings_res.png)
+</details>
+</p>
+<br>
+
+
+**Endpoint: Delete Cart Listing** \
+Method: DELETE \
+Request URL: http://localhost:8000/cart_listings/{cart_listing_id} \
+Description: Delete a cart listing \
+What is necessary: Url with correct "cart listing id".
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/cart-listing-screenshots/delete_cart_listings.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Get Cart Listing** \
+Method: GET \
+Request URL: http://localhost:8000/cart_listings/{cart_id} \
+Description: Get all cart listings for a cart \
+What is necessary: Url with correct "cart id".
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/cart-listing-screenshots/get_cart_listings.png)
+</details>
+</p>
+<br>
