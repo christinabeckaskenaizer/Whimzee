@@ -13,30 +13,30 @@ The key features of the website include:
 - Reviews and Ratings: Users have the ability to leave reviews for items they have purchased or interacted with. This feature enables an open and transparent feedback system, allowing users to make informed decisions when browsing listings.
 - Landing Page: The landing page serves as a central hub for all the listings available on the website. Users can explore a wide range of items across different categories, allowing for easy browsing and discovery.
 - Navigation Bar: The navigation bar offers convenient search functionalities. Users can search for specific items by selecting a category or using the search by name function. This feature streamlines the process of finding desired products within the website's extensive inventory.
-  <br>
-  Overall, our shop website provides a user-friendly interface for buying and selling items. The combination of user management, shop creation, listing creation, reviews, and efficient search functionalities ensures a seamless experience for users as they explore and interact with the platform.
-  <br>
-  <br>
+<br>
+Overall, our shop website provides a user-friendly interface for buying and selling items. The combination of user management, shop creation, listing creation, reviews, and efficient search functionalities ensures a seamless experience for users as they explore and interact with the platform.
+<br>
+<br>
 
 **Team**
 
 - Christina Beckaskenaizer \
   Backend: Categories, Listings \
   Frontend: Listings, Wishlist \
-  Unit test: \
+  Unit test: test_listings(get and create)\
   Backend Auth
 
 - Sina Klughardt \
   Backend Endpoints: Users/Accounts, Orders \
-  Frontend: Navbar(Searchbar, Navigation, Logos), Reviews, Landing Page \
+  Frontend: Navbar(Searchbar, Navigation, Logos), Reviews, Landing Page, Login, Logout, Sign up \
   Unit Test: test_category(get and create) \
-  Backend Auth
+  Backend Auth, Styling
 
 - Santiago Bothe \
   Backend: Accounts, Shops, Reviews, Cart listings \
   Frontend: Shops, Account Page, Payment, Specialized Operations \
   Unit Test: Test_shops, Test_users\
-  Frontend Auth, Backend Deployment
+  Frontend Auth, Deployment
 
 - Preeti Mahar \
   Backend: Cart \
@@ -530,23 +530,12 @@ What is necessary: request body with fields: "rating" and "description".
 
 ### Categories
 
-### Cart Listings
-
-**Endpoint: Create Cart Listing** \
-Method: POST \
-Request URL: http://localhost:8000/cart_listings \
-Description: Create a new cart listing \
-What is necessary: request body with fields: "cart_id" and "listing_id".
-
-<p>
-<details>
-<summary>Request body</summary>
-![Alt text](screenshots/cart-listing-screenshots/create_cart_listings_bod.png)
 **Endpoint: Get all categories** \
 Method: GET \
 Request URL: http://localhost:8000/categories \
 Description: Get all existing categories \
 What is necessary: No request body, just Request Url
+
 <p>
 <details>
 <summary>Response</summary>
@@ -567,6 +556,22 @@ What is necessary: Request Body with a "name" field and Request Url
 ![Alt text](screenshots/create_category_request.png)
 </details>
 </p>
+![Alt text](screenshots/create_category_response.png)
+</details>
+</p>
+
+### Cart Listings
+
+**Endpoint: Create Cart Listing** \
+Method: POST \
+Request URL: http://localhost:8000/cart_listings \
+Description: Create a new cart listing \
+What is necessary: request body with fields: "cart_id" and "listing_id".
+
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/cart-listing-screenshots/create_cart_listings_bod.png)
 <p>
 <details>
 <summary>Response</summary>
@@ -589,7 +594,7 @@ What is necessary: Url with correct "cart listing id".
 </p>
 <br>
 
-**Endpoint: Get Cart Listing** \
+**Endpoint: Get Cart Listings** \
 Method: GET \
 Request URL: http://localhost:8000/cart_listings/{cart_id} \
 Description: Get all cart listings for a cart \
@@ -602,6 +607,3 @@ What is necessary: Url with correct "cart id".
 </details>
 </p>
 <br>
-![Alt text](screenshots/create_category_response.png)
-</details>
-</p>
