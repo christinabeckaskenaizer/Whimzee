@@ -58,6 +58,52 @@ Diagram of the backend and how every table interacts with each other
 ![Alt text](screenshots/excalidraw.png)
 
 ## API Documentation
+### Token
+**Endpoint: Get Token** \
+Method: GET \
+Request URL: http://localhost:8000/token \
+Description: Get token in use \
+What is necessary: no request body necessary, only Request URL
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/get_token_response.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Login** \
+Method: POST \
+Request URL: http://localhost:8000/token \
+Description: Login to existing account \
+What is necessary: request body with fields: "email" and "password"
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/login_request.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/login_response.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Logout** \
+Method: DELETE \
+Request URL: http://localhost:8000/token \
+Description: Delete a token and get logged out \
+What is necessary: no request body only Request URL
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/logout_response.png)
+</details>
+</p>
+<br>
+
 
 ### User/Account
 **Endpoint: Create Account** \
@@ -121,6 +167,102 @@ What is necessary: Email in Request Url, no request body
 ### Shop
 
 ### Listing
+**Endpoint: Get all listings** \
+Method: GET \
+Request URL: http://localhost:8000/listings \
+Description: Get all listings \
+What is necessary: No Request body necessary, just the Request URL
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/get_all_listings_response.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Create a listing** \
+Method: POST \
+Request URL: http://localhost:8000/listings \
+Description: Create a new listing \
+What is necessary: request body with fields: "shop_id", "name", "quantity", "description", "price", "new", "picture" and "category"
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/create_listing_request.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/create_listing_response.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Get one listing** \
+Method: GET \
+Request URL: http://localhost:8000/listings/{listing_id} \
+Description: Get one listing by listing_id \
+What is necessary: No Request body necessary, just the Url with listing_id
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/get_one_listing_response.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Update Listing** \
+Method: PUT \
+Request URL: http://localhost:8000/listings/{listing_id} \
+Description: Update any field in listing \
+What is necessary: request body and Request URL
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/update_listing_request.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/update_order_response.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Delete a listing** \
+Method: DELETE \
+Request URL: http://localhost:8000/listings/{listing_id} \
+Description: Delete a listing and return true if listing got deleted \
+What is necessary: listing_id in Request Url, no request body
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/delete_listing_response.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Update Inventory** \
+Method: PUT \
+Request URL: http://localhost:8000/{listing_id}/inventory \
+Description: Update quantity and quantity sold on a listing \
+What is necessary: request body with fields: "quantity" and "quantity_sold" and Request URL with listing_id
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](screenshots/update_inventory_request.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/update_inventory_response.png)
+</details>
+</p>
+<br>
+
 
 ### Cart
 
@@ -187,7 +329,7 @@ What is necessary: No Request body necessary, just the Url with order_id
 Method: PUT \
 Request URL: http://localhost:8000/orders/{order_id} \
 Description: Update status of order to true when order got processed \
-What is necessary: request body with field: "status"
+What is necessary: request body with field: "status" and Request URL
 <p>
 <details>
 <summary>Request body</summary>
