@@ -11,7 +11,7 @@ function Landing(props) {
         setsearched={props.setsearched}
       />
       <div className="px-4 py-5 my-20 text-center">
-        <AllListings listings={props.listings} category={category} filteredlistings={props.filteredlistings} searched={props.searched}/>
+        <AllListings listings={props.listings} category={category} filteredlistings={props.filteredlistings} searched={props.searched} ids={props.ids ? props.ids : null} token={props.token ? props.token : null} />
       </div>
     </>
   );

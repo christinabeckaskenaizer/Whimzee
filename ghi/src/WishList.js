@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function WishList({ token, ids }) {
 
     const [listings, setListings] = useState([]);
     const [wishlist, setWishlist] = useState([]);
-    // console.log("items in wishlist", wishlist.listings)
 
 
     const getListings = async () => {
@@ -14,7 +14,6 @@ export default function WishList({ token, ids }) {
             const response = await fetch(listingsUrl);
             const listingsData = await response.json();
             if (response.ok) {
-                console.log("listings hereee", listingsData)
                 setListings(listingsData)
             }
         } catch {
@@ -24,7 +23,6 @@ export default function WishList({ token, ids }) {
 
     const getWishlist = async () => {
         const wishlistUrl = `http://localhost:8000/wishlist/${ids.id}`;
-        console.log(wishlistUrl)
         const config = {
             credentials: "include",
             method: "GET",
@@ -37,8 +35,6 @@ export default function WishList({ token, ids }) {
         const data = await response.json();
         if (response.ok) {
             setWishlist(data.listings)
-            console.log("listings in wishlist", wishlist)
-            console.log("wishlist contents", data)
         } else {
             console.log("uh ohhhhh")
         }
@@ -47,13 +43,10 @@ export default function WishList({ token, ids }) {
     const updateWishlist = async (newWishlist) => {
         const url = `http://localhost:8000/wishlist/${ids.id}`
 
-        console.log("santi2", newWishlist)
         const data = {
             "user_id": ids.id,
             "listings": newWishlist
         }
-
-        console.log("DATA RIGHT HERE", data.listings)
 
         const config = {
             credentials: "include",
@@ -66,9 +59,10 @@ export default function WishList({ token, ids }) {
         };
 
         const response = await fetch(url, config);
+        const updated = await response.json()
 
         if (response.ok) {
-            setWishlist(data);
+            setWishlist(updated.listings);
         } else {
             console.log("ERROR!!")
         }
@@ -76,19 +70,12 @@ export default function WishList({ token, ids }) {
 
     const removeItem = async (listing) => {
         const iToBeRemoved = wishlist.indexOf(listing.id);
-        console.log("listing id", listing.id);
-        console.log("iToBeRemoved", iToBeRemoved);
-        const updatedWishlist = wishlist.slice();
-        updatedWishlist.splice(iToBeRemoved, 1);
-        setWishlist(updatedWishlist);
-        console.log("SANTI", updatedWishlist)
-        updateWishlist(updatedWishlist);
-    }
+        wishlist.splice(iToBeRemoved, 1);
 
-    useEffect(() => {
-        console.log("updated?", wishlist)
-        // ?whatver filtered arrat
-    }, [wishlist])
+
+        setWishlist(wishlist);
+        updateWishlist(wishlist);
+    }
 
     useEffect(() => {
         getListings();
@@ -102,18 +89,17 @@ export default function WishList({ token, ids }) {
 
     return (
         <div>
-            {!token ? (
-                <h2 className='mt-10 text-center font-bold'>
-                    Oops! Looks like you're not logged in. Please log in to view your wishlist.
-                </h2>
-            ) : (
+            {!token && <h2 className='mt-10 text-center font-bold'>
+                Oops! Looks like you're not logged in. Please log in to view your wishlist.
+            </h2>}
+            {token && wishlist.length >= 1 &&
                 <section>
                     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
                         <div className="mx-auto max-w-3xl">
                             <header className="text-left">
                                 <h1 className="text-xl font-bold text-gray-900 sm:text-3xl">Wishlist</h1>
                             </header>
-                            {listings.filter(listing => wishlist.includes(listing.id)).map(listing => (
+                            {listings && wishlist && listings.filter(listing => wishlist.includes(listing.id)).map(listing => (
                                 <div className="mt-8" key={listing.id}>
                                     <ul className="space-y-4">
                                         <li className="flex items-center gap-4">
@@ -155,8 +141,8 @@ export default function WishList({ token, ids }) {
                             ))}
                         </div>
                     </div>
-                </section>
-            )}
+                </section>}
+            {token && wishlist.length < 1 && <h1 className='mt-10 text-center text-lg font-bold' >Your wish list is empty! <Link className="text-green-700 hover:underline" to="/">Browse</Link> our items to get started</h1>}
         </div>
     );
 }

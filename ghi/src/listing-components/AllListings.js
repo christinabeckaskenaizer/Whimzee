@@ -7,8 +7,31 @@ export default function AllListings({
   category,
   filteredlistings,
   searched,
+  ids,
+  token
 }) {
   const [filteredListings, setFilteredListings] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+
+  const getWishlist = async () => {
+    const wishlistUrl = `http://localhost:8000/wishlist/${ids.id}`;
+    const config = {
+      credentials: "include",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    };
+    const response = await fetch(wishlistUrl, config, ids);
+    const data = await response.json();
+    if (response.ok) {
+      setWishlist(data.listings)
+    } else {
+      console.log("uh ohhhhh")
+    }
+  }
+
 
   useEffect(() => {
     if (listings) {
@@ -19,6 +42,12 @@ export default function AllListings({
     }
     // eslint-disable-next-line
   }, [category]);
+
+  useEffect(() => {
+    if (token && ids) {
+      getWishlist();
+    }
+  }, [token, ids])
 
   if (searched === false) {
     if (category === null) {

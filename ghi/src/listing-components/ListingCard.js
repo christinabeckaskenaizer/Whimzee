@@ -1,11 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function ListingCard({ picture, name, isNew, price, id }) {
+
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
+
+  // const updateWishlist = async (newWishlist) => {
+  //   const url = `http://localhost:8000/wishlist/${ids.id}`
+
+  //   const data = {
+  //     "user_id": ids.id,
+  //     "listings": newWishlist
+  //   }
+
+  //   const config = {
+  //     credentials: "include",
+  //     method: 'PUT',
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     },
+  //     body: JSON.stringify(data)
+  //   };
+
+  //   const response = await fetch(url, config);
+  //   const updated = await response.json()
+
+  //   if (response.ok) {
+  //     setWishlist(updated.listings);
+  //   } else {
+  //     console.log("ERROR!!")
+  //   }
+  // }
+
+  // const removeItem = async (listing) => {
+  //   const iToBeRemoved = wishlist.indexOf(listing.id);
+  //   wishlist.splice(iToBeRemoved, 1);
+
+
+  //   setWishlist(wishlist);
+  //   updateWishlist(wishlist);
+  // }
 
   return (
     <div className="container flex justify-center mx-4 max max-w-4xl hover:scale-105">
@@ -26,31 +64,33 @@ export default function ListingCard({ picture, name, isNew, price, id }) {
           <span className="mx-2 bg-blue-100 text-blue-800 text-xs font-semibold mr-2 p-1 rounded dark:bg-green-200 dark:text-gray-950">
             {isNew ? "New" : "Used"}
           </span>
-          <div className="flex items-center justify-between p-2">
-            <span className="text-xl font-semibold text-gray-900 dark:text-gray-950">
-              {formatter.format(price)}
-            </span>
-            <span
-              href="#"
-              className="text-white bg-green-800 hover:bg-green-900 focus:ring-4 font-medium rounded-lg text-sm px-2 py-2 text-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 "
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                />
-              </svg>
-            </span>
-          </div>
+
         </Link>
+        <div className="flex items-center justify-between p-2">
+          <span className="text-xl font-semibold text-gray-900 dark:text-gray-950">
+            {formatter.format(price)}
+          </span>
+          <button
+            onClick={() => console.log('hi')}
+            href="#"
+            className="text-green-700 font-medium rounded-lg text-sm px-2 py-2 text-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 transition ease-in-out delay-150 fill-slate-100 hover: hover:fill-green-700 duration-300"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
 
