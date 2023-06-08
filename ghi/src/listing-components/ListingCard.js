@@ -81,7 +81,7 @@ export default function ListingCard({ picture, name, isNew, price, id, wishlist,
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 transition ease-in-out delay-150 fill-slate-100 hover: hover:fill-green-700 duration-300"
+                className="w-6 h-6 transition ease-in-out delay-150 fill-green-700 hover: hover:fill-green-700 duration-300"
               >
                 <path
                   strokeLinecap="round"
@@ -98,7 +98,6 @@ export default function ListingCard({ picture, name, isNew, price, id, wishlist,
                 stroke="currentColor"
                 className="w-6 h-6 transition ease-in-out delay-150 fill-slate-100 hover hover:fill-green-700 duration-300"
               >
-
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
