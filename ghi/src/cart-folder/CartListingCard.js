@@ -16,7 +16,7 @@ export default function CartListingCard({ cartListings }) {
             className="p-2 w-[30rem] my-2 full h-52 flex-col-2 flex items-center bg-white border border-gray-200 rounded-lg shadow"
           >
             <img
-              className="w-48 h-48 object-cover rounded-lg"
+              className="w-64 object-cover object-center overflow-hidden h-full rounded-lg"
               src={listing.listing.picture}
               alt=""
             />

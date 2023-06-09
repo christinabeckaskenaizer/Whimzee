@@ -12,10 +12,7 @@ export default function Payment({
 }) {
   const [purchased, setPurchased] = useState(false);
   const [checkoutList, setCheckoutList] = useState([]);
-  const orderUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/orders`;
-  const listingUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
-  // const [open, setOpen] = useState(false);
-  // const cancelButtonRef = useRef(null);
+  const url = process.env.REACT_APP_SAMPLE_SERVICE_API_HOST;
 
   const createNewOrder = async (currentListing) => {
     const data = {
@@ -37,13 +34,26 @@ export default function Payment({
         headers: { Authorization: `Bearer ${token}` },
       },
     };
-    const response = await fetch(orderUrl, config);
+    const response = await fetch(`${url}/orders`, config);
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
     } else {
       return null;
     }
+  };
+
+  const deleteCartListings = async (currentListing) => {
+    const config = {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const deleteResponse = await fetch(
+      `${url}/cart_listings/${currentListing.id}`,
+      config
+    );
   };
 
   const editListings = async (currentListing) => {
@@ -60,10 +70,11 @@ export default function Payment({
       },
     };
     const response = await fetch(
-      `${listingUrl}/${currentListing.listing.id}/inventory`,
+      `${url}/listings/${currentListing.listing.id}/inventory`,
       config
     );
     if (response.ok) {
+      deleteCartListings(currentListing);
     } else {
       console.log("Unable to update listings");
     }
@@ -72,8 +83,9 @@ export default function Payment({
   const handlePay = async (e) => {
     for (let i = 0; i < checkoutList.length; i++) {
       const currentListing = checkoutList[i];
-      const singleListingUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings/${currentListing.listing.id}`;
-      const listingResponse = await fetch(singleListingUrl);
+      const listingResponse = await fetch(
+        `${url}/listings/${currentListing.listing.id}`
+      );
       if (listingResponse.ok) {
         const listingData = await listingResponse.json();
         currentListing.listing = listingData;
@@ -89,8 +101,6 @@ export default function Payment({
         }
       }
     }
-    // update the shopping cart
-    // delete all items cart from checkoutList
     setCartListings([]);
     setPurchased(true);
   };
@@ -109,11 +119,13 @@ export default function Payment({
         <PaySuccess />
       ) : (
         <button
-        onClick={handlePay}
-        className="bg-white hover:bg-gray-200 text-black font-sm
+          onClick={handlePay}
+          className="bg-white hover:bg-gray-200 text-black font-sm
          hover:text-black py-2 px-2 border border-gray-400
         rounded-lg "
-        >pay</button>
+        >
+          pay
+        </button>
       )}
       {/* <Transition.Root show={open} as={Fragment}>
         <Dialog
