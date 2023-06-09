@@ -143,36 +143,6 @@ class CartRepository(BaseModel):
             print(e)
             return False
 
-    def update(self, cart_id: int, cart: CartIn) -> CartOut | bool | Error:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    if cart.quantity > 0:
-                        db.execute(
-                            """
-                            update cart
-                            set
-                            user_id = %s,
-                            WHERE id = %s
-                            RETURNING (id, user_id)
-                            """,
-                            [cart.user_id, cart_id],
-                        )
-                        return CartOut(id=cart_id, **cart.dict())
-                    else:
-                        db.execute(
-                            """
-                            DELETE FROM cart
-                            WHERE id = %s
-                            """,
-                            [cart_id],
-                        )
-                        return True
-
-        except Exception as e:
-            print(e)
-            return False
-
 
 # class Cart_listingsRepository(BaseModel):
 

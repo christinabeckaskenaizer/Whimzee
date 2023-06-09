@@ -3,8 +3,7 @@
 ## Project Summary:
 
 Our project is a user-friendly shop website that facilitates the buying and selling of new and pre-owned items. The platform offers a range of features to enhance the user experience, including user registration, login, and logout functionalities. Once logged in, users have the ability to create their own shop and manage their listings.
-\
-\
+
 The key features of the website include:
 
 - User Registration and Authentication: Users can sign up with their personal details and create an account. They can subsequently log in to access the full range of functionalities offered by the website. Logging out allows users to securely end their session.
@@ -39,9 +38,9 @@ The key features of the website include:
   Frontend Auth, Deployment
 
 - Preeti Mahar \
-  Backend: Cart \
-  Frontend: \
-  Unit Test:
+  Backend: Cart end-points \
+  Frontend: CartView , Delete \
+  Unit Test: Test_cart
 
 ## How to run this project
 
@@ -370,6 +369,65 @@ What is necessary: request body with fields: "quantity" and "quantity_sold" and 
 <br>
 
 ### Cart
+
+**Endpoint: Create Cart** \
+Method: POST \
+Request URL: http://localhost:8000/cart \
+Description: Create a new cart \
+What is necessary: request body with fields: "user_id".
+
+<p>
+<details>
+<summary>Request body</summary>
+![Alt text](cart-screenshots/post-cart-input.png)
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](cart-screenshots/post-cart-input.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Get Cart** \
+Method: GET \
+Request URL: http://localhost:8000/cart/{cart_id} \
+Description: Get the cart from a cart_id \
+What is necessary: Url with correct "cart_id".
+
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/cart-screenshots/getinput.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/cart-screenshots/getoutput.png)
+</details>
+</p>
+<br>
+
+**Endpoint: Delete Cart** \
+Method: DELETE \
+Request URL: http://localhost:8000/cart/{cart_id} \
+Description: Delete a cart \
+What is necessary: Url with the correct "cart_id".
+
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/cart-screenshots/deletecartrequest.png)
+</details>
+</p>
+<p>
+<details>
+<summary>Response</summary>
+![Alt text](screenshots/cart-screenshots/deletecartresponse.png)
+</details>
+</p>
+<br>
 
 ### Order
 
