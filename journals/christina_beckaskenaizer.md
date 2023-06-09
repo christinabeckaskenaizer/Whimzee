@@ -11,7 +11,11 @@
 
 ## June 6, 2023
 
+    - Started working on wish list backend. Set up my wish list queries as well as my wish list routers. Showed my work to my teammates. Will create merge request tomorrow.
+
 ## June 5, 2023
+
+    - Spent most of the day deploying our backend, all to find out we had a lil typo!
 
 ## June 2, 2023
 
