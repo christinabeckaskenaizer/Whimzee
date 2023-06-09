@@ -409,26 +409,6 @@ What is necessary: Url with correct "cart_id".
 </p>
 <br>
 
-**Endpoint: Update Cart** \
-Method: PUT \
-Request URL: http://localhost:8000/cart/{cart_id} \
-Description: Update cart according to user_id or cart_id \
-What is necessary: request body with user_id
-
-<p>
-<details>
-<summary>Request body</summary>
-![Alt text](cart-screenshots/updateinput.png)
-</details>
-</p>
-<p>
-<details>
-<summary>Response</summary>
-![Alt text](screenshots/update_order_response.png)
-</details>
-</p>
-<br>
-
 **Endpoint: Delete Cart** \
 Method: DELETE \
 Request URL: http://localhost:8000/cart/{cart_id} \
