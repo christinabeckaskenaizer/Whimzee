@@ -78,7 +78,7 @@ steps = [
         """
         CREATE TABLE cart (
           id SERIAL PRIMARY KEY NOT NULL,
-          user_id INT REFERENCES users (id) ON DELETE CASCADE
+          user_id INT REFERENCES users (id)
         );
         """,
         """
@@ -101,12 +101,12 @@ steps = [
         """
         CREATE TABLE orders (
           id SERIAL PRIMARY KEY NOT NULL,
-          user_id INT REFERENCES users (id) ON DELETE CASCADE,
-          shop_id INT REFERENCES shops (id) ON DELETE CASCADE,
+          user_id INT REFERENCES users (id) NOT NULL,
+          shop_id INT REFERENCES shops (id) NOT NULL,
           buyer_first_name VARCHAR(200) NOT NULL,
           buyer_last_name VARCHAR(200) NOT NULL,
           quantity INT NOT NULL,
-          listing INT REFERENCES listings (id) ON DELETE CASCADE,
+          listing INT REFERENCES listings (id) NOT NULL,
           status BOOLEAN NOT NULL,
           address TEXT NOT NULL,
           price NUMERIC NOT NULL
