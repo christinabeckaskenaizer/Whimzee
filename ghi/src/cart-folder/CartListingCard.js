@@ -34,7 +34,7 @@ export default function CartListingCard({ cartListings }) {
                   <p className="mt-1 text-sm text-gray-500">
                     {listing.listing.description.slice(0, 25)}...
                   </p>
-                  <div className="text-gray-500 flex items-center">
+                  {/* <div className="text-gray-500 flex items-center">
                     <button className="w-6 h-6 text-sm bg-gray-100 hover:bg-gray-200 rounded-full">
                       -
                     </button>
@@ -42,7 +42,7 @@ export default function CartListingCard({ cartListings }) {
                     <button className="w-6 h-6 text-sm bg-gray-100 hover:bg-gray-200 rounded-full">
                       +
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
