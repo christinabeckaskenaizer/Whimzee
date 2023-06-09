@@ -50,10 +50,7 @@ export default function Payment({
         "Content-Type": "application/json",
       },
     };
-    const deleteResponse = await fetch(
-      `${url}/cart_listings/${currentListing.id}`,
-      config
-    );
+    await fetch(`${url}/cart_listings/${currentListing.id}`, config);
   };
 
   const editListings = async (currentListing) => {
