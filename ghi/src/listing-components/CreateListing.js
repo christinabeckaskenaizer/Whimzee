@@ -13,8 +13,6 @@ export default function MyModal({ ids, fetchData }) {
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState();
 
-  // console.log("data", data)
-
   function closeModal() {
     setIsOpen(false);
   }
@@ -25,12 +23,7 @@ export default function MyModal({ ids, fetchData }) {
 
   function toggleUsed() {
     setToggled(!toggled);
-    console.log("toggled");
   }
-
-  // useEffect(() => {
-  //   setListings(shopListings)
-  // }, [shopListings])
 
   async function getCategories() {
     const categoryUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/categories`;
@@ -68,23 +61,11 @@ export default function MyModal({ ids, fetchData }) {
         fetchData();
         closeModal();
       }
-      const result = await response.json();
-      console.log("success:", result);
+      // const result = await response.json();
     } catch (error) {
       console.error("error:", error);
     }
   };
-
-  // const data = {
-  //     "shop_id": 0,
-  //     "name": "string",
-  //     "quantity": 0,
-  //     "description": "string",
-  //     "price": 0,
-  //     "new": true,
-  //     "picture": "string",
-  //     "category": 0
-  // }
 
   useEffect(() => {
     getCategories();

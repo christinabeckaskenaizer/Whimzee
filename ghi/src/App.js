@@ -8,6 +8,7 @@ import UserAccount from "./account-components/UserAccount.js";
 import DeleteListing from "./listing-components/DeleteListing";
 import AllListings from "./listing-components/AllListings.js";
 import ListingDetail from "./listing-components/ListingDetail";
+import WishList from "./WishList";
 
 import Shop from "./shop-components/Shop";
 
@@ -31,6 +32,7 @@ function App() {
   const [listingsBySearchBar, setListingsBySearchBar] = useState([]);
   const [searched, setSearched] = useState(false);
   const [cartListings, setCartListings] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -44,12 +46,36 @@ function App() {
     } catch (error) {}
   };
 
+  const fetchWishlistData = async () => {
+    try {
+      const wishlistUrl = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/wishlist/${ids.id}`;
+      const config = {
+        credentials: "include",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      };
+      const response = await fetch(wishlistUrl, config);
+      const data = await response.json();
+      setWishlist(data);
+    } catch (error) {}
+  };
+
   useEffect(() => {
     fetchListingData();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
+    fetchWishlistData();
+    // eslint-disable-next-line
+  }, [ids]);
+
+  useEffect(() => {
     setCartListings(cart);
+    // eslint-disable-next-line
   }, [cart]);
 
   return (
@@ -68,6 +94,10 @@ function App() {
             path="/"
             element={
               <Landing
+                changeWishlist={(listings) => setWishlist(listings)}
+                ids={ids}
+                fetchWL={fetchWishlistData}
+                wishlist={wishlist}
                 listings={listings}
                 filteredlistings={listingsBySearchBar}
                 searched={searched}
@@ -100,6 +130,10 @@ function App() {
           <Route
             path="/listings"
             element={<AllListings listings={listings} />}
+          />
+          <Route
+            path="/wishlist"
+            element={<WishList listings={listings} token={token} ids={ids} />}
           />
           <Route
             path="/listings/:id"

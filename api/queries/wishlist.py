@@ -28,40 +28,48 @@ class WishlistRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        UPDATE wishlist
-                        SET listings=%s
-                        WHERE user_id=%s
-                        RETURNING
-                            (id,
-                            user_id,
-                            listings)
-                        """,
+                            UPDATE wishlist
+                            SET listings=%s
+                            WHERE user_id=%s
+                            RETURNING
+                                (id,
+                                user_id,
+                                listings)
+                            """,
                         [wishlist.listings, user_id],
                     )
                     # old_data = wishlist.dict()
                     updated_listing = result.fetchone()
-                    print("LOOKY HERE!!!!!", updated_listing)
+
+                    if updated_listing and len(updated_listing[0][2]) == 0:
+                        return WishlistOut(
+                            id=updated_listing[0][0],
+                            user_id=user_id,
+                            listings=[],
+                        )
+
                     if updated_listing:
                         id = updated_listing[0][0]
                         user_id = updated_listing[0][1]
                         listings = updated_listing[0][2]
-                        print("listings", listings)
+
                         listings = listings.replace("{", "")
                         listings = listings.replace("}", "")
                         listings = listings.split(",")
 
-                        for idx in range(len(listings)):
-                            listings[idx] = int(listings[idx])
+                        if listings != [""]:
+                            for idx in range(len(listings)):
+                                listings[idx] = int(listings[idx])
 
-                        print("item")
-                        print("listingsss", listings)
-                        print(type(listings))
+                        if listings == [""]:
+                            listings = []
                         return WishlistOut(
                             id=id, user_id=user_id, listings=listings
                         )
                     else:
                         return Error(message="Wishlist not found")
                     # user_id=updated_listing[]
+
         except Exception as e:
             print(e)
             return {"message": "Could not update wishlist"}
@@ -104,7 +112,6 @@ class WishlistRepository:
                     )
 
                     tup = db.fetchone()
-                    print("TUP", tup)
                     id = tup[0]
                     listings = tup[2]
 
@@ -112,7 +119,6 @@ class WishlistRepository:
                         listings = []
 
                     old_data = wishlist.dict()
-                    print("old data", old_data)
 
                     return WishlistOut(id=id, **old_data)
         except Exception as e:

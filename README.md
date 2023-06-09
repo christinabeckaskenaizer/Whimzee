@@ -19,9 +19,9 @@ The key features of the website include:
 
 **Team**
 
-- Christina Beckaskenaizer \
-  Backend: Categories, Listings \
-  Frontend: Listings, Wishlist \
+- Christina Beck-Askenaizer \
+  Backend: Categories, Listings, Wishlist \
+  Frontend: Listings(create, get one, get all, update, delete), Wishlist \
   Unit test: test_listings(get and create)\
   Backend Auth
 

@@ -14,7 +14,7 @@ export default function AccountNav({ token }) {
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
             <li>
               <NavLink
-                to="#"
+                to="/wishlist"
                 className="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:p-0 dark:text-white md:dark:text-black md:hover:text-green-800"
                 aria-current="page"
               >

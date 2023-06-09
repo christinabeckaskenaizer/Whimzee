@@ -7,6 +7,11 @@ export default function AllListings({
   category,
   filteredlistings,
   searched,
+  ids,
+  token,
+  wishlist,
+  fetchWL,
+  changeWishlist
 }) {
   const [filteredListings, setFilteredListings] = useState([]);
 
@@ -20,6 +25,11 @@ export default function AllListings({
     // eslint-disable-next-line
   }, [category]);
 
+  // useEffect(() => {
+  //   if (token && ids) {
+  //   }
+  // }, [token, ids])
+
   if (searched === false) {
     if (category === null) {
       return (
@@ -30,6 +40,11 @@ export default function AllListings({
               listings.map((listing) => (
                 <div key={listing.id} className="col-span-1">
                   <ListingCard
+                    changeWishlist={changeWishlist}
+                    ids={ids}
+                    token={token}
+                    fetchWL={fetchWL}
+                    wishlist={wishlist}
                     picture={listing.picture}
                     name={listing.name}
                     isNew={listing.new}

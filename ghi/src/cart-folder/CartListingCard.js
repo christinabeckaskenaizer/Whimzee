@@ -8,15 +8,15 @@ export default function CartListingCard({ cartListings }) {
   }
 
   return (
-    <div class="mt-4 col-span-3 flex-col flex items-center">
+    <div className="mt-4 col-span-3 flex-col flex items-center">
       {cartListings.map((listing) => {
         return (
           <div
             key={listing.id}
-            class="p-2 w-[30rem] my-2 full h-52 flex-col-2 flex items-center bg-white border border-gray-200 rounded-lg shadow"
+            className="p-2 w-[30rem] my-2 full h-52 flex-col-2 flex items-center bg-white border border-gray-200 rounded-lg shadow"
           >
             <img
-              class="w-48 h-48 object-cover rounded-lg"
+              className="w-64 object-cover object-center overflow-hidden h-full rounded-lg"
               src={listing.listing.picture}
               alt=""
             />
@@ -34,7 +34,7 @@ export default function CartListingCard({ cartListings }) {
                   <p className="mt-1 text-sm text-gray-500">
                     {listing.listing.description.slice(0, 25)}...
                   </p>
-                  <div className="text-gray-500 flex items-center">
+                  {/* <div className="text-gray-500 flex items-center">
                     <button className="w-6 h-6 text-sm bg-gray-100 hover:bg-gray-200 rounded-full">
                       -
                     </button>
@@ -42,7 +42,7 @@ export default function CartListingCard({ cartListings }) {
                     <button className="w-6 h-6 text-sm bg-gray-100 hover:bg-gray-200 rounded-full">
                       +
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

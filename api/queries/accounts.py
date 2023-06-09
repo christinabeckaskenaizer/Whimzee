@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from queries.pool import pool
+
 # from cart import CartRepository
 
 
@@ -23,6 +24,7 @@ class AccountIDS(BaseModel):
     id: int
     shop_id: int | None
     cart_id: int | None
+    wishlist_id: int | None
 
 
 class AccountOutWithPassword(AccountOut):
@@ -40,22 +42,21 @@ class AccountQueries(BaseModel):
                         FROM users
                         WHERE email = %s
                         """,
-                        [email]
+                        [email],
                     )
                     records = result.fetchone()
                     return AccountOutWithPassword(
                         id=records[0],
                         email=records[2],
                         username=records[1],
-                        hashed_password=records[3])
+                        hashed_password=records[3],
+                    )
         except Exception:
             print("Could not get accounts!")
             return None
 
     def create(
-        self,
-        info: AccountIn,
-        hashed_password: str
+        self, info: AccountIn, hashed_password: str
     ) -> AccountOutWithPassword:
         try:
             with pool.connection() as conn:
@@ -68,18 +69,15 @@ class AccountQueries(BaseModel):
                         (%s, %s, %s)
                         RETURNING id
                         """,
-                        [
-                            info.username,
-                            info.email,
-                            hashed_password
-                        ]
+                        [info.username, info.email, hashed_password],
                     )
                     id = result.fetchone()[0]
                     return AccountOutWithPassword(
                         id=id,
                         email=info.email,
                         username=info.username,
-                        hashed_password=hashed_password)
+                        hashed_password=hashed_password,
+                    )
 
         except Exception:
             return {"message": "Could not create account!"}
@@ -90,25 +88,32 @@ class AccountQueries(BaseModel):
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT u.id, s.id as shop_id, c.id as cart_id
+                        SELECT u.id,
+                            s.id as shop_id,
+                            c.id as cart_id,
+                            w.id as wishlist_id
                         FROM users u
                         LEFT OUTER JOIN shops s
                         ON s.user_id = %s
                         LEFT OUTER JOIN cart c
                         ON c.user_id = %s
+                        LEFT OUTER JOIN wishlist w
+                        ON w.user_id = %s
                         WHERE u.id = %s
                         """,
                         [
                             user,
                             user,
                             user,
-                        ]
+                            user,
+                        ],
                     )
                     data = result.fetchone()
                     return AccountIDS(
-                        id = data[0],
-                        shop_id = data[1],
-                        cart_id = data[2]
+                        id=data[0],
+                        shop_id=data[1],
+                        cart_id=data[2],
+                        wishlist_id=data[3],
                     )
 
         except Exception as e:
