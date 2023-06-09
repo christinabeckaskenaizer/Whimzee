@@ -62,22 +62,10 @@ export default function MyModal({ ids, fetchData }) {
         closeModal();
       }
       const result = await response.json();
-      console.log("success:", result);
     } catch (error) {
       console.error("error:", error);
     }
   };
-
-  // const data = {
-  //     "shop_id": 0,
-  //     "name": "string",
-  //     "quantity": 0,
-  //     "description": "string",
-  //     "price": 0,
-  //     "new": true,
-  //     "picture": "string",
-  //     "category": 0
-  // }
 
   useEffect(() => {
     getCategories();
