@@ -46,8 +46,6 @@ export default function MyModal({ ids, fetchData }) {
         picture: picture,
         category: category,
       };
-      // console.log(typeof data.price)
-      // return
 
       const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/listings`;
       const response = await fetch(url, {
@@ -61,7 +59,6 @@ export default function MyModal({ ids, fetchData }) {
         fetchData();
         closeModal();
       }
-      // const result = await response.json();
     } catch (error) {
       console.error("error:", error);
     }

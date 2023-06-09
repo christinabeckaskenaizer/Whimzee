@@ -101,18 +101,6 @@ export default function ListingDetail({
                   </button>
                 </div>
                 <div className="flex-wrap hidden -mx-2 md:flex">
-                  {/* <div className="w-1/2 p-2 sm:w-1/4">
-                    <button
-                      className="block border border-transparent hover:border-green-900"
-                      href="#"
-                    >
-                      <img
-                        className="object-cover w-full lg:h-32"
-                        src=""
-                        alt=""
-                      />
-                    </button>
-                  </div> */}
                 </div>
                 <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
                   <div className="items-center justify-center mt-6">

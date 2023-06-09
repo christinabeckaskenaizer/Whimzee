@@ -1,6 +1,21 @@
+## June 8, 2023
+
+    - Did a lot with the wish list. Users can now add an item to their wish list by clicking the heart button
+    - If an item is in the user's wish list, the heart on the card will remain filled in.
+    - Spent a lot of the day cleaning up code
+
+## June 7, 2023
+
+    - Added a "remove from wish list" button that refreshes the state of the wish list to reflect the changes (This took a lot of time, I had a bug unfortunately that I did not see for a long time)
+    - Added some styling to the card. Made a transition effect on the heart button.
+
+## June 6, 2023
+
+## June 5, 2023
+
 ## June 2, 2023
 
--
+- Spent a lot of time trying to deploy
 - Updated state of listings after one has been created
 
 ## June 1, 2023

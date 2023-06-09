@@ -25,10 +25,6 @@ export default function AllListings({
     // eslint-disable-next-line
   }, [category]);
 
-  // useEffect(() => {
-  //   if (token && ids) {
-  //   }
-  // }, [token, ids])
 
   if (searched === false) {
     if (category === null) {
@@ -120,7 +116,3 @@ export default function AllListings({
     );
   }
 }
-
-// if (!listings) {
-//     return <h1>Loading</h1>;
-// }
