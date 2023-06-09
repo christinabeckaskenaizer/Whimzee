@@ -61,7 +61,7 @@ export default function MyModal({ ids, fetchData }) {
         fetchData();
         closeModal();
       }
-      const result = await response.json();
+      // const result = await response.json();
     } catch (error) {
       console.error("error:", error);
     }
