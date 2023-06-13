@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function ListingCard({ picture, name, isNew, price, id, wishlist, fetchWL, token, ids, changeWishlist }) {
+export default function ListingCard({ quantity, picture, name, isNew, price, id, wishlist, fetchWL, token, ids, changeWishlist }) {
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -61,9 +61,13 @@ export default function ListingCard({ picture, name, isNew, price, id, wishlist,
 
         </Link>
         <div className="flex items-center justify-between p-2">
-          <span className="text-xl font-semibold text-gray-900 dark:text-gray-950">
-            {formatter.format(price)}
-          </span>
+          {(quantity == 0) ?
+            <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2 py-0.5 rounded-full dark:bg-green-700 dark:text-white">SOLD OUT</span>
+            :
+            <span className="text-xl font-semibold text-gray-900 dark:text-gray-950">
+              {formatter.format(price)}
+            </span>
+          }
           <button
             onClick={() => addItem()}
             href="#"

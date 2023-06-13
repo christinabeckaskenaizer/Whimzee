@@ -46,6 +46,7 @@ export default function AllListings({
                     isNew={listing.new}
                     price={listing.price}
                     id={listing.id}
+                    quantity={listing.quantity}
                   />
                 </div>
               ))
