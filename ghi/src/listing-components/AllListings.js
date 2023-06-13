@@ -8,6 +8,7 @@ export default function AllListings({
   filteredlistings,
   searched,
   ids,
+  user,
   token,
   wishlist,
   fetchWL,
@@ -39,6 +40,7 @@ export default function AllListings({
                     changeWishlist={changeWishlist}
                     ids={ids}
                     token={token}
+                    user={user}
                     fetchWL={fetchWL}
                     wishlist={wishlist}
                     picture={listing.picture}
