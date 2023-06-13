@@ -41,11 +41,11 @@ export default function ListingCard({ picture, name, isNew, price, id, wishlist,
 
   return (
     <div className="container flex justify-center mx-4 max max-w-4xl hover:scale-105">
-      <div className="w-64 sm:w-80 overflow-hidden m-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow dark:bg-slate-50">
+      <div className="w-64 sm:w-80 overflow-hidden m-5 max-w-sm bg-white border rounded-lg shadow dark:white">
         <Link to={`/listings/${id}`}>
           <div className="rounded-t-lg overflow-hidden h-48 object-fill flex items-center justify-center">
             <img
-              className="rounded-t-lg object-fill w-full h-full"
+              className="rounded-t-lg object-cover w-full h-full"
               src={picture}
               alt="product"
             />
