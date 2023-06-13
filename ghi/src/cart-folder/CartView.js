@@ -6,6 +6,7 @@ import CartListingCard from "./CartListingCard";
 
 export default function CartView({ ids, cartListings, setCartListings, user, token }) {
   const [total, setTotal] = useState(0);
+  const hi = "hi"
 
   useEffect(() => {
     const getTotalCost = () => {
@@ -77,6 +78,7 @@ export default function CartView({ ids, cartListings, setCartListings, user, tok
                   user={user}
                   cartListings={cartListings}
                   setCartListings={setCartListings}
+                  hi={hi}
                 />
               ) : (
                 <div className="text-gray-400 rounded-lg border-2 px-6 py-4 flex justify-center">

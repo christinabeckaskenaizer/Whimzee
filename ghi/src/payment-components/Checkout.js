@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import PaySuccess from "./success";
 import ReturnToHome from "../utilities/ReturnToHome";
 
-export default function Checkout(
+export default function Checkout({
   token,
   user,
   cartListings,
   setCartListings,
+}
 ) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -16,7 +17,6 @@ export default function Checkout(
   const [purchased, setPurchased] = useState(false);
   const [checkoutList, setCheckoutList] = useState([]);
   const url = process.env.REACT_APP_SAMPLE_SERVICE_API_HOST;
-  console.log(cartListings)
 
 
   const createNewOrder = async (currentListing) => {
@@ -83,28 +83,28 @@ export default function Checkout(
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // for (let i = 0; i < checkoutList.length; i++) {
-    //   const currentListing = checkoutList[i];
-    //   const listingResponse = await fetch(
-    //     `${url}/listings/${currentListing.listing.id}`
-    //   );
-    //   if (listingResponse.ok) {
-    //     const listingData = await listingResponse.json();
-    //     currentListing.listing = listingData;
-    //     if (currentListing.listing.quantity >= currentListing.num_in_cart) {
-    //       const orderStatus = await createNewOrder(currentListing);
-    //       if (orderStatus) {
-    //         editListings(currentListing);
-    //       } else {
-    //         console.log("could not complete order creation");
-    //       }
-    //     } else {
-    //       console.log("Not enough units in stock");
-    //     }
-    //   }
-    // }
-    // setCartListings([]);
-    // setPurchased(true);
+    for (let i = 0; i < checkoutList.length; i++) {
+      const currentListing = checkoutList[i];
+      const listingResponse = await fetch(
+        `${url}/listings/${currentListing.listing.id}`
+      );
+      if (listingResponse.ok) {
+        const listingData = await listingResponse.json();
+        currentListing.listing = listingData;
+        if (currentListing.listing.quantity >= currentListing.num_in_cart) {
+          const orderStatus = await createNewOrder(currentListing);
+          if (orderStatus) {
+            editListings(currentListing);
+          } else {
+            console.log("could not complete order creation");
+          }
+        } else {
+          console.log("Not enough units in stock");
+        }
+      }
+    }
+    setCartListings([]);
+    setPurchased(true);
     navigate("/checkout")
   };
 
