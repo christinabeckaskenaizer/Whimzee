@@ -39,8 +39,14 @@ const LoginForm = () => {
     const response = await fetch(url);
     const data = await response.json();
     if (data === true) {
+      try {
       await login(email, password);
       e.target.reset();
+      } catch(err) {
+        setAuth(true);
+        e.target.reset();
+      }
+
     } else {
       setAuth(true);
       e.target.reset();

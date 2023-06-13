@@ -22,6 +22,7 @@ import useCart from "./custom-hooks/useCart";
 import CartView from "./cart-folder/CartView";
 
 import Payment from "./payment-components/Payment";
+import PaySuccess from "./payment-components/success";
 
 function App() {
   const { token } = useToken();
@@ -154,6 +155,8 @@ function App() {
                 ids={ids}
                 cartListings={cartListings}
                 setCartListings={setCartListings}
+                token={token}
+                user={user}
               />
             }
           />
@@ -162,7 +165,7 @@ function App() {
           <Route
             path="/checkout"
             element={
-              <Payment
+              <PaySuccess
                 token={token}
                 user={user}
                 cartListings={cartListings}

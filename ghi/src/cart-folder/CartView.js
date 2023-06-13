@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Checkout from "../payment-components/Checkout";
 import ReturnToHome from "../utilities/ReturnToHome";
 import CartListingCard from "./CartListingCard";
 
-export default function CartView({ ids, cartListings }) {
+export default function CartView({ ids, cartListings, setCartListings, user, token }) {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -65,12 +66,18 @@ export default function CartView({ ids, cartListings }) {
                 </p>
               )}
               {cartListings.length > 0 ? (
-                <Link
-                  className="border-2 px-6 py-4 rounded-lg flex justify-center font-semibold text-gray-50 bg-green-800"
-                  to="/checkout"
-                >
-                  Checkout
-                </Link>
+                // <Link
+                //   className="border-2 px-6 py-4 rounded-lg flex justify-center font-semibold text-gray-50 bg-green-800"
+                //   to="/checkout"
+                // >
+                //   Checkout
+                // </Link>
+                <Checkout
+                  token={token}
+                  user={user}
+                  cartListings={cartListings}
+                  setCartListings={setCartListings}
+                />
               ) : (
                 <div className="text-gray-400 rounded-lg border-2 px-6 py-4 flex justify-center">
                   Checkout
