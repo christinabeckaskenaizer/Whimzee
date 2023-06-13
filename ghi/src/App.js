@@ -43,7 +43,7 @@ function App() {
       const response = await fetch(listingsUrl);
       const data = await response.json();
       setListings(data.reverse());
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const fetchWishlistData = async () => {
@@ -60,7 +60,7 @@ function App() {
       const response = await fetch(wishlistUrl, config);
       const data = await response.json();
       setWishlist(data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -129,7 +129,7 @@ function App() {
           ></Route>
           <Route
             path="/listings"
-            element={<AllListings listings={listings} />}
+            element={<AllListings token={token} user={user} listings={listings} />}
           />
           <Route
             path="/wishlist"
