@@ -9,7 +9,7 @@ import DeleteListing from "./listing-components/DeleteListing";
 import AllListings from "./listing-components/AllListings.js";
 import ListingDetail from "./listing-components/ListingDetail";
 import WishList from "./WishList";
-
+import About from "./About";
 import Shop from "./shop-components/Shop";
 
 import LoginForm from "./LoginForm";
@@ -170,6 +170,7 @@ function App() {
               />
             }
           ></Route>
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
     </BrowserRouter>
