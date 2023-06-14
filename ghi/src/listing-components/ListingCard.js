@@ -61,7 +61,7 @@ export default function ListingCard({ quantity, picture, name, isNew, price, id,
 
         </Link>
         <div className="flex items-center justify-between p-2">
-          {(quantity == 0) ?
+          {(quantity === 0) ?
             <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2 py-0.5 rounded-full dark:bg-green-700 dark:text-white">SOLD OUT</span>
             :
             <span className="text-xl font-semibold text-gray-900 dark:text-gray-950">
