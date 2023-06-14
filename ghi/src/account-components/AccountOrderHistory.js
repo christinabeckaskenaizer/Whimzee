@@ -35,17 +35,21 @@ export default function AccountOrderHistory({ history }) {
       <div className="m-auto p-4 flex flex-col px-4">
         {purchased.length > 0 ? (
           <div className="grid m-auto items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-            {purchased.map((item) => (
-              <div key={item.id} className="col-span-1">
-                <ListingCard
-                  id={item.id}
-                  picture={item.picture}
-                  name={item.name}
-                  isNew={item.new}
-                  price={item.price}
-                />
-              </div>
-            ))}
+            {purchased.map((item) => {
+              if (item.id) {
+                return (
+                  <div key={item.id} className="col-span-1">
+                    <ListingCard
+                      id={item.id}
+                      picture={item.picture}
+                      name={item.name}
+                      isNew={item.new}
+                      price={item.price}
+                    />
+                  </div>
+                );
+              }
+            })}
           </div>
         ) : (
           <p className="text-center text-xl font-medium text-gray-500">

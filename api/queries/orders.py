@@ -1,11 +1,23 @@
 from queries.pool import pool
 from typing import List
 from pydantic import BaseModel
-from .listings import ListingOut
 
 
 class Error(BaseModel):
     message: str
+
+
+class ListingOut(BaseModel):
+    id: int | None
+    shop_id: int | None
+    name: str | None
+    quantity: int | None
+    quantity_sold: int | None
+    description: str | None
+    price: int | None
+    new: bool | None
+    picture: str | None
+    category: int | None
 
 
 class OrderIn(BaseModel):
