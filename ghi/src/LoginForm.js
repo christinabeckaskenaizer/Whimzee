@@ -108,8 +108,7 @@ const LoginForm = () => {
         <NavLink
           to="/signup"
           className="block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-5 md:dark:text-black md:hover:text-green-800"
-          aria-current="page"
-        >
+          aria-current="page">
           New here? Click here to sign up
         </NavLink>
       </form>
