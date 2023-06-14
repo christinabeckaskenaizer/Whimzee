@@ -1,9 +1,11 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import useUser from "../custom-hooks/useUser";
+import { useNavigate } from "react-router-dom";
 
 export default function DeleteCart({ listing_id }) {
   const { token } = useToken();
   const { ids } = useUser(token);
+  const navigate = useNavigate();
 
   const handleClick = async (listing_id) => {
     const data = {
@@ -25,8 +27,7 @@ export default function DeleteCart({ listing_id }) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
-      console.log("item deleted");
+      navigate(0);
     } else {
       console.log("unable to delete");
     }

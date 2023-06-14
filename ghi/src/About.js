@@ -185,7 +185,7 @@ export default function About() {
                 <div className="absolute -mt-20 w-full flex justify-center">
                   <div className="h-32 w-32">
                     <img
-                      src="/christina.jpg"
+                      src=""
                       alt=""
                       className="rounded-full object-cover h-full w-full shadow-md"
                     />
@@ -193,15 +193,12 @@ export default function About() {
                 </div>
                 <div className="px-6 mt-16">
                   <h1 className="font-bold text-3xl text-center mb-1">
-                    Christina Beck-Askenaizer
+                    Preeti Mahar
                   </h1>
                   <p className="text-gray-800 text-sm text-center">
                     Full-Stack Developer
                   </p>
                   <p className="text-center text-gray-600 text-base pt-3 font-normal">
-                    A passionate developer who finds joy in working with React.
-                    When Christina isn't busy diving into code, you'll find her
-                    immersed in the realm of Pokemon deck building.
                   </p>
                   <div className="w-full flex justify-center pt-5 pb-5">
                     <a
