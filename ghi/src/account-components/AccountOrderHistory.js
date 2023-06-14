@@ -49,6 +49,7 @@ export default function AccountOrderHistory({ history }) {
                   </div>
                 );
               }
+              return <></>;
             })}
           </div>
         ) : (
