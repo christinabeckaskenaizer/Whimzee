@@ -49,12 +49,9 @@ class OrderOutWithListing(BaseModel):
 
 
 class OrderRepo(BaseModel):
-
-    def create(self,
-               order_in: OrderIn,
-               status: bool,
-               user_id: int) -> OrderIn | Error:
-
+    def create(
+        self, order_in: OrderIn, status: bool, user_id: int
+    ) -> OrderIn | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -83,22 +80,24 @@ class OrderRepo(BaseModel):
                             order_in.listing,
                             order_in.address,
                             order_in.price,
-                            status
-                        ]
+                            status,
+                        ],
                     )
                     id = result.fetchone()[0]
-                    return OrderOut(id=id,
-                                    status=status,
-                                    user_id=user_id,
-                                    **order_in.dict())
+                    return OrderOut(
+                        id=id,
+                        status=status,
+                        user_id=user_id,
+                        **order_in.dict()
+                    )
 
         except Exception as e:
             print("Order cannot be created because of: ", e)
             return None
 
-    def get_all_shop_orders(self,
-                            shop_id: int) -> List[OrderOutWithListing] | Error:
-
+    def get_all_shop_orders(
+        self, shop_id: int
+    ) -> List[OrderOutWithListing] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -110,9 +109,10 @@ class OrderRepo(BaseModel):
                         ON o.listing = l.id
                         WHERE o.shop_id = %s
                         """,
-                        [shop_id]
+                        [shop_id],
                     )
                     data = result.fetchall()
+                    print(data)
                     return [
                         OrderOutWithListing(
                             id=record[0],
@@ -135,16 +135,15 @@ class OrderRepo(BaseModel):
                             ),
                             address=record[8],
                             price=record[9],
-                            status=record[7]
-                        ) for record in data
+                            status=record[7],
+                        )
+                        for record in data
                     ]
         except Exception as e:
             print("Can't get orders because of: ", e)
             return None
 
-    def get_all(self,
-                user_id: int) -> List[OrderOutWithListing] | Error:
-
+    def get_all(self, user_id: int) -> List[OrderOutWithListing] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -156,7 +155,7 @@ class OrderRepo(BaseModel):
                         ON o.listing = l.id
                         WHERE o.user_id = %s
                         """,
-                        [user_id]
+                        [user_id],
                     )
                     data = result.fetchall()
                     return [
@@ -182,14 +181,14 @@ class OrderRepo(BaseModel):
                             address=record[8],
                             price=record[9],
                             status=record[7],
-                        ) for record in data
+                        )
+                        for record in data
                     ]
         except Exception as e:
             print("Can't get orders because of: ", e)
             return None
 
     def get_one(self, order_id: int) -> OrderOut | Error:
-
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -208,7 +207,7 @@ class OrderRepo(BaseModel):
                         FROM orders
                         WHERE id = %s
                         """,
-                        [order_id]
+                        [order_id],
                     )
                     record = result.fetchone()
                     return OrderOut(
@@ -221,16 +220,15 @@ class OrderRepo(BaseModel):
                         listing=record[6],
                         address=record[7],
                         price=record[8],
-                        status=record[9]
+                        status=record[9],
                     )
         except Exception as e:
             print("Can't get order because of: ", e)
             return None
 
-    def update(self,
-               order_id: int,
-               order: OrderInWithStatus) -> OrderOut | Error:
-
+    def update(
+        self, order_id: int, order: OrderInWithStatus
+    ) -> OrderOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -241,10 +239,7 @@ class OrderRepo(BaseModel):
                         WHERE id = %s
                         RETURNING *
                         """,
-                        [
-                            order.status,
-                            order_id
-                        ]
+                        [order.status, order_id],
                     )
                     record = result.fetchall()[0]
                     print(record)
@@ -258,7 +253,7 @@ class OrderRepo(BaseModel):
                         listing=record[6],
                         status=record[7],
                         address=record[8],
-                        price=record[9]
+                        price=record[9],
                     )
         except Exception as e:
             print("Yoooohoo", e)
