@@ -26,7 +26,7 @@ export default function DeleteCart({ listing_id }) {
     );
 
     if (response.ok) {
-      const data = await response.json();
+      await response.json();
       navigate(0);
     } else {
       console.log("unable to delete");
