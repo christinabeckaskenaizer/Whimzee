@@ -22,7 +22,7 @@ import useCart from "./custom-hooks/useCart";
 import CartView from "./cart-folder/CartView";
 import Footer from "./Footer";
 
-import Payment from "./payment-components/Payment";
+// import Payment from "./payment-components/Payment";
 import PaySuccess from "./payment-components/success";
 
 function App() {

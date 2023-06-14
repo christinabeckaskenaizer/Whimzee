@@ -110,6 +110,7 @@ export default function Checkout({
 
   useEffect(() => {
     setCheckoutList(cartListings);
+    // eslint-disable-next-line
   }, []);
 
   if (!user) {
