@@ -144,7 +144,7 @@ export default function WishList({ token, ids }) {
                         </div>
                     </div>
                 </section>}
-            {token && wishlist.length < 1 && <section><h1 className='mt-10 text-center text-lg font-bold' >Your wish list is empty! <Link className="text-green-700 hover:underline" to="/" reloadDocument >Browse</Link> our items to get started</h1> <div className='mt-5 flex justify-center items-center'> <img src="/wishlist-empty.png" alt="sad shopping bag"></img></div></section>}
+            {token && wishlist.length < 1 && <section><h1 className='mt-10 text-center text-lg font-bold' >Your wish list is empty! <Link className="text-green-700 hover:underline" to="/" reloadDocument >Browse</Link> our items to get started</h1> <div className='mt-5 flex justify-center items-center'> <img src="./wishlist-empty.png" alt="sad shopping bag"></img></div></section>}
         </div>
     );
 }

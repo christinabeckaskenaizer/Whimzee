@@ -1,6 +1,7 @@
 import React from "react";
 import ListingCard from "./ListingCard";
 import { useState, useEffect } from "react";
+import Footer from "../Footer";
 
 export default function AllListings({
   listings,
@@ -56,6 +57,7 @@ export default function AllListings({
               <p>Loading...</p>
             )}
           </div>
+          <Footer />
         </>
       );
     } else {

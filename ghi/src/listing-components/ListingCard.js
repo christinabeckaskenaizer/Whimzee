@@ -95,7 +95,7 @@ export default function ListingCard({ quantity, picture, name, isNew, price, id,
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 transition ease-in-out delay-150 fill-slate-100 hover hover:fill-green-700 duration-300"
+                className="w-6 h-6 transition ease-in-out delay-150 fill-white hover hover:fill-green-700 duration-300"
               >
                 <path
                   strokeLinecap="round"
