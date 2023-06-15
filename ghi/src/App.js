@@ -20,7 +20,6 @@ import useUser from "./custom-hooks/useUser";
 import useShop from "./custom-hooks/useShop";
 import useCart from "./custom-hooks/useCart";
 import CartView from "./cart-folder/CartView";
-import Footer from "./Footer";
 
 // import Payment from "./payment-components/Payment";
 import PaySuccess from "./payment-components/success";
